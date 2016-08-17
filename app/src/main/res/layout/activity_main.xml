@@ -38,11 +38,5 @@
             android:layout_weight="1"
             android:text="userinfo" />
 
-        <Button
-            android:id="@+id/online_btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="online" />
     </LinearLayout>
 </LinearLayout>

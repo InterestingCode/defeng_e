@@ -39,7 +39,6 @@ public class MainActivity extends BaseActivity {
         fragments.add(FarmingFragment.newInstance());
         fragments.add(DepthServiceFragment.newInstance());
         fragments.add(UserInfoFragment.newInstance());
-        fragments.add(UserInfoFragment.newInstance());
         MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
         adapter.setList(fragments);
         mMainPager.setAdapter(adapter);
@@ -58,9 +57,6 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.userinfo_btn:
                 mMainPager.setCurrentItem(2);
-                break;
-            case R.id.online_btn:
-                mMainPager.setCurrentItem(3);
                 break;
         }
     }
