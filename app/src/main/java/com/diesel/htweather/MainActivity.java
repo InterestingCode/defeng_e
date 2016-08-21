@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
         mMainPager.setCurrentItem(0, false);
     }
 
-    @OnClick({R.id.farming_btn, R.id.service_btn, R.id.userinfo_btn, R.id.online_btn})
+    @OnClick({R.id.farming_btn, R.id.service_btn, R.id.userinfo_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.farming_btn:
