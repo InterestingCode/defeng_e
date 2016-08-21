@@ -41,6 +41,8 @@ public class HTApplication extends Application {
         mInstance = this;
         CrashHandler.getInstance().init(this);
         initOkHttp();
+
+
         Fresco.initialize(this);
     }
 
