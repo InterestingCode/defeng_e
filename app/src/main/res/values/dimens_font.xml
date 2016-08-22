@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="font_10px">5.0sp</dimen>
+
+    <dimen name="font_10px">5.0sp</dimen>
     <dimen name="font_11px">5.5sp</dimen>
     <dimen name="font_12px">6.0sp</dimen>
     <dimen name="font_13px">6.5sp</dimen>
@@ -91,5 +92,6 @@
     <dimen name="font_98px">49.0sp</dimen>
     <dimen name="font_99px">49.5sp</dimen>
     <dimen name="font_100px">50.0sp</dimen>
+    <dimen name="font_180px">90.0sp</dimen>
 
 </resources>

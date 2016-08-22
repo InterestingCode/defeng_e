@@ -2,12 +2,20 @@ package com.diesel.htweather;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.diesel.htweather.base.BaseFragment;
+import com.diesel.htweather.farming.FarmingPagerFragment;
+import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -21,6 +29,11 @@ import butterknife.ButterKnife;
  * @version 1.0.0
  */
 public class FarmingFragment extends BaseFragment {
+
+    @BindView(R.id.weather_pager)
+    ViewPager mWeatherPager;
+
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     public static FarmingFragment newInstance() {
         return new FarmingFragment();
@@ -37,5 +50,10 @@ public class FarmingFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        mFragments.add(FarmingPagerFragment.newInstance());
+        MainPagerAdapter adapter = new MainPagerAdapter(getChildFragmentManager());
+        adapter.setList(mFragments);
+        mWeatherPager.setAdapter(adapter);
     }
 }

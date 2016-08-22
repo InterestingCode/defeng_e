@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5912c"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/weather_page_lr_margin"
+        android:paddingRight="@dimen/weather_page_lr_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/px20">
+
+            <TextView
+                android:id="@+id/temperature_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="37"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_180px" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px30"
+                android:layout_toRightOf="@id/temperature_tv"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_temperature_unit" />
+
+                <ImageView
+                    android:id="@+id/weather_icon_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_sunshine" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/px30"
+                    android:singleLine="true"
+                    android:text="晴  25°/32°  微风1-3级"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_24px" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/temperature_tv"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="@dimen/px30"
+                android:layout_toRightOf="@id/temperature_tv"
+                android:singleLine="true"
+                android:text="2016.8.22 (农历七月二十) 星期二"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_right_arrow" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/weather_page_lr_margin"
+        android:layout_marginRight="@dimen/weather_page_lr_margin"
+        android:background="@drawable/bg_farming_tips"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_trumpet"
+            android:drawablePadding="5dp"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:text="崇州市干旱提醒：过去45天降水量为0，当前已造成严重干旱"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_24px" />
+
+        <ImageView
+            android:id="@+id/close_tips_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/ic_close_tips" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px568"
+        android:layout_marginTop="@dimen/px44"
+        android:background="@drawable/bg_weather_data">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px382"
+            android:layout_marginLeft="@dimen/weather_page_lr_margin"
+            android:layout_marginRight="@dimen/weather_page_lr_margin"
+            android:background="@drawable/bg_farming_tips"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_weather_truth_data"
+            android:paddingRight="@dimen/weather_page_lr_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/px10"
+                android:background="@drawable/ic_weather_truth_data"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/px42"
+                android:text="实况\n数据"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_24px" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px22"
+        android:background="@android:color/white"/>-->
+
+
+</LinearLayout>
