@@ -34,7 +34,7 @@ public class SlidingTableTabStrip extends LinearLayout {
 
     private static final float TAB_DIVIDER_LINE_HEIGHT_DP = 22f; // tab间分隔线的高度
 
-    private static final int DIVIDER_LINE_COLOR = 0xFFFFAE00; // 分隔线默认颜色值
+    private static final int DIVIDER_LINE_COLOR = 0xFF85B900; // 分隔线默认颜色值
 
     private static final int BOTTOM_LINE_COLOR = 0xFFDDDDDD; // 底部横线默认颜色值
 
@@ -42,7 +42,7 @@ public class SlidingTableTabStrip extends LinearLayout {
 
     private static final int TAB_TITLE_TEXT_COLOR_NORMAL = 0xFF666666; // tab标题文本默认颜色值
 
-    private static final int TAB_TITLE_TEXT_COLOR_SELECT = 0xFFFFAE00; // tab标题文本默认选中颜色值
+    private static final int TAB_TITLE_TEXT_COLOR_SELECT = 0xFF85B900; // tab标题文本默认选中颜色值
 
     private int mTextDividerSpace;
 
@@ -135,13 +135,13 @@ public class SlidingTableTabStrip extends LinearLayout {
             canvas.drawRect(left, height - mDividerLineHeight, right, height, mDividerLinePaint);
         }
 
-        // Vertical separators between the titles
-        int separatorTop = (height - mTabDividerLineHeight) / 2;
-        for (int i = 0; i < childCount - 1; i++) {
-            View child = getChildAt(i);
-            canvas.drawRect(child.getRight(), separatorTop, child.getRight() + mTabDividerLineWidth,
-                    separatorTop + mTabDividerLineHeight, mTabDividerLinePaint);
-        }
+//        // Vertical separators between the titles
+//        int separatorTop = (height - mTabDividerLineHeight) / 2;
+//        for (int i = 0; i < childCount - 1; i++) {
+//            View child = getChildAt(i);
+//            canvas.drawRect(child.getRight(), separatorTop, child.getRight() + mTabDividerLineWidth,
+//                    separatorTop + mTabDividerLineHeight, mTabDividerLinePaint);
+//        }
 
         // change selected tab text's color
         for (int i = 0; i < childCount; i++) {

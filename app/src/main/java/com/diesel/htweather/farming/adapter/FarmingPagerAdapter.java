@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
+import com.diesel.htweather.farming.holder.ActualFarmingHolder;
 import com.diesel.htweather.farming.holder.WeatherDataHolder;
 import com.diesel.htweather.farming.model.ActualFarmBean;
 import com.diesel.htweather.farming.model.FarmBannerBean;
@@ -54,8 +55,8 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
                         inflater.inflate(R.layout.list_item_weather_data, parent, false));
                 break;
             case TYPE_ACTUAL_FARM:
-                holder = new WeatherDataHolder(
-                        inflater.inflate(R.layout.list_item_weather_data, parent, false));
+                holder = new ActualFarmingHolder(
+                        inflater.inflate(R.layout.list_item_actual_farming, parent, false));
                 break;
             case TYPE_FARM_INFO:
                 holder = new WeatherDataHolder(

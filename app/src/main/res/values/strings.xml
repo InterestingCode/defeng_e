@@ -8,4 +8,6 @@
     <string name="main_tab_one_class">com.diesel.htweather.FarmingFragment</string>
     <string name="main_tab_two_class">com.diesel.htweather.DepthServiceFragment</string>
     <string name="main_tab_three_class">com.diesel.htweather.UserInfoFragment</string>
+
+    <string name="actual_farming">精准农技</string>
 </resources>
