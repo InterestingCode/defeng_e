@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="menu_image" type="id" />
+
+    <item name="main_tab_one" type="id" />
+    <item name="main_tab_two" type="id" />
+    <item name="main_tab_three" type="id" />
+</resources>

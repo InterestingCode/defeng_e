@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HTWeather</string>
+
+    <string name="main_tab_one">农事</string>
+    <string name="main_tab_two">深度服务</string>
+    <string name="main_tab_three">个人中心</string>
+
+    <string name="main_tab_one_class">com.diesel.htweather.FarmingFragment</string>
+    <string name="main_tab_two_class">com.diesel.htweather.DepthServiceFragment</string>
+    <string name="main_tab_three_class">com.diesel.htweather.UserInfoFragment</string>
 </resources>

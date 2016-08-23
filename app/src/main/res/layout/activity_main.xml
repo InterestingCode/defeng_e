@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.diesel.htweather.MainActivity">
+
+    <com.diesel.htweather.widget.MainTabBar
+        android:id="@+id/main_tab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px88"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:paddingTop="@dimen/px6"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.diesel.htweather.widget.MainTab
+            android:id="@id/main_tab_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:tabDrawable="@drawable/main_tab_farming"
+            app:tabText="@string/main_tab_one"
+            app:tabTextColor="@color/main_tab_text_color"
+            app:tabTextSize="11dp" />
+
+        <com.diesel.htweather.widget.MainTab
+            android:id="@id/main_tab_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:tabDrawable="@drawable/main_tab_depth_service"
+            app:tabText="@string/main_tab_two"
+            app:tabTextColor="@color/main_tab_text_color"
+            app:tabTextSize="11dp" />
+
+        <com.diesel.htweather.widget.MainTab
+            android:id="@id/main_tab_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:tabDrawable="@drawable/main_tab_user_info"
+            app:tabText="@string/main_tab_three"
+            app:tabTextColor="@color/main_tab_text_color"
+            app:tabTextSize="11dp" />
+    </com.diesel.htweather.widget.MainTabBar>
 
     <com.diesel.htweather.widget.NoScrollViewPager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:layout_above="@id/main_tab"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent" />
 
-    <LinearLayout
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/main_tab"
+        android:background="@drawable/ic_main_tab_shadow" />
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px98"
         android:orientation="horizontal">
@@ -38,5 +90,5 @@
             android:layout_weight="1"
             android:text="userinfo" />
 
-    </LinearLayout>
-</LinearLayout>
+    </LinearLayout>-->
+</RelativeLayout>

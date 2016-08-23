@@ -15,4 +15,23 @@
             <enum name="text_or_icon" value="4" /> <!-- 通用头部右侧显示类型-文本或者图标 -->
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="TabMenu">
+        <attr name="tabChecked" format="boolean" />
+        <attr name="tabDrawable" format="reference" />
+        <attr name="tabTextColor" format="reference|color" />
+        <attr name="tabTextSize" format="reference|dimension" />
+        <attr name="tabText" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="TabBar">
+        <attr name="tabChecked_1" format="boolean" />
+        <attr name="tabDividerVisibility" format="boolean" />
+        <attr name="tabDividerColor" format="reference|color" />
+        <attr name="tabIndicatorColor" format="reference|color" />
+        <attr name="tabTextColor_1" format="reference|color" />
+        <attr name="tabTextSize_1" format="reference|dimension" />
+        <attr name="tabText_1" format="reference|string" />
+        <attr name="tabName_1" format="reference|string" />
+    </declare-styleable>
 </resources>

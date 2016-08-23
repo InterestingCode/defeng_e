@@ -11,6 +11,7 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
+import com.diesel.htweather.farming.model.WeatherDataBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class FarmingPagerFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mFarmingData.add(new WeatherDataBean());
         mAdapter = new FarmingPagerAdapter(mFarmingData);
 
         mFarmingDataView.setLayoutManager(new LinearLayoutManager(mActivity));
