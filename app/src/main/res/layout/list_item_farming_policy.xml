@@ -23,7 +23,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/px20">
+        android:paddingBottom="@dimen/px30"
+        android:paddingLeft="@dimen/px20"
+        android:paddingRight="@dimen/px20"
+        android:paddingTop="@dimen/px20">
 
         <ImageView
             android:id="@+id/farming_info_cover_iv"

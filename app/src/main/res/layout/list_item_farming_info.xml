@@ -23,12 +23,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/px20">
+        android:paddingBottom="@dimen/px30"
+        android:paddingLeft="@dimen/px20"
+        android:paddingRight="@dimen/px20"
+        android:paddingTop="@dimen/px20">
 
         <ImageView
             android:id="@+id/farming_info_cover_iv"
             android:layout_width="@dimen/px260"
-            android:layout_height="@dimen/px180"
+            android:layout_height="@dimen/px170"
             android:layout_marginRight="@dimen/px20"
             android:scaleType="centerCrop"
             android:src="@drawable/index_excise_bg" />
