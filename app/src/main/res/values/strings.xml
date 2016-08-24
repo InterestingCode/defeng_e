@@ -10,4 +10,6 @@
     <string name="main_tab_three_class">com.diesel.htweather.UserInfoFragment</string>
 
     <string name="actual_farming">精准农技</string>
+    <string name="farming_info">农气情报</string>
+    <string name="farming_policy">农业政策</string>
 </resources>

@@ -11,8 +11,12 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
-import com.diesel.htweather.farming.model.ActualFarmBean;
+import com.diesel.htweather.farming.model.ActualFarmingBean;
+import com.diesel.htweather.farming.model.FarmingBannerBean;
+import com.diesel.htweather.farming.model.FarmingInfoBean;
+import com.diesel.htweather.farming.model.FarmingPolicyBean;
 import com.diesel.htweather.farming.model.WeatherDataBean;
+import com.diesel.htweather.widget.DividerItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -57,10 +61,15 @@ public class FarmingPagerFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFarmingData.add(new WeatherDataBean());
-        mFarmingData.add(new ActualFarmBean());
+        mFarmingData.add(new ActualFarmingBean());
+        mFarmingData.add(new FarmingBannerBean());
+        mFarmingData.add(new FarmingInfoBean());
+        mFarmingData.add(new FarmingPolicyBean());
+        mFarmingData.add(new FarmingBannerBean());
         mAdapter = new FarmingPagerAdapter(mFarmingData);
 
-        mFarmingDataView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mFarmingDataView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mFarmingDataView.addItemDecoration(new DividerItemDecoration(getContext()));
         mFarmingDataView.setAdapter(mAdapter);
     }
 }

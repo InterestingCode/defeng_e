@@ -11,6 +11,10 @@
 
     <color name="black_333">#FF333333</color>
     <color name="gray_999">#FF999999</color>
+    <color name="gray_666">#FF666666</color>
+
+    <color name="bg_farming_page">#FFF0F0F0</color>
+    <color name="horizontal_divider_line">#FFDCDCDC</color>
 
     <color name="common_light_blue_txt_color">#6DD0F4</color>
     <color name="bg_white_with_90per_alaph">#E0FFFFFF</color>

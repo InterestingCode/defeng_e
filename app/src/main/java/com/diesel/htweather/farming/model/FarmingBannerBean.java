@@ -3,7 +3,7 @@ package com.diesel.htweather.farming.model;
 import com.diesel.htweather.base.BaseBean;
 
 /**
- * Comments：精准农技
+ * Comments：广告
  *
  * @author Diesel
  *         Time: 2016/8/22
@@ -12,6 +12,6 @@ import com.diesel.htweather.base.BaseBean;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class ActualFarmBean extends BaseBean {
+public class FarmingBannerBean extends BaseBean {
 
 }

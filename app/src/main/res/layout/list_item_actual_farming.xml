@@ -4,63 +4,58 @@
     android:layout_height="@dimen/px360"
     android:layout_marginLeft="@dimen/weather_page_lr_margin"
     android:layout_marginRight="@dimen/weather_page_lr_margin"
+    android:layout_marginTop="-15dp"
+    android:background="@drawable/bg_actual_farming"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_actual_farming"
-        android:orientation="vertical">
+        android:layout_height="@dimen/px62">
 
-        <RelativeLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/px20"
+            android:drawableLeft="@drawable/icon_actual_farming"
+            android:drawablePadding="@dimen/px10"
+            android:gravity="center"
+            android:text="@string/actual_farming"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_30px" />
+
+        <ImageView
+            android:id="@+id/actual_farming_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/px20"
+            android:paddingRight="@dimen/px20"
+            android:src="@drawable/ic_setting" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px62">
+
+        <com.diesel.htweather.widget.SlidingTableTabLayout
+            android:id="@+id/actual_farming_tabs_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px62">
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/px20"
-                android:drawableLeft="@drawable/ic_actual_farming"
-                android:drawablePadding="@dimen/px10"
-                android:gravity="center"
-                android:text="@string/actual_farming"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/font_30px" />
+        <ImageView
+            android:id="@+id/more_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/px10"
+            android:src="@drawable/ic_arrow_more" />
+    </FrameLayout>
 
-            <ImageView
-                android:id="@+id/actual_farming_setting_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/px20"
-                android:paddingRight="@dimen/px20"
-                android:src="@drawable/ic_setting" />
-        </RelativeLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/px62">
-
-            <com.diesel.htweather.widget.SlidingTableTabLayout
-                android:id="@+id/actual_farming_tabs_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:id="@+id/more_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:layout_marginRight="@dimen/px10"
-                android:src="@drawable/ic_arrow_more" />
-        </FrameLayout>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/actual_farming_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/actual_farming_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

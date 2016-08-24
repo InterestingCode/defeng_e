@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.farming.holder.ActualFarmingHolder;
+import com.diesel.htweather.farming.holder.FarmingBannerHolder;
+import com.diesel.htweather.farming.holder.FarmingInfoHolder;
+import com.diesel.htweather.farming.holder.FarmingPolicyHolder;
 import com.diesel.htweather.farming.holder.WeatherDataHolder;
-import com.diesel.htweather.farming.model.ActualFarmBean;
-import com.diesel.htweather.farming.model.FarmBannerBean;
-import com.diesel.htweather.farming.model.FarmInfoBean;
-import com.diesel.htweather.farming.model.FarmPolicyBean;
+import com.diesel.htweather.farming.model.ActualFarmingBean;
+import com.diesel.htweather.farming.model.FarmingBannerBean;
+import com.diesel.htweather.farming.model.FarmingInfoBean;
+import com.diesel.htweather.farming.model.FarmingPolicyBean;
 import com.diesel.htweather.farming.model.WeatherDataBean;
 
 import java.util.List;
@@ -59,16 +62,16 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
                         inflater.inflate(R.layout.list_item_actual_farming, parent, false));
                 break;
             case TYPE_FARM_INFO:
-                holder = new WeatherDataHolder(
-                        inflater.inflate(R.layout.list_item_weather_data, parent, false));
+                holder = new FarmingInfoHolder(
+                        inflater.inflate(R.layout.list_item_farming_info, parent, false));
                 break;
             case TYPE_FARM_POLICY:
-                holder = new WeatherDataHolder(
-                        inflater.inflate(R.layout.list_item_weather_data, parent, false));
+                holder = new FarmingPolicyHolder(
+                        inflater.inflate(R.layout.list_item_farming_policy, parent, false));
                 break;
             case TYPE_FARM_BANNER:
-                holder = new WeatherDataHolder(
-                        inflater.inflate(R.layout.list_item_weather_data, parent, false));
+                holder = new FarmingBannerHolder(
+                        inflater.inflate(R.layout.list_item_farming_banner, parent, false));
                 break;
             default:
                 View emptyView = new View(parent.getContext());
@@ -95,13 +98,13 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
         BaseBean bean = mFarmingData.get(position);
         if (bean instanceof WeatherDataBean) {
             viewType = TYPE_WEATHER_DATA;
-        } else if (bean instanceof ActualFarmBean) {
+        } else if (bean instanceof ActualFarmingBean) {
             viewType = TYPE_ACTUAL_FARM;
-        } else if (bean instanceof FarmInfoBean) {
+        } else if (bean instanceof FarmingInfoBean) {
             viewType = TYPE_FARM_INFO;
-        } else if (bean instanceof FarmPolicyBean) {
+        } else if (bean instanceof FarmingPolicyBean) {
             viewType = TYPE_FARM_POLICY;
-        } else if (bean instanceof FarmBannerBean) {
+        } else if (bean instanceof FarmingBannerBean) {
             viewType = TYPE_FARM_BANNER;
         }
         return viewType;
