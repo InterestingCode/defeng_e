@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px382"
+    android:layout_marginLeft="@dimen/weather_page_lr_margin"
+    android:layout_marginRight="@dimen/weather_page_lr_margin"
+    android:background="@drawable/shape_truth_data_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px52"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="气温"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_24px" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="降水"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_24px" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="土壤温度"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_24px" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="土壤湿度"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_24px" />
+
+    </LinearLayout>
+
+    <View style="@style/BaseHorizontalLine" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px330">
+
+        <com.diesel.htweather.widget.XHorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- 温度趋势图 -->
+                <com.diesel.htweather.widget.Trend24HourView
+                    android:id="@+id/truth_data_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/px278" />
+
+                <View style="@style/BaseHorizontalLine" />
+
+                <!-- 填充布局 时间栏 -->
+                <LinearLayout
+                    android:id="@+id/forecast_times_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/px52"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+        </com.diesel.htweather.widget.XHorizontalScrollView>
+    </FrameLayout>
+
+</LinearLayout>

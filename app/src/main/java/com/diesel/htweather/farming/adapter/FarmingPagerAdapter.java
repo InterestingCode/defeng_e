@@ -84,7 +84,23 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        BaseBean bean = mFarmingData.get(position);
+        int viewType = getItemViewType(position);
+        switch (viewType) {
+            case TYPE_WEATHER_DATA:
+                ((WeatherDataHolder) holder).bindData((WeatherDataBean) bean);
+                break;
+            case TYPE_ACTUAL_FARM:
+                break;
+            case TYPE_FARM_INFO:
+                break;
+            case TYPE_FARM_POLICY:
+                break;
+            case TYPE_FARM_BANNER:
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

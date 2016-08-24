@@ -49,9 +49,9 @@ public class Trend24HourView extends View {
 
     private int height; // 纵坐标
 
-    private List<Integer> temperatures = null; // 24小时温度集合
+    private List<Integer> temperatures = new ArrayList<>(); // 24小时温度集合
 
-    private ArrayList<Weather24Hour> weather24Hours = null; // 24小时数据
+//    private ArrayList<Weather24Hour> weather24Hours = null; // 24小时数据
 
     //最高温和最低温
     private int minTemp;
@@ -91,7 +91,6 @@ public class Trend24HourView extends View {
     }
 
     private void init() {
-        temperatures = new ArrayList<Integer>();
         circleRadius = context.getResources().getDimensionPixelOffset(R.dimen.trend_radius_size);
         reduce = context.getResources().getDimensionPixelOffset(R.dimen.trend24_weathericon_reduce);
 
@@ -164,17 +163,20 @@ public class Trend24HourView extends View {
     /**
      * 设置温度
      */
-    public void setTemperatures(List<Integer> temp, ArrayList<Weather24Hour> weather24Hours) {
+    public void setTemperatures(List<Integer> temp/*, ArrayList<Weather24Hour> weather24Hours*/) {
         this.temperatures = temp;
-        this.weather24Hours = weather24Hours;
+//        this.temperatures.addAll(temp);
+//        this.weather24Hours = weather24Hours;
         maxTemp = Collections.max(temperatures);
         minTemp = Collections.min(temperatures);
         tempFall = maxTemp - minTemp;
         if (tempFall == 0) {
             tempFall = 1;
         }
-        Log.i(tag, "最高温=" + maxTemp + ",最低温=" + minTemp + " ,高低温差=" + tempFall);
-        invalidate();
+        Log.i(tag, "最高温=" + maxTemp + ",最低温=" + minTemp + " ,高低温差=" + tempFall+", 温度个数"+temperatures.size());
+//        invalidate();
+//        postInvalidate();
+        postInvalidateDelayed(100);
     }
 
     @Override
@@ -183,7 +185,7 @@ public class Trend24HourView extends View {
 
         this.width = this.getWidth();
 
-        xPoints = new ArrayList<Integer>();
+        xPoints = new ArrayList<>();
         int tempSize = temperatures.size();
         for (int i = 0; i < tempSize; i++) {
             xPoints.add((width * (2 * i + 1)) / (tempSize * 2));
@@ -205,12 +207,14 @@ public class Trend24HourView extends View {
         int y2 = height / 2;
         int y3 = height * 3 / 4;
         int y4 = height;
+        Log.d(tag, "onDraw() 画四条线之前 y1("+y1+"), y2("+y2+"), y3("+y3+"), y4("+y4+"), tempSize("+tempSize+")");
         if (tempSize != 0) {
             int endLineX = xPoints.get(tempSize - 1) + xPoints.get(0);
             canvas.drawLine(0, y1, endLineX, y1, bgLinePaint);
             canvas.drawLine(0, y2, endLineX, y2, bgLinePaint);
             canvas.drawLine(0, y3, endLineX, y3, bgLinePaint);
             canvas.drawLine(0, y4, endLineX, y4, bgLinePaint);
+            Log.d(tag, "onDraw() 画四条线 endLineX("+endLineX+"), y1("+y1+"), y2("+y2+"), y3("+y3+"), y4("+y4+")");
         }
 
         for (int i = 0; i < tempSize; i++) {

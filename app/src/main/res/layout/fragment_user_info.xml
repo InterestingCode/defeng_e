@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+    <com.diesel.htweather.widget.Trend24HourView
+        android:id="@+id/truth_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px278"
+        android:background="@drawable/shape_truth_data_bg" />
+
+    <com.diesel.htweather.widget.LineChartSurfaceView
+        android:id="@+id/chart_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp" />
+
+
+</LinearLayout>

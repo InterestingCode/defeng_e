@@ -2,80 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="-16dp"
     android:background="#f5912c"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:paddingLeft="@dimen/weather_page_lr_margin"
-        android:paddingRight="@dimen/weather_page_lr_margin">
+        android:paddingRight="@dimen/weather_page_lr_margin"
+        android:paddingTop="@dimen/px20">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/temperature_tv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/px20">
+            android:layout_marginRight="5dp"
+            android:text="37"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_180px" />
 
-            <TextView
-                android:id="@+id/temperature_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="37"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/font_180px" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/px50"
-                android:layout_toRightOf="@id/temperature_tv"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_temperature_unit" />
-
-                <ImageView
-                    android:id="@+id/weather_icon_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_sunshine" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/px30"
-                    android:singleLine="true"
-                    android:text="晴  25°/32°  微风1-3级"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/font_24px" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/temperature_tv"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="@dimen/px30"
-                android:layout_toRightOf="@id/temperature_tv"
-                android:singleLine="true"
-                android:text="2016.8.22 (农历七月二十) 星期二"
-                android:textColor="@android:color/white" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px50"
+            android:layout_toRightOf="@id/temperature_tv"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_right_arrow" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:src="@drawable/ic_temperature_unit" />
+
+            <ImageView
+                android:id="@+id/weather_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_sunshine" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/px30"
+                android:singleLine="true"
+                android:text="晴  25°/32°  微风1-3级"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_24px" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/temperature_tv"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="@dimen/px30"
+            android:layout_toRightOf="@id/temperature_tv"
+            android:singleLine="true"
+            android:text="2016.8.22 (农历七月二十) 星期二"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right_arrow" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -114,7 +109,7 @@
         android:layout_marginTop="@dimen/px44"
         android:background="@drawable/bg_weather_data">
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/px382"
             android:layout_marginLeft="@dimen/weather_page_lr_margin"
@@ -122,7 +117,8 @@
             android:background="@drawable/bg_farming_tips"
             android:orientation="vertical">
 
-        </LinearLayout>
+        </LinearLayout>-->
+        <include layout="@layout/truth_data_layout" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -144,11 +140,5 @@
                 android:textSize="@dimen/font_24px" />
         </RelativeLayout>
     </RelativeLayout>
-
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px22"
-        android:background="@android:color/white"/>-->
-
 
 </LinearLayout>
