@@ -2,33 +2,59 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
+    // keytool -list -v -keystore diesel_dfen.jks
+    signingConfigs {
+        dfen {
+            // MD5: 9F:CB:F1:D2:D3:BA:80:F1:E9:F7:6B:03:A2:33:BB:2C
+            // SHA1: 4C:5A:41:A5:9A:32:01:C6:DC:C2:7C:7C:55:EA:61:FF:71:68:C2:BE
+            // SHA256: 3C:F9:14:CF:05:1C:F1:56:3D:F4:68:54:39:EC:9E:8D:31:FA:BA:A2:AA:A5:A4:30:62:A9:69:C8:6F:95:21:3D
+            keyAlias 'dfen'
+            keyPassword '902060'
+            storeFile file('F:/git_workspace/HTWeather/app/keystore/diesel_dfen.jks')
+            storePassword '902060'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
-
     defaultConfig {
         applicationId "com.diesel.htweather"
         minSdkVersion 14
         targetSdkVersion 19
         versionCode 100
         versionName "1.0.0"
+        signingConfig signingConfigs.dfen
     }
     buildTypes {
+        debug {
+            signingConfig android.buildTypes.release.signingConfig
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "defeng_v" + defaultConfig.versionName + ".apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
+    }
+    productFlavors {
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/fastjson-1.2.9.jar')
-
     compile 'com.hannesdorfmann:adapterdelegates2:2.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.facebook.fresco:fresco:0.12.0'

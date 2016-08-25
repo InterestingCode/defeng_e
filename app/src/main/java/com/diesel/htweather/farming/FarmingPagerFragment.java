@@ -68,6 +68,11 @@ public class FarmingPagerFragment extends BaseFragment {
         mFarmingData.add(new FarmingBannerBean());
         mAdapter = new FarmingPagerAdapter(mFarmingData);
 
+//        View header = LayoutInflater.from(getContext())
+//                .inflate(R.layout.pager_item_actual_framing_data,
+//                        (ViewGroup) getActivity().findViewById(android.R.id.content), false);
+//        mFarmingDataView.addHeaderView(header);
+
         mFarmingDataView.setLayoutManager(new LinearLayoutManager(getContext()));
         mFarmingDataView.addItemDecoration(new DividerItemDecoration(getContext()));
         mFarmingDataView.setAdapter(mAdapter);

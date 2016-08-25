@@ -30,12 +30,6 @@ import butterknife.ButterKnife;
  */
 public class UserInfoFragment extends BaseFragment {
 
-    @BindView(R.id.chart_view)
-    LineChartSurfaceView mChartView;
-
-    @BindView(R.id.truth_data_view)
-    Trend24HourView mTruthDataView;
-
     public static UserInfoFragment newInstance() {
         return new UserInfoFragment();
     }
@@ -52,26 +46,5 @@ public class UserInfoFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        List<List<Integer>> mLinesList = getData();
-        mChartView.setBloodPressure(mLinesList.get(0));
-//        mChartView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-
-        Integer[] temp = new Integer[]{32, 33, 33, 35, 35, 36, 35, 37, 39, 38, 34, 33};
-        List<Integer> tempratures = Arrays.asList(temp);
-        mTruthDataView.setTemperatures(tempratures);
-    }
-
-    private List<List<Integer>> getData() {
-        List<List<Integer>> mLineList = new ArrayList<List<Integer>>();
-        List<Integer> line1 = new ArrayList<Integer>();
-        List<Integer> line2 = new ArrayList<Integer>();
-        for (int i = 0; i < 200; i++) {
-            line1.add(550 + (int) (Math.random() * 200));
-            line2.add(550 - (int) (Math.random() * 200));
-        }
-        mLineList.add(line1);
-        mLineList.add(line2);
-        return mLineList;
     }
 }

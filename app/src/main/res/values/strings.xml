@@ -12,4 +12,10 @@
     <string name="actual_farming">精准农技</string>
     <string name="farming_info">农气情报</string>
     <string name="farming_policy">农业政策</string>
+
+    <string name="real_weather">天气实况</string>
+    <string name="gather_data">信息采集</string>
+    <string name="user_message">个人信息</string>
+    <string name="help_center">帮助中心</string>
+    <string name="system_setting">系统设置</string>
 </resources>

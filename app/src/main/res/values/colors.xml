@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="bg_activity">#F5F5F5</color>
+    <color name="bg_activity">#FFF0F0F0</color>
     <color name="bg_common_header">#F5F5F5</color>
     <color name="txt_color_header_title">#FFFFFF</color>
     <color name="main_tab_txt_color_normal">#666666</color>
@@ -13,6 +13,8 @@
     <color name="black_333">#FF333333</color>
     <color name="gray_999">#FF999999</color>
     <color name="gray_666">#FF666666</color>
+
+    <color name="bg_top_header">#86B802</color>
 
     <color name="bg_farming_page">#FFF0F0F0</color>
     <color name="horizontal_divider_line">#FFDCDCDC</color>

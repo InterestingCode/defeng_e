@@ -1,21 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
     android:orientation="vertical">
 
-    <com.diesel.htweather.widget.Trend24HourView
-        android:id="@+id/truth_data_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px278"
-        android:background="@drawable/shape_truth_data_bg" />
+        android:layout_height="match_parent"
+        android:divider="@drawable/shape_horizontal_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
 
-    <com.diesel.htweather.widget.LineChartSurfaceView
-        android:id="@+id/chart_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_user_info_header"
+            android:paddingBottom="@dimen/px30"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px24"
+            android:paddingTop="@dimen/px30">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/user_avatar_view"
+                android:layout_width="@dimen/px140"
+                android:layout_height="@dimen/px140"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/px30"
+                fresco:placeholderImage="@drawable/ic_def_avatar"
+                fresco:roundAsCircle="true"
+                fresco:roundingBorderColor="@android:color/white"
+                fresco:roundingBorderWidth="@dimen/px4" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/user_avatar_view">
+
+                <TextView
+                    android:id="@+id/user_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="王茂林"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_30px" />
+
+                <TextView
+                    android:id="@+id/user_rank_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/user_name_tv"
+                    android:layout_marginLeft="@dimen/px10"
+                    android:layout_toRightOf="@id/user_name_tv"
+                    android:background="@drawable/bg_user_rank"
+                    android:gravity="center"
+                    android:text="普通用户"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_24px" />
+
+                <TextView
+                    android:id="@+id/user_addr_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_name_tv"
+                    android:layout_marginTop="@dimen/px30"
+                    android:text="重庆市江北区"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_24px" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawablePadding="@dimen/px10"
+                android:drawableRight="@drawable/ic_right_white_arrow"
+                android:gravity="center"
+                android:paddingBottom="@dimen/px20"
+                android:paddingLeft="@dimen/px20"
+                android:paddingTop="@dimen/px20"
+                android:text="个人资料"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_24px" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/real_weather_tv"
+            style="@style/UserCenterButton"
+            android:drawableLeft="@drawable/icon_real_weather"
+            android:text="@string/real_weather" />
+
+        <TextView
+            android:id="@+id/actual_farming_tv"
+            style="@style/UserCenterButton"
+            android:drawableLeft="@drawable/icon_real_farming"
+            android:text="@string/actual_farming" />
+
+        <TextView
+            android:id="@+id/gather_data_tv"
+            style="@style/UserCenterButton"
+            android:drawableLeft="@drawable/icon_gather_data"
+            android:text="@string/gather_data" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px90" />
+
+        <TextView
+            android:id="@+id/user_message_tv"
+            style="@style/UserCenterButton"
+            android:drawableLeft="@drawable/icon_user_message"
+            android:text="@string/user_message" />
+
+        <TextView
+            android:id="@+id/help_center_tv"
+            style="@style/UserCenterButton"
+            android:drawableLeft="@drawable/icon_help_center"
+            android:text="@string/help_center" />
+
+        <TextView
+            android:id="@+id/system_setting_tv"
+            style="@style/UserCenterButton"
+            android:drawableLeft="@drawable/icon_system_setting"
+            android:text="@string/system_setting" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px2" />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</FrameLayout>

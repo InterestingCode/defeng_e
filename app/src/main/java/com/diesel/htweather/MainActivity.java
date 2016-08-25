@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.map.BMapLocationClient;
 import com.diesel.htweather.widget.MainTab;
 import com.diesel.htweather.widget.MainTabBar;
 import com.diesel.htweather.widget.NoScrollViewPager;
@@ -34,6 +35,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_pager)
     NoScrollViewPager mMainPager;
 
+    private BMapLocationClient mBMapLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,20 @@ public class MainActivity extends BaseActivity {
         addTabBarChangeListener();
         mTabBar.setCurrentTabBar(0);
         mMainPager.setCurrentItem(0, false);
+
+        mBMapLocationClient = new BMapLocationClient(getApplicationContext());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mBMapLocationClient.startLocation();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mBMapLocationClient.stopLocation();
     }
 
     private void initView() {
