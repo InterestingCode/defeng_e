@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.farming.FarmingPagerFragment;
-import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
+import com.diesel.htweather.util.ActivityNav;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Comments：农事
@@ -43,17 +43,22 @@ public class FarmingFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_farming, container, false);
+        View view = inflater.inflate(R.layout.fragment_farming, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-
         mFragments.add(FarmingPagerFragment.newInstance());
         MainPagerAdapter adapter = new MainPagerAdapter(getChildFragmentManager());
         adapter.setList(mFragments);
         mWeatherPager.setAdapter(adapter);
+    }
+
+    @OnClick(R.id.area_layout)
+    public void onClick() {
+        ActivityNav.getInstance().startCityManageActivity(mActivity);
     }
 }

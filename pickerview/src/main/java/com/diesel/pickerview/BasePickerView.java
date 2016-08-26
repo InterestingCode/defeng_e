@@ -18,7 +18,7 @@ public class BasePickerView {
 
     private final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
-            Gravity.BOTTOM);
+            Gravity.CENTER);
 
     private Context context;
 
@@ -55,7 +55,14 @@ public class BasePickerView {
         rootView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         contentContainer = (ViewGroup) rootView.findViewById(R.id.content_container);
+        params.leftMargin = dip2px(context, 10);
+        params.rightMargin = dip2px(context, 10);
         contentContainer.setLayoutParams(params);
+    }
+
+    public static int dip2px(Context context, float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
     }
 
     protected void init() {

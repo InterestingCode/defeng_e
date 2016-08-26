@@ -25,7 +25,8 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pickerview_options, contentContainer);
         // -----确定和取消按钮
-        btnSubmit = findViewById(R.id.btnSubmit);
+//        btnSubmit = findViewById(R.id.btnSubmit);
+        btnSubmit = findViewById(R.id.confirm_btn);
         btnSubmit.setTag(TAG_SUBMIT);
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setTag(TAG_CANCEL);

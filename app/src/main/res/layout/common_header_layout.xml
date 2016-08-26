@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cn.cst.iov.app.widget.TitleCommonLayout android:id="@+id/common_head_layout"
+<LinearLayout android:id="@+id/common_head_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="44dp"
+    android:layout_height="@dimen/top_header_height"
     android:background="@color/bg_common_header">
 
     <LinearLayout
@@ -106,4 +106,4 @@
 
     </LinearLayout>
 
-</cn.cst.iov.app.widget.TitleCommonLayout>
+</LinearLayout>

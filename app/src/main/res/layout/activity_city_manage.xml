@@ -1,13 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.diesel.htweather.farming.CityManageActivity">
 
-    <com.diesel.htweather.widget.CommonHeaderView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_header_height"
-        android:background="@color/bg_top_header" />
+        android:background="@color/bg_top_header">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/manage_weather_city"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+
+        <ImageView
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_edit_weather_city" />
+
+        <TextView
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_34px"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_horizontal_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/city_one_tv"
+                style="@style/WeatherCityTextStyle"
+                android:text="重庆市-重庆-渝北区" />
+
+            <ImageView
+                android:id="@+id/arrow_or_delete_btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/city_two_tv"
+                style="@style/WeatherCityTextStyle"
+                android:text="四川省-成都市-双流区" />
+
+            <ImageView
+                android:id="@+id/arrow_or_delete_btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/city_three_tv"
+                style="@style/WeatherCityTextStyle"
+                android:text="江苏省-南京市-雨花区" />
+
+            <ImageView
+                android:id="@+id/arrow_or_delete_btn_3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_weather_city_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px45"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/px100"
+            android:drawableLeft="@drawable/ic_add_weather_city"
+            android:drawablePadding="@dimen/px20"
+            android:gravity="center"
+            android:text="@string/add_weather_city"
+            android:textColor="@color/gray_666"
+            android:textSize="@dimen/font_34px" />
+    </LinearLayout>
+
+</LinearLayout>

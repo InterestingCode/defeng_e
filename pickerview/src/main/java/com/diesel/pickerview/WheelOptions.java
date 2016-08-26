@@ -86,7 +86,7 @@ public class WheelOptions<T> {
         }
         wv_option3.setCurrentItem(wv_option3.getCurrentItem());// 初始化时显示的数据
 
-        int textSize = 25;
+        int textSize = 15; // sp
 
         wv_option1.setTextSize(textSize);
         wv_option2.setTextSize(textSize);
@@ -111,8 +111,7 @@ public class WheelOptions<T> {
                     opt2Select = opt2Select >= mOptions2Items.get(index).size() - 1 ?
                             mOptions2Items.get(index).size() - 1 : opt2Select;
 
-                    wv_option2.setAdapter(new ArrayWheelAdapter(mOptions2Items
-                            .get(index)));
+                    wv_option2.setAdapter(new ArrayWheelAdapter(mOptions2Items.get(index)));
                     wv_option2.setCurrentItem(opt2Select);
                 }
                 if (mOptions3Items != null) {

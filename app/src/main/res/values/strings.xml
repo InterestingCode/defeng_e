@@ -5,6 +5,8 @@
     <string name="main_tab_two">深度服务</string>
     <string name="main_tab_three">个人中心</string>
 
+    <string name="save">保存</string>
+
     <string name="main_tab_one_class">com.diesel.htweather.FarmingFragment</string>
     <string name="main_tab_two_class">com.diesel.htweather.DepthServiceFragment</string>
     <string name="main_tab_three_class">com.diesel.htweather.UserInfoFragment</string>
@@ -18,4 +20,8 @@
     <string name="user_message">个人信息</string>
     <string name="help_center">帮助中心</string>
     <string name="system_setting">系统设置</string>
+
+    <string name="manage_weather_city">天气地区管理</string>
+    <string name="add_weather_city">新增区域</string>
+    <string name="choose_area">区域选择</string>
 </resources>
