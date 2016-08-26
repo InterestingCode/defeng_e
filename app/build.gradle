@@ -44,17 +44,16 @@ android {
             }
         }
     }
-    productFlavors {
-    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/fastjson-1.2.9.jar')
+    compile project(':pickerview')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-    compile files('libs/BaiduLBS_Android.jar')
-    compile files('libs/fastjson-1.2.9.jar')
     compile 'com.hannesdorfmann:adapterdelegates2:2.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.facebook.fresco:fresco:0.12.0'
