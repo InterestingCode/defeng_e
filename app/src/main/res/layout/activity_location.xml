@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".farming.LocationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px250"
+        android:background="@drawable/bg_location_header">
+
+        <EditText
+            android:id="@+id/search_city_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px70"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/px24"
+            android:layout_marginRight="@dimen/px24"
+            android:background="@drawable/bg_farming_tips"
+            android:drawableLeft="@drawable/icon_search"
+            android:drawablePadding="@dimen/px25"
+            android:gravity="center_vertical"
+            android:hint="@string/search_city"
+            android:textColor="@color/gray_ccc"
+            android:textColorHint="@color/gray_ccc"
+            android:textSize="@dimen/font_30px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px90"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/px24"
+        android:paddingRight="@dimen/px24">
+
+        <TextView
+            android:id="@+id/location_city_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_location_city"
+            android:drawablePadding="@dimen/px20"
+            android:gravity="center_vertical"
+            android:text="重庆"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_30px" />
+
+        <ImageView
+            android:id="@+id/relocation_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/location_city_tv"
+            android:paddingLeft="@dimen/px20"
+            android:paddingRight="@dimen/px20"
+            android:src="@drawable/ic_relocation" />
+
+        <ImageView
+            android:id="@+id/more_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/px20"
+            android:src="@drawable/ic_right_gray_arrow" />
+    </RelativeLayout>
+
+</LinearLayout>

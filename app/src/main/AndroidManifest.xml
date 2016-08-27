@@ -33,7 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".farming.CityManageActivity" />
 
         <service
@@ -44,6 +43,8 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="g0yjMVUM2cwVmCN66oGL2ehXWL6aGvG3" />
+
+        <activity android:name=".farming.LocationActivity"></activity>
     </application>
 
 </manifest>
