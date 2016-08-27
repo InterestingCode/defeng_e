@@ -10,7 +10,7 @@ android {
             // SHA256: 3C:F9:14:CF:05:1C:F1:56:3D:F4:68:54:39:EC:9E:8D:31:FA:BA:A2:AA:A5:A4:30:62:A9:69:C8:6F:95:21:3D
             keyAlias 'dfen'
             keyPassword '902060'
-            storeFile file('F:/git_workspace/HTWeather/app/keystore/diesel_dfen.jks')
+            storeFile file("keystore/diesel_dfen.jks")
             storePassword '902060'
         }
     }
