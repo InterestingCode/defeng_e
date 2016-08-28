@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.diesel.htweather.farming.WeatherTrendActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/weather_trend"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px300"
+        android:layout_margin="@dimen/px24"
+        android:background="@drawable/bg_weather_trend"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/weather_page_lr_margin"
+        android:paddingRight="@dimen/weather_page_lr_margin"
+        android:paddingTop="@dimen/px10">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/temperature_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/px10"
+                android:layout_marginTop="-5dp"
+                android:text="36"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_150px"
+                android:typeface="sans" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:src="@drawable/ic_temperature_unit" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/weather_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_sunshine" />
+
+            <TextView
+                style="@style/BaseText.white_24px"
+                android:singleLine="true"
+                android:text="晴  25°/32°  微风1-3级"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_24px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px20"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/BaseText.white_24px"
+                android:layout_width="0dp"
+                android:layout_marginRight="@dimen/px10"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="2016.8.22 (农历七月二十) 星期二"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                style="@style/BaseText.white_24px"
+                android:text="09:00 更新" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px700"
+        android:layout_marginLeft="@dimen/weather_page_lr_margin"
+        android:layout_marginRight="@dimen/weather_page_lr_margin"
+        android:background="@drawable/shape_white_bg_with_radius"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/weather_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px205"
+            android:orientation="horizontal" />
+
+        <View style="@style/BaseHorizontalLine" />
+
+        <com.diesel.htweather.widget.WeatherTrendView
+            android:id="@+id/weather_trend_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View style="@style/BaseHorizontalLine" />
+
+        <LinearLayout
+            android:id="@+id/wind_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px125"
+            android:orientation="horizontal" />
+
+    </LinearLayout>
+</LinearLayout>

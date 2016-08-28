@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px150"
+    android:background="@android:color/white"
+    android:padding="@dimen/px15">
+
+    <ImageView
+        android:id="@+id/farming_info_cover_iv"
+        android:layout_width="@dimen/px200"
+        android:layout_height="@dimen/px120"
+        android:layout_marginRight="@dimen/px20"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_farming_policy_cover" />
+
+    <TextView
+        android:id="@+id/farming_info_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/farming_info_cover_iv"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="方言：农业供给侧改革种植业是切入点"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/font_30px" />
+
+    <TextView
+        android:id="@+id/farming_info_source_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/farming_info_cover_iv"
+        android:layout_toLeftOf="@+id/farming_info_browse_tv"
+        android:layout_toRightOf="@id/farming_info_cover_iv"
+        android:maxLines="1"
+        android:text="德丰e农"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/font_24px" />
+
+    <TextView
+        android:id="@id/farming_info_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/farming_info_cover_iv"
+        android:layout_alignParentRight="true"
+        android:maxLines="1"
+        android:text="2016.08.24"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/font_24px" />
+</RelativeLayout>

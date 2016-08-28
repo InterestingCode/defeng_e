@@ -51,17 +51,17 @@ public class MainActivity extends BaseActivity {
         mBMapLocationClient = new BMapLocationClient(getApplicationContext());
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mBMapLocationClient.startLocation();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mBMapLocationClient.stopLocation();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mBMapLocationClient.startLocation();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        mBMapLocationClient.stopLocation();
+//    }
 
     private void initView() {
         ArrayList<Fragment> fragments = new ArrayList<>();

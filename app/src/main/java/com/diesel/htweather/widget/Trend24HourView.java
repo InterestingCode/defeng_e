@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.model.Weather24Hour;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -117,7 +116,7 @@ public class Trend24HourView extends View {
         bgLinePaint.setAntiAlias(true);
         bgLinePaint.setStrokeWidth(1.0f);
         bgLinePaint.setStyle(Paint.Style.FILL);
-        bgLinePaint.setColor(getResources().getColor(R.color.bg_white_with_90per_alaph));
+        bgLinePaint.setColor(getResources().getColor(R.color.bg_white_with_90per_alpha));
 
     }
 

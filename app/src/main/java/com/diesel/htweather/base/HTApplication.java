@@ -1,9 +1,11 @@
 package com.diesel.htweather.base;
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.diesel.htweather.db.DBManager;
 import com.diesel.htweather.db.RegionDBHelper;
+import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -45,6 +47,7 @@ public class HTApplication extends Application {
         initOkHttp();
         Fresco.initialize(this);
 //        RegionDBHelper.initDbFile(this);
+        startService(new Intent(this, AreaIntentService.class));
         DBManager dbHelper = new DBManager(this);
         dbHelper.openDatabase();
     }

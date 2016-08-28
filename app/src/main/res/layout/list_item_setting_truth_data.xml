@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px90"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/px30"
+    android:paddingRight="@dimen/px50">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/truth_data_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_black_check_box"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/truth_data_type_tv"
+            style="@style/BaseText.black333_30px"
+            android:layout_marginLeft="@dimen/px20"
+            android:text="气温(℃)" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BaseText.gray666_30px"
+            android:text="@string/highest" />
+
+        <EditText
+            android:id="@+id/highest_value_et"
+            style="@style/BaseText.green_30px"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/font_10px"
+            android:background="@null"
+            android:text="100" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/px40"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BaseText.gray666_30px"
+            android:text="@string/lowest" />
+
+        <EditText
+            android:id="@+id/lowest_value_et"
+            style="@style/BaseText.green_30px"
+            android:layout_width="match_parent"
+            android:inputType="numberDecimal"
+            android:layout_marginLeft="@dimen/font_10px"
+            android:background="@null"
+            android:text="70" />
+    </LinearLayout>
+</LinearLayout>

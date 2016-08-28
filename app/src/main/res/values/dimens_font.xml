@@ -92,6 +92,8 @@
     <dimen name="font_98px">49.0sp</dimen>
     <dimen name="font_99px">49.5sp</dimen>
     <dimen name="font_100px">50.0sp</dimen>
+    <dimen name="font_120px">60.0sp</dimen>
+    <dimen name="font_150px">75.0sp</dimen>
     <dimen name="font_180px">90.0sp</dimen>
 
 </resources>

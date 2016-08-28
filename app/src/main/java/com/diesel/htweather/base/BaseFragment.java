@@ -16,6 +16,8 @@ import android.support.v4.app.Fragment;
  */
 public class BaseFragment extends Fragment {
 
+    public String TAG = this.getClass().getSimpleName();
+
     protected Activity mActivity;
 
     @Override

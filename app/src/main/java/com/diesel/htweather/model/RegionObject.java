@@ -9,13 +9,13 @@
  */
 package com.diesel.htweather.model;
 
+import java.io.Serializable;
+
 /**
  * 功能描述：地区实体类
  *
- * @author duxl
  */
-@SuppressWarnings("serial")
-public class RegionObject extends ResponseData {
+public class RegionObject implements Serializable {
 
     /**
      * 地区id

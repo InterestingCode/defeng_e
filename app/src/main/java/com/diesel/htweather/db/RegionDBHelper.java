@@ -20,21 +20,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.baidu.location.BDLocation;
 
 /**
  * 地区数据库帮助类
- *
- * @author duxl
  */
 public class RegionDBHelper {
+
+    private static final String TAG = "AreaDao";
 
     private Context mContext;
 
     private static final String mAssetDbFileName = "area.db";
 
-    private static final String mDbFileName = "areaVer1.1.0.db";// 更新区域表后更改名字
+    private static final String mDbFileName = "area_v1.db";// 更新区域表后更改名字
 
     private static final long mDbFileLength = 252928; // 数据库文件大小（用作校验：如果修改了数据库，被忘了更改这个值）
 
@@ -75,7 +76,6 @@ public class RegionDBHelper {
      * 获取数据库实例
      */
     public static SQLiteDatabase getInstance(Context c) {
-
         return new RegionDBHelper(c).myDBHelper.getReadableDatabase();
     }
 
@@ -83,6 +83,7 @@ public class RegionDBHelper {
      * 初始化数据库文件 如果databases目录不存在地区数据库文件， 将会把asset目录下的数据库文件拷贝到databases目录下
      */
     public static void initDbFile(Context context) {
+        Log.i(TAG, "----------- 开始初始化数据库文件 --------------");
         InputStream is = null;
         FileOutputStream fos = null;
         try {
@@ -103,15 +104,16 @@ public class RegionDBHelper {
                             return true;
                         }
                     });
-            // 删除旧的地区数据库文件
-            for (File f : oldFiles) {
-                f.delete();
+            if (null != oldFiles) {
+                // 删除旧的地区数据库文件
+                for (File f : oldFiles) {
+                    f.delete();
+                }
             }
 
             if (!dbFile.exists() || dbFile.length() < mDbFileLength) {
                 File dir = new File("data/data/" + pkgName + "/databases");
                 if (!dir.exists()) {
-
                     dir.mkdirs();
                 }
 
@@ -120,16 +122,14 @@ public class RegionDBHelper {
                 is = am.open(mAssetDbFileName);
                 fos = new FileOutputStream(dbFile);
                 byte[] data = new byte[1024];
-                int len = -1;
+                int len;
                 while ((len = is.read(data)) != -1) {
                     fos.write(data, 0, len);
                 }
                 fos.flush();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
-
         } finally {
             if (fos != null) {
                 try {
@@ -138,7 +138,6 @@ public class RegionDBHelper {
                     e.printStackTrace();
                 }
             }
-
             if (is != null) {
                 try {
                     is.close();
@@ -146,6 +145,7 @@ public class RegionDBHelper {
                     e.printStackTrace();
                 }
             }
+            Log.i(TAG, "----------- 初始化数据库文件结束 --------------");
         }
     }
 

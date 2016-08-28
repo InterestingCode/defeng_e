@@ -61,7 +61,7 @@ public class WheelView extends View {
 
     int maxTextWidth;
 
-    int maxTextHeight = 100;
+    int maxTextHeight;
 
     float itemHeight;// 每行高度
 

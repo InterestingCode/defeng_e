@@ -57,8 +57,4 @@ public class FarmingFragment extends BaseFragment {
         mWeatherPager.setAdapter(adapter);
     }
 
-    @OnClick(R.id.area_layout)
-    public void onClick() {
-        ActivityNav.getInstance().startCityManageActivity(mActivity);
-    }
 }

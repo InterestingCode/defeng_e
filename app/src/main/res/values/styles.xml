@@ -9,13 +9,6 @@
         <item name="android:windowBackground">@color/bg_activity</item>
     </style>
 
-    <!-- 横线 -->
-    <style name="BaseHorizontalLine">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/horizontal_divider_line</item>
-    </style>
-
     <style name="UserCenterButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/px90</item>
@@ -41,6 +34,69 @@
         <item name="android:paddingRight">@dimen/px24</item>
         <item name="android:textSize">@dimen/font_34px</item>
         <item name="android:textColor">@color/gray_666</item>
+    </style>
+
+    <style name="BaseHorizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/horizontal_divider_line</item>
+    </style>
+
+    <style name="BaseVerticalLine">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/horizontal_divider_line</item>
+    </style>
+
+    <style name="BaseHorizontalLineWithShadow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ic_main_tab_shadow</item>
+    </style>
+
+    <style name="BaseText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="BaseText.gray999_24px">
+        <item name="android:textColor">@color/gray_999</item>
+        <item name="android:textSize">@dimen/font_24px</item>
+    </style>
+
+    <style name="BaseText.gray666_24px">
+        <item name="android:textColor">@color/gray_666</item>
+        <item name="android:textSize">@dimen/font_24px</item>
+    </style>
+
+    <style name="BaseText.gray666_30px">
+        <item name="android:textColor">@color/gray_666</item>
+        <item name="android:textSize">@dimen/font_30px</item>
+    </style>
+
+    <style name="BaseText.black333_24px">
+        <item name="android:textColor">@color/black_333</item>
+        <item name="android:textSize">@dimen/font_24px</item>
+    </style>
+
+    <style name="BaseText.black333_30px">
+        <item name="android:textColor">@color/black_333</item>
+        <item name="android:textSize">@dimen/font_30px</item>
+    </style>
+
+    <style name="BaseText.white_24px">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_24px</item>
+    </style>
+
+    <style name="BaseText.white_30px">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_30px</item>
+    </style>
+
+    <style name="BaseText.green_30px">
+        <item name="android:textColor">@color/bg_top_header</item>
+        <item name="android:textSize">@dimen/font_30px</item>
     </style>
 
 </resources>

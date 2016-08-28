@@ -3,6 +3,9 @@ package com.diesel.htweather.farming.holder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.diesel.htweather.farming.FarmingPolicyActivity;
+import com.diesel.htweather.util.ActivityNav;
+
 /**
  * Comments：
  *
@@ -17,7 +20,14 @@ import android.view.View;
  */
 public class FarmingPolicyHolder extends RecyclerView.ViewHolder {
 
-    public FarmingPolicyHolder(View itemView) {
+    public FarmingPolicyHolder(final View itemView) {
         super(itemView);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityNav.getInstance().startFarmingPolicyActivity(itemView.getContext(),
+                        FarmingPolicyActivity.TYPE_FARMING_POLICY);
+            }
+        });
     }
 }

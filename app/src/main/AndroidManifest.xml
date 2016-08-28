@@ -44,7 +44,17 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="g0yjMVUM2cwVmCN66oGL2ehXWL6aGvG3" />
 
-        <activity android:name=".farming.LocationActivity"></activity>
+        <service android:name=".service.AreaIntentService" />
+
+        <activity android:name=".farming.LocationActivity" />
+        <activity android:name=".farming.MessageActivity" />
+        <activity android:name=".farming.MessageDetailsActivity" />
+        <activity android:name=".farming.FarmingPolicyActivity" />
+        <activity android:name=".farming.FarmingDetailsActivity" />
+        <activity android:name=".farming.WeatherTrendActivity" />
+        <activity
+            android:name=".farming.TruthDataSettingActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
     </application>
 
 </manifest>

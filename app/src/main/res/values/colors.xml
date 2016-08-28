@@ -15,13 +15,18 @@
     <color name="gray_666">#FF666666</color>
     <color name="gray_ccc">#FFCCCCCC</color>
 
+    <color name="divider_line">#FFF0F0F0</color>
+    <color name="high_temperature_line">#FFF7D435</color>
+    <color name="low_temperature_line">#FF00B4EC</color>
+
     <color name="bg_top_header">#86B802</color>
+    <color name="bg_weather_page_header">#FFF5912C</color>
 
     <color name="bg_farming_page">#FFF0F0F0</color>
     <color name="horizontal_divider_line">#FFDCDCDC</color>
 
     <color name="common_light_blue_txt_color">#6DD0F4</color>
-    <color name="bg_white_with_90per_alaph">#E0FFFFFF</color>
-    <color name="weather_trend_forward_day_color">#b9b9b9</color>
+    <color name="bg_white_with_90per_alpha">#E0FFFFFF</color>
+    <color name="weather_trend_forward_day_color">#B9B9B9</color>
 
 </resources>

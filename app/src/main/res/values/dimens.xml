@@ -9,6 +9,9 @@
     <dimen name="trend24_weathericon_reduce">0dp</dimen>
     <dimen name="trend_line_size">3dp</dimen>
 
+    <dimen name="without_truth_data_top_margin">0dp</dimen>
+    <dimen name="with_truth_data_top_margin">-70dp</dimen>
+
     <dimen name="px1">0.5dp</dimen>
     <dimen name="px2">1.0dp</dimen>
     <dimen name="px3">1.5dp</dimen>
@@ -511,6 +514,9 @@
     <dimen name="px500">250.0dp</dimen>
     <dimen name="px538">269.0dp</dimen>
     <dimen name="px568">284.0dp</dimen>
+    <dimen name="px602">301.0dp</dimen>
     <dimen name="px660">330.0dp</dimen>
+    <dimen name="px700">350.0dp</dimen>
+    <dimen name="px765">382.5dp</dimen>
 
 </resources>
