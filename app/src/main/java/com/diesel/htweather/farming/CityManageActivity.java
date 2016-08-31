@@ -1,7 +1,6 @@
 package com.diesel.htweather.farming;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,13 +8,9 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.db.RegionDAO;
-import com.diesel.htweather.model.RegionInfo;
-import com.diesel.htweather.model.RegionObject;
+import com.diesel.htweather.base.HTApplication;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.pickerview.OptionsPickerView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,18 +51,6 @@ public class CityManageActivity extends BaseActivity {
     private boolean mIsEditable = true;
 
     private OptionsPickerView mCityPickerView;
-
-    //    static ArrayList<RegionObject> province = new ArrayList<>();
-//
-//    static ArrayList<ArrayList<RegionObject>> city = new ArrayList<>();
-//
-//    static ArrayList<ArrayList<ArrayList<RegionObject>>> country = new ArrayList<>();
-
-    static ArrayList<RegionInfo> item1;
-
-    static ArrayList<ArrayList<RegionInfo>> item2 = new ArrayList<>();
-
-    static ArrayList<ArrayList<ArrayList<RegionInfo>>> item3 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,70 +107,23 @@ public class CityManageActivity extends BaseActivity {
         mAddWeatherCityLayout.setVisibility(mIsEditable ? View.VISIBLE : View.GONE);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (null != handler) {
-            handler.removeCallbacksAndMessages(null);
-        }
-    }
-
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            System.out.println(System.currentTimeMillis());
-            // 三级联动效果
-            mCityPickerView.setPicker(item1, item2, item3, true);
-            mCityPickerView.setCyclic(true, true, true);
-            mCityPickerView.setSelectOptions(0, 0, 0);
-        }
-    };
-
     private void initPickerView() {
         mCityPickerView = new OptionsPickerView(this);
         mCityPickerView.setTitle(getString(R.string.choose_area));
-
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                System.out.println(System.currentTimeMillis());
-                if (item1 != null && item2 != null && item3 != null) {
-                    handler.sendEmptyMessage(0x123);
-                    return;
-                }
-                item1 = (ArrayList<RegionInfo>) RegionDAO.getProvencesOrCity(1);
-                for (RegionInfo regionInfo : item1) {
-                    item2.add((ArrayList<RegionInfo>) RegionDAO
-                            .getProvencesOrCityOnParent(regionInfo.getId()));
-
-                }
-
-                for (ArrayList<RegionInfo> arrayList : item2) {
-                    ArrayList<ArrayList<RegionInfo>> list2 = new ArrayList<ArrayList<RegionInfo>>();
-                    for (RegionInfo regionInfo : arrayList) {
-
-                        ArrayList<RegionInfo> q = (ArrayList<RegionInfo>) RegionDAO
-                                .getProvencesOrCityOnParent(regionInfo.getId());
-                        list2.add(q);
-
-                    }
-                    item3.add(list2);
-                }
-
-                handler.sendEmptyMessage(0x123);
-
-            }
-        }).start();
+        mCityPickerView
+                .setPicker(HTApplication.provinces, HTApplication.cities, HTApplication.countries,
+                        true);
+        mCityPickerView.setCyclic(true, true, true);
+        mCityPickerView.setSelectOptions(0, 0, 0);
 
         mCityPickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
 
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
                 // 返回的分别是三个级别的选中位置
-                String tx = item1.get(options1).getPickerViewText() + item2.get(options1)
-                        .get(option2).getPickerViewText() + item3.get(options1).get(option2)
-                        .get(options3).getPickerViewText();
+                String tx = HTApplication.provinces.get(options1).name + "-"
+                        + HTApplication.cities.get(options1).get(option2).name + "-"
+                        + HTApplication.countries.get(options1).get(option2).get(options3).name;
                 ToastUtils.show(tx);
             }
         });

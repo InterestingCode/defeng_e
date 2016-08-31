@@ -11,11 +11,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.diesel.htweather.model.RegionObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 区域数据dao，用于操作区域SQLite数据库
@@ -93,8 +93,8 @@ public class AreaDao {
     /**
      * 加载第一级(省份列表)数据
      */
-    public List<RegionObject> loadLevel01Data() {
-        List<RegionObject> listData = new ArrayList<RegionObject>();
+    public ArrayList<RegionObject> loadLevel01Data() {
+        ArrayList<RegionObject> listData = new ArrayList<RegionObject>();
         Cursor cur = null;
 
         try {
@@ -109,7 +109,7 @@ public class AreaDao {
                 obj.fullName = cur.getString(cur.getColumnIndex(RegionDBHelper.COL_FULL_NAME));
                 obj.showName = cur.getString(cur.getColumnIndex(RegionDBHelper.COL_SHOW_NAME));
                 listData.add(obj);
-//                Log.v(TAG, "---省--- " + obj.toString());
+                Log.v(TAG, "---省--- " + obj.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,8 +126,8 @@ public class AreaDao {
      *
      * @param cityObj 父级地区
      */
-    public List<RegionObject> loadLevel02Data(RegionObject cityObj) {
-        List<RegionObject> listData = new ArrayList<RegionObject>();
+    public ArrayList<RegionObject> loadLevel02Data(RegionObject cityObj) {
+        ArrayList<RegionObject> listData = new ArrayList<RegionObject>();
         Cursor cur = null;
 
         try {
@@ -143,7 +143,7 @@ public class AreaDao {
                 obj.fullName = cur.getString(cur.getColumnIndex(RegionDBHelper.COL_FULL_NAME));
                 obj.showName = cur.getString(cur.getColumnIndex(RegionDBHelper.COL_SHOW_NAME));
                 listData.add(obj);
-//                Log.v(TAG, "---市--- " + obj.toString());
+                Log.v(TAG, "---市--- " + obj.toString());
             }
 
         } catch (Exception e) {
@@ -163,8 +163,8 @@ public class AreaDao {
      *
      * @param cityObj 父级地区
      */
-    public List<RegionObject> loadLevel03Data(RegionObject cityObj) {
-        List<RegionObject> listData = new ArrayList<RegionObject>();
+    public ArrayList<RegionObject> loadLevel03Data(RegionObject cityObj) {
+        ArrayList<RegionObject> listData = new ArrayList<RegionObject>();
 
         // 三级地区第一个数据是父级（但需要排除 海南省、湖北省、河南、新疆 的二级数据）
         if (!"3890".equals(cityObj.id) && !"4190".equals(cityObj.id) && !"3718".equals(cityObj.id)
@@ -186,7 +186,7 @@ public class AreaDao {
                 obj.showName = cur.getString(cur.getColumnIndex(RegionDBHelper.COL_SHOW_NAME));
                 obj.parentName = cityObj.fullName;
                 listData.add(obj);
-//                Log.v(TAG, "---区县--- " + obj.toString());
+                Log.v(TAG, "---区县--- " + obj.toString());
             }
 
         } catch (Exception e) {

@@ -4,11 +4,11 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.diesel.htweather.base.HTApplication;
 import com.diesel.htweather.db.AreaDao;
 import com.diesel.htweather.model.RegionObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Comments：
@@ -37,21 +37,26 @@ public class AreaIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.i("AreaDao", "----------- 开始获取地区数据 --------------");
-        List<RegionObject> provinces = mAreaDao.loadLevel01Data();
-        List<List<RegionObject>> cities = new ArrayList<>();
-        List<List<List<RegionObject>>> countries = new ArrayList<>();
+        long curr = System.currentTimeMillis();
+        ArrayList<RegionObject> provinces = mAreaDao.loadLevel01Data();
+        ArrayList<ArrayList<RegionObject>> cities = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<RegionObject>>> countries = new ArrayList<>();
 
-        for (RegionObject province :provinces) {
-            List<RegionObject> city = mAreaDao.loadLevel02Data(province);
+        for (RegionObject province : provinces) {
+            ArrayList<RegionObject> city = mAreaDao.loadLevel02Data(province);
             cities.add(city);
 
-            List<List<RegionObject>> country = new ArrayList<>();
+            ArrayList<ArrayList<RegionObject>> country = new ArrayList<>();
             for (RegionObject c : city) {
                 country.add(mAreaDao.loadLevel03Data(c));
             }
             countries.add(country);
         }
-        Log.i("AreaDao", "----------- 获取地区数据结束 --------------");
+        HTApplication.provinces = provinces;
+        HTApplication.cities = cities;
+        HTApplication.countries = countries;
+        Log.i("AreaDao", "----------- 获取地区数据结束 --------------cost time:"
+                + (System.currentTimeMillis() - curr) + " ms");
     }
 
     @Override

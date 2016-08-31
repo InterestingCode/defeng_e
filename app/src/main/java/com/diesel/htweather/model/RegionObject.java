@@ -13,7 +13,6 @@ import java.io.Serializable;
 
 /**
  * 功能描述：地区实体类
- *
  */
 public class RegionObject implements Serializable {
 
@@ -40,6 +39,12 @@ public class RegionObject implements Serializable {
     public String showName;
 
     public String parentShowName;
+
+    //这个用来显示在PickerView上面的字符串,PickerView会通过反射获取getPickerViewText方法显示出来。
+    public String getPickerViewText() {
+        //这里还可以判断文字超长截断再提供显示
+        return name;
+    }
 
     @Override
     public String toString() {

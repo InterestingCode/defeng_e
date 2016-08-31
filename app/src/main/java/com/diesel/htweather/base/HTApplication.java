@@ -3,8 +3,7 @@ package com.diesel.htweather.base;
 import android.app.Application;
 import android.content.Intent;
 
-import com.diesel.htweather.db.DBManager;
-import com.diesel.htweather.db.RegionDBHelper;
+import com.diesel.htweather.model.RegionObject;
 import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -14,6 +13,7 @@ import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
 import com.zhy.http.okhttp.https.HttpsUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -35,6 +35,12 @@ public class HTApplication extends Application {
 
     private static HTApplication mInstance = null;
 
+    public static ArrayList<RegionObject> provinces ;
+
+    public static ArrayList<ArrayList<RegionObject>> cities;
+
+    public static ArrayList<ArrayList<ArrayList<RegionObject>>> countries;
+
     public static HTApplication getInstance() {
         return mInstance;
     }
@@ -46,10 +52,7 @@ public class HTApplication extends Application {
         CrashHandler.getInstance().init(this);
         initOkHttp();
         Fresco.initialize(this);
-//        RegionDBHelper.initDbFile(this);
         startService(new Intent(this, AreaIntentService.class));
-        DBManager dbHelper = new DBManager(this);
-        dbHelper.openDatabase();
     }
 
     private void initOkHttp() {
