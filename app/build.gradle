@@ -61,4 +61,5 @@ dependencies {
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.6'
 }
