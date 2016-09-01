@@ -82,35 +82,34 @@
 
         <View style="@style/BaseHorizontalLine" />
 
-        <FrameLayout
+        <HorizontalScrollView
+            android:id="@+id/truth_data_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/px330">
+            android:layout_height="wrap_content"
+            android:fadingEdge="none"
+            android:fillViewport="true"
+            android:scrollbars="none">
 
-            <com.diesel.htweather.widget.XHorizontalScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
+                android:layout_height="@dimen/px330"
+                android:orientation="vertical">
+                <!-- 温度趋势图 -->
+                <com.diesel.htweather.widget.Trend24HourView
+                    android:id="@+id/truth_data_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <!-- 温度趋势图 -->
-                    <com.diesel.htweather.widget.Trend24HourView
-                        android:id="@+id/truth_data_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/px278" />
+                    android:layout_height="@dimen/px278" />
 
-                    <View style="@style/BaseHorizontalLine" />
+                <!--<View style="@style/BaseHorizontalLine" />-->
 
-                    <!-- 填充布局 时间栏 -->
-                    <LinearLayout
-                        android:id="@+id/forecast_times_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/px52"
-                        android:layout_gravity="bottom"
-                        android:orientation="horizontal" />
-                </LinearLayout>
-            </com.diesel.htweather.widget.XHorizontalScrollView>
-        </FrameLayout>
+                <!-- 填充布局 时间栏 -->
+                <LinearLayout
+                    android:id="@+id/forecast_times_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/px52"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 </LinearLayout>

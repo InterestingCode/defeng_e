@@ -134,35 +134,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/px30"
-        android:background="@color/bg_activity"/>
-
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/px44"
-        android:background="@drawable/bg_weather_data">
-
-        <include layout="@layout/truth_data_layout" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_weather_truth_data"
-            android:paddingRight="@dimen/weather_page_lr_margin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/px10"
-                android:background="@drawable/ic_weather_truth_data"
-                android:gravity="center_horizontal"
-                android:paddingTop="@dimen/px42"
-                android:text="实况\n数据"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/font_24px" />
-        </RelativeLayout>
-    </RelativeLayout>-->
+        android:background="@color/bg_activity" />
 
 </LinearLayout>

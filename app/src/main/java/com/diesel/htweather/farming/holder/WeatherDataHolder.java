@@ -16,6 +16,7 @@ import com.diesel.htweather.farming.model.WeatherDataBean;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.widget.Trend24HourView;
+import com.diesel.htweather.widget.XHorizontalScrollView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +63,9 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.truth_data_bottom_layout)
     RelativeLayout mTruthDataBottomLayout;
 
+//    @BindView(R.id.truth_data_scroll_view)
+//    XHorizontalScrollView mScrollView;
+
     Context mContext;
 
     public WeatherDataHolder(View itemView) {
@@ -76,8 +80,14 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
             return;
         }
         Integer[] temp = new Integer[]{32, 33, 33, 35, 35, 36, 35, 37, 39, 38, 34, 33};
-        List<Integer> tempratures = Arrays.asList(temp);
-//        mTruthDataView.setTemperatures(tempratures);
+        List<Integer> temperatures = Arrays.asList(temp);
+        mTruthDataView.setTemperatures(temperatures);
+//        mScrollView.setOnScrollChanged(new XHorizontalScrollView.OnScrollChanged() {
+//            @Override
+//            public void onChanged(int left) {
+//
+//            }
+//        });
     }
 
     @OnClick({R.id.more_btn, R.id.close_tips_iv, R.id.truth_data_btn, R.id.truth_data_setting_iv})
@@ -98,6 +108,12 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                     LinearLayout.LayoutParams lp
                             = (LinearLayout.LayoutParams) mTruthDataBottomLayout.getLayoutParams();
                     lp.topMargin = -ViewUtils.dip2px(mContext, 70);
+                    mTruthDataBottomLayout.setLayoutParams(lp);
+                } else if (mTruthDataTopLayout.getVisibility() == View.VISIBLE) {
+                    ViewUtils.gone(mTruthDataTopLayout);
+                    LinearLayout.LayoutParams lp
+                            = (LinearLayout.LayoutParams) mTruthDataBottomLayout.getLayoutParams();
+                    lp.topMargin = 0;
                     mTruthDataBottomLayout.setLayoutParams(lp);
                 }
                 break;

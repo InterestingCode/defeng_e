@@ -27,6 +27,8 @@ public class XHorizontalScrollView extends HorizontalScrollView {
      */
     private int lastScrollX;
 
+    float lastX = 0;
+
     public XHorizontalScrollView(Context context) {
         this(context, null);
     }
@@ -107,9 +109,6 @@ public class XHorizontalScrollView extends HorizontalScrollView {
         return super.onTouchEvent(ev);
     }
 
-    float lastX = 0;
-
-
     /**
      * 滚动的回调接口
      *
@@ -120,7 +119,7 @@ public class XHorizontalScrollView extends HorizontalScrollView {
         /**
          * 回调方法， 返回ScrollView滑动的x方向距离
          */
-        public void onScroll(int scrollX);
+        void onScroll(int scrollX);
     }
 
     /**
@@ -130,7 +129,7 @@ public class XHorizontalScrollView extends HorizontalScrollView {
      */
     public interface OnScrollChanged {
 
-        public void onChanged(int left);
+        void onChanged(int left);
     }
 
 }

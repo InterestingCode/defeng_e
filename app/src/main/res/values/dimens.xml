@@ -5,7 +5,6 @@
 
     <dimen name="top_header_height">@dimen/px88</dimen>
     <dimen name="weather_page_lr_margin">@dimen/px23</dimen>
-    <dimen name="trend_radius_size">@dimen/px10</dimen>
     <dimen name="trend24_weathericon_reduce">0dp</dimen>
     <dimen name="trend_line_size">3dp</dimen>
 
