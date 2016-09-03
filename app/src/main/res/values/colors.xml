@@ -29,4 +29,7 @@
     <color name="bg_white_with_90per_alpha">#E0FFFFFF</color>
     <color name="weather_trend_forward_day_color">#B9B9B9</color>
 
+    <color name="polyline_yellow_point_color">#FFFDF000</color>
+    <color name="polyline_blue_point_color">#FF02A2FF</color>
+
 </resources>
