@@ -51,7 +51,7 @@ public class Trend24HourView extends View {
 
     private int mMaxTemperature;
 
-    private int topBottomMargin = 0; // 曲线与上下边距
+    private int topBottomMargin = 20; // 曲线与上下边距
 
     private int leftRightMargin = 0; // 折线左右间距
 
@@ -142,17 +142,20 @@ public class Trend24HourView extends View {
         int y2 = gridSpaceHeight * 2 + topBottomMargin;//height / 2;
         int y3 = gridSpaceHeight * 3 + topBottomMargin;//height * 3 / 4;
         int y4 = gridSpaceHeight * 4 + topBottomMargin;//height;
+        int y5 = gridSpaceHeight * 5 + topBottomMargin;//height;
         canvas.drawLine(dividerLineStartX, y1, dividerLineStopX, y1, bgLinePaint);
         canvas.drawLine(dividerLineStartX, y2, dividerLineStopX, y2, bgLinePaint);
         canvas.drawLine(dividerLineStartX, y3, dividerLineStopX, y3, bgLinePaint);
         canvas.drawLine(dividerLineStartX, y4, dividerLineStopX, y4, bgLinePaint);
+        canvas.drawLine(dividerLineStartX, y5, dividerLineStopX, y5, bgLinePaint);
 
         // draw unit value
         int unitStartX = unitWidth / 2;
-        canvas.drawText("35", unitStartX, y1, mTextPaint);
-        canvas.drawText("33", unitStartX, y2, mTextPaint);
-        canvas.drawText("32", unitStartX, y3, mTextPaint);
-        canvas.drawText("31", unitStartX, y4, mTextPaint);
+        canvas.drawText("39°", unitStartX, y1, mTextPaint);
+        canvas.drawText("37°", unitStartX, y2, mTextPaint);
+        canvas.drawText("35°", unitStartX, y3, mTextPaint);
+        canvas.drawText("34°", unitStartX, y4, mTextPaint);
+        canvas.drawText("32°", unitStartX, y5, mTextPaint);
 
         // draw vertical divider line
 //        for (int i = 1; i < tempSize; i++) {
@@ -229,7 +232,7 @@ public class Trend24HourView extends View {
                 : gridSpaceWidth * temperatures.size() + leftRightMargin * 2 + unitWidth;
         height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        gridSpaceHeight = (height - topBottomMargin * 2 - timeHeight) / 4;
+        gridSpaceHeight = (height - topBottomMargin * 2 - timeHeight) / 5;
 
         setMeasuredDimension(width, height);
     }

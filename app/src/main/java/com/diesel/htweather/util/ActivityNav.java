@@ -10,6 +10,12 @@ import com.diesel.htweather.farming.MessageActivity;
 import com.diesel.htweather.farming.MessageDetailsActivity;
 import com.diesel.htweather.farming.TruthDataSettingActivity;
 import com.diesel.htweather.farming.WeatherTrendActivity;
+import com.diesel.htweather.user.EditUserInfoActivity;
+import com.diesel.htweather.user.GatherDataActivity;
+import com.diesel.htweather.user.HelpCenterActivity;
+import com.diesel.htweather.user.PlantAndAreaActivity;
+import com.diesel.htweather.user.RealNameAuthActivity;
+import com.diesel.htweather.user.SystemSettingActivity;
 
 /**
  * Comments：
@@ -31,6 +37,10 @@ public class ActivityNav {
         }
         return mInstance;
     }
+
+    //---------------------------------------------------------------------------------------
+    // 农事
+    //---------------------------------------------------------------------------------------
 
     public void startCityManageActivity(Context context) {
         Intent intent = new Intent(context, CityManageActivity.class);
@@ -65,6 +75,40 @@ public class ActivityNav {
 
     public void startTruthDataSettingActivity(Context context) {
         Intent intent = new Intent(context, TruthDataSettingActivity.class);
+        context.startActivity(intent);
+    }
+
+    //---------------------------------------------------------------------------------------
+    // 用户中心
+    //---------------------------------------------------------------------------------------
+
+    public void startEditUserInfoActivity(Context context) {
+        Intent intent = new Intent(context, EditUserInfoActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startSystemSettingActivity(Context context) {
+        Intent intent = new Intent(context, SystemSettingActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startHelpCenterActivity(Context context) {
+        Intent intent = new Intent(context, HelpCenterActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startPlantAndAreaActivity(Context context) {
+        Intent intent = new Intent(context, PlantAndAreaActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startRealNameAuthActivity(Context context) {
+        Intent intent = new Intent(context, RealNameAuthActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startGatherDataActivity(Context context) {
+        Intent intent = new Intent(context, GatherDataActivity.class);
         context.startActivity(intent);
     }
 

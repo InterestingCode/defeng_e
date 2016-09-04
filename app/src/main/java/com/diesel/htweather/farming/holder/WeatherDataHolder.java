@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.diesel.htweather.R;
 import com.diesel.htweather.farming.model.WeatherDataBean;
 import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.DataProcessUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.widget.Trend24HourView;
 import com.diesel.htweather.widget.XHorizontalScrollView;
@@ -51,9 +52,6 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.truth_data_view)
     Trend24HourView mTruthDataView;
 
-    @BindView(R.id.forecast_times_layout)
-    LinearLayout mForecastTimesLayout;
-
     @BindView(R.id.weather_tips_layout)
     LinearLayout mTipsLayout;
 
@@ -62,9 +60,6 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.truth_data_bottom_layout)
     RelativeLayout mTruthDataBottomLayout;
-
-//    @BindView(R.id.truth_data_scroll_view)
-//    XHorizontalScrollView mScrollView;
 
     Context mContext;
 
@@ -79,15 +74,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
         if (null == bean) {
             return;
         }
-        Integer[] temp = new Integer[]{32, 33, 33, 35, 35, 36, 35, 37, 39, 38, 34, 33};
+        Integer[] temp = new Integer[]{32, 33, 33, 35, 35, 36, 35, 37, 39, 38, 36, 33};
         List<Integer> temperatures = Arrays.asList(temp);
         mTruthDataView.setTemperatures(temperatures);
-//        mScrollView.setOnScrollChanged(new XHorizontalScrollView.OnScrollChanged() {
-//            @Override
-//            public void onChanged(int left) {
-//
-//            }
-//        });
+
+//        mTemperatureTv.setText(DataProcessUtils.getTemperatureWithouUnit(bean.currTemp));
     }
 
     @OnClick({R.id.more_btn, R.id.close_tips_iv, R.id.truth_data_btn, R.id.truth_data_setting_iv})

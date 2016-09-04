@@ -55,6 +55,14 @@
         <activity
             android:name=".farming.TruthDataSettingActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity android:name=".user.EditUserInfoActivity" />
+        <activity android:name=".user.SystemSettingActivity" />
+        <activity android:name=".user.HelpCenterActivity" />
+        <activity android:name=".user.PlantAndAreaActivity" />
+        <activity android:name=".user.RealNameAuthActivity" />
+        <activity
+            android:name=".user.GatherDataActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
     </application>
 
 </manifest>

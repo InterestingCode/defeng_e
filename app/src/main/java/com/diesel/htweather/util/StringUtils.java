@@ -2,10 +2,14 @@ package com.diesel.htweather.util;
 
 import android.text.TextUtils;
 
+import com.diesel.htweather.constant.Consts;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Comments：字符串相关的工具类
@@ -45,5 +49,22 @@ public class StringUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 正则验证
+     *
+     * @param context 要验证的内容
+     * @param regExp  验证规则
+     * @return 通过true，否则false
+     */
+    public static boolean regExpVerify(String context, String regExp) {
+        Pattern p = Pattern.compile(regExp);
+        Matcher matcher = p.matcher(context);
+        return matcher.find();
+    }
+
+    public static boolean mobileVerify(String telephone) {
+        return regExpVerify(telephone, Consts.MOBILE_REG_EXP);
     }
 }

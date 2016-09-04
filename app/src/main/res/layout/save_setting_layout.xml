@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/save_setting_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px88"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView style="@style/BaseHorizontalLine" />
+
+    <TextView
+        style="@style/BaseText.gray666_30px"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/icon_save"
+        android:drawablePadding="@dimen/px12"
+        android:gravity="center"
+        android:text="@string/save_setting" />
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_bg_with_10dp_radius"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px70">
+
+        <TextView
+            android:id="@+id/dialog_title_tv"
+            style="@style/BaseText.black333_30px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/px20"
+            android:text="修改性别" />
+
+        <ImageView
+            android:id="@+id/dismiss_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/px20"
+            android:paddingRight="@dimen/px20"
+            android:src="@drawable/ic_close_gray" />
+    </RelativeLayout>
+
+    <View style="@style/BaseHorizontalLine" />
+
+    <RadioGroup
+        android:id="@+id/gender_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px40"
+        android:layout_marginLeft="@dimen/px45"
+        android:layout_marginTop="@dimen/px40"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/male_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:checked="true"
+            android:drawableLeft="@drawable/selector_green_radio_button"
+            android:drawablePadding="@dimen/px35"
+            android:gravity="center_vertical"
+            android:text="男"
+            android:textColor="@color/gender_radio_button_text_color"
+            android:textSize="@dimen/font_36px" />
+
+        <RadioButton
+            android:id="@+id/female_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px40"
+            android:button="@null"
+            android:checked="false"
+            android:drawableLeft="@drawable/selector_green_radio_button"
+            android:drawablePadding="@dimen/px35"
+            android:gravity="center_vertical"
+            android:text="女"
+            android:textColor="@color/gender_radio_button_text_color"
+            android:textSize="@dimen/font_36px" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/commit_btn"
+        style="@style/BaseText.white_30px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px62"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginRight="@dimen/px30"
+        android:background="@drawable/shape_green_bg_with_radius"
+        android:gravity="center"
+        android:text="@string/commit" />
+
+</LinearLayout>

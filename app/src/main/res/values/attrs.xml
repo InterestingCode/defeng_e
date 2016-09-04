@@ -60,4 +60,12 @@
         <attr name="vertical_values_size" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="EditUserInfoView">
+        <attr name="column_name" format="string|reference" />
+        <attr name="column_content" format="string|reference" />
+        <attr name="column_icon" format="reference" />
+        <attr name="column_check_box" format="reference" />
+        <attr name="hide_arrow" format="boolean" />
+    </declare-styleable>
+
 </resources>

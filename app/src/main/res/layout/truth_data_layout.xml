@@ -90,26 +90,10 @@
             android:fillViewport="true"
             android:scrollbars="none">
 
-            <LinearLayout
+            <com.diesel.htweather.widget.Trend24HourView
+                android:id="@+id/truth_data_view"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/px330"
-                android:orientation="vertical">
-                <!-- 温度趋势图 -->
-                <com.diesel.htweather.widget.Trend24HourView
-                    android:id="@+id/truth_data_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/px278" />
-
-                <!--<View style="@style/BaseHorizontalLine" />-->
-
-                <!-- 填充布局 时间栏 -->
-                <LinearLayout
-                    android:id="@+id/forecast_times_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/px52"
-                    android:layout_gravity="bottom"
-                    android:orientation="horizontal" />
-            </LinearLayout>
+                android:layout_height="@dimen/px323" />
         </HorizontalScrollView>
     </LinearLayout>
 </LinearLayout>

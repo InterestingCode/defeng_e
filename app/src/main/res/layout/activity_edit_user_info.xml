@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:diesel="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.diesel.htweather.user.EditUserInfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/user_data"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/shape_horizontal_divider"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px160"
+                android:background="@android:color/white"
+                android:paddingLeft="@dimen/px30"
+                android:paddingRight="@dimen/px24">
+
+                <TextView
+                    style="@style/BaseText.black333_30px"
+                    android:layout_centerVertical="true"
+                    android:text="@string/avatar" />
+
+                <ImageView
+                    android:id="@+id/right_arrow_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right_gray_arrow" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/user_avatar_view"
+                    android:layout_width="@dimen/px140"
+                    android:layout_height="@dimen/px140"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/px24"
+                    android:layout_toLeftOf="@id/right_arrow_iv"
+                    fresco:placeholderImage="@drawable/icon_avatar_test" />
+            </RelativeLayout>
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_appellation_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_appellation"
+                diesel:column_name="@string/appellation" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_gender_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_gender"
+                diesel:column_name="@string/gender" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_birth_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_birth"
+                diesel:column_name="@string/birth" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_area_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_belong_area"
+                diesel:column_name="@string/belong_area" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_occupation_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_occupation"
+                diesel:column_name="@string/occupation" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_address_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_address"
+                diesel:column_name="@string/address" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_plant_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_plant"
+                diesel:column_name="@string/plant" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_telephone_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_telephone"
+                diesel:column_name="@string/telephone" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_certification_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_name="@string/certification" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/save_setting_layout" />
+
+</LinearLayout>

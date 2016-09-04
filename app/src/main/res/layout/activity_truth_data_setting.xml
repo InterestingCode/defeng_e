@@ -35,22 +35,25 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <ImageView style="@style/BaseHorizontalLineWithShadow" />
+    <include layout="@layout/save_setting_layout" />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/save_setting_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px88"
+        android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center"
         android:orientation="vertical">
 
+        <ImageView style="@style/BaseHorizontalLine" />
+
         <TextView
             style="@style/BaseText.gray666_30px"
+            android:layout_height="@dimen/px88"
             android:drawableLeft="@drawable/icon_save"
             android:drawablePadding="@dimen/px12"
             android:gravity="center"
             android:text="@string/save_setting" />
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

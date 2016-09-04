@@ -1,8 +1,12 @@
 package com.diesel.htweather.base;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
+import com.diesel.htweather.constant.Consts;
 import com.diesel.htweather.model.RegionObject;
 import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
@@ -35,7 +39,7 @@ public class HTApplication extends Application {
 
     private static HTApplication mInstance = null;
 
-    public static ArrayList<RegionObject> provinces ;
+    public static ArrayList<RegionObject> provinces;
 
     public static ArrayList<ArrayList<RegionObject>> cities;
 
@@ -50,6 +54,7 @@ public class HTApplication extends Application {
         super.onCreate();
         mInstance = this;
         CrashHandler.getInstance().init(this);
+        Consts.sDeviceToken = getDrivenToken(this);
         initOkHttp();
         Fresco.initialize(this);
         startService(new Intent(this, AreaIntentService.class));
@@ -73,6 +78,20 @@ public class HTApplication extends Application {
                 })
                 .build();
         OkHttpUtils.initClient(okHttpClient);
+    }
+
+    public static String getDrivenToken(Context context) {
+        String drivenToken = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        if (drivenToken == null) {
+            drivenToken = android.provider.Settings.System.getString(
+                    context.getContentResolver(),
+                    android.provider.Settings.System.ANDROID_ID);
+            if (drivenToken == null) {
+                return "AAAAAAAAAAAAA";
+            }
+        }
+        return drivenToken;
     }
 
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_bg_with_10dp_radius"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px70">
+
+        <TextView
+            android:id="@+id/dialog_title_tv"
+            style="@style/BaseText.black333_30px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/px20"
+            android:text="@string/add" />
+
+        <ImageView
+            android:id="@+id/dismiss_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/px20"
+            android:paddingRight="@dimen/px20"
+            android:src="@drawable/ic_close_gray" />
+    </RelativeLayout>
+
+    <View style="@style/BaseHorizontalLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginRight="@dimen/px30"
+        android:layout_marginTop="@dimen/px45"
+        android:background="@drawable/bg_default_input_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BaseText.black333_30px"
+            android:text="@string/plants_name" />
+
+        <EditText
+            android:id="@+id/dialog_plant_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:paddingLeft="@dimen/px15"
+            android:paddingRight="@dimen/px15"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_36px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginRight="@dimen/px30"
+        android:layout_marginTop="@dimen/px45"
+        android:background="@drawable/bg_default_input_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BaseText.black333_30px"
+            android:text="@string/plants_area" />
+
+        <EditText
+            android:id="@+id/dialog_plant_area_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="numberDecimal"
+            android:paddingLeft="@dimen/px15"
+            android:paddingRight="@dimen/px15"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_36px" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/commit_btn"
+        style="@style/BaseText.white_30px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px62"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginRight="@dimen/px30"
+        android:layout_marginTop="@dimen/px45"
+        android:background="@drawable/shape_green_bg_with_radius"
+        android:gravity="center"
+        android:text="@string/commit" />
+
+</LinearLayout>

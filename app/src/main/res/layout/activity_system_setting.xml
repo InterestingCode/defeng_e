@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:diesel="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.diesel.htweather.user.SystemSettingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_horizontal_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <com.diesel.htweather.widget.EditUserInfoView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            diesel:column_check_box="@drawable/selector_black_check_box"
+            diesel:column_name="@string/message_notify"
+            diesel:hide_arrow="true" />
+
+        <com.diesel.htweather.widget.EditUserInfoView
+            android:id="@+id/clear_cache_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            diesel:column_name="@string/clear_cache" />
+
+        <com.diesel.htweather.widget.EditUserInfoView
+            android:id="@+id/modify_password_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            diesel:column_name="@string/modify_password" />
+
+        <com.diesel.htweather.widget.EditUserInfoView
+            android:id="@+id/feedback_advise_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            diesel:column_name="@string/feedback_advise" />
+
+        <com.diesel.htweather.widget.EditUserInfoView
+            android:id="@+id/help_center_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            diesel:column_name="@string/help_center" />
+
+        <com.diesel.htweather.widget.EditUserInfoView
+            android:id="@+id/about_defeng_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            diesel:column_icon="@drawable/icon_new_message"
+            diesel:column_name="@string/about_defeng" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/exit_app_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px90"
+        android:layout_marginTop="@dimen/px100"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="@string/exit_app"
+        android:textColor="@color/important_btn_txt_color"
+        android:textSize="@dimen/font_30px" />
+</LinearLayout>

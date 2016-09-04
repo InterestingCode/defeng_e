@@ -86,13 +86,13 @@ public class TruthDataSettingActivity extends BaseActivity {
         mTruthData.add(bean7);
     }
 
-    @OnClick({R.id.back_btn, R.id.save_setting_layout})
+    @OnClick({R.id.back_btn, R.id.save_setting_view})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_btn:
                 finish();
                 break;
-            case R.id.save_setting_layout:
+            case R.id.save_setting_view:
                 finish();
                 break;
         }
