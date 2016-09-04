@@ -17,7 +17,6 @@ import com.diesel.pickerview.R;
 import com.diesel.pickerview.adapter.WheelAdapter;
 import com.diesel.pickerview.listener.OnItemSelectedListener;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -31,7 +30,7 @@ public class WheelView extends View {
 
     public enum ACTION {
         // 点击，滑翔(滑到尽头)，拖拽事件
-        CLICK, FLING, DAGGLE
+        CLICK, FLING, DRAG
     }
 
     Context context;
@@ -72,7 +71,7 @@ public class WheelView extends View {
     int dividerColor;
 
     // 条目间距倍数
-    static final float lineSpacingMultiplier = 1.4F;
+    static final float lineSpacingMultiplier = 2;//1.4F;
 
     boolean isLoop;
 
@@ -100,7 +99,7 @@ public class WheelView extends View {
     int change;
 
     // 显示几个条目
-    int itemsVisible = 11;
+    int itemsVisible = 7;
 
     int measuredHeight;
 
@@ -119,7 +118,7 @@ public class WheelView extends View {
     long startTime = 0;
 
     // 修改这个值可以改变滑行速度
-    private static final int VELOCITYFLING = 5;
+    private static final int VELOCITY_FLING = 5;
 
     int widthMeasureSpec;
 
@@ -129,11 +128,11 @@ public class WheelView extends View {
 
     private int drawOutContentStart = 0;// 非中间文字开始绘制位置
 
-    private static final float SCALECONTENT = 0.8F;// 非中间文字则用此控制高度，压扁形成3d错觉
+    private static final float SCALE_CONTENT = 1;//0.8F;// 非中间文字则用此控制高度，压扁形成3d错觉
 
-    private static final float CENTERCONTENTOFFSET = 6;// 中间文字文字居中需要此偏移值
+    private static final float CENTER_CONTENT_OFFSET = 0;//6;// 中间文字文字居中需要此偏移值
 
-    private static final String GETPICKERVIEWTEXT = "getPickerViewText";// 反射的方法名
+    private static final String GET_PICKER_VIEW_TEXT = "getPickerViewText";// 反射的方法名
 
     public WheelView(Context context) {
         this(context, null);
@@ -182,7 +181,7 @@ public class WheelView extends View {
         paintCenterText = new Paint();
         paintCenterText.setColor(textColorCenter);
         paintCenterText.setAntiAlias(true);
-        paintCenterText.setTextScaleX(1.1F);
+//        paintCenterText.setTextScaleX(1.1F);
         paintCenterText.setTypeface(Typeface.MONOSPACE);
         paintCenterText.setTextSize(textSize);
 
@@ -213,7 +212,7 @@ public class WheelView extends View {
         // 计算两条横线和控件中间点的Y位置
         firstLineY = (measuredHeight - itemHeight) / 2.0F;
         secondLineY = (measuredHeight + itemHeight) / 2.0F;
-        centerY = (measuredHeight + maxTextHeight) / 2.0F - CENTERCONTENTOFFSET;
+        centerY = (measuredHeight + maxTextHeight) / 2.0F - CENTER_CONTENT_OFFSET;
         // 初始化显示的item的position，根据是否loop
         if (initPosition == -1) {
             if (isLoop) {
@@ -249,7 +248,7 @@ public class WheelView extends View {
 
     void smoothScroll(ACTION action) {
         cancelFuture();
-        if (action == ACTION.FLING || action == ACTION.DAGGLE) {
+        if (action == ACTION.FLING || action == ACTION.DRAG) {
             mOffset = (int) ((totalScrollY % itemHeight + itemHeight) % itemHeight);
             if ((float) mOffset > itemHeight / 2.0F) {
                 mOffset = (int) (itemHeight - (float) mOffset);
@@ -266,7 +265,7 @@ public class WheelView extends View {
         cancelFuture();
 
         mFuture = mExecutor
-                .scheduleWithFixedDelay(new InertiaTimerTask(this, velocityY), 0, VELOCITYFLING,
+                .scheduleWithFixedDelay(new InertiaTimerTask(this, velocityY), 0, VELOCITY_FLING,
                         TimeUnit.MILLISECONDS);
     }
 
@@ -395,7 +394,7 @@ public class WheelView extends View {
         if (label != null) {
             int drawRightContentStart = measuredWidth - getTextWidth(paintCenterText, label);
             // 靠右并留出空隙
-            canvas.drawText(label, drawRightContentStart - CENTERCONTENTOFFSET, centerY,
+            canvas.drawText(label, drawRightContentStart - CENTER_CONTENT_OFFSET, centerY,
                     paintCenterText);
         }
         counter = 0;
@@ -426,7 +425,7 @@ public class WheelView extends View {
                     // 条目经过第一条线
                     canvas.save();
                     canvas.clipRect(0, 0, measuredWidth, firstLineY - translateY);
-                    canvas.scale(1.0F, (float) Math.sin(radian) * SCALECONTENT);
+                    canvas.scale(1.0F, (float) Math.sin(radian) * SCALE_CONTENT);
                     canvas.drawText(contentText, drawOutContentStart, maxTextHeight,
                             paintOuterText);
                     canvas.restore();
@@ -434,7 +433,7 @@ public class WheelView extends View {
                     canvas.clipRect(0, firstLineY - translateY, measuredWidth, (int) (itemHeight));
                     canvas.scale(1.0F, (float) Math.sin(radian) * 1F);
                     canvas.drawText(contentText, drawCenterContentStart,
-                            maxTextHeight - CENTERCONTENTOFFSET, paintCenterText);
+                            maxTextHeight - CENTER_CONTENT_OFFSET, paintCenterText);
                     canvas.restore();
                 } else if (translateY <= secondLineY && maxTextHeight + translateY >= secondLineY) {
                     // 条目经过第二条线
@@ -442,11 +441,11 @@ public class WheelView extends View {
                     canvas.clipRect(0, 0, measuredWidth, secondLineY - translateY);
                     canvas.scale(1.0F, (float) Math.sin(radian) * 1.0F);
                     canvas.drawText(contentText, drawCenterContentStart,
-                            maxTextHeight - CENTERCONTENTOFFSET, paintCenterText);
+                            maxTextHeight - CENTER_CONTENT_OFFSET, paintCenterText);
                     canvas.restore();
                     canvas.save();
                     canvas.clipRect(0, secondLineY - translateY, measuredWidth, (int) (itemHeight));
-                    canvas.scale(1.0F, (float) Math.sin(radian) * SCALECONTENT);
+                    canvas.scale(1.0F, (float) Math.sin(radian) * SCALE_CONTENT);
                     canvas.drawText(contentText, drawOutContentStart, maxTextHeight,
                             paintOuterText);
                     canvas.restore();
@@ -454,7 +453,7 @@ public class WheelView extends View {
                     // 中间条目
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(contentText, drawCenterContentStart,
-                            maxTextHeight - CENTERCONTENTOFFSET, paintCenterText);
+                            maxTextHeight - CENTER_CONTENT_OFFSET, paintCenterText);
                     int preSelectedItem = adapter.indexOf(visibles[counter]);
                     if (preSelectedItem != -1) {
                         selectedItem = preSelectedItem;
@@ -464,7 +463,7 @@ public class WheelView extends View {
                     // 其他条目
                     canvas.save();
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
-                    canvas.scale(1.0F, (float) Math.sin(radian) * SCALECONTENT);
+                    canvas.scale(1.0F, (float) Math.sin(radian) * SCALE_CONTENT);
                     canvas.drawText(contentText, drawOutContentStart, maxTextHeight,
                             paintOuterText);
                     canvas.restore();
@@ -482,11 +481,8 @@ public class WheelView extends View {
         String contentText = item.toString();
         try {
             Class<?> clz = item.getClass();
-            Method m = clz.getMethod(GETPICKERVIEWTEXT);
+            Method m = clz.getMethod(GET_PICKER_VIEW_TEXT);
             contentText = m.invoke(item, new Object[0]).toString();
-        } catch (NoSuchMethodException e) {
-        } catch (InvocationTargetException e) {
-        } catch (IllegalAccessException e) {
         } catch (Exception e) {
         }
         return contentText;
@@ -577,7 +573,7 @@ public class WheelView extends View {
 
                     if ((System.currentTimeMillis() - startTime) > 120) {
                         // 处理拖拽事件
-                        smoothScroll(ACTION.DAGGLE);
+                        smoothScroll(ACTION.DRAG);
                     } else {
                         // 处理条目点击事件
                         smoothScroll(ACTION.CLICK);

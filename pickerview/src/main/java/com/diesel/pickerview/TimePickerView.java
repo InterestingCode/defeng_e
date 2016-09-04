@@ -3,6 +3,7 @@ package com.diesel.pickerview;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -24,9 +25,13 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
 
     private TextView tvTitle;
 
+    private Button mConfirmBtn;
+
     private static final String TAG_SUBMIT = "submit";
 
     private static final String TAG_CANCEL = "cancel";
+
+    private static final String TAG_CONFIRM = "confirm";
 
     private OnTimeSelectListener timeSelectListener;
 
@@ -46,6 +51,10 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
         // ----时间转轮
         final View timepickerview = findViewById(R.id.timepicker);
         wheelTime = new WheelTime(timepickerview, type);
+        // 确定
+        mConfirmBtn = (Button) findViewById(R.id.confirm_btn);
+        mConfirmBtn.setTag(TAG_CONFIRM);
+        mConfirmBtn.setOnClickListener(this);
 
         // 默认选中当前时间
         Calendar calendar = Calendar.getInstance();
@@ -115,10 +124,9 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
     @Override
     public void onClick(View v) {
         String tag = (String) v.getTag();
-        if (tag.equals(TAG_CANCEL)) {
-            dismiss();
-            return;
-        } else {
+        if (TAG_CANCEL.equals(tag)) {
+
+        } else if (TAG_CONFIRM.equals(tag)) {
             if (timeSelectListener != null) {
                 try {
                     Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
@@ -127,9 +135,17 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
                     e.printStackTrace();
                 }
             }
-            dismiss();
-            return;
+        } else if (TAG_SUBMIT.equals(tag)) {
+            if (timeSelectListener != null) {
+                try {
+                    Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
+                    timeSelectListener.onTimeSelect(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        dismiss();
     }
 
     public interface OnTimeSelectListener {

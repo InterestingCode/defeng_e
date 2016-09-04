@@ -175,28 +175,28 @@ public class WheelTime {
         wv_month.setOnItemSelectedListener(wheelListener_month);
 
         // 根据屏幕密度来指定选择器字体的大小(不同屏幕可能不同)
-        int textSize = 6;
+        int textSize = 15;//6;
         switch (type) {
             case ALL:
-                textSize = textSize * 3;
+//                textSize = textSize * 3;
                 break;
             case YEAR_MONTH_DAY:
-                textSize = textSize * 4;
+//                textSize = textSize * 4;
                 wv_hours.setVisibility(View.GONE);
                 wv_mins.setVisibility(View.GONE);
                 break;
             case HOURS_MINS:
-                textSize = textSize * 4;
+//                textSize = textSize * 4;
                 wv_year.setVisibility(View.GONE);
                 wv_month.setVisibility(View.GONE);
                 wv_day.setVisibility(View.GONE);
                 break;
             case MONTH_DAY_HOUR_MIN:
-                textSize = textSize * 3;
+//                textSize = textSize * 3;
                 wv_year.setVisibility(View.GONE);
                 break;
             case YEAR_MONTH:
-                textSize = textSize * 4;
+//                textSize = textSize * 4;
                 wv_day.setVisibility(View.GONE);
                 wv_hours.setVisibility(View.GONE);
                 wv_mins.setVisibility(View.GONE);
