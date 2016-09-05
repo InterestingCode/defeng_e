@@ -100,6 +100,8 @@
     <string name="operation_guide">操作指南</string>
 
     <string name="tips_input_article_title">请输入文章标题</string>
+    <string name="browse_number">阅读 %1$d</string>
+    <string name="comment_number">评论 %1$d</string>
 
     <string-array name="occupation_ary">
         <item>会计</item>

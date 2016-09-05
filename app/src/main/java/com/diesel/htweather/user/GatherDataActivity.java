@@ -10,6 +10,11 @@ import android.widget.ImageView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.user.adapter.GatherDataAdapter;
+import com.diesel.htweather.user.model.GatherDataBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +41,10 @@ public class GatherDataActivity extends BaseActivity
     @BindView(R.id.scroll_to_top_btn)
     ImageButton mScrollToTopBtn;
 
+    private GatherDataAdapter mAdapter;
+
+    private List<GatherDataBean> mList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +56,10 @@ public class GatherDataActivity extends BaseActivity
         mRefreshLayout.setPullDownRefreshEnable(false);
         mRefreshLayout.setDelegate(this);
 
+        mList.add(new GatherDataBean());
+        mAdapter = new GatherDataAdapter(mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @OnClick({R.id.back_btn, R.id.edit_btn, R.id.search_btn, R.id.scroll_to_top_btn})

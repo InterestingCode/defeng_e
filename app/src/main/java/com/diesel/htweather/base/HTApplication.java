@@ -4,12 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 
 import com.diesel.htweather.constant.Consts;
 import com.diesel.htweather.model.RegionObject;
 import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
+import com.diesel.htweather.util.Drawables;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -56,6 +56,7 @@ public class HTApplication extends Application {
         CrashHandler.getInstance().init(this);
         Consts.sDeviceToken = getDrivenToken(this);
         initOkHttp();
+        Drawables.init(this);
         Fresco.initialize(this);
         startService(new Intent(this, AreaIntentService.class));
     }

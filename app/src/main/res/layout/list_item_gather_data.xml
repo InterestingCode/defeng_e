@@ -1,7 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/user_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px25"
+        android:paddingBottom="@dimen/px12"
+        android:paddingTop="@dimen/px25">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/user_avatar_view"
+            android:layout_width="@dimen/px80"
+            android:layout_height="@dimen/px80"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/px12"
+            fresco:placeholderImage="@drawable/ic_def_avatar"
+            fresco:roundAsCircle="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/user_avatar_view">
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                style="@style/BaseText.green_30px"
+                android:text="王茂林" />
+
+            <TextView
+                android:id="@+id/user_rank_tv"
+                style="@style/BaseText.gray999_24px"
+                android:layout_alignBottom="@id/user_name_tv"
+                android:layout_marginLeft="@dimen/px15"
+                android:layout_toRightOf="@id/user_name_tv"
+                android:text="普通用户" />
+
+            <TextView
+                android:id="@+id/user_addr_tv"
+                style="@style/BaseText.gray999_24px"
+                android:layout_below="@id/user_name_tv"
+                android:layout_marginTop="@dimen/px10"
+                android:text="重庆市江北区" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/publish_time_tv"
+            style="@style/BaseText.gray666_24px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="2016.09.05 17:00" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/gather_data_content_tv"
+        style="@style/BaseText.black333_24px"
+        android:layout_width="match_parent"
+        android:layout_below="@id/user_info_layout"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="习近平在二十国集团领导人杭州峰会上的开幕辞" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gather_data_photos_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px140"
+        android:layout_below="@id/gather_data_content_tv"
+        android:layout_marginTop="@dimen/px15" />
+
+    <TextView
+        android:id="@+id/browse_number_tv"
+        style="@style/BaseText.gray666_24px"
+        android:layout_below="@id/gather_data_photos_view"
+        android:paddingTop="@dimen/px15"
+        android:text="@string/browse_number" />
+
+    <TextView
+        android:id="@+id/comment_number_tv"
+        style="@style/BaseText.gray666_24px"
+        android:layout_below="@id/gather_data_photos_view"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_toRightOf="@id/browse_number_tv"
+        android:paddingTop="@dimen/px15"
+        android:text="@string/comment_number" />
+
+    <ImageButton
+        android:id="@+id/comment_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/gather_data_photos_view"
+        android:background="@null"
+        android:paddingLeft="@dimen/px10"
+        android:paddingRight="@dimen/px10"
+        android:paddingTop="@dimen/px15"
+        android:src="@drawable/ic_comment" />
+
+</RelativeLayout>

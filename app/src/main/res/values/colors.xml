@@ -34,4 +34,6 @@
     <color name="polyline_yellow_point_color">#FFFDF000</color>
     <color name="polyline_blue_point_color">#FF02A2FF</color>
 
+    <color name="placeholder_color">@color/bg_activity</color>
+
 </resources>
