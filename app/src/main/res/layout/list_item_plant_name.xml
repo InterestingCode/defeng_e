@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/plant_name_tv"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/px80"
+    android:layout_marginBottom="@dimen/px15"
+    android:layout_marginLeft="@dimen/px20"
+    android:layout_marginTop="@dimen/px15"
+    android:background="@drawable/shape_white_bg_with_radius_and_stroke"
+    android:gravity="center"
+    android:paddingLeft="@dimen/px30"
+    android:paddingRight="@dimen/px30"
+    android:text="冬油菜"
+    android:textColor="@color/gray_666"
+    android:textSize="@dimen/font_30px">
+
+</TextView>

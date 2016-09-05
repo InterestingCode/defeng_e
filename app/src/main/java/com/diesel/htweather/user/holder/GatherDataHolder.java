@@ -77,7 +77,8 @@ public class GatherDataHolder extends RecyclerView.ViewHolder {
                 new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(
-                new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST));
+                new DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL_LIST,
+                        R.drawable.recycler_view_5px_divider_shape));
         mAdapter = new GatherDataPhotoAdapter(mPhotos);
         mRecyclerView.setAdapter(mAdapter);
     }

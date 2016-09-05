@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/user_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/px25"
-        android:paddingBottom="@dimen/px12"
-        android:paddingTop="@dimen/px25">
+        android:paddingBottom="@dimen/px15"
+        android:paddingTop="@dimen/px15">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/user_avatar_view"
@@ -18,7 +18,7 @@
             android:layout_height="@dimen/px80"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/px12"
-            fresco:placeholderImage="@drawable/ic_def_avatar"
+            fresco:placeholderImage="@drawable/ic_gather_data_avatar"
             fresco:roundAsCircle="true" />
 
         <RelativeLayout
@@ -64,7 +64,7 @@
         android:layout_below="@id/user_info_layout"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="习近平在二十国集团领导人杭州峰会上的开幕辞" />
+        android:text="“请问这是颈稻瘟病吗？怎么解决？有青的白的，不像..." />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gather_data_photos_view"
@@ -77,6 +77,7 @@
         android:id="@+id/browse_number_tv"
         style="@style/BaseText.gray666_24px"
         android:layout_below="@id/gather_data_photos_view"
+        android:layout_marginBottom="@dimen/px15"
         android:paddingTop="@dimen/px15"
         android:text="@string/browse_number" />
 

@@ -47,6 +47,7 @@
         android:layout_marginLeft="@dimen/px23"
         android:layout_marginRight="@dimen/px23"
         android:layout_marginTop="@dimen/px15"
+        android:layout_marginBottom="@dimen/px10"
         android:background="@drawable/shape_gray_bg_with_radius"
         android:orientation="horizontal">
 

@@ -12,6 +12,7 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.user.adapter.GatherDataAdapter;
 import com.diesel.htweather.user.model.GatherDataBean;
+import com.diesel.htweather.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +58,13 @@ public class GatherDataActivity extends BaseActivity
         mRefreshLayout.setDelegate(this);
 
         mList.add(new GatherDataBean());
+        mList.add(new GatherDataBean());
+        mList.add(new GatherDataBean());
         mAdapter = new GatherDataAdapter(mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST,
+                        R.drawable.recycler_view_1px_divider_shape));
         mRecyclerView.setAdapter(mAdapter);
     }
 

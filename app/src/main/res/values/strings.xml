@@ -86,6 +86,11 @@
     <string name="modify_your_name">修改姓名</string>
     <string name="modify_your_id_number">修改身份证号</string>
 
+    <string name="actual_farming_setting">精准农技设置</string>
+    <string name="add_area">添加区域</string>
+    <string name="watch_plants">关注农作物</string>
+    <string name="add_watch_plants">添加关注农作物</string>
+
     <string name="commit">提交</string>
 
     <string name="setting">设置</string>

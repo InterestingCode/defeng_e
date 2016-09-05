@@ -2,7 +2,9 @@ package com.diesel.htweather.user.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.diesel.htweather.user.holder.GatherDataPhotoHolder;
 import com.diesel.htweather.util.Drawables;
@@ -36,9 +38,11 @@ public class GatherDataPhotoAdapter extends RecyclerView.Adapter<GatherDataPhoto
     @Override
     public GatherDataPhotoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        int width = ViewUtils.dip2px(context, 220);
-        int height = ViewUtils.dip2px(context, 140);
+        int width = ViewUtils.dip2px(context, 110);
+        int height = ViewUtils.dip2px(context, 70);
+        Log.d("GatherDataPhotoAdapter", "width=" + width + "; height=" + height);
         SimpleDraweeView draweeView = new SimpleDraweeView(context);
+        draweeView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         draweeView.setLayoutParams(new ViewGroup.MarginLayoutParams(width, height));
 
         GenericDraweeHierarchyBuilder builder =

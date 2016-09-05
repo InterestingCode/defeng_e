@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.diesel.htweather.user.AddWatchPlantActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/add_watch_plants"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/plant_category_view"
+            android:layout_width="@dimen/px200"
+            android:layout_height="match_parent" />
+
+        <com.heaven7.android.dragflowlayout.DragFlowLayout
+            android:id="@+id/plant_name_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/added_plants_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View style="@style/BaseHorizontalLine" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/added_plants_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px120" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px95"
+        android:background="@android:color/white">
+
+        <View style="@style/BaseHorizontalLine" />
+
+        <Button
+            android:id="@+id/save_btn"
+            style="@style/BaseText.white_30px"
+            android:layout_width="@dimen/px150"
+            android:layout_height="@dimen/px70"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_green_bg_with_radius"
+            android:text="@string/save" />
+    </RelativeLayout>
+
+</LinearLayout>

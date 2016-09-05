@@ -52,6 +52,7 @@ public class UserInfoFragment extends BaseFragment {
             case R.id.real_weather_tv:
                 break;
             case R.id.actual_farming_tv:
+                ActivityNav.getInstance().startActualFarmingSettingActivity(getContext());
                 break;
             case R.id.gather_data_tv:
                 ActivityNav.getInstance().startGatherDataActivity(getContext());
