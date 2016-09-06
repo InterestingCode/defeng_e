@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:id="@+id/header_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/px20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/px88"
+                android:layout_height="@dimen/px88"
+                android:src="@drawable/ic_gather_data_avatar" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px15">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="王茂林"
+                    android:textColor="@color/main_tab_txt_color_select"
+                    android:textSize="@dimen/font_32px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvName"
+                    android:text="四川省成都市崇州市"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_30px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px20"
+                    android:layout_toRightOf="@+id/tvName"
+                    android:text="普通会员"
+                    android:textColor="@color/gray_999"
+                    android:textSize="@dimen/font_30px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="2016.08.01 12:49"
+                    android:textColor="@color/gray_666"
+                    android:textSize="@dimen/font_30px" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:padding="@dimen/px20"
+            android:singleLine="true"
+            android:text="&quot;请问这是颈稻瘟病吗?怎么解决?有青的白的,不像...."
+            android:textColor="@color/gray_666"
+            android:textSize="@dimen/font_32px" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/test_online_image" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px15"
+                android:layout_weight="1"
+                android:src="@drawable/test_online_image" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px15"
+                android:layout_weight="1"
+                android:src="@drawable/test_online_image" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="赞"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_30px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px8"
+                android:text="26"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/font_30px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px40"
+                android:text="评论"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_30px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px8"
+                android:text="2"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/font_30px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px40"
+                android:text="阅读"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_30px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px8"
+                android:text="364"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/font_30px" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/px1"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="@dimen/px36"
+                android:layout_height="@dimen/px36"
+                android:src="@drawable/ic_zan" />
+
+            <ImageView
+                android:layout_width="@dimen/px36"
+                android:layout_height="@dimen/px36"
+                android:layout_marginLeft="@dimen/px40"
+                android:src="@drawable/ic_online_message" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/BaseHorizontalLine" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px28"
+        android:layout_marginLeft="@dimen/px28"
+        android:layout_marginRight="@dimen/px28"
+        android:layout_marginTop="@dimen/px36"
+        android:text="王德贵:怎么了?"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/font_30px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px28"
+        android:layout_marginLeft="@dimen/px28"
+        android:layout_marginRight="@dimen/px28"
+        android:text="王茂林 回复 王德贵:长虫了,怎么办?"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/font_30px" />
+
+</LinearLayout>

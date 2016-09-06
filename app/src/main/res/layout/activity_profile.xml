@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="生长日记详情"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingBottom="@dimen/px24"
+        android:paddingTop="@dimen/px24"
+        android:text="深度服务简介"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/font_40px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingTop="@dimen/px20"
+        android:paddingBottom="@dimen/px34"
+        android:paddingRight="@dimen/px34"
+        android:paddingLeft="@dimen/px34"
+        android:text="气象为农深度服务是指将气象数据与农业种植技术相结合,依托华泰德丰专家团队和本地基层信息员体系,针对特定地标农作物全生育期的各个选种育苗、种植、增产、品质改良等环节进行深度服务,帮助种植户实现增产增收。与普适性服务不同的是,深度服务主要针对当地地标农作物,为定制化服务,主要服务对象为农业种植大户。深度服务产品内容可通过微信、手机APP或大惬意展示,用户可与本地服务实施团队进行互动交流。"
+        android:textColor="@color/gray_666"
+        android:textSize="@dimen/font_30px" />
+</LinearLayout>

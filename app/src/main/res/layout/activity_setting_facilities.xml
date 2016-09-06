@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/setting_facilities_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+
+        <ImageView
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_edit_weather_city"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_34px"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/shape_horizontal_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:id="@+id/btnCrop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="种植作物"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="超级杂交稻"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="作物品种"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="两优1128"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="作物特性"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="晚熟稻"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="种植面积"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="100"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="大棚地址"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text=""
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="播种期"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="2016-01-12"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="定制期"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="2016-01-12"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/px24"
+                android:paddingRight="@dimen/px24"
+                android:src="@drawable/ic_right_gray_arrow" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px15"
+        android:layout_marginRight="@dimen/px15"
+        android:layout_marginTop="@dimen/px30"
+        android:background="@drawable/shape_confirm_btn_bg"
+        android:gravity="center"
+        android:padding="@dimen/px15"
+        android:text="提交申请"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_34px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我想稍后完善信息"
+        android:gravity="center"
+        android:textColor="@color/gray_999"
+        android:textSize="@dimen/font_34px" />
+
+</LinearLayout>
