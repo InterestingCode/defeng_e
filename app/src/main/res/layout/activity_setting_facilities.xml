@@ -74,6 +74,7 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvCrop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -190,6 +191,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnAddress"
             android:layout_width="match_parent"
             android:layout_height="@dimen/px100"
             android:background="@android:color/white"
@@ -205,6 +207,7 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvAddress"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -223,6 +226,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnGetTime"
             android:layout_width="match_parent"
             android:layout_height="@dimen/px100"
             android:background="@android:color/white"
@@ -238,6 +242,7 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvGetTime"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -290,6 +295,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/btnCommit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/px30"
@@ -306,8 +312,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我想稍后完善信息"
         android:gravity="center"
+        android:text="我想稍后完善信息"
         android:textColor="@color/gray_999"
         android:textSize="@dimen/font_34px" />
 

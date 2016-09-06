@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context="com.diesel.htweather.farming.FarmingDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingBottom="@dimen/px30"
+            android:paddingLeft="@dimen/px24"
+            android:paddingRight="@dimen/px24"
+            android:paddingTop="@dimen/px30">
+
+            <TextView
+                android:id="@+id/farming_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="关于水稻灌溉建议"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/font_36px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/farming_time_and_source_tv"
+                style="@style/BaseText.gray999_24px"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/px15"
+                android:text="2016.08.28 18:23" />
+
+
+            <TextView
+                style="@style/BaseText.black333_24px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/farming_title_tv"
+                android:layout_marginTop="@dimen/px25"
+                android:lineSpacingExtra="@dimen/px25"
+                android:text="现在充分抓住近期有利的天气条件,及时做好对秋粮的田间管理,尤其是对受暴雨洪涝影响的田地,需积极做好大田肥水调控,及时补充由于强降水带来的田地肥力消耗,以促进作物积极生长,增加后期穗粒数、穗重打下基础,导致田间湿度持续偏大,极易志致成熟玉米出现霉烂、发芽现象。因此,应充分利用近期有利的睛好天气,对已成熟的玉米进行及时收晒,以减少后期可能出现的多雨天气带来的不利影响。&quot;七下八上&quot;正值盆地大面积水稻病虫防治关键时刻,由于前期多持续强降水,田间温湿环境利于穗颈瘟、稻曲病等水稻病虫害的发生发展,应高度警惕,需要进一步加大对病虫害的监测防治力度,利用有利天气及时开展统防统治,提高防治交果。" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_main_tab_shadow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px88"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/feedback_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/icon_feedback"
+                android:drawablePadding="@dimen/px10"
+                android:gravity="center_vertical"
+                android:text="@string/feedback"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_24px" />
+        </RelativeLayout>
+
+        <View style="@style/BaseVerticalLine" />
+
+        <RelativeLayout
+            android:id="@+id/share_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/icon_share"
+                android:drawablePadding="@dimen/px10"
+                android:gravity="center_vertical"
+                android:text="@string/share"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_24px" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

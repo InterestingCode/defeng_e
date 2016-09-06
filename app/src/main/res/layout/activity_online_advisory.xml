@@ -26,6 +26,7 @@
             android:text="在线咨询"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_36px" />
+
         <ImageView
             android:id="@+id/edit_btn"
             android:layout_width="wrap_content"
@@ -35,6 +36,95 @@
             android:paddingRight="@dimen/px30"
             android:src="@drawable/ic_edit_weather_city" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/px22"
+        android:background="@drawable/shape_gray_bg_with_radius">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="请输入文章标题"
+            android:padding="@dimen/px14"
+            android:textColor="@color/gray_666"
+            android:textColorHint="@color/gray_ccc"
+            android:textSize="@dimen/font_28px" />
+
+        <ImageView
+            android:layout_width="@dimen/px45"
+            android:layout_height="@dimen/px45"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/px10"
+            android:src="@drawable/ic_serch_depth" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/main_tab_txt_color_select">
+
+            <TextView
+                android:id="@+id/tvAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/px14"
+                android:text="所有"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_32px" />
+
+            <TextView
+                android:layout_width="@dimen/px45"
+                android:layout_height="@dimen/px45"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvAll"
+                android:gravity="center"
+                android:background="@drawable/ic_notice"
+                android:text="98"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_28px" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/horizontal_divider_line">
+
+            <TextView
+                android:id="@+id/tvMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/px14"
+                android:text="我的"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_32px" />
+
+            <TextView
+                android:layout_width="@dimen/px45"
+                android:layout_height="@dimen/px45"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/tvMe"
+                android:background="@drawable/ic_notice"
+                android:text="..."
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_28px" />
+
+        </RelativeLayout>
+    </LinearLayout>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/farming_policy_recycler_view"

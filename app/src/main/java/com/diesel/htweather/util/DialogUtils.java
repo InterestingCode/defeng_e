@@ -36,18 +36,18 @@ public class DialogUtils {
     }
 
     public static void showInputDialog(@NonNull Context context, @NonNull String title,
-            @NonNull DialogOnClickListener listener) {
+                                       @NonNull DialogOnClickListener listener) {
         showAlertDialog(context, title, true, false, listener, InputType.TYPE_CLASS_TEXT);
     }
 
     public static void showTelephoneDialog(@NonNull Context context,
-            @NonNull DialogOnClickListener listener) {
+                                           @NonNull DialogOnClickListener listener) {
         showAlertDialog(context, context.getResources().getString(R.string.modify_telephone), true,
                 false, listener, InputType.TYPE_CLASS_PHONE);
     }
 
     private static void showAlertDialog(final Context context, String title, boolean cancelable,
-            boolean cancel, final DialogOnClickListener listener, final int inputType) {
+                                        boolean cancel, final DialogOnClickListener listener, final int inputType) {
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCancelable(cancelable);
         dialog.setCanceledOnTouchOutside(cancel);
@@ -90,7 +90,7 @@ public class DialogUtils {
     }
 
     public static void showGenderDialog(Context context,
-            @NonNull final DialogOnClickListener listener) {
+                                        @NonNull final DialogOnClickListener listener) {
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
@@ -125,8 +125,9 @@ public class DialogUtils {
         });
     }
 
+
     public static void showAddPlantDialog(final Context context,
-            @NonNull final DialogOnClickListener listener) {
+                                          @NonNull final DialogOnClickListener listener) {
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
@@ -159,6 +160,25 @@ public class DialogUtils {
                 dialog.dismiss();
                 listener.onClick(dialog, DialogInterface.BUTTON_POSITIVE,
                         plantName + "&" + plantArea);
+            }
+        });
+    }
+
+
+    public static void showCommitDialog(Context context) {
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        window.setContentView(R.layout.dialog_commit_layout);
+
+        Button commitBtn = (Button) window.findViewById(R.id.commit_btn);
+        commitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
     }

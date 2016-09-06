@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_bg_with_10dp_radius"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px50"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/font_40px"
+        android:gravity="center"
+        android:text="我们已收到您的信息\n\t稍后客户经理回联系你"
+        android:layout_marginTop="@dimen/px50" />
+
+
+    <Button
+        android:id="@+id/commit_btn"
+        style="@style/BaseText.white_30px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px62"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px30"
+        android:layout_marginLeft="@dimen/px30"
+        android:layout_marginRight="@dimen/px30"
+        android:background="@drawable/shape_green_bg_with_radius"
+        android:gravity="center"
+        android:text="@string/commit" />
+
+</LinearLayout>
