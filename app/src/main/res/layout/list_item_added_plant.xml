@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/px120"
+    android:background="@android:color/white">
+
+    <TextView android:id="@+id/plant_name_tv"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/px70"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_white_bg_with_radius_and_yellow_stroke"
+        android:gravity="center"
+        android:paddingLeft="@dimen/px30"
+        android:paddingRight="@dimen/px30"
+        android:textColor="@color/high_temperature_line"
+        android:textSize="@dimen/font_30px" />
+
+    <ImageView
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-15dp"
+        android:layout_toRightOf="@id/plant_name_tv"
+        android:paddingBottom="@dimen/px15"
+        android:paddingLeft="@dimen/px10"
+        android:paddingRight="@dimen/px10"
+        android:paddingTop="@dimen/px15"
+        android:src="@drawable/ic_delete_plant" />
+
+</RelativeLayout>

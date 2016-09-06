@@ -6,6 +6,8 @@ import android.widget.ImageView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.widget.EditUserInfoView;
 
 import butterknife.BindView;
@@ -48,14 +50,19 @@ public class SystemSettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.clear_cache_view:
+                ToastUtils.show(getString(R.string.tips_cache_had_cleared));
                 break;
             case R.id.modify_password_view:
+                ActivityNav.getInstance().startModifyPasswordActivity(this);
                 break;
             case R.id.feedback_advise_view:
+                ActivityNav.getInstance().startFeedbackActivity(this);
                 break;
             case R.id.help_center_view:
+                ActivityNav.getInstance().startHelpCenterActivity(this);
                 break;
             case R.id.about_defeng_view:
+                ActivityNav.getInstance().startAboutAppActivity(this);
                 break;
             case R.id.exit_app_btn:
                 break;

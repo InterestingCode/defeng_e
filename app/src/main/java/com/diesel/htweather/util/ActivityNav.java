@@ -10,11 +10,14 @@ import com.diesel.htweather.farming.MessageActivity;
 import com.diesel.htweather.farming.MessageDetailsActivity;
 import com.diesel.htweather.farming.TruthDataSettingActivity;
 import com.diesel.htweather.farming.WeatherTrendActivity;
+import com.diesel.htweather.user.AboutAppActivity;
 import com.diesel.htweather.user.ActualFarmingSettingActivity;
 import com.diesel.htweather.user.AddWatchPlantActivity;
 import com.diesel.htweather.user.EditUserInfoActivity;
+import com.diesel.htweather.user.FeedbackActivity;
 import com.diesel.htweather.user.GatherDataActivity;
 import com.diesel.htweather.user.HelpCenterActivity;
+import com.diesel.htweather.user.ModifyPasswordActivity;
 import com.diesel.htweather.user.PlantAndAreaActivity;
 import com.diesel.htweather.user.RealNameAuthActivity;
 import com.diesel.htweather.user.SystemSettingActivity;
@@ -121,6 +124,21 @@ public class ActivityNav {
 
     public void startAddWatchPlantActivity(Context context) {
         Intent intent = new Intent(context, AddWatchPlantActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startAboutAppActivity(Context context) {
+        Intent intent = new Intent(context, AboutAppActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startFeedbackActivity(Context context) {
+        Intent intent = new Intent(context, FeedbackActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startModifyPasswordActivity(Context context) {
+        Intent intent = new Intent(context, ModifyPasswordActivity.class);
         context.startActivity(intent);
     }
 

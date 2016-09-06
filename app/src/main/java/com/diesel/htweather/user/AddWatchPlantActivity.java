@@ -2,8 +2,10 @@ package com.diesel.htweather.user;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,13 +13,17 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.event.DeletePlantEvent;
 import com.diesel.htweather.event.RecyclerItemEvent;
+import com.diesel.htweather.user.adapter.AddedPlantAdapter;
 import com.diesel.htweather.user.adapter.PlantCategoryAdapter;
-import com.diesel.htweather.user.model.PlantBaseBean;
 import com.diesel.htweather.user.model.PlantBean;
 import com.diesel.htweather.user.model.PlantCategoryBean;
+import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.widget.DividerItemDecoration;
 import com.heaven7.android.dragflowlayout.DragAdapter;
 import com.heaven7.android.dragflowlayout.DragFlowLayout;
+import com.heaven7.android.dragflowlayout.IViewObserver;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,11 +49,30 @@ public class AddWatchPlantActivity extends BaseActivity {
     @BindView(R.id.added_plants_layout)
     LinearLayout mAddedPlantsLayout;
 
+    private int mCurrIndex;
+
     private PlantCategoryAdapter mAdapter;
 
     private List<PlantCategoryBean> mCategories = new ArrayList<>();
 
     private List<List<PlantBean>> mPlants = new ArrayList<>();
+
+    private AddedPlantAdapter mAddedPlantAdapter;
+
+    private List<PlantBean> mAddedPlants = new ArrayList<>();
+
+    private List<View> mPlantViews = new ArrayList<>();
+
+    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            if (null != mAddedPlantAdapter) {
+                mAddedPlantsLayout.setVisibility(
+                        mAddedPlantAdapter.getItemCount() > 0 ? View.VISIBLE : View.GONE);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +81,7 @@ public class AddWatchPlantActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         initCategories();
+        initAddedPlants();
         initDragView();
         switchPlants(0);
     }
@@ -87,7 +113,6 @@ public class AddWatchPlantActivity extends BaseActivity {
         List<PlantBean> plant3 = new ArrayList<>();
         plant3.add(new PlantBean("西瓜"));
         plant3.add(new PlantBean("苹果"));
-//        plant3.add(new PlantBean("苹果（红富士，红星，国光，秦冠，黄元帅）"));
         plant3.add(new PlantBean("无花果"));
         plant3.add(new PlantBean("奇异果"));
         plant3.add(new PlantBean("甘蔗"));
@@ -122,11 +147,31 @@ public class AddWatchPlantActivity extends BaseActivity {
         mPlantCategoryView.setAdapter(mAdapter);
     }
 
+    private void initAddedPlants() {
+        mAddedPlantAdapter = new AddedPlantAdapter(mAddedPlants);
+        mAddedPlantAdapter.registerAdapterDataObserver(mObserver);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mAddedPlantsView.setLayoutManager(layoutManager);
+        mAddedPlantsView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
+        mAddedPlantsView.setAdapter(mAddedPlantAdapter);
+    }
+
     private void initDragView() {
         mPlantNameView.setOnItemClickListener(new DragFlowLayout.OnItemClickListener() {
             @Override
             public boolean performClick(DragFlowLayout dragFlowLayout, View child,
                     MotionEvent event, int dragState) {
+                PlantBean bean = (PlantBean) child.getTag();
+                if (null != bean && !mAddedPlants.contains(bean)) {
+                    mAddedPlants.add(bean);
+                    mAddedPlantAdapter.notifyDataSetChanged();
+                    child.setBackgroundResource(
+                            R.drawable.shape_white_bg_with_radius_and_yellow_stroke);
+                    ((TextView) child.findViewById(R.id.plant_name_tv)).setTextColor(ContextCompat
+                            .getColor(AddWatchPlantActivity.this, R.color.high_temperature_line));
+                }
                 return false;
             }
         });
@@ -141,6 +186,22 @@ public class AddWatchPlantActivity extends BaseActivity {
                 itemView.setTag(data);
                 TextView textView = (TextView) itemView.findViewById(R.id.plant_name_tv);
                 textView.setText(data.plantName);
+//                for (PlantBean bean : mAddedPlants) {
+//                    if (bean.plantName.equals(data.plantName)) {
+//                        itemView.setBackgroundResource(
+//                                R.drawable.shape_white_bg_with_radius_and_yellow_stroke);
+//                        ((TextView) itemView.findViewById(R.id.plant_name_tv))
+//                                .setTextColor(ContextCompat
+//                                        .getColor(AddWatchPlantActivity.this,
+//                                                R.color.high_temperature_line));
+//                    } else {
+//                        itemView.setBackgroundResource(
+//                                R.drawable.shape_white_bg_with_radius_and_stroke);
+//                        ((TextView) itemView.findViewById(R.id.plant_name_tv))
+//                                .setTextColor(ContextCompat
+//                                        .getColor(AddWatchPlantActivity.this, R.color.gray_666));
+//                    }
+//                }
             }
 
             @NonNull
@@ -149,9 +210,52 @@ public class AddWatchPlantActivity extends BaseActivity {
                 return (PlantBean) itemView.getTag();
             }
         });
+        mPlantNameView.addViewObserver(new IViewObserver() {
+            @Override
+            public void onAddView(View child, int index) {
+                mPlantViews.add(child);
+//                for (PlantBean bean : mAddedPlants) {
+//                    if (child.getTag().equals(bean)) {
+//                        child.setBackgroundResource(
+//                                R.drawable.shape_white_bg_with_radius_and_yellow_stroke);
+//                        ((TextView) child.findViewById(R.id.plant_name_tv))
+//                                .setTextColor(ContextCompat
+//                                        .getColor(AddWatchPlantActivity.this,
+//                                                R.color.high_temperature_line));
+//                    } else {
+//                        child.setBackgroundResource(
+//                                R.drawable.shape_white_bg_with_radius_and_stroke);
+//                        ((TextView) child.findViewById(R.id.plant_name_tv))
+//                                .setTextColor(ContextCompat
+//                                        .getColor(AddWatchPlantActivity.this, R.color.gray_666));
+//                    }
+//                }
+//                for (View addedView : mPlantViews) {
+//                    if (addedView.getTag().equals(child.getTag())) {
+//                        child.setBackgroundResource(
+//                                R.drawable.shape_white_bg_with_radius_and_yellow_stroke);
+//                        ((TextView) child.findViewById(R.id.plant_name_tv))
+//                                .setTextColor(ContextCompat
+//                                        .getColor(AddWatchPlantActivity.this,
+//                                                R.color.high_temperature_line));
+//                    } else {
+//                        child.setBackgroundResource(
+//                                R.drawable.shape_white_bg_with_radius_and_stroke);
+//                        ((TextView) child.findViewById(R.id.plant_name_tv))
+//                                .setTextColor(ContextCompat
+//                                        .getColor(AddWatchPlantActivity.this, R.color.gray_666));
+//                    }
+//                }
+            }
+
+            @Override
+            public void onRemoveView(View child, int index) {
+            }
+        });
     }
 
     private void switchPlants(int position) {
+        mPlantViews.clear();
         mPlantNameView.getDragItemManager().clearItems();
         mPlantNameView.getDragItemManager().addItems(mPlants.get(position));
     }
@@ -179,15 +283,48 @@ public class AddWatchPlantActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAddedPlantAdapter.unregisterAdapterDataObserver(mObserver);
+    }
+
     @Subscribe
     public void onRecyclerItemEvent(RecyclerItemEvent event) {
         int position = event.position;
         if (position >= 0) {
+            mCurrIndex = position;
             for (int i = 0; i < mCategories.size(); i++) {
                 mCategories.get(i).isSelectedItem = i == position;
             }
             mAdapter.notifyDataSetChanged();
             switchPlants(position);
+        }
+    }
+
+    @Subscribe
+    public void onDeletePlantEvent(DeletePlantEvent event) {
+        int position = event.position;
+        if (position >= 0) {
+            PlantBean plantBean = mAddedPlants.get(position);
+            mAddedPlants.remove(position);
+            mAddedPlantAdapter.notifyDataSetChanged();
+            for (View child : mPlantViews) {
+                if (child.getTag().equals(plantBean)) {
+                    child.setBackgroundResource(R.drawable.shape_white_bg_with_radius_and_stroke);
+                    ((TextView) child.findViewById(R.id.plant_name_tv)).setTextColor(ContextCompat
+                            .getColor(AddWatchPlantActivity.this, R.color.gray_666));
+                }
+            }
+
+//            if (position < mPlantViews.size()) {
+//                View view = mPlantViews.get(position);
+//                PlantBean tag = (PlantBean) view.getTag();
+//                ToastUtils.show(tag.plantName);
+//                view.setBackgroundResource(R.drawable.shape_white_bg_with_radius_and_stroke);
+//                ((TextView) view.findViewById(R.id.plant_name_tv)).setTextColor(ContextCompat
+//                        .getColor(AddWatchPlantActivity.this, R.color.gray_666));
+//            }
         }
     }
 }
