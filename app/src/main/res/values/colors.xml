@@ -37,5 +37,6 @@
     <color name="placeholder_color">@color/bg_activity</color>
 
     <color name="password_commit_btn_color">#FF876F00</color>
+    <color name="bg_login_page">#FF7FA60B</color>
 
 </resources>

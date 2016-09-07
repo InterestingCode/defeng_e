@@ -21,6 +21,8 @@ public class SharedPreferencesUtils {
 
     static SharedPreferencesUtils mUtil = null;
 
+    String mVersionName;
+
     public static synchronized SharedPreferencesUtils getInstance(Context context) {
         if (mUtil == null) {
             mUtil = new SharedPreferencesUtils(context);
@@ -30,6 +32,7 @@ public class SharedPreferencesUtils {
 
     private SharedPreferencesUtils(Context ctx) {
         mShared = ctx.getSharedPreferences(Consts.APP_CONFIGURE, Context.MODE_PRIVATE);
+        mVersionName = AppUtils.getVersionName(ctx);
     }
 
 
@@ -74,6 +77,16 @@ public class SharedPreferencesUtils {
 
     public void putString(String key, String value) {
         mShared.edit().putString(key, value).apply();
+    }
+
+    public static final String SP_KEY_NEED_ENTER_GUIDE_PAGE = "sp_key_need_enter_guide_page";
+
+    public void updateEnterGuidePageStatus() {
+        putBoolean(SP_KEY_NEED_ENTER_GUIDE_PAGE + mVersionName, false);
+    }
+
+    public boolean needEnterGuidePage() {
+        return getBoolean(SP_KEY_NEED_ENTER_GUIDE_PAGE + mVersionName, true);
     }
 
 }

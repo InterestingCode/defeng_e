@@ -26,13 +26,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".farming.CityManageActivity" />
 
         <service
@@ -78,6 +79,8 @@
         <activity android:name=".user.FeedbackActivity" />
         <activity android:name=".user.ModifyPasswordActivity" />
         <activity android:name=".depthservice.FarmingAdviceActivity" />
+        <activity android:name=".GuideActivity" />
+        <activity android:name=".user.LoginActivity"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,8 @@ package com.diesel.htweather.util;
 import android.content.Context;
 import android.content.Intent;
 
+import com.diesel.htweather.GuideActivity;
+import com.diesel.htweather.MainActivity;
 import com.diesel.htweather.farming.CityManageActivity;
 import com.diesel.htweather.farming.FarmingDetailsActivity;
 import com.diesel.htweather.farming.FarmingPolicyActivity;
@@ -41,6 +43,16 @@ public class ActivityNav {
             mInstance = new ActivityNav();
         }
         return mInstance;
+    }
+
+    public void startMainActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startGuideActivity(Context context) {
+        Intent intent = new Intent(context, GuideActivity.class);
+        context.startActivity(intent);
     }
 
     //---------------------------------------------------------------------------------------
