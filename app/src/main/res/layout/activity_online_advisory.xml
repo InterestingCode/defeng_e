@@ -144,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:drawableLeft="@drawable/ic_question_online"
+            android:drawableLeft="@drawable/ic_question"
             android:drawablePadding="@dimen/px10"
             android:gravity="center_vertical"
             android:text="我要提问"

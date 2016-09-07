@@ -62,7 +62,6 @@
                 android:layout_marginTop="@dimen/px15"
                 android:text="2016.09.02" />
 
-
             <TextView
                 style="@style/BaseText.black333_24px"
                 android:layout_width="match_parent"
