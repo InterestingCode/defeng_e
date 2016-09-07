@@ -89,13 +89,14 @@
                 android:layout_height="@dimen/px45"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tvAll"
-                android:gravity="center"
                 android:background="@drawable/ic_notice"
+                android:gravity="center"
                 android:text="98"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/font_28px" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -116,9 +117,9 @@
                 android:layout_width="@dimen/px45"
                 android:layout_height="@dimen/px45"
                 android:layout_centerVertical="true"
-                android:gravity="center"
                 android:layout_toRightOf="@+id/tvMe"
                 android:background="@drawable/ic_notice"
+                android:gravity="center"
                 android:text="..."
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/font_28px" />
@@ -129,5 +130,25 @@
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/farming_policy_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View style="@style/BaseHorizontalLine" />
+
+    <RelativeLayout
+        android:id="@+id/share_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px88">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableLeft="@drawable/ic_question_online"
+            android:drawablePadding="@dimen/px10"
+            android:gravity="center_vertical"
+            android:text="我要提问"
+            android:textColor="@color/gray_666"
+            android:textSize="@dimen/font_24px" />
+    </RelativeLayout>
 </LinearLayout>
