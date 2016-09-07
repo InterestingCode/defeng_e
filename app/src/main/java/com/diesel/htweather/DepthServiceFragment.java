@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.depthservice.AgricultureDoctorActivity;
 import com.diesel.htweather.depthservice.FacilitiesActivity;
+import com.diesel.htweather.depthservice.FacilitiesDetailsActivity;
 import com.diesel.htweather.depthservice.FarmingAdviceActivity;
 import com.diesel.htweather.depthservice.GrowthDiaryActivity;
 import com.diesel.htweather.depthservice.GrowthDiaryDetailsActivity;
@@ -98,6 +99,6 @@ public class DepthServiceFragment extends BaseFragment {
 
     @OnItemClick({R.id.diaryList})
     public void onItemClick() {
-        startActivity(new Intent(mActivity, OnlineAdvisoryDetailsActivity.class));
+        startActivity(new Intent(mActivity, GrowthDiaryDetailsActivity.class));
     }
 }
