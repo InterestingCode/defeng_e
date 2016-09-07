@@ -3,10 +3,16 @@ package com.diesel.htweather.farming.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.farming.holder.InnerFarmingPolicyHolder;
-import com.diesel.htweather.farming.holder.MessageHolder;
+import com.diesel.htweather.farming.model.FarmingInfoPolicyBean;
+
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Comments：
@@ -20,6 +26,12 @@ import com.diesel.htweather.farming.holder.MessageHolder;
  */
 public class FarmingPolicyAdapter extends RecyclerView.Adapter<InnerFarmingPolicyHolder> {
 
+    private List<FarmingInfoPolicyBean> mList;
+
+    public FarmingPolicyAdapter(List<FarmingInfoPolicyBean> list) {
+        mList = list;
+    }
+
     @Override
     public InnerFarmingPolicyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new InnerFarmingPolicyHolder(LayoutInflater.from(parent.getContext())
@@ -28,11 +40,11 @@ public class FarmingPolicyAdapter extends RecyclerView.Adapter<InnerFarmingPolic
 
     @Override
     public void onBindViewHolder(InnerFarmingPolicyHolder holder, int position) {
-
+        holder.bindData(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return mList == null ? 0 : mList.size();
     }
 }

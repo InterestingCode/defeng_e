@@ -65,6 +65,8 @@ public class SystemSettingActivity extends BaseActivity {
                 ActivityNav.getInstance().startAboutAppActivity(this);
                 break;
             case R.id.exit_app_btn:
+                ActivityNav.getInstance().startLoginActivity(this);
+                finish();
                 break;
         }
     }

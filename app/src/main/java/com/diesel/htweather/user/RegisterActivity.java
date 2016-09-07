@@ -6,37 +6,35 @@ import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.util.ActivityNav;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity {
 
     @BindView(R.id.account_et)
     EditText mAccountEt;
 
-    @BindView(R.id.password_et)
-    EditText mPasswordEt;
+    @BindView(R.id.auth_code_et)
+    EditText mAuthCodeEt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.register_tv, R.id.forget_password_tv, R.id.login_btn})
+    @OnClick({R.id.back_btn, R.id.get_auth_code_btn, R.id.login_btn})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.register_tv:
-                ActivityNav.getInstance().startRegisterActivity(this);
+            case R.id.back_btn:
+                finish();
                 break;
-            case R.id.forget_password_tv:
+            case R.id.get_auth_code_btn:
                 break;
             case R.id.login_btn:
-                ActivityNav.getInstance().startMainActivity(this);
                 break;
         }
     }

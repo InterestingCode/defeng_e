@@ -34,7 +34,7 @@
             android:layout_height="@dimen/px170"
             android:layout_marginRight="@dimen/px20"
             android:scaleType="centerCrop"
-            android:src="@drawable/index_excise_bg" />
+            android:src="@drawable/bg_farming_cover" />
 
         <TextView
             android:id="@+id/farming_info_title_tv"
@@ -43,7 +43,7 @@
             android:layout_toRightOf="@id/farming_info_cover_iv"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="重庆今天局部地区有雷阵雨 后天35℃"
+            android:text="生产指南 | 就像那一把火 四川冬草莓你可别错过"
             android:textColor="@color/black_333"
             android:textSize="@dimen/font_24px"
             android:textStyle="bold" />
@@ -57,7 +57,7 @@
             android:layout_toRightOf="@id/farming_info_cover_iv"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="昨日处暑，重庆市气象台发布高温红色预警，今明最高气温继续维持43℃。这是我市连续第10天发布高温最高级别预警。"
+            android:text="四川冬季气候相对偏于潮湿和阴冷对于草莓的种植方面需要..."
             android:textColor="@color/gray_666"
             android:textSize="@dimen/font_24px" />
 
@@ -69,7 +69,7 @@
             android:layout_toLeftOf="@+id/farming_info_browse_tv"
             android:layout_toRightOf="@id/farming_info_cover_iv"
             android:maxLines="1"
-            android:text="2016.08.24 14:23"
+            android:text="2016.08.20"
             android:textColor="@color/gray_999"
             android:textSize="@dimen/font_24px" />
 

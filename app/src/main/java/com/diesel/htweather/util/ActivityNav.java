@@ -19,9 +19,11 @@ import com.diesel.htweather.user.EditUserInfoActivity;
 import com.diesel.htweather.user.FeedbackActivity;
 import com.diesel.htweather.user.GatherDataActivity;
 import com.diesel.htweather.user.HelpCenterActivity;
+import com.diesel.htweather.user.LoginActivity;
 import com.diesel.htweather.user.ModifyPasswordActivity;
 import com.diesel.htweather.user.PlantAndAreaActivity;
 import com.diesel.htweather.user.RealNameAuthActivity;
+import com.diesel.htweather.user.RegisterActivity;
 import com.diesel.htweather.user.SystemSettingActivity;
 
 /**
@@ -151,6 +153,16 @@ public class ActivityNav {
 
     public void startModifyPasswordActivity(Context context) {
         Intent intent = new Intent(context, ModifyPasswordActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startLoginActivity(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startRegisterActivity(Context context) {
+        Intent intent = new Intent(context, RegisterActivity.class);
         context.startActivity(intent);
     }
 

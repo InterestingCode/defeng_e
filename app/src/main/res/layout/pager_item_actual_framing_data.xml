@@ -38,7 +38,7 @@
         android:layout_marginTop="@dimen/px20"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="习近平总书记在全国卫生与健康大会上发表重要讲话，提出“努力全方位、全周期保障人民健康”，在专家学者、业内人士和广大基层群众中引起强烈反响。他们表示，让人民群众公平可及地享有全方位、全周期的健康服务，充分体现了党“以人为本”的执政理念，将为健康中国的实现凝聚起更加磅礴的力量。"
+        android:text="近期天气情况，崇州市预计未来一周以降雨天气为主，15日有降雨，16日-19日有小雨，20日小雨转晴，21日有小雨，9日、12日中雨转小雨。平均气温29度左右，平均最高气温33度左右，平均最低气温23度...."
         android:textColor="@color/black_333"
         android:textSize="@dimen/font_24px" />
 
