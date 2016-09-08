@@ -31,8 +31,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px300"
-        android:layout_margin="@dimen/px24"
+        android:layout_height="@dimen/px320"
+        android:layout_margin="@dimen/px20"
         android:background="@drawable/bg_weather_trend"
         android:orientation="vertical"
         android:paddingLeft="@dimen/weather_page_lr_margin"
@@ -108,8 +108,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px700"
-        android:layout_marginLeft="@dimen/weather_page_lr_margin"
-        android:layout_marginRight="@dimen/weather_page_lr_margin"
+        android:layout_marginLeft="@dimen/px20"
+        android:layout_marginRight="@dimen/px20"
         android:background="@drawable/shape_white_bg_with_radius"
         android:orientation="vertical">
 
