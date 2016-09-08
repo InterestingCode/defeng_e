@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.model.WeatherTrendBean;
@@ -52,6 +53,7 @@ public class WeatherTrendHelper {
         ViewTreeObserver vto = mWeatherLayout.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             boolean hasMeasured;
+
             @Override
             public boolean onPreDraw() {
                 if (!hasMeasured) {
@@ -70,6 +72,9 @@ public class WeatherTrendHelper {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         for (int i = 0; i < mDayCnt; i++) {
             View weatherChild = inflater.inflate(R.layout.weather_trend_data_item_layout, null);
+            TextView weekTv = (TextView) weatherChild.findViewById(R.id.week_tv);
+            TextView dateTv = (TextView) weatherChild.findViewById(R.id.date_tv);
+            setTextValue(weekTv, dateTv, i);
             ViewGroup.LayoutParams weatherLp = weatherChild.getLayoutParams();
             if (null == weatherLp) {
                 weatherLp = new ViewGroup.LayoutParams(childWidth,
@@ -90,6 +95,35 @@ public class WeatherTrendHelper {
                 windLp.width = childWidth;
             }
             mWindLayout.addView(windChild, windLp);
+        }
+    }
+
+    private void setTextValue(TextView weekTv, TextView dateTv, int i) {
+        switch (i) {
+            case 0:
+                weekTv.setText("明天");
+                dateTv.setText("09/10");
+                break;
+            case 1:
+                weekTv.setText("周六");
+                dateTv.setText("09/11");
+                break;
+            case 2:
+                weekTv.setText("周日");
+                dateTv.setText("09/12");
+                break;
+            case 3:
+                weekTv.setText("周一");
+                dateTv.setText("09/13");
+                break;
+            case 4:
+                weekTv.setText("周二");
+                dateTv.setText("09/14");
+                break;
+            case 5:
+                weekTv.setText("周三");
+                dateTv.setText("09/15");
+                break;
         }
     }
 }

@@ -32,6 +32,6 @@
         android:id="@+id/weather_or_wind_tv"
         style="@style/BaseText.black333_24px"
         android:layout_marginTop="@dimen/px10"
-        android:text="多云" />
+        android:text="微风" />
 
 </LinearLayout>

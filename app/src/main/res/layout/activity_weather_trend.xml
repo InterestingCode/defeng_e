@@ -96,7 +96,7 @@
                 android:layout_marginRight="@dimen/px10"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:text="2016.8.22 (农历七月二十) 星期二"
+                android:text="2016.09.09 (八月初九) 星期五"
                 android:textColor="@android:color/white" />
 
             <TextView
