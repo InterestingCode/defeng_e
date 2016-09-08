@@ -34,6 +34,7 @@ public class LoginActivity extends BaseActivity {
                 ActivityNav.getInstance().startRegisterActivity(this);
                 break;
             case R.id.forget_password_tv:
+                ActivityNav.getInstance().startFindPasswordActivity(this);
                 break;
             case R.id.login_btn:
                 ActivityNav.getInstance().startMainActivity(this);

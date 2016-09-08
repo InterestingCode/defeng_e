@@ -7,7 +7,7 @@ import com.diesel.htweather.GuideActivity;
 import com.diesel.htweather.MainActivity;
 import com.diesel.htweather.farming.CityManageActivity;
 import com.diesel.htweather.farming.FarmingDetailsActivity;
-import com.diesel.htweather.farming.FarmingPolicyActivity;
+import com.diesel.htweather.farming.FarmingListActivity;
 import com.diesel.htweather.farming.MessageActivity;
 import com.diesel.htweather.farming.MessageDetailsActivity;
 import com.diesel.htweather.farming.TruthDataSettingActivity;
@@ -17,6 +17,7 @@ import com.diesel.htweather.user.ActualFarmingSettingActivity;
 import com.diesel.htweather.user.AddWatchPlantActivity;
 import com.diesel.htweather.user.EditUserInfoActivity;
 import com.diesel.htweather.user.FeedbackActivity;
+import com.diesel.htweather.user.FindPasswordActivity;
 import com.diesel.htweather.user.GatherDataActivity;
 import com.diesel.htweather.user.HelpCenterActivity;
 import com.diesel.htweather.user.LoginActivity;
@@ -77,7 +78,7 @@ public class ActivityNav {
     }
 
     public void startFarmingPolicyActivity(Context context, int farmingType) {
-        Intent intent = new Intent(context, FarmingPolicyActivity.class);
+        Intent intent = new Intent(context, FarmingListActivity.class);
         IntentExtras.setFarmingType(intent, farmingType);
         context.startActivity(intent);
     }
@@ -163,6 +164,11 @@ public class ActivityNav {
 
     public void startRegisterActivity(Context context) {
         Intent intent = new Intent(context, RegisterActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startFindPasswordActivity(Context context) {
+        Intent intent = new Intent(context, FindPasswordActivity.class);
         context.startActivity(intent);
     }
 

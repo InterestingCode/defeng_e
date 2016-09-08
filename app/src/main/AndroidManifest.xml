@@ -52,7 +52,7 @@
         <activity android:name=".farming.LocationActivity" />
         <activity android:name=".farming.MessageActivity" />
         <activity android:name=".farming.MessageDetailsActivity" />
-        <activity android:name=".farming.FarmingPolicyActivity" />
+        <activity android:name=".farming.FarmingListActivity" />
         <activity android:name=".farming.FarmingDetailsActivity" />
         <activity android:name=".farming.WeatherTrendActivity" />
         <activity
@@ -83,7 +83,8 @@
         <activity android:name=".depthservice.FarmingAdviceActivity" />
         <activity android:name=".GuideActivity" />
         <activity android:name=".user.LoginActivity" />
-        <activity android:name=".user.RegisterActivity"></activity>
+        <activity android:name=".user.RegisterActivity" />
+        <activity android:name=".user.FindPasswordActivity"></activity>
     </application>
 
 </manifest>

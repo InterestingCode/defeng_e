@@ -27,7 +27,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FarmingPolicyActivity extends BaseActivity {
+public class FarmingListActivity extends BaseActivity {
+
+    public static final int TYPE_ACTUAL_FARMING = 9000;
 
     public static final int TYPE_FARMING_INFO = 9001;
 

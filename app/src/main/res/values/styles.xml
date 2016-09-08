@@ -107,6 +107,11 @@
         <item name="android:textSize">@dimen/font_30px</item>
     </style>
 
+    <style name="BaseText.green_24px">
+        <item name="android:textColor">@color/bg_top_header</item>
+        <item name="android:textSize">@dimen/font_24px</item>
+    </style>
+
     <style name="BaseText.green_30px">
         <item name="android:textColor">@color/bg_top_header</item>
         <item name="android:textSize">@dimen/font_30px</item>

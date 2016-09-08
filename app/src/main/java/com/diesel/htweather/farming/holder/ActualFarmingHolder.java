@@ -1,5 +1,6 @@
 package com.diesel.htweather.farming.holder;
 
+import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.farming.FarmingListActivity;
+import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.widget.SlidingTableTabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Comments：
@@ -47,6 +51,11 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
         mActualFarmingTabsLayout.setViewPager(mActualFarmingPager);
     }
 
+    @OnClick(R.id.actual_farming_setting_btn)
+    public void addPlant() {
+        ActivityNav.getInstance().startAddWatchPlantActivity(itemView.getContext());
+    }
+
     private static class ActualFramingAdapter extends PagerAdapter {
 
         @Override
@@ -67,8 +76,14 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = View
-                    .inflate(container.getContext(), R.layout.pager_item_actual_framing_data, null);
+            final Context context = container.getContext();
+            View view = View.inflate(context, R.layout.pager_item_actual_framing_data, null);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ActivityNav.getInstance().startFarmingDetailsActivity(context);
+                }
+            });
             container.addView(view);
             return view;
         }
