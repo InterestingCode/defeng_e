@@ -26,7 +26,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.App.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,7 +82,8 @@
         <activity android:name=".user.ModifyPasswordActivity" />
         <activity android:name=".depthservice.FarmingAdviceActivity" />
         <activity android:name=".GuideActivity" />
-        <activity android:name=".user.LoginActivity"></activity>
+        <activity android:name=".user.LoginActivity" />
+        <activity android:name=".user.RegisterActivity"></activity>
     </application>
 
 </manifest>

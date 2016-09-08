@@ -104,6 +104,7 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
             case TYPE_FARMING_POLICY:
                 break;
             case TYPE_FARMING_BANNER:
+                ((FarmingBannerHolder)holder).bindData();
                 break;
             default:
                 break;

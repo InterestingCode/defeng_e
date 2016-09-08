@@ -11,7 +11,7 @@
         android:layout_height="@dimen/px120"
         android:layout_marginRight="@dimen/px20"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg_farming_policy_cover" />
+        android:src="@drawable/cover_farming_policy" />
 
     <TextView
         android:id="@+id/farming_info_title_tv"

@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/px100"
         android:scaleType="fitXY"
-        android:src="@drawable/banner" />
+        android:src="@drawable/banner_depth_service" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/farming_policy_recycler_view"
