@@ -1,6 +1,7 @@
 package com.diesel.htweather.user;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.util.ViewUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,11 +55,19 @@ public class FindPasswordActivity extends BaseActivity {
     @BindView(R.id.auth_code_layout)
     LinearLayout mAuthCodeLayout;
 
-    @BindView(R.id.setting_success_layout)
-    LinearLayout mSettingSuccessLayout;
+    @BindView(R.id.step_one_layout)
+    LinearLayout mStepOneLayout;
+
+    @BindView(R.id.step_two_layout)
+    LinearLayout mStepTwoLayout;
+
+    @BindView(R.id.step_three_layout)
+    LinearLayout mStepThreeLayout;
 
     @BindView(R.id.next_step_btn)
     Button mNextStepBtn;
+
+    private int mCurrentStep = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +85,34 @@ public class FindPasswordActivity extends BaseActivity {
             case R.id.get_auth_code_btn:
                 break;
             case R.id.next_step_btn:
+                if (mCurrentStep == 1) {
+                    changeToResetPassword();
+                } else if (mCurrentStep == 2) {
+                    changeToSettingSuccess();
+                } else if (mCurrentStep == 3) {
+                    finish();
+                }
                 break;
         }
+    }
+
+    private void changeToResetPassword() {
+        mCurrentStep = 2;
+        mNextStepBtn.setText(R.string.commit);
+        mStepOneLineView.setBackgroundResource(R.drawable.icon_line_green);
+        mStepTwoDotIv.setImageResource(R.drawable.icon_dot_green);
+        mSettingPasswordTv.setTextColor(ContextCompat.getColor(this, R.color.bg_top_header));
+        ViewUtils.visible(mStepTwoLayout);
+        ViewUtils.gone(mStepOneLayout, mStepThreeLayout);
+    }
+
+    private void changeToSettingSuccess() {
+        mCurrentStep = 3;
+        mNextStepBtn.setText(R.string.back_to_login);
+        mStepTwoLineView.setBackgroundResource(R.drawable.icon_line_green);
+        mStepThreeDotIv.setImageResource(R.drawable.icon_dot_green);
+        mSettingPasswordSuccessTv.setTextColor(ContextCompat.getColor(this, R.color.bg_top_header));
+        ViewUtils.visible(mStepThreeLayout);
+        ViewUtils.gone(mStepOneLayout, mStepTwoLayout);
     }
 }

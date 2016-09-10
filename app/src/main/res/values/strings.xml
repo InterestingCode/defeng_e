@@ -112,6 +112,7 @@
     <string name="operation_guide">操作指南</string>
     <string name="hint_input_old_password">输入原密码</string>
     <string name="hint_input_new_password">输入新密码</string>
+    <string name="hint_confirm_new_password">确认新密码</string>
     <string name="tips_input_old_password">请输入原密码</string>
     <string name="tips_input_new_password">请输入新密码</string>
     <string name="tips_input_new_password_again">请再次输入新密码</string>
@@ -133,6 +134,7 @@
     <string name="setting_success">设置成功</string>
     <string name="setting_password_success">密码设置成功</string>
     <string name="next_step">下一步</string>
+    <string name="back_to_login">返回登录</string>
 
     <string name="tips_input_article_title">请输入文章标题</string>
     <string name="browse_number">阅读 %1$d</string>
