@@ -6,11 +6,15 @@ import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.util.ActivityNav;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class LoginActivity extends BaseActivity {
 
@@ -40,5 +44,27 @@ public class LoginActivity extends BaseActivity {
                 ActivityNav.getInstance().startMainActivity(this);
                 break;
         }
+    }
+
+    private void login() {
+        OkHttpUtils
+                .get()
+                .url(Api.FARMING_URL)
+                .addParams("drivenType", "02")
+                .addParams("appkey", "b66a5c46acf46c10a601bc8cabe4c074")
+                .addParams("username", "")
+                .addParams("pwd", "")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                    }
+                });
     }
 }

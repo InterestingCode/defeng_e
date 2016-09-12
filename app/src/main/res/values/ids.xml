@@ -5,4 +5,6 @@
     <item name="main_tab_one" type="id" />
     <item name="main_tab_two" type="id" />
     <item name="main_tab_three" type="id" />
+
+    <item name="progress_bar" type="id" />
 </resources>

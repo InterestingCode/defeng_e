@@ -46,37 +46,25 @@
     <string name="user_data">个人资料</string>
     <string name="avatar">头像</string>
     <string name="appellation">称呼</string>
-    <string name="tips_input_appellation">请输入你的称呼</string>
     <string name="modify_appellation">修改称呼</string>
     <string name="gender">性别</string>
-    <string name="tips_input_gender">请选择你的性别</string>
     <string name="birth">出生日期</string>
-    <string name="tips_input_birth">请选择你的出生日期</string>
     <string name="choose_birth">选择出生日期</string>
     <string name="belong_area">所属区域</string>
-    <string name="tips_input_belong_area">请输入你的所属区域</string>
     <string name="occupation">职业</string>
-    <string name="tips_input_occupation">请输入你的职业</string>
     <string name="modify_occupation">修改职业</string>
     <string name="address">地址</string>
-    <string name="tips_input_address">请输入你的地址</string>
     <string name="modify_address">修改地址</string>
     <string name="plant">种植作物和面积</string>
-    <string name="tips_input_plant">请输入你的种植作物和面积</string>
     <string name="telephone">手机号码</string>
-    <string name="tips_input_telephone">请输入你的手机号码</string>
     <string name="modify_telephone">修改手机号码</string>
     <string name="certification">实名认证</string>
-    <string name="tips_input_certification">请输入你的称呼</string>
-    <string name="tips_input_content">请填写信息</string>
-    <string name="tips_input_correct_telephone">请输入正确的手机号码</string>
 
     <string name="plant_and_area_setting">种植作物和面积设置</string>
     <string name="plants_name">种植作物：</string>
     <string name="plants_area">种植面积：</string>
     <string name="plants_name_with_args">种植作物：%1$s</string>
     <string name="plants_area_with_args">种植面积：%1$s</string>
-    <string name="tips_has_data_is_empty">种植作物名称和面积都必须填写</string>
     <string name="add">添加</string>
 
     <string name="real_name_authentication">实名认证</string>
@@ -100,24 +88,16 @@
     <string name="feedback_advise">留言反馈</string>
     <string name="about_defeng">关于德丰e农</string>
     <string name="exit_app">退出德丰e农</string>
-    <string name="tips_cache_had_cleared">缓存数据已清空</string>
     <string name="about_defeng_app">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;德丰e农是由北京华泰德丰公司推出的一项免费的气象为农服务，服务内容包括天气预报、农事建议和病虫害预警等内容，指导农户进行科学的田间管理，为农户的增产增收保驾护航。</string>
     <string name="about">关于</string>
     <string name="check_latest_version">检查更新</string>
     <string name="current_defeng_version">德丰e农 V%1$s</string>
     <string name="current_version_is_latest">当前版本是最新版本</string>
-    <string name="tips_some_advices_for_app">对app有何建议</string>
-    <string name="tips_thanks_for_your_advices">感谢您的建议</string>
     <string name="common_problems">常见问题</string>
     <string name="operation_guide">操作指南</string>
     <string name="hint_input_old_password">输入原密码</string>
     <string name="hint_input_new_password">输入新密码</string>
     <string name="hint_confirm_new_password">确认新密码</string>
-    <string name="tips_input_old_password">请输入原密码</string>
-    <string name="tips_input_new_password">请输入新密码</string>
-    <string name="tips_input_new_password_again">请再次输入新密码</string>
-    <string name="tips_new_password_mistake">新密码不一致，请重新输入</string>
-    <string name="tips_modify_password_success">密码修改成功</string>
     <string name="user_register">用户注册</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
@@ -136,10 +116,32 @@
     <string name="next_step">下一步</string>
     <string name="back_to_login">返回登录</string>
 
-    <string name="tips_input_article_title">请输入文章标题</string>
     <string name="browse_number">阅读 %1$d</string>
     <string name="comment_number">评论 %1$d</string>
+    <string name="count_down_timer">%1$ds</string>
 
+    <string name="tips_input_appellation">请输入你的称呼</string>
+    <string name="tips_input_gender">请选择你的性别</string>
+    <string name="tips_input_birth">请选择你的出生日期</string>
+    <string name="tips_input_belong_area">请输入你的所属区域</string>
+    <string name="tips_input_occupation">请输入你的职业</string>
+    <string name="tips_input_address">请输入你的地址</string>
+    <string name="tips_input_plant">请输入你的种植作物和面积</string>
+    <string name="tips_input_telephone">请输入你的手机号码</string>
+    <string name="tips_input_certification">请输入你的称呼</string>
+    <string name="tips_input_content">请填写信息</string>
+    <string name="tips_input_correct_telephone">请输入正确的手机号码</string>
+    <string name="tips_input_new_password_again">请再次输入新密码</string>
+    <string name="tips_new_password_mistake">新密码不一致，请重新输入</string>
+    <string name="tips_modify_password_success">密码修改成功</string>
+    <string name="tips_some_advices_for_app">对app有何建议</string>
+    <string name="tips_thanks_for_your_advices">感谢您的建议</string>
+    <string name="tips_cache_had_cleared">缓存数据已清空</string>
+    <string name="tips_has_data_is_empty">种植作物名称和面积都必须填写</string>
+    <string name="tips_input_old_password">请输入原密码</string>
+    <string name="tips_input_new_password">请输入新密码</string>
+    <string name="tips_input_article_title">请输入文章标题</string>
+    <string name="tips_input_auth_code">请输入验证码</string>
 
     <string-array name="occupation_ary">
         <item>会计</item>

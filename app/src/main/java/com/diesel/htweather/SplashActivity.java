@@ -19,6 +19,7 @@ public class SplashActivity extends BaseActivity {
             } else if (msg.what == 1) {
                 ActivityNav.getInstance().startGuideActivity(SplashActivity.this);
             }
+            finish();
         }
     };
 

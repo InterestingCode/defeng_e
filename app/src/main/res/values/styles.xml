@@ -15,6 +15,7 @@
 
     <style name="Theme.App.Launch" parent="AppTheme">
          <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="UserCenterButton">
@@ -142,6 +143,11 @@
         <item name="android:paddingRight">@dimen/px30</item>
         <item name="android:textColor">@color/black_333</item>
         <item name="android:textSize">@dimen/font_40px</item>
+    </style>
+
+    <style name="LoadingDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
 </resources>
