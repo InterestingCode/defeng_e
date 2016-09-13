@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
@@ -15,6 +16,8 @@ import com.diesel.htweather.response.BaseResJo;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.StringUtils;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.util.ViewUtils;
+import com.diesel.htweather.webapi.UserWebService;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -34,7 +37,27 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.get_auth_code_btn)
     Button mAuthBtn;
 
+    @BindView(R.id.telephone_layout)
+    LinearLayout mTelephoneLayout;
+
+    @BindView(R.id.auth_code_layout)
+    LinearLayout mAuthCodeLayout;
+
+    @BindView(R.id.new_password_et)
+    EditText mNewPasswordEt;
+
+    @BindView(R.id.new_password_again_et)
+    EditText mNewPasswordAgainEt;
+
+    @BindView(R.id.password_layout)
+    LinearLayout mPasswordLayout;
+
+    @BindView(R.id.register_btn)
+    Button mRegisterBtn;
+
     private String mMobile, mAuthCode;
+
+    private int mCurrStep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,50 +85,70 @@ public class RegisterActivity extends BaseActivity {
                 getAuthCode();
                 break;
             case R.id.register_btn:
-                mAuthCode = mAuthCodeEt.getText().toString();
-                if (TextUtils.isEmpty(mAuthCode)) {
-                    ToastUtils.show(getString(R.string.tips_input_auth_code));
-                    return;
+                if (mCurrStep == 0) {
+                    mAuthCode = mAuthCodeEt.getText().toString();
+                    if (TextUtils.isEmpty(mAuthCode)) {
+                        ToastUtils.show(getString(R.string.tips_input_auth_code));
+                        return;
+                    }
+                    verifyMobile();
+                } else if (mCurrStep == 1) {
+                    String newPsw = mNewPasswordEt.getText().toString();
+                    if (TextUtils.isEmpty(newPsw)) {
+                        ToastUtils.show(getString(R.string.tips_input_new_password));
+                        return;
+                    }
+                    String newPswAgain = mNewPasswordAgainEt.getText().toString();
+                    if (TextUtils.isEmpty(newPswAgain)) {
+                        ToastUtils.show(getString(R.string.tips_input_new_password_again));
+                        return;
+                    }
+                    if (!newPsw.equals(newPswAgain)) {
+                        ToastUtils.show(getString(R.string.tips_new_password_mistake));
+                        mNewPasswordEt.setText("");
+                        mNewPasswordAgainEt.setText("");
+                        mNewPasswordEt.requestFocus();
+                        return;
+                    }
+                    resetPassword(newPsw);
                 }
-                verifyMobile();
                 break;
         }
+    }
+
+    private void changeToConfirmPassword() {
+        ViewUtils.gone(mTelephoneLayout, mAuthCodeLayout);
+        ViewUtils.visible(mPasswordLayout);
+        mRegisterBtn.setText(R.string.save);
+        mCurrStep = 1;
+        mTimer.cancel();
     }
 
     private void getAuthCode() {
         mTimer.start();
         mAuthBtn.setEnabled(false);
-        OkHttpUtils
-                .get()
-                .url(Api.GET_AUTH_CODE_URL)
-                .addParams("drivenType", "02")
-                .addParams("appkey", "b66a5c46acf46c10a601bc8cabe4c074")
-                .addParams("mobile", mMobile)
-                .addParams("smsType", "1")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG, "getAuthCode#onError() " + e.getMessage());
-                    }
+        UserWebService.getInstance().getAuthCode(1, mMobile, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getAuthCode#onError() " + e.getMessage());
+            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.d(TAG, "getAuthCode#onResponse() " + response);
-                        try {
-                            BaseResJo resJO = FastJsonUtils
-                                    .getSingleBean(response, BaseResJo.class);
-                            if (null == resJO) {
-                                return;
-                            }
-                            if (resJO.status != 0) {
-                                ToastUtils.show(resJO.msg);
-                            }
-                        } catch (Exception e) {
-                            Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
-                        }
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getAuthCode#onResponse() " + response);
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        return;
                     }
-                });
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                }
+            }
+        });
     }
 
     private void verifyMobile() {
@@ -137,12 +180,29 @@ public class RegisterActivity extends BaseActivity {
                             }
                             if (resJO.status != 0) {
                                 ToastUtils.show(resJO.msg);
+                            } else {
+                                changeToConfirmPassword();
                             }
                         } catch (Exception e) {
                             Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
                         }
                     }
                 });
+    }
+
+    private void resetPassword(String password) {
+        showDialog();
+        UserWebService.getInstance().resetPassword(password, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "resetPassword#onError() " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "resetPassword#onResponse() " + response);
+            }
+        });
     }
 
     private CountDownTimer mTimer = new CountDownTimer(60000, 1000) {

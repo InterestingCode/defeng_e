@@ -1,131 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.diesel.htweather.user.RegisterActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_register_top">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_register_top">
+            android:layout_centerVertical="true"
+            android:padding="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
 
-            <ImageView
-                android:id="@+id/back_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/px30"
-                android:src="@drawable/ic_left_white_arrow" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="@string/user_register"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/font_40px" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/telephone_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/px90"
-            android:layout_marginLeft="@dimen/px24"
-            android:layout_marginRight="@dimen/px24"
-            android:layout_marginTop="@dimen/px70"
-            android:background="@drawable/bg_password_input_box"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/px40"
-                android:paddingRight="@dimen/px20"
-                android:text="@string/telephone1"
-                android:textColor="@color/black_333"
-                android:textSize="@dimen/font_40px" />
-
-            <EditText
-                android:id="@+id/account_et"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:paddingRight="@dimen/px20"
-                android:textColor="@color/gray_ccc"
-                android:textSize="@dimen/font_40px" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/auth_code_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/px90"
-            android:layout_marginLeft="@dimen/px24"
-            android:layout_marginRight="@dimen/px24"
-            android:layout_marginTop="@dimen/px30"
-            android:background="@drawable/bg_password_input_box"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/px40"
-                android:paddingRight="@dimen/px20"
-                android:text="@string/auth_code"
-                android:textColor="@color/black_333"
-                android:textSize="@dimen/font_40px" />
-
-            <EditText
-                android:id="@+id/auth_code_et"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@null"
-                android:inputType="number"
-                android:maxLength="6"
-                android:paddingRight="@dimen/px20"
-                android:textColor="@color/gray_ccc"
-                android:textSize="@dimen/font_40px" />
-
-            <Button
-                android:id="@+id/get_auth_code_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/px12"
-                android:background="@drawable/bg_get_auth_code_btn"
-                android:gravity="center"
-                android:text="@string/get_auth_code"
-                android:textColor="@color/password_commit_btn_color"
-                android:textSize="@dimen/font_30px" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/register_btn"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/px24"
-            android:layout_marginRight="@dimen/px24"
-            android:layout_marginTop="@dimen/px60"
-            android:background="@drawable/bg_commit_password_btn"
-            android:text="@string/register"
-            android:textColor="@color/password_commit_btn_color"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/user_register"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_40px" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/telephone_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px90"
+        android:layout_marginLeft="@dimen/px24"
+        android:layout_marginRight="@dimen/px24"
+        android:layout_marginTop="@dimen/px70"
+        android:background="@drawable/bg_password_input_box"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/px40"
+            android:paddingRight="@dimen/px20"
+            android:text="@string/telephone1"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_40px" />
+
+        <EditText
+            android:id="@+id/account_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingRight="@dimen/px20"
+            android:textColor="@color/gray_ccc"
             android:textSize="@dimen/font_40px" />
     </LinearLayout>
 
-    <com.diesel.htweather.widget.UberProgressView
-        android:id="@id/progress_bar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/auth_code_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px90"
+        android:layout_marginLeft="@dimen/px24"
+        android:layout_marginRight="@dimen/px24"
+        android:layout_marginTop="@dimen/px30"
+        android:background="@drawable/bg_password_input_box"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/px40"
+            android:paddingRight="@dimen/px20"
+            android:text="@string/auth_code"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_40px" />
+
+        <EditText
+            android:id="@+id/auth_code_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingRight="@dimen/px20"
+            android:textColor="@color/gray_ccc"
+            android:textSize="@dimen/font_40px" />
+
+        <Button
+            android:id="@+id/get_auth_code_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/px12"
+            android:background="@drawable/bg_get_auth_code_btn"
+            android:gravity="center"
+            android:text="@string/get_auth_code"
+            android:textColor="@color/password_commit_btn_color"
+            android:textSize="@dimen/font_30px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/password_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
-</RelativeLayout>
+        android:layout_marginLeft="@dimen/px24"
+        android:layout_marginRight="@dimen/px24"
+        android:layout_marginTop="@dimen/px35"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/new_password_et"
+            style="@style/PasswordInputStyle"
+            android:hint="@string/hint_input_new_password" />
+
+        <EditText
+            android:id="@+id/new_password_again_et"
+            style="@style/PasswordInputStyle"
+            android:hint="@string/hint_confirm_new_password" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px24"
+        android:layout_marginRight="@dimen/px24"
+        android:layout_marginTop="@dimen/px60"
+        android:background="@drawable/bg_commit_password_btn"
+        android:text="@string/register"
+        android:textColor="@color/password_commit_btn_color"
+        android:textSize="@dimen/font_40px" />
+
+</LinearLayout>

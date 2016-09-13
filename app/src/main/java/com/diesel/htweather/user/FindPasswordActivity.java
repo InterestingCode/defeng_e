@@ -1,7 +1,10 @@
 package com.diesel.htweather.user;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +14,18 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.StringUtils;
+import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
+import com.diesel.htweather.webapi.UserWebService;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class FindPasswordActivity extends BaseActivity {
 
@@ -67,6 +77,11 @@ public class FindPasswordActivity extends BaseActivity {
     @BindView(R.id.next_step_btn)
     Button mNextStepBtn;
 
+    @BindView(R.id.get_auth_code_btn)
+    Button mAuthBtn;
+
+    private String mMobile;
+
     private int mCurrentStep = 1;
 
     @Override
@@ -83,6 +98,16 @@ public class FindPasswordActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.get_auth_code_btn:
+                mMobile = mAccountEt.getText().toString();
+                if (TextUtils.isEmpty(mMobile)) {
+                    ToastUtils.show(getString(R.string.tips_input_telephone));
+                    return;
+                }
+                if (!StringUtils.mobileVerify(mMobile)) {
+                    ToastUtils.show(getString(R.string.tips_input_correct_telephone));
+                    return;
+                }
+                getAuthCode();
                 break;
             case R.id.next_step_btn:
                 if (mCurrentStep == 1) {
@@ -114,5 +139,51 @@ public class FindPasswordActivity extends BaseActivity {
         mSettingPasswordSuccessTv.setTextColor(ContextCompat.getColor(this, R.color.bg_top_header));
         ViewUtils.visible(mStepThreeLayout);
         ViewUtils.gone(mStepOneLayout, mStepTwoLayout);
+    }
+
+    private void getAuthCode() {
+        mTimer.start();
+        mAuthBtn.setEnabled(false);
+        UserWebService.getInstance().getAuthCode(3, mMobile, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getAuthCode#onError() " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getAuthCode#onResponse() " + response);
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private CountDownTimer mTimer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            mAuthBtn.setText(getString(R.string.count_down_timer, millisUntilFinished / 1000));
+        }
+
+        @Override
+        public void onFinish() {
+            mAuthBtn.setEnabled(true);
+            mAuthBtn.setText(R.string.get_auth_code);
+        }
+    };
+
+    @Override
+    public void finish() {
+        super.finish();
+        mTimer.cancel();
     }
 }
