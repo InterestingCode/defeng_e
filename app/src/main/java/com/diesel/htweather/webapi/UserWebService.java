@@ -41,7 +41,7 @@ public class UserWebService extends WebService {
     public void getAuthCode(int smsType, @NonNull String mobile, Callback callback) {
         OkHttpUtils
                 .get()
-                .url(Api.RESET_PASSWORD_URL)
+                .url(Api.GET_AUTH_CODE_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("mobile", mobile)

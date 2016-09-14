@@ -65,6 +65,12 @@ public class FindPasswordActivity extends BaseActivity {
     @BindView(R.id.auth_code_layout)
     LinearLayout mAuthCodeLayout;
 
+    @BindView(R.id.new_password_et)
+    EditText mNewPasswordEt;
+
+    @BindView(R.id.new_password_again_et)
+    EditText mNewPasswordAgainEt;
+
     @BindView(R.id.step_one_layout)
     LinearLayout mStepOneLayout;
 
@@ -111,9 +117,31 @@ public class FindPasswordActivity extends BaseActivity {
                 break;
             case R.id.next_step_btn:
                 if (mCurrentStep == 1) {
-                    changeToResetPassword();
+                    String authCode = mAuthCodeEt.getText().toString();
+                    if (TextUtils.isEmpty(authCode)) {
+                        ToastUtils.show(getString(R.string.tips_input_auth_code));
+                        return;
+                    }
+                    verifyMobile(authCode);
                 } else if (mCurrentStep == 2) {
-                    changeToSettingSuccess();
+                    String newPsw = mNewPasswordEt.getText().toString();
+                    if (TextUtils.isEmpty(newPsw)) {
+                        ToastUtils.show(getString(R.string.tips_input_new_password));
+                        return;
+                    }
+                    String newPswAgain = mNewPasswordAgainEt.getText().toString();
+                    if (TextUtils.isEmpty(newPswAgain)) {
+                        ToastUtils.show(getString(R.string.tips_input_new_password_again));
+                        return;
+                    }
+                    if (!newPsw.equals(newPswAgain)) {
+                        ToastUtils.show(getString(R.string.tips_new_password_mistake));
+                        mNewPasswordEt.setText("");
+                        mNewPasswordAgainEt.setText("");
+                        mNewPasswordEt.requestFocus();
+                        return;
+                    }
+                    resetPassword(newPsw);
                 } else if (mCurrentStep == 3) {
                     finish();
                 }
@@ -160,6 +188,66 @@ public class FindPasswordActivity extends BaseActivity {
                     }
                     if (resJO.status != 0) {
                         ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void verifyMobile(String authCode) {
+        showDialog();
+        UserWebService.getInstance().verifyAuthCode(mMobile, authCode, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "verifyMobile#onError() " + e.getMessage());
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "verifyMobile#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        changeToResetPassword();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void resetPassword(String password) {
+        showDialog();
+        UserWebService.getInstance().resetPassword(password, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "resetPassword#onError() " + e.getMessage());
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "resetPassword#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        changeToSettingSuccess();
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());

@@ -196,11 +196,13 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "resetPassword#onError() " + e.getMessage());
+                dismissDialog();
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "resetPassword#onResponse() " + response);
+                dismissDialog();
             }
         });
     }
