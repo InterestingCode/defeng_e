@@ -14,7 +14,6 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.constant.Api;
-import com.diesel.htweather.constant.Consts;
 import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
 import com.diesel.htweather.farming.model.ActualFarmingBean;
 import com.diesel.htweather.farming.model.FarmingBannerBean;
@@ -99,7 +98,7 @@ public class FarmingPagerFragment extends BaseFragment
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
-//        getFarmingData();
+        getFarmingData();
     }
 
     @Override

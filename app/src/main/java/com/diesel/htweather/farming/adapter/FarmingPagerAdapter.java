@@ -98,13 +98,16 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
                 ((WeatherDataHolder) holder).bindData((WeatherDataBean) bean);
                 break;
             case TYPE_ACTUAL_FARM:
+                ((ActualFarmingHolder) holder).bindData((ActualFarmingBean) bean);
                 break;
             case TYPE_FARMING_INFO:
+                ((FarmingInfoHolder) holder).bindData((FarmingInfoBean) bean);
                 break;
             case TYPE_FARMING_POLICY:
+                ((FarmingPolicyHolder) holder).bindData((FarmingPolicyBean) bean);
                 break;
             case TYPE_FARMING_BANNER:
-                ((FarmingBannerHolder)holder).bindData();
+                ((FarmingBannerHolder) holder).bindData();
                 break;
             default:
                 break;

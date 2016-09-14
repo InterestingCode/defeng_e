@@ -7,11 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.farming.FarmingListActivity;
+import com.diesel.htweather.farming.model.ActualFarmingBean;
+import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.widget.SlidingTableTabLayout;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,12 +47,26 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.actual_farming_pager)
     ViewPager mActualFarmingPager;
 
+    private ActualFramingAdapter mAdapter;
+
     public ActualFarmingHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+    }
 
-        mActualFarmingPager.setAdapter(new ActualFramingAdapter());
-        mActualFarmingTabsLayout.setViewPager(mActualFarmingPager);
+    public void bindData(ActualFarmingBean bean) {
+        List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity>
+                entities = bean.mTimelyCropsNewsListEntities;
+        if (null == mAdapter) {
+            mAdapter = new ActualFramingAdapter(entities);
+            mActualFarmingPager.setAdapter(mAdapter);
+            mActualFarmingTabsLayout.setViewPager(mActualFarmingPager);
+        } else {
+            mAdapter.setEntities(entities);
+        }
+//        if (null != entities && !entities.isEmpty()) {
+//            mAdapter.setEntities(entities);
+//        }
     }
 
     @OnClick(R.id.actual_farming_setting_btn)
@@ -58,15 +76,33 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
 
     private static class ActualFramingAdapter extends PagerAdapter {
 
+        private List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity>
+                mEntities;
+
+        public ActualFramingAdapter(
+                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity> entities) {
+            mEntities = entities;
+        }
+
+        public void setEntities(
+                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity> entities) {
+            mEntities = entities;
+            notifyDataSetChanged();
+        }
+
         @Override
         public CharSequence getPageTitle(int position) {
-            String[] s = {"水稻", "大豆", "玉米", "番茄"};
-            return s[position];
+            return getEntity(position).cropName;
+        }
+
+        private FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity getEntity(
+                int position) {
+            return mEntities.get(position);
         }
 
         @Override
         public int getCount() {
-            return 4;
+            return null == mEntities ? 0 : mEntities.size();
         }
 
         @Override
@@ -84,6 +120,15 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
                     ActivityNav.getInstance().startFarmingDetailsActivity(context);
                 }
             });
+            TextView mTipsTitleTv = (TextView) view.findViewById(R.id.tips_title_tv);
+            TextView mTipsTimeTv = (TextView) view.findViewById(R.id.tips_time_tv);
+            TextView mTipsDataTv = (TextView) view.findViewById(R.id.tips_data_tv);
+            FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity
+                    entity = getEntity(position);
+            mTipsTitleTv.setText(entity.title);
+            mTipsTimeTv.setText(entity.sendTime);
+            mTipsDataTv.setText(entity.content);
+
             container.addView(view);
             return view;
         }
