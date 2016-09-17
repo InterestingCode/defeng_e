@@ -43,6 +43,7 @@ import butterknife.OnItemClick;
  * @version 1.0.0
  */
 public class DepthServiceFragment extends BaseFragment {
+
     @BindView(R.id.diaryList)
     FullListView diaryList;
 
@@ -53,7 +54,7 @@ public class DepthServiceFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_depth_service, container, false);
         ButterKnife.bind(this, view);
         initData();
@@ -69,7 +70,8 @@ public class DepthServiceFragment extends BaseFragment {
         diaryList.setAdapter(new DepthDiaryAdapter(mActivity, data));
     }
 
-    @OnClick({R.id.tvDepthFacilities, R.id.tvAgriculture, R.id.btnDepthDiary, R.id.btnJust, R.id.btnAsk, R.id.btnFarming, R.id.btnProfile})
+    @OnClick({R.id.tvDepthFacilities, R.id.tvAgriculture, R.id.btnDepthDiary, R.id.btnJust,
+            R.id.btnAsk, R.id.btnFarming, R.id.btnProfile})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvDepthFacilities:

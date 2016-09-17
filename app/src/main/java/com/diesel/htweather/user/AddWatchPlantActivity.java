@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.event.DeletePlantEvent;
 import com.diesel.htweather.event.RecyclerItemEvent;
 import com.diesel.htweather.user.adapter.AddedPlantAdapter;
@@ -20,10 +21,14 @@ import com.diesel.htweather.user.adapter.PlantCategoryAdapter;
 import com.diesel.htweather.user.model.PlantBean;
 import com.diesel.htweather.user.model.PlantCategoryBean;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.PlantWebService;
+import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.heaven7.android.dragflowlayout.DragAdapter;
 import com.heaven7.android.dragflowlayout.DragFlowLayout;
 import com.heaven7.android.dragflowlayout.IViewObserver;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +39,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class AddWatchPlantActivity extends BaseActivity {
 
@@ -80,10 +86,27 @@ public class AddWatchPlantActivity extends BaseActivity {
         setContentView(R.layout.activity_add_watch_plant);
         ButterKnife.bind(this);
 
+        getPlantCategory();
         initCategories();
         initAddedPlants();
         initDragView();
         switchPlants(0);
+    }
+
+    private void getPlantCategory() {
+        showDialog();
+        PlantWebService.getInstance().getPlantCategory(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getPlantCategory#onError() " + e.getMessage());
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getPlantCategory#onResponse() " + response);
+            }
+        });
     }
 
     private void initCategories() {
