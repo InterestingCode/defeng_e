@@ -17,11 +17,14 @@ public class Api {
     // 登陆
     public static final String LOGIN_URL = SERVER_URL + "/nologin/personal/process.c?do=loginForNormal";
 
+    // 注册
+    public static final String REGISTER_URL = SERVER_URL + "/nologin/personal/process.c?do=register";
+
     // 短信验证码发送
     public static final String GET_AUTH_CODE_URL = SERVER_URL + "/nologin/personal/process.c?do=sendSmsCode";
 
     // 手机验证
-    public static final String VERIFY_MOBILE_URL = SERVER_URL + "/nologin/personal/process.c?do=cbForValiMobile";
+    public static final String VERIFY_AUTH_CODE_URL = SERVER_URL + "/nologin/personal/process.c?do=verifySmsCode";
 
     // 重置密码
     public static final String RESET_PASSWORD_URL = SERVER_URL + "/nologin/personal/process.c?do=cbForResetPwd";

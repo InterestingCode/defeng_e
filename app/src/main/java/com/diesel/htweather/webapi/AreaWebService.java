@@ -34,9 +34,41 @@ public class AreaWebService extends WebService {
     public void getOpenArea(Callback callback) {
         OkHttpUtils
                 .get()
-                .url(Api.GET_AUTH_CODE_URL)
+                .url(Api.GET_OPEN_AREA_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    public void getHotArea(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_HOT_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    public void getAreaByName(String areaName, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_HOT_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("areaName", areaName)
+                .build()
+                .execute(callback);
+    }
+
+    public void getAreaById(String areaId, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_HOT_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("areaId", areaId)
                 .build()
                 .execute(callback);
     }

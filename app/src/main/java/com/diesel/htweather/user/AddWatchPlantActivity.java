@@ -13,21 +13,21 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.event.DeletePlantEvent;
 import com.diesel.htweather.event.RecyclerItemEvent;
+import com.diesel.htweather.response.PlantCategoryResJo;
+import com.diesel.htweather.response.PlantResJo;
 import com.diesel.htweather.user.adapter.AddedPlantAdapter;
 import com.diesel.htweather.user.adapter.PlantCategoryAdapter;
 import com.diesel.htweather.user.model.PlantBean;
 import com.diesel.htweather.user.model.PlantCategoryBean;
+import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.PlantWebService;
-import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.heaven7.android.dragflowlayout.DragAdapter;
 import com.heaven7.android.dragflowlayout.DragFlowLayout;
 import com.heaven7.android.dragflowlayout.IViewObserver;
-import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
@@ -59,9 +59,11 @@ public class AddWatchPlantActivity extends BaseActivity {
 
     private PlantCategoryAdapter mAdapter;
 
-    private List<PlantCategoryBean> mCategories = new ArrayList<>();
+        private List<PlantCategoryBean> mCategories = new ArrayList<>();
+//    private List<PlantCategoryResJo.PlantCategoryEntity> mCategories;
 
     private List<List<PlantBean>> mPlants = new ArrayList<>();
+//    private List<List<PlantResJo.PlantEntity>> mPlants = new ArrayList<>();
 
     private AddedPlantAdapter mAddedPlantAdapter;
 
@@ -105,6 +107,45 @@ public class AddWatchPlantActivity extends BaseActivity {
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getPlantCategory#onResponse() " + response);
+                try {
+                    PlantCategoryResJo resJO = FastJsonUtils
+                            .getSingleBean(response, PlantCategoryResJo.class);
+                    if (resJO.status == 0) {
+//                        mCategories = resJO.data;
+//                        if (null != mCategories && !mCategories.isEmpty()) {
+//                            for (PlantCategoryResJo.PlantCategoryEntity entity : mCategories) {
+//                                getPlants("1", String.valueOf(entity.id));
+//                            }
+//                        }
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    dismissDialog();
+                    Log.e(TAG, "getPlantCategory#onResponse() " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void getPlants(String areaId, final String categoryId) {
+        PlantWebService.getInstance().getPlantList(areaId, categoryId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getPlants#onError() categoryId(" + categoryId + ")" + e.getMessage());
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getPlants#onResponse() categoryId(" + categoryId + ") " + response);
+                dismissDialog();
+                try {
+                    PlantResJo resJO = FastJsonUtils.getSingleBean(response, PlantResJo.class);
+                    List<PlantResJo.PlantEntity> plant = new ArrayList<>();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

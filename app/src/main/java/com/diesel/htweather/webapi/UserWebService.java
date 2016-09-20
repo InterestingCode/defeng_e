@@ -54,11 +54,24 @@ public class UserWebService extends WebService {
             Callback callback) {
         OkHttpUtils
                 .get()
-                .url(Api.RESET_PASSWORD_URL)
+                .url(Api.VERIFY_AUTH_CODE_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("mobile", mobile)
                 .addParams("smsCode", mobile)
+                .build()
+                .execute(callback);
+    }
+
+    public void register(@NonNull String password, @NonNull String mobile, @NonNull String authCode, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.REGISTER_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("mobile", mobile)
+                .addParams("smsCode", authCode)
+                .addParams("pwd", password)
                 .build()
                 .execute(callback);
     }

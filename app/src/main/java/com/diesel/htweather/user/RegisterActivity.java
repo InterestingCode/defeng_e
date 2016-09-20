@@ -11,14 +11,12 @@ import android.widget.LinearLayout;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.response.BaseResJo;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.StringUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.webapi.UserWebService;
-import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
@@ -110,7 +108,7 @@ public class RegisterActivity extends BaseActivity {
                         mNewPasswordEt.requestFocus();
                         return;
                     }
-                    resetPassword(newPsw);
+                    register(newPsw);
                 }
                 break;
         }
@@ -153,56 +151,59 @@ public class RegisterActivity extends BaseActivity {
 
     private void verifyMobile() {
         showDialog();
-        OkHttpUtils
-                .get()
-                .url(Api.VERIFY_MOBILE_URL)
-                .addParams("drivenType", "02")
-                .addParams("appkey", "b66a5c46acf46c10a601bc8cabe4c074")
-                .addParams("mobile", mMobile)
-                .addParams("smsCode", mAuthCode)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG, "verifyMobile#onError() " + e.getMessage());
-                        dismissDialog();
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.d(TAG, "verifyMobile#onResponse() " + response);
-                        dismissDialog();
-                        try {
-                            BaseResJo resJO = FastJsonUtils
-                                    .getSingleBean(response, BaseResJo.class);
-                            if (null == resJO) {
-                                return;
-                            }
-                            if (resJO.status != 0) {
-                                ToastUtils.show(resJO.msg);
-                            } else {
-                                changeToConfirmPassword();
-                            }
-                        } catch (Exception e) {
-                            Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
-                        }
-                    }
-                });
-    }
-
-    private void resetPassword(String password) {
-        showDialog();
-        UserWebService.getInstance().resetPassword(password, new StringCallback() {
+        UserWebService.getInstance().verifyAuthCode(mMobile, mAuthCode, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Log.e(TAG, "resetPassword#onError() " + e.getMessage());
+                Log.e(TAG, "verifyMobile#onError() " + e.getMessage());
                 dismissDialog();
             }
 
             @Override
             public void onResponse(String response, int id) {
-                Log.d(TAG, "resetPassword#onResponse() " + response);
+                Log.d(TAG, "verifyMobile#onResponse() " + response);
                 dismissDialog();
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        changeToConfirmPassword();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void register(String password) {
+        showDialog();
+        UserWebService.getInstance().register(password, mMobile, mAuthCode, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "register#onError() " + e.getMessage());
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "register#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        return;
+                    }
+                    ToastUtils.show(resJO.msg);
+                    if (resJO.status == 0) {
+                        finish();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "register#onResponse() " + e.getMessage());
+                }
             }
         });
     }
