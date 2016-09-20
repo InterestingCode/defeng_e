@@ -79,7 +79,7 @@ public class SharedPreferencesUtils {
         mShared.edit().putString(key, value).apply();
     }
 
-    public static final String SP_KEY_NEED_ENTER_GUIDE_PAGE = "sp_key_need_enter_guide_page";
+    private static final String SP_KEY_NEED_ENTER_GUIDE_PAGE = "sp_key_need_enter_guide_page";
 
     public void updateEnterGuidePageStatus() {
         putBoolean(SP_KEY_NEED_ENTER_GUIDE_PAGE + mVersionName, false);
@@ -87,6 +87,16 @@ public class SharedPreferencesUtils {
 
     public boolean needEnterGuidePage() {
         return getBoolean(SP_KEY_NEED_ENTER_GUIDE_PAGE + mVersionName, true);
+    }
+
+    private static final String SP_KEY_MESSAGE_NOTIFY_ENABLE = "sp_key_message_notify_enable";
+
+    public void enableMessageNotify(boolean enable) {
+        putBoolean(SP_KEY_MESSAGE_NOTIFY_ENABLE + mVersionName, enable);
+    }
+
+    public boolean messageNotifyEnable() {
+        return getBoolean(SP_KEY_MESSAGE_NOTIFY_ENABLE + mVersionName, true);
     }
 
 }

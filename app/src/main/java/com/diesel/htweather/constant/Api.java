@@ -12,7 +12,7 @@ package com.diesel.htweather.constant;
  */
 public class Api {
 
-    public static final String SERVER_URL = "http://183.230.37.112:7016";
+    private static final String SERVER_URL = "http://183.230.37.112:7016";
 
     // 登陆
     public static final String LOGIN_URL = SERVER_URL + "/nologin/personal/process.c?do=loginForNormal";
@@ -29,8 +29,23 @@ public class Api {
     // 重置密码
     public static final String RESET_PASSWORD_URL = SERVER_URL + "/nologin/personal/process.c?do=cbForResetPwd";
 
-    // 首页
-    public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";
+    // 修改密码
+    public static final String MODIFY_PASSWORD_URL = SERVER_URL + "/session/user/process.c?do=updateUserPwd";
+
+    // 实名认证申请
+    public static final String REAL_NAME_AUTH_URL = SERVER_URL + "/session/user/process.c?do=addTruthVerify";
+
+    // 查询认证情况
+    public static final String GET_REAL_NAME_AUTH_INFO_URL = SERVER_URL + "/session/user/process.c?do=getUserTruthStatus";
+
+    // 消息提醒开关设置
+    public static final String UPLOAD_PUSH_MESSAGE_SWITCH_URL = SERVER_URL + "/session/user/process.c?do=setUserPushWaring";
+
+    // 留言反馈
+    public static final String FEEDBACK_ADVISE_URL = SERVER_URL + "/session/user/process.c?do=addGuestbook";
+
+    // 版本检测
+    public static final String CHECK_VERSION_URL = SERVER_URL + "/nologin/common/process.c?do=getVersion";
 
     // 获取用户已关注区域
     public static final String GET_FOCUS_AREA_URL = SERVER_URL + "/session/user/process.c?do=findFocusAreaByUserId";
@@ -61,5 +76,8 @@ public class Api {
 
     // 关注农作物
     public static final String GET_FOCUS_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addFocusCropForUser";
+
+    // 首页
+    public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";
 
 }

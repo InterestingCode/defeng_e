@@ -2,16 +2,22 @@ package com.diesel.htweather.user;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.UserWebService;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class ModifyPasswordActivity extends BaseActivity {
 
@@ -66,7 +72,39 @@ public class ModifyPasswordActivity extends BaseActivity {
             mNewPasswordEt.requestFocus();
             return;
         }
-        ToastUtils.show(getString(R.string.tips_modify_password_success));
-        finish();
+        modifyPassword(oldPsw, newPsw);
+    }
+
+    private void modifyPassword(String oldPsw, String newPsw) {
+        showDialog();
+        UserWebService.getInstance().modifyPassword(oldPsw, newPsw, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "modifyPassword#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "modifyPassword#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        ToastUtils.show(getString(R.string.tips_request_failure));
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        ToastUtils.show(getString(R.string.tips_modify_password_success));
+                        finish();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "feedbackAdvice#onResponse() " + e.getMessage());
+                }
+            }
+        });
     }
 }

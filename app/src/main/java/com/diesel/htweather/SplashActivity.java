@@ -7,6 +7,7 @@ import android.os.Message;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.SharedPreferencesUtils;
+import com.diesel.htweather.webapi.UserWebService;
 
 public class SplashActivity extends BaseActivity {
 
@@ -29,6 +30,8 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         boolean needEnterGuidePage = SharedPreferencesUtils.getInstance(this).needEnterGuidePage();
         mHandler.sendEmptyMessageDelayed(needEnterGuidePage ? 1 : 0, 2000);
+
+        UserWebService.getInstance().login("18782941024", "123456", null);
     }
 
     @Override

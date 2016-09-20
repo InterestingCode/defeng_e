@@ -33,7 +33,7 @@ public class ActualFarmingBean extends BaseBean {
 //
 //    public String sendTime;
 //
-//    public void convertTimelyCropsNewsListEntity(FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity entity) {
+//    public void convertTimelyCropsNewsListEntity(FarmingResJO.VersionEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity entity) {
 //        cropId = entity.cropId;
 //        newsId = entity.newsId;
 //        cropName = entity.cropName;

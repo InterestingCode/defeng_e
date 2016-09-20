@@ -1,17 +1,23 @@
 package com.diesel.htweather.user;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.response.CheckVersionResJo;
 import com.diesel.htweather.util.AppUtils;
+import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.UserWebService;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class AboutAppActivity extends BaseActivity {
 
@@ -35,8 +41,45 @@ public class AboutAppActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.check_version_tv:
-                ToastUtils.show(getString(R.string.current_version_is_latest));
+                checkVersion();
                 break;
         }
+    }
+
+    private void checkVersion() {
+        showDialog();
+        UserWebService.getInstance().checkVersion(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "checkVersion#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "checkVersion#onResponse() " + response);
+                dismissDialog();
+                try {
+                    CheckVersionResJo resJo = FastJsonUtils
+                            .getSingleBean(response, CheckVersionResJo.class);
+                    if (null == resJo || null == resJo.obj) {
+                        ToastUtils.show(getString(R.string.tips_request_failure));
+                        return;
+                    }
+                    if (resJo.status == 0) {
+                        if (resJo.obj.vId <= AppUtils.getVersionCode(mContext)) {
+                            ToastUtils.show(getString(R.string.current_version_is_latest));
+                        } else {
+                            ToastUtils.show(getString(R.string.current_version_is_older));
+                        }
+                    } else {
+                        ToastUtils.show(resJo.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "checkVersion#onResponse() " + e.getMessage());
+                }
+            }
+        });
     }
 }

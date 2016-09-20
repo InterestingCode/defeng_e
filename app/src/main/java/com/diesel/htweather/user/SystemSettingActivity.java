@@ -1,23 +1,35 @@
 package com.diesel.htweather.user;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.response.BaseResJo;
 import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.EditUserInfoView;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class SystemSettingActivity extends BaseActivity {
 
     @BindView(R.id.back_btn)
     ImageView mBackBtn;
+
+    @BindView(R.id.message_notify_view)
+    EditUserInfoView mMsgNotifyView;
 
     @BindView(R.id.clear_cache_view)
     EditUserInfoView mClearCacheView;
@@ -39,6 +51,45 @@ public class SystemSettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_setting);
         ButterKnife.bind(this);
+
+        boolean enable = SharedPreferencesUtils.getInstance(mContext).messageNotifyEnable();
+        final CheckBox msgNotifyCheckBox = mMsgNotifyView.getColumnCheckBox();
+        msgNotifyCheckBox.setChecked(enable);
+        msgNotifyCheckBox.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, final boolean b) {
+                        UserWebService.getInstance().uploadPushMessageSwitch(b ? "1" : "0",
+                                new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+                                        Log.e(TAG, "onCheckedChanged#onError() " + e.getMessage());
+                                        ToastUtils.show(getString(R.string.tips_request_failure));
+                                    }
+
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        Log.d(TAG, "onCheckedChanged#onResponse() " + response);
+                                        try {
+                                            BaseResJo resJO = FastJsonUtils
+                                                    .getSingleBean(response, BaseResJo.class);
+                                            if (null == resJO) {
+                                                return;
+                                            }
+                                            if (resJO.status != 0) {
+                                                ToastUtils.show(resJO.msg);
+                                            } else {
+                                                SharedPreferencesUtils.getInstance(mContext)
+                                                        .enableMessageNotify(b);
+                                            }
+                                        } catch (Exception e) {
+                                            Log.e(TAG, "onCheckedChanged#onResponse() " + e
+                                                    .getMessage());
+                                        }
+                                    }
+                                });
+                    }
+                });
     }
 
     @OnClick({R.id.back_btn, R.id.clear_cache_view, R.id.modify_password_view,

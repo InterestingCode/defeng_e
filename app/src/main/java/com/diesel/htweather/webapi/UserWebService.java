@@ -63,7 +63,26 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
-    public void register(@NonNull String password, @NonNull String mobile, @NonNull String authCode, Callback callback) {
+    /**
+     * 登录
+     */
+    public void login(@NonNull String userName, @NonNull String password, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.LOGIN_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("username", userName)
+                .addParams("pwd", password)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 注册
+     */
+    public void register(@NonNull String password, @NonNull String mobile, @NonNull String authCode,
+            Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.REGISTER_URL)
@@ -76,6 +95,9 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 重置密码
+     */
     public void resetPassword(@NonNull String password, Callback callback) {
         OkHttpUtils
                 .get()
@@ -83,6 +105,95 @@ public class UserWebService extends WebService {
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("newPwd", password)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 修改密码
+     */
+    public void modifyPassword(@NonNull String oldPsw, @NonNull String newPsw, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.MODIFY_PASSWORD_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("oldPwd", oldPsw)
+                .addParams("newPwd", newPsw)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 实名认证申请
+     *
+     * @param cardPath 证件图片，分号分割，格式：图片1;图片2;图片3;
+     */
+    public void realNameAuth(@NonNull String name, @NonNull String idNumber, String cardPath,
+            Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.REAL_NAME_AUTH_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("realName", name)
+                .addParams("cardId", idNumber)
+                .addParams("verifyImgPath", cardPath)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 查询认证情况
+     */
+    public void getRealNameAuthInfo(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_REAL_NAME_AUTH_INFO_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 消息提醒开关设置
+     *
+     * @param switchStatus 1：开启消息推送 2：关闭消息推送
+     */
+    public void uploadPushMessageSwitch(String switchStatus, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.UPLOAD_PUSH_MESSAGE_SWITCH_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 留言反馈
+     */
+    public void feedbackAdvise(String content, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.FEEDBACK_ADVISE_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("content", content)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 版本检测
+     */
+    public void checkVersion(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.CHECK_VERSION_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
                 .build()
                 .execute(callback);
     }

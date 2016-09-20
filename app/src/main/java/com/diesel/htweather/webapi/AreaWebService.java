@@ -1,5 +1,7 @@
 package com.diesel.htweather.webapi;
 
+import android.support.annotation.NonNull;
+
 import com.diesel.htweather.constant.Api;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -31,6 +33,9 @@ public class AreaWebService extends WebService {
         super();
     }
 
+    /**
+     * 已开通服务区域
+     */
     public void getOpenArea(Callback callback) {
         OkHttpUtils
                 .get()
@@ -41,6 +46,9 @@ public class AreaWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 热门推荐区域
+     */
     public void getHotArea(Callback callback) {
         OkHttpUtils
                 .get()
@@ -51,7 +59,7 @@ public class AreaWebService extends WebService {
                 .execute(callback);
     }
 
-    public void getAreaByName(String areaName, Callback callback) {
+    public void getAreaByName(@NonNull String areaName, Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.GET_HOT_AREA_URL)
@@ -62,13 +70,54 @@ public class AreaWebService extends WebService {
                 .execute(callback);
     }
 
-    public void getAreaById(String areaId, Callback callback) {
+    public void getAreaById(@NonNull String areaId, Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.GET_HOT_AREA_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("areaId", areaId)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 获取用户已关注区域
+     */
+    public void getFocusArea(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_FOCUS_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 新增关注区域
+     */
+    public void focusArea(@NonNull String areaId, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.ADD_FOCUS_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("arId", areaId)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 取消关注区域
+     */
+    public void cancelFocusArea(@NonNull String areaId, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.CANCEL_FOCUS_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("arId", areaId)
                 .build()
                 .execute(callback);
     }

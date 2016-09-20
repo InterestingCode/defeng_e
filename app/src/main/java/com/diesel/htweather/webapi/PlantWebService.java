@@ -55,4 +55,19 @@ public class PlantWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 关注农作物
+     */
+    public void focusPlant(String areaId, String categoryId, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_PLANT_CATEGORY_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("uaId", areaId)
+                .addParams("cropIds", categoryId)
+                .build()
+                .execute(callback);
+    }
+
 }

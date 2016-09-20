@@ -1,6 +1,8 @@
 package com.diesel.htweather.user;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -8,6 +10,8 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.UserWebService;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -41,30 +45,36 @@ public class LoginActivity extends BaseActivity {
                 ActivityNav.getInstance().startFindPasswordActivity(this);
                 break;
             case R.id.login_btn:
+                String userName = mAccountEt.getText().toString();
+                if (TextUtils.isEmpty(userName)) {
+                    ToastUtils.show(getString(R.string.tips_input_username));
+                    return;
+                }
+                String password = mPasswordEt.getText().toString();
+                if (TextUtils.isEmpty(password)) {
+                    ToastUtils.show(getString(R.string.tips_input_password));
+                    return;
+                }
+                login(userName, password);
                 ActivityNav.getInstance().startMainActivity(this);
                 break;
         }
     }
 
-    private void login() {
-        OkHttpUtils
-                .get()
-                .url(Api.FARMING_URL)
-                .addParams("drivenType", "02")
-                .addParams("appkey", "b66a5c46acf46c10a601bc8cabe4c074")
-                .addParams("username", "")
-                .addParams("pwd", "")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+    private void login(String userName, String password) {
+        showDialog();
+        UserWebService.getInstance().login(userName, password, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "login#onError() " + e.getMessage());
+                dismissDialog();
+            }
 
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-
-                    }
-                });
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "login#onResponse() " + response);
+                dismissDialog();
+            }
+        });
     }
 }

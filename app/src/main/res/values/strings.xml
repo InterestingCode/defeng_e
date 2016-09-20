@@ -93,6 +93,7 @@
     <string name="check_latest_version">检查更新</string>
     <string name="current_defeng_version">德丰e农 V%1$s</string>
     <string name="current_version_is_latest">当前版本是最新版本</string>
+    <string name="current_version_is_older">有更新版本，请前往商店更新</string>
     <string name="common_problems">常见问题</string>
     <string name="operation_guide">操作指南</string>
     <string name="hint_input_old_password">输入原密码</string>
@@ -136,12 +137,16 @@
     <string name="tips_modify_password_success">密码修改成功</string>
     <string name="tips_some_advices_for_app">对app有何建议</string>
     <string name="tips_thanks_for_your_advices">感谢您的建议</string>
+    <string name="tips_empty_advices">请填写建议</string>
     <string name="tips_cache_had_cleared">缓存数据已清空</string>
     <string name="tips_has_data_is_empty">种植作物名称和面积都必须填写</string>
     <string name="tips_input_old_password">请输入原密码</string>
     <string name="tips_input_new_password">请输入新密码</string>
     <string name="tips_input_article_title">请输入文章标题</string>
     <string name="tips_input_auth_code">请输入验证码</string>
+    <string name="tips_input_username">请输入用户名</string>
+    <string name="tips_input_password">请输入密码</string>
+    <string name="tips_request_failure">请求失败，请重试</string>
 
     <string-array name="occupation_ary">
         <item>会计</item>
