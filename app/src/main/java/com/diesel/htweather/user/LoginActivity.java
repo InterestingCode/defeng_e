@@ -9,7 +9,10 @@ import android.widget.EditText;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.constant.Api;
+import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.response.LoginResJo;
 import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -56,7 +59,6 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 login(userName, password);
-                ActivityNav.getInstance().startMainActivity(this);
                 break;
         }
     }
@@ -68,12 +70,28 @@ public class LoginActivity extends BaseActivity {
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "login#onError() " + e.getMessage());
                 dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "login#onResponse() " + response);
                 dismissDialog();
+                try {
+                    LoginResJo resJO = FastJsonUtils.getSingleBean(response, LoginResJo.class);
+                    if (null == resJO || null == resJO.obj) {
+                        ToastUtils.show(getString(R.string.tips_request_failure));
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        ActivityNav.getInstance().startMainActivity(mContext);
+                        finish();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "login#onResponse() " + e.getMessage());
+                }
             }
         });
     }

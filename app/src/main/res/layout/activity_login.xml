@@ -47,7 +47,9 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="@string/hint_input_telephone"
+            android:inputType="phone"
             android:paddingRight="@dimen/px20"
+            android:text="18782941024"
             android:textColor="@color/gray_ccc"
             android:textSize="@dimen/font_40px" />
     </LinearLayout>

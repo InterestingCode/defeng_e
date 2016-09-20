@@ -21,6 +21,13 @@ import java.util.Map;
 public class FastJsonUtils {
 
     /**
+     * 将JavaBean序列化为JSON文本
+     */
+    public static String toJsonString(Object o) {
+        return JSON.toJSONString(o);
+    }
+
+    /**
      * 功能描述：把JSON数据转换成普通字符串列表
      *
      * @param jsonData JSON数据

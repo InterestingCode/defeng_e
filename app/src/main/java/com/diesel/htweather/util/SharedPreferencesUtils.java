@@ -2,8 +2,10 @@ package com.diesel.htweather.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.diesel.htweather.constant.Consts;
+import com.diesel.htweather.model.UserInfoBean;
 
 /**
  * @author Diesel
@@ -97,6 +99,25 @@ public class SharedPreferencesUtils {
 
     public boolean messageNotifyEnable() {
         return getBoolean(SP_KEY_MESSAGE_NOTIFY_ENABLE + mVersionName, true);
+    }
+
+    private static final String SP_KEY_USER_INFO = "sp_key_user_info";
+
+    public void updateUserInfo(UserInfoBean bean) {
+        String userInfo = FastJsonUtils.toJsonString(bean);
+        putString(SP_KEY_USER_INFO, userInfo);
+    }
+
+    public UserInfoBean getUserInfo() {
+        String s = getString(SP_KEY_USER_INFO, "");
+        UserInfoBean bean;
+        try {
+            bean = FastJsonUtils.getSingleBean(s, UserInfoBean.class);
+        } catch (Exception e) {
+            Log.e("SharedPreferencesUtils", "getUserInfo() " + e.getMessage());
+            bean = new UserInfoBean();
+        }
+        return bean;
     }
 
 }

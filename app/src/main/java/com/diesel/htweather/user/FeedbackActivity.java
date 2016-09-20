@@ -55,6 +55,7 @@ public class FeedbackActivity extends BaseActivity {
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "feedbackAdvice#onError() " + e.getMessage());
                 dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
             }
 
             @Override
