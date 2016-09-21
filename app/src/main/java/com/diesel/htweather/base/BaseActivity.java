@@ -1,5 +1,6 @@
 package com.diesel.htweather.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,12 +26,15 @@ public class BaseActivity extends AppCompatActivity {
 
     protected Context mContext;
 
+    protected Activity mActivity;
+
     private LoadingDialog mDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this.getApplicationContext();
+        mActivity = this;
     }
 
     protected void showDialog() {

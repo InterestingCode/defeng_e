@@ -89,7 +89,7 @@ public class RegisterActivity extends BaseActivity {
                         ToastUtils.show(getString(R.string.tips_input_auth_code));
                         return;
                     }
-                    verifyMobile();
+                    verifyAuthCode();
                 } else if (mCurrStep == 1) {
                     String newPsw = mNewPasswordEt.getText().toString();
                     if (TextUtils.isEmpty(newPsw)) {
@@ -143,24 +143,24 @@ public class RegisterActivity extends BaseActivity {
                         ToastUtils.show(resJO.msg);
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                    Log.e(TAG, "verifyAuthCode#onResponse() " + e.getMessage());
                 }
             }
         });
     }
 
-    private void verifyMobile() {
+    private void verifyAuthCode() {
         showDialog();
         UserWebService.getInstance().verifyAuthCode(mMobile, mAuthCode, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Log.e(TAG, "verifyMobile#onError() " + e.getMessage());
+                Log.e(TAG, "verifyAuthCode#onError() " + e.getMessage());
                 dismissDialog();
             }
 
             @Override
             public void onResponse(String response, int id) {
-                Log.d(TAG, "verifyMobile#onResponse() " + response);
+                Log.d(TAG, "verifyAuthCode#onResponse() " + response);
                 dismissDialog();
                 try {
                     BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
@@ -173,7 +173,7 @@ public class RegisterActivity extends BaseActivity {
                         changeToConfirmPassword();
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "verifyMobile#onResponse() " + e.getMessage());
+                    Log.e(TAG, "verifyAuthCode#onResponse() " + e.getMessage());
                 }
             }
         });
@@ -186,6 +186,7 @@ public class RegisterActivity extends BaseActivity {
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "register#onError() " + e.getMessage());
                 dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
             }
 
             @Override
@@ -195,6 +196,7 @@ public class RegisterActivity extends BaseActivity {
                 try {
                     BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
                     if (null == resJO) {
+                        ToastUtils.show(getString(R.string.tips_request_failure));
                         return;
                     }
                     ToastUtils.show(resJO.msg);

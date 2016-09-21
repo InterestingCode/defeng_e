@@ -110,11 +110,13 @@ public class SharedPreferencesUtils {
 
     public UserInfoBean getUserInfo() {
         String s = getString(SP_KEY_USER_INFO, "");
-        UserInfoBean bean;
+        UserInfoBean bean = null;
         try {
             bean = FastJsonUtils.getSingleBean(s, UserInfoBean.class);
         } catch (Exception e) {
             Log.e("SharedPreferencesUtils", "getUserInfo() " + e.getMessage());
+        }
+        if (null == bean) {
             bean = new UserInfoBean();
         }
         return bean;

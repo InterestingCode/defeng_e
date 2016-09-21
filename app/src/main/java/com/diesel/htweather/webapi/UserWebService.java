@@ -58,7 +58,7 @@ public class UserWebService extends WebService {
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("mobile", mobile)
-                .addParams("smsCode", mobile)
+                .addParams("smsCode", authCode)
                 .build()
                 .execute(callback);
     }

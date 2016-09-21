@@ -8,14 +8,13 @@ import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.constant.Api;
-import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.response.LoginResJo;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
-import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
@@ -79,15 +78,19 @@ public class LoginActivity extends BaseActivity {
                 dismissDialog();
                 try {
                     LoginResJo resJO = FastJsonUtils.getSingleBean(response, LoginResJo.class);
-                    if (null == resJO || null == resJO.obj) {
-                        ToastUtils.show(getString(R.string.tips_request_failure));
-                        return;
-                    }
-                    if (resJO.status != 0) {
-                        ToastUtils.show(resJO.msg);
-                    } else {
-                        ActivityNav.getInstance().startMainActivity(mContext);
+                    if (null != resJO && null != resJO.obj && resJO.status == 0) {
+                        UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext)
+                                .getUserInfo();
+                        userInfo.userMobile = resJO.obj.userMobile;
+                        userInfo.userNickname = resJO.obj.userNickname;
+                        userInfo.userId = resJO.obj.userId;
+                        userInfo.userFace = resJO.obj.userFace;
+                        SharedPreferencesUtils.getInstance(mContext).updateUserInfo(userInfo);
+
+                        ActivityNav.getInstance().startMainActivity(mActivity);
                         finish();
+                    } else {
+                        ToastUtils.show(resJO.msg);
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "login#onResponse() " + e.getMessage());
