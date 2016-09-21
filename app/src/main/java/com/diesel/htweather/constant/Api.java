@@ -32,6 +32,9 @@ public class Api {
     // 修改密码
     public static final String MODIFY_PASSWORD_URL = SERVER_URL + "/session/user/process.c?do=updateUserPwd";
 
+    // 修改用户个人信息
+    public static final String MODIFY_USER_INFO_URL = SERVER_URL + "/session/user/process.c?do=updateUserInfo";
+
     // 实名认证申请
     public static final String REAL_NAME_AUTH_URL = SERVER_URL + "/session/user/process.c?do=addTruthVerify";
 

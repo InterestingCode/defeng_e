@@ -2,6 +2,7 @@ package com.diesel.htweather.user;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,14 +10,17 @@ import android.widget.LinearLayout;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.HTApplication;
+import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.DialogUtils;
 import com.diesel.htweather.util.StringUtils;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.EditUserInfoView;
 import com.diesel.pickerview.OptionsPickerView;
 import com.diesel.pickerview.TimePickerView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class EditUserInfoActivity extends BaseActivity {
 
@@ -148,8 +153,24 @@ public class EditUserInfoActivity extends BaseActivity {
                 ActivityNav.getInstance().startRealNameAuthActivity(this);
                 break;
             case R.id.save_setting_view:
+                updateUserInfo();
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (null != mTimePickerView && mTimePickerView.isShowing()) {
+                mTimePickerView.dismiss();
+                return true;
+            }
+            if (null != mCityPickerView && mCityPickerView.isShowing()) {
+                mCityPickerView.dismiss();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void showTimePickerView() {
@@ -180,6 +201,7 @@ public class EditUserInfoActivity extends BaseActivity {
                             HTApplication.countries,
                             true);
             mCityPickerView.setCyclic(true, true, true);
+            mCityPickerView.setCancelable(true);
             mCityPickerView.setSelectOptions(0, 0, 0);
 
             mCityPickerView
@@ -218,5 +240,28 @@ public class EditUserInfoActivity extends BaseActivity {
                     });
         }
         mOccupationPickerView.show();
+    }
+
+    private void updateUserInfo() {
+        UserInfoBean bean = new UserInfoBean();
+        bean.userNickname = mUserAppellationView.getInputContent();
+        bean.userSex = "男".equals(mUserGenderView.getInputContent()) ? 1 : 2;
+        bean.userBirthday = mUserBirthView.getInputContent();
+        bean.areaId = 0;
+        bean.jobId = 0;
+        bean.address = mUserAddressView.getInputContent();
+        bean.userMobile = mUserTelephoneView.getInputContent();
+
+        UserWebService.getInstance().modifyUserInfo(bean, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+            }
+        });
     }
 }

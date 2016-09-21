@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.map.BMapLocationClient;
+import com.diesel.htweather.util.BackToExitUtil;
+import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.widget.MainTab;
 import com.diesel.htweather.widget.MainTabBar;
 import com.diesel.htweather.widget.NoScrollViewPager;
@@ -36,6 +39,8 @@ public class MainActivity extends BaseActivity {
     NoScrollViewPager mMainPager;
 
     private BMapLocationClient mBMapLocationClient;
+
+    private BackToExitUtil mBackToExit = new BackToExitUtil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +101,25 @@ public class MainActivity extends BaseActivity {
             MainTab tab = (MainTab) (mTabBar.getChildAt(i));
             tab.setOnClickListener(new TabClickListener());
             tab.setOnCheckedChangeListener(new TabChangeListener());
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            pressAgainToExit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void pressAgainToExit() {
+        if (mBackToExit.isExit()) {
+            finish();
+            System.gc();
+        } else {
+            ToastUtils.show(getString(R.string.again_back_to_exit));
+            mBackToExit.doExitInOneSecond();
         }
     }
 

@@ -83,4 +83,8 @@ public class EditUserInfoView extends LinearLayout {
     public void setContent(String content) {
         mColumnContentTv.setText(content);
     }
+
+    public String getInputContent() {
+        return mColumnContentTv.getText().toString();
+    }
 }

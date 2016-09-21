@@ -3,6 +3,7 @@ package com.diesel.htweather.webapi;
 import android.support.annotation.NonNull;
 
 import com.diesel.htweather.constant.Api;
+import com.diesel.htweather.model.UserInfoBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -194,6 +195,27 @@ public class UserWebService extends WebService {
                 .url(Api.CHECK_VERSION_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 修改用户个人信息
+     */
+    public void modifyUserInfo(UserInfoBean bean, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.MODIFY_USER_INFO_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("userFace", bean.userFace)
+                .addParams("userNickname", bean.userNickname)
+                .addParams("userSex", String.valueOf(bean.userSex))
+                .addParams("userBirthday", bean.userBirthday)
+                .addParams("areaId", String.valueOf(bean.areaId))
+                .addParams("jobId", String.valueOf(bean.jobId))
+                .addParams("address", bean.address)
+                .addParams("userMobile", bean.userMobile)
                 .build()
                 .execute(callback);
     }

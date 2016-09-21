@@ -118,7 +118,7 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
             enterBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ActivityNav.getInstance().startMainActivity(mActivity);
+                    ActivityNav.getInstance().startLoginActivity(mActivity);
                     mActivity.finish();
                 }
             });
