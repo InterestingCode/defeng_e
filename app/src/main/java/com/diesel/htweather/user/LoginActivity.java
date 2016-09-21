@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void login(String userName, String password) {
+    private void login(String userName, final String password) {
         showDialog();
         UserWebService.getInstance().login(userName, password, new StringCallback() {
             @Override
@@ -85,6 +85,7 @@ public class LoginActivity extends BaseActivity {
                         userInfo.userNickname = resJO.obj.userNickname;
                         userInfo.userId = resJO.obj.userId;
                         userInfo.userFace = resJO.obj.userFace;
+                        userInfo.password = password;
                         SharedPreferencesUtils.getInstance(mContext).updateUserInfo(userInfo);
 
                         ActivityNav.getInstance().startMainActivity(mActivity);

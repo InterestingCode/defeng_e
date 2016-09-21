@@ -2,6 +2,7 @@ package com.diesel.htweather.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.diesel.htweather.constant.Consts;
@@ -104,6 +105,9 @@ public class SharedPreferencesUtils {
     private static final String SP_KEY_USER_INFO = "sp_key_user_info";
 
     public void updateUserInfo(UserInfoBean bean) {
+        if (null != bean && !TextUtils.isEmpty(bean.password)) {
+            bean.password = AES.encode(bean.password);
+        }
         String userInfo = FastJsonUtils.toJsonString(bean);
         putString(SP_KEY_USER_INFO, userInfo);
     }
@@ -113,6 +117,7 @@ public class SharedPreferencesUtils {
         UserInfoBean bean = null;
         try {
             bean = FastJsonUtils.getSingleBean(s, UserInfoBean.class);
+            bean.password = AES.decode(bean.password);
         } catch (Exception e) {
             Log.e("SharedPreferencesUtils", "getUserInfo() " + e.getMessage());
         }

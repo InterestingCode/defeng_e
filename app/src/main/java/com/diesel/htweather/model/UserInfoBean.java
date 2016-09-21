@@ -57,4 +57,24 @@ public class UserInfoBean {
      */
     public String address;
 
+    /**
+     * 密码
+     */
+    public String password;
+
+    @Override
+    public String toString() {
+        return "UserInfoBean{" +
+                "userMobile='" + userMobile + '\'' +
+                ", userNickname='" + userNickname + '\'' +
+                ", userId=" + userId +
+                ", userSex=" + userSex +
+                ", areaId=" + areaId +
+                ", jobId=" + jobId +
+                ", userFace='" + userFace + '\'' +
+                ", userBirthday='" + userBirthday + '\'' +
+                ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
