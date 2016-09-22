@@ -25,4 +25,24 @@ public class IntentExtras {
         return intent.getIntExtra(FARMING_TYPE, 0);
     }
 
+    private static final String WEB_TITLE = "web_title";
+
+    public static void setWebTitle(@NonNull Intent intent, String webTitle) {
+        intent.putExtra(WEB_TITLE, webTitle);
+    }
+
+    public static String getWebTitle(@NonNull Intent intent) {
+        return intent.getStringExtra(WEB_TITLE);
+    }
+
+    private static final String WEB_URL = "web_url";
+
+    public static void setWebUrl(@NonNull Intent intent, String webUrl) {
+        intent.putExtra(WEB_URL, webUrl);
+    }
+
+    public static String getWebUrl(@NonNull Intent intent) {
+        return intent.getStringExtra(WEB_URL);
+    }
+
 }

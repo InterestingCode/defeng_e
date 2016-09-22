@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.constant.Api;
+import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.widget.EditUserInfoView;
 
 import butterknife.BindView;
@@ -33,8 +35,12 @@ public class HelpCenterActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.common_problems_view:
+                ActivityNav.getInstance().startWebViewActivity(mActivity,
+                        getString(R.string.common_problems), Api.COMMON_PROBLEMS_URL);
                 break;
             case R.id.operation_guide_view:
+                ActivityNav.getInstance().startWebViewActivity(mActivity,
+                        getString(R.string.operation_guide), Api.OPERATION_GUIDE_URL);
                 break;
         }
     }

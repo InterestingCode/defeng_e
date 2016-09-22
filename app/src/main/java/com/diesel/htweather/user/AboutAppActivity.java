@@ -68,7 +68,7 @@ public class AboutAppActivity extends BaseActivity {
                         return;
                     }
                     if (resJo.status == 0) {
-                        if (resJo.obj.vId <= AppUtils.getVersionCode(mContext)) {
+                        if (resJo.obj.versionCode <= AppUtils.getVersionCode(mContext)) {
                             ToastUtils.show(getString(R.string.current_version_is_latest));
                         } else {
                             ToastUtils.show(getString(R.string.current_version_is_older));

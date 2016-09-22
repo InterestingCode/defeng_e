@@ -15,6 +15,7 @@ import com.diesel.htweather.farming.WeatherTrendActivity;
 import com.diesel.htweather.user.AboutAppActivity;
 import com.diesel.htweather.user.ActualFarmingSettingActivity;
 import com.diesel.htweather.user.AddWatchPlantActivity;
+import com.diesel.htweather.user.CommonWebViewActivity;
 import com.diesel.htweather.user.EditUserInfoActivity;
 import com.diesel.htweather.user.FeedbackActivity;
 import com.diesel.htweather.user.FindPasswordActivity;
@@ -169,6 +170,13 @@ public class ActivityNav {
 
     public void startFindPasswordActivity(Context context) {
         Intent intent = new Intent(context, FindPasswordActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startWebViewActivity(Context context, String webTitle, String webUrl) {
+        Intent intent = new Intent(context, CommonWebViewActivity.class);
+        IntentExtras.setWebTitle(intent, webTitle);
+        IntentExtras.setWebUrl(intent, webUrl);
         context.startActivity(intent);
     }
 

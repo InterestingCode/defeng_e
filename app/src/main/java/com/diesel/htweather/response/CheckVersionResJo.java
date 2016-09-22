@@ -15,9 +15,9 @@ public class CheckVersionResJo extends BaseResJo {
     /**
      * status : 1
      * remark :
-     * vId : 4
+     * versionCode : 4
      * type : 2
-     * version : 2
+     * versionName : 2
      */
 
     public VersionEntity obj;
@@ -28,10 +28,10 @@ public class CheckVersionResJo extends BaseResJo {
 
         public String remark;
 
-        public int vId;
+        public int versionCode;
 
         public int type;
 
-        public String version;
+        public String versionName;
     }
 }
