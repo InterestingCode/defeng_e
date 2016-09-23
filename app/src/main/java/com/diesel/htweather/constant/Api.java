@@ -86,6 +86,9 @@ public class Api {
     // 关注农作物
     public static final String GET_FOCUS_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addFocusCropForUser";
 
+    // 所有职业信息
+    public static final String GET_JOB_LIST_URL = SERVER_URL + "/nologin/common/process.c?do=getAllJobList";
+
     // 首页
     public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";
 

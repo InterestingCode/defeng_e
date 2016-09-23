@@ -220,4 +220,17 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 所有职业信息
+     */
+    public void getJobList(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_JOB_LIST_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
 }
