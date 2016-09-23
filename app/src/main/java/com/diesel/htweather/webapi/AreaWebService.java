@@ -34,6 +34,19 @@ public class AreaWebService extends WebService {
     }
 
     /**
+     * 所有区域信息
+     */
+    public void getAllArea(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
      * 已开通服务区域
      */
     public void getOpenArea(Callback callback) {

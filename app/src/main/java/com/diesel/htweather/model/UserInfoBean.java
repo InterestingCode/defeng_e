@@ -62,6 +62,32 @@ public class UserInfoBean {
      */
     public String password;
 
+    /**
+     * birthday :
+     * arId : 0
+     * isTrue : 1
+     * realName :
+     * cardId :
+     * pushWarning : 1
+     * areaAddr :
+     * userType : 1
+     */
+    public String birthday;
+
+    public int arId;
+
+    public int isTrue;
+
+    public String realName;
+
+    public String cardId;
+
+    public int pushWarning;
+
+    public String areaAddr;
+
+    public int userType;
+
     @Override
     public String toString() {
         return "UserInfoBean{" +

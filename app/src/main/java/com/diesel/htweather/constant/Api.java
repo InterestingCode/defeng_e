@@ -35,6 +35,9 @@ public class Api {
     // 修改用户个人信息
     public static final String MODIFY_USER_INFO_URL = SERVER_URL + "/session/user/process.c?do=updateUserInfo";
 
+    // 获取个人信息
+    public static final String GET_USER_INFO_URL = SERVER_URL + "/session/user/process.c?do=getUserInfo";
+
     // 实名认证申请
     public static final String REAL_NAME_AUTH_URL = SERVER_URL + "/session/user/process.c?do=addTruthVerify";
 
@@ -76,6 +79,9 @@ public class Api {
 
     // 通过区域ID查询
     public static final String GET_AREA_BY_ID_URL = SERVER_URL + "/nologin/common/process.c?do=findById";
+
+    // 所有区域信息
+    public static final String GET_AREA_URL = SERVER_URL + "/nologin/common/process.c?do=getAllAreaList";
 
     // 获取农作物分类
     public static final String GET_PLANT_CATEGORY_URL = SERVER_URL + "/nologin/common/process.c?do=getAllParentCropList";

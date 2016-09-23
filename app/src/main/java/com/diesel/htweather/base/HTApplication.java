@@ -7,6 +7,7 @@ import android.provider.Settings;
 
 import com.diesel.htweather.constant.Consts;
 import com.diesel.htweather.model.RegionObject;
+import com.diesel.htweather.response.AreaResJo;
 import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
 import com.diesel.htweather.util.Drawables;
@@ -39,11 +40,17 @@ public class HTApplication extends Application {
 
     private static HTApplication mInstance = null;
 
-    public static ArrayList<RegionObject> provinces;
+//    public static ArrayList<RegionObject> provinces;
+//
+//    public static ArrayList<ArrayList<RegionObject>> cities;
+//
+//    public static ArrayList<ArrayList<ArrayList<RegionObject>>> countries;
 
-    public static ArrayList<ArrayList<RegionObject>> cities;
+    public static ArrayList<AreaResJo.ProvinceEntity> provinces;
 
-    public static ArrayList<ArrayList<ArrayList<RegionObject>>> countries;
+    public static ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity>> cities;
+
+    public static ArrayList<ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity.CountryEntity>>> countries;
 
     public static HTApplication getInstance() {
         return mInstance;

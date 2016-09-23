@@ -48,7 +48,7 @@ public class ArrayWheelAdapter<T> implements WheelAdapter {
 
     @Override
     public int getItemsCount() {
-        return items.size();
+        return null != items ? items.size() : 0;
     }
 
     @Override

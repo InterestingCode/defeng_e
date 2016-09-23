@@ -121,9 +121,9 @@ public class CityManageActivity extends BaseActivity {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
                 // 返回的分别是三个级别的选中位置
-                String tx = HTApplication.provinces.get(options1).name + "-"
-                        + HTApplication.cities.get(options1).get(option2).name + "-"
-                        + HTApplication.countries.get(options1).get(option2).get(options3).name;
+                String tx = HTApplication.provinces.get(options1).pvName + "-"
+                        + HTApplication.cities.get(options1).get(option2).ctName + "-"
+                        + HTApplication.countries.get(options1).get(option2).get(options3).arName;
                 ToastUtils.show(tx);
             }
         });

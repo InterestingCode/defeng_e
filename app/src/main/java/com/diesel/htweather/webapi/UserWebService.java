@@ -97,6 +97,19 @@ public class UserWebService extends WebService {
     }
 
     /**
+     * 获取个人信息
+     */
+    public void getUserInfo(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_USER_INFO_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
      * 重置密码
      */
     public void resetPassword(@NonNull String password, Callback callback) {
