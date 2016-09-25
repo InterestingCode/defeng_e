@@ -20,7 +20,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "htweather.db";
+    public static final String DATABASE_NAME = "defeng_e.db";
 
     private final static int DATABASE_VERSION = 1;
 

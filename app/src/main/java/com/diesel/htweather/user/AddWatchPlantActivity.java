@@ -107,44 +107,17 @@ public class AddWatchPlantActivity extends BaseActivity {
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getPlantCategory#onResponse() " + response);
+                dismissDialog();
                 try {
                     PlantCategoryResJo resJO = FastJsonUtils
                             .getSingleBean(response, PlantCategoryResJo.class);
-                    if (resJO.status == 0) {
-//                        mCategories = resJO.data;
-//                        if (null != mCategories && !mCategories.isEmpty()) {
-//                            for (PlantCategoryResJo.PlantCategoryEntity entity : mCategories) {
-//                                getPlants("1", String.valueOf(entity.id));
-//                            }
-//                        }
+                    if (null != resJO && resJO.status == 0) {
+
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
                 } catch (Exception e) {
-                    dismissDialog();
                     Log.e(TAG, "getPlantCategory#onResponse() " + e.getMessage());
-                }
-            }
-        });
-    }
-
-    private void getPlants(String areaId, final String categoryId) {
-        PlantWebService.getInstance().getPlantList(areaId, categoryId, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Log.e(TAG, "getPlants#onError() categoryId(" + categoryId + ")" + e.getMessage());
-                dismissDialog();
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.d(TAG, "getPlants#onResponse() categoryId(" + categoryId + ") " + response);
-                dismissDialog();
-                try {
-                    PlantResJo resJO = FastJsonUtils.getSingleBean(response, PlantResJo.class);
-                    List<PlantResJo.PlantEntity> plant = new ArrayList<>();
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         });

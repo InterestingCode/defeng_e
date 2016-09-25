@@ -39,6 +39,7 @@ public class PlantWebService extends WebService {
                 .url(Api.GET_PLANT_CATEGORY_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
+                .addParams("arId", "1")
                 .build()
                 .execute(callback);
     }

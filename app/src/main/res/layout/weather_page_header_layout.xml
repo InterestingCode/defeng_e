@@ -25,7 +25,6 @@
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:paddingLeft="@dimen/weather_page_lr_margin"
-                android:text="崇州"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/font_36px" />
 
@@ -57,7 +56,8 @@
             android:gravity="center"
             android:text="98"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/font_18px" />
+            android:textSize="@dimen/font_18px"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

@@ -81,12 +81,26 @@ public class LoginActivity extends BaseActivity {
                     if (null != resJO && null != resJO.obj && resJO.status == 0) {
                         UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext)
                                 .getUserInfo();
+                        userInfo.password = password;
                         userInfo.userMobile = resJO.obj.userMobile;
                         userInfo.userNickname = resJO.obj.userNickname;
                         userInfo.userId = resJO.obj.userId;
                         userInfo.userFace = resJO.obj.userFace;
-                        userInfo.password = password;
+                        userInfo.birthday = resJO.obj.birthday;
+                        userInfo.arId = resJO.obj.arId;
+                        userInfo.userSex = resJO.obj.userSex;
+                        userInfo.address = resJO.obj.address;
+                        userInfo.isTrue = resJO.obj.isTrue;
+                        userInfo.jobId = resJO.obj.jobId;
+                        userInfo.realName = resJO.obj.realName;
+                        userInfo.cardId = resJO.obj.cardId;
+                        userInfo.pushWarning = resJO.obj.pushWarning;
+                        userInfo.areaAddr = resJO.obj.areaAddr;
+                        userInfo.userType = resJO.obj.userType;
+                        userInfo.userFace = resJO.obj.userFace;
                         SharedPreferencesUtils.getInstance(mContext).updateUserInfo(userInfo);
+                        SharedPreferencesUtils.getInstance(mContext)
+                                .enableMessageNotify(resJO.obj.pushWarning == 1);
 
                         ActivityNav.getInstance().startMainActivity(mActivity);
                         finish();

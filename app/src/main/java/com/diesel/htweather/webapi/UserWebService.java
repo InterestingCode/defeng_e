@@ -181,6 +181,7 @@ public class UserWebService extends WebService {
                 .url(Api.UPLOAD_PUSH_MESSAGE_SWITCH_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
+                .addParams("type", switchStatus)
                 .build()
                 .execute(callback);
     }
@@ -224,8 +225,8 @@ public class UserWebService extends WebService {
                 .addParams("userFace", bean.userFace)
                 .addParams("userNickname", bean.userNickname)
                 .addParams("userSex", String.valueOf(bean.userSex))
-                .addParams("userBirthday", bean.userBirthday)
-                .addParams("areaId", String.valueOf(bean.areaId))
+                .addParams("userBirthday", bean.birthday)
+                .addParams("arId", String.valueOf(bean.arId))
                 .addParams("jobId", String.valueOf(bean.jobId))
                 .addParams("address", bean.address)
                 .addParams("userMobile", bean.userMobile)
@@ -242,6 +243,36 @@ public class UserWebService extends WebService {
                 .url(Api.GET_JOB_LIST_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 获取系统消息
+     */
+    public void getSystemMessage(int page, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_SYSTEM_MESSAGE_LIST_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("page", String.valueOf(page))
+                .addParams("rows", "20")
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 获取提醒消息
+     */
+    public void getNotifyMessage(int page, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_NOTIFY_MESSAGE_LIST_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("page", String.valueOf(page))
+                .addParams("rows", "20")
                 .build()
                 .execute(callback);
     }

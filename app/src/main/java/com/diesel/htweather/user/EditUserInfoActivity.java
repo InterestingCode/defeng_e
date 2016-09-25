@@ -2,6 +2,7 @@ package com.diesel.htweather.user;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,9 +12,11 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.HTApplication;
 import com.diesel.htweather.model.UserInfoBean;
+import com.diesel.htweather.response.BaseResJo;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.DialogUtils;
-import com.diesel.htweather.util.StringUtils;
+import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.EditUserInfoView;
@@ -85,6 +88,21 @@ public class EditUserInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user_info);
         ButterKnife.bind(this);
+
+        bindUserInfo();
+    }
+
+    private void bindUserInfo() {
+        UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext).getUserInfo();
+        mUserAvatarView.setImageURI(userInfo.userFace);
+        mUserAppellationView.setContent(userInfo.userNickname);
+        mUserGenderView.setContent(userInfo.userSex == 1 ? "男" : "女");
+        mUserBirthView.setContent(userInfo.birthday);
+        mUserAreaView.setContent(userInfo.areaAddr);
+        mUserOccupationView.setContent("");
+        mUserAddressView.setContent(userInfo.address);
+
+        mUserTelephoneView.setContent(userInfo.userMobile);
     }
 
     @OnClick({R.id.back_btn, R.id.right_arrow_iv, R.id.user_avatar_view, R.id.user_appellation_view,
@@ -243,11 +261,13 @@ public class EditUserInfoActivity extends BaseActivity {
     }
 
     private void updateUserInfo() {
-        UserInfoBean bean = new UserInfoBean();
+        showDialog();
+
+        final UserInfoBean bean = SharedPreferencesUtils.getInstance(mContext).getUserInfo();
         bean.userNickname = mUserAppellationView.getInputContent();
         bean.userSex = "男".equals(mUserGenderView.getInputContent()) ? 1 : 2;
-        bean.userBirthday = mUserBirthView.getInputContent();
-        bean.areaId = 0;
+        bean.birthday = mUserBirthView.getInputContent();
+        bean.arId = 0;
         bean.jobId = 0;
         bean.address = mUserAddressView.getInputContent();
         bean.userMobile = mUserTelephoneView.getInputContent();
@@ -255,12 +275,31 @@ public class EditUserInfoActivity extends BaseActivity {
         UserWebService.getInstance().modifyUserInfo(bean, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                Log.e(TAG, "updateUserInfo#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
             }
 
             @Override
             public void onResponse(String response, int id) {
-
+                Log.d(TAG, "updateUserInfo#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    if (null == resJO) {
+                        ToastUtils.show(getString(R.string.tips_request_failure));
+                        return;
+                    }
+                    if (resJO.status != 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        SharedPreferencesUtils.getInstance(mContext).updateUserInfo(bean);
+                        ToastUtils.show(getString(R.string.tips_modify_user_info_success));
+                        finish();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "updateUserInfo#onResponse() " + e.getMessage());
+                }
             }
         });
     }

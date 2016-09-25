@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.response.BaseResJo;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
@@ -59,7 +60,7 @@ public class SystemSettingActivity extends BaseActivity {
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, final boolean b) {
-                        UserWebService.getInstance().uploadPushMessageSwitch(b ? "1" : "0",
+                        UserWebService.getInstance().uploadPushMessageSwitch(b ? "1" : "2",
                                 new StringCallback() {
                                     @Override
                                     public void onError(Call call, Exception e, int id) {

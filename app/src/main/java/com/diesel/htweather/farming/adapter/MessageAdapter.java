@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.farming.holder.MessageHolder;
+import com.diesel.htweather.response.MessageResJO;
+
+import java.util.List;
 
 /**
  * Comments：
@@ -19,6 +22,12 @@ import com.diesel.htweather.farming.holder.MessageHolder;
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageHolder> {
 
+    private List<MessageResJO.MessageEntity> mList;
+
+    public MessageAdapter(List<MessageResJO.MessageEntity> list) {
+        mList = list;
+    }
+
     @Override
     public MessageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MessageHolder(LayoutInflater.from(parent.getContext())
@@ -27,11 +36,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageHolder> {
 
     @Override
     public void onBindViewHolder(MessageHolder holder, int position) {
-
+        holder.bindData(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return null != mList ? mList.size() : 0;
     }
 }

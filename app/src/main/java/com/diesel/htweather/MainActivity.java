@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
         mTabBar.setCurrentTabBar(0);
         mMainPager.setCurrentItem(0, false);
 
-        getUserInfo();
+//        getUserInfo();
 
         mBMapLocationClient = new BMapLocationClient(getApplicationContext());
     }

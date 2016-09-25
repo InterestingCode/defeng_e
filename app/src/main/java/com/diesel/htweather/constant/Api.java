@@ -84,16 +84,19 @@ public class Api {
     public static final String GET_AREA_URL = SERVER_URL + "/nologin/common/process.c?do=getAllAreaList";
 
     // 获取农作物分类
-    public static final String GET_PLANT_CATEGORY_URL = SERVER_URL + "/nologin/common/process.c?do=getAllParentCropList";
-
-    // 获取农作物列表
-    public static final String GET_PLANT_LIST_URL = SERVER_URL + "/nologin/common/process.c?do=getAllCropList";
+    public static final String GET_PLANT_CATEGORY_URL = SERVER_URL + "/nologin/common/process.c?do=getAllCropTypeList";
 
     // 关注农作物
     public static final String GET_FOCUS_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addFocusCropForUser";
 
     // 所有职业信息
     public static final String GET_JOB_LIST_URL = SERVER_URL + "/nologin/common/process.c?do=getAllJobList";
+
+    // 获取系统消息
+    public static final String GET_SYSTEM_MESSAGE_LIST_URL = SERVER_URL + "/session/user/process.c?do=getUserSysMsg";
+
+    // 获取提醒消息
+    public static final String GET_NOTIFY_MESSAGE_LIST_URL = SERVER_URL + "/session/user/process.c?do=getUserWarnMsg";
 
     // 首页
     public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";

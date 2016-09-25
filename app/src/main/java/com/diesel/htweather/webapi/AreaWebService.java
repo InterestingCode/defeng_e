@@ -89,7 +89,7 @@ public class AreaWebService extends WebService {
                 .url(Api.GET_HOT_AREA_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
-                .addParams("areaId", areaId)
+                .addParams("arId", areaId)
                 .build()
                 .execute(callback);
     }
