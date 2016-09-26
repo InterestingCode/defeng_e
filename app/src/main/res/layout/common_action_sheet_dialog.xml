@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_tip_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:text="选项标题"
+        android:textColor="@color/gray_666"
+        android:visibility="gone" />
+
+    <View style="@style/BaseHorizontalLine" />
+
+    <cn.cst.iov.app.widget.ListViewNoVScroll
+        android:id="@+id/dialog_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/gray_ea"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@color/transparent"
+        android:scrollbars="none" />
+
+    <Button
+        android:id="@+id/dialog_btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/comment_center_circlebtn"
+        android:text="取消"
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/font_34px" />
+
+    <View
+        android:layout_width="2048dp"
+        android:layout_height="1px" />
+
+</LinearLayout>

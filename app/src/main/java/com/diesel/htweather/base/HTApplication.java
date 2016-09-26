@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.provider.Settings;
 
 import com.diesel.htweather.constant.Consts;
-import com.diesel.htweather.model.RegionObject;
+import com.diesel.htweather.db.DBHelper;
 import com.diesel.htweather.response.AreaResJo;
 import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
@@ -60,6 +60,7 @@ public class HTApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        DBHelper.init(this);
         CrashHandler.getInstance().init(this);
         Consts.sDeviceToken = getDrivenToken(this);
         initOkHttp();

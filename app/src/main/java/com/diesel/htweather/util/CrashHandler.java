@@ -60,7 +60,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         mContext = context.getApplicationContext();
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             mCrashLogPath = Environment.getExternalStorageDirectory().getPath()
-                    + "/htweather/log/crash";
+                    + "/defeng_e/log/crash";
         } else {
             mCrashLogPath = "/data/data/" + mContext.getPackageName() + "/log/crash";
         }
