@@ -19,15 +19,17 @@
 
     <View style="@style/BaseHorizontalLine" />
 
-    <cn.cst.iov.app.widget.ListViewNoVScroll
+    <com.diesel.htweather.widget.FullListView
         android:id="@+id/dialog_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="@android:color/transparent"
-        android:divider="@color/divider_line"
+        android:divider="@color/horizontal_divider_line"
         android:dividerHeight="0.5dp"
         android:listSelector="@android:color/transparent"
         android:scrollbars="none" />
+
+    <View style="@style/BaseHorizontalLine" />
 
     <Button
         android:id="@+id/dialog_btn_cancel"

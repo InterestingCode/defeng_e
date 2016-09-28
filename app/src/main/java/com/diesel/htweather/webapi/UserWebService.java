@@ -277,4 +277,6 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
+//    public void uploadPhoto()
+
 }

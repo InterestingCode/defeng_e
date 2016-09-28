@@ -16,7 +16,6 @@ import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.event.DeletePlantEvent;
 import com.diesel.htweather.event.RecyclerItemEvent;
 import com.diesel.htweather.response.PlantCategoryResJo;
-import com.diesel.htweather.response.PlantResJo;
 import com.diesel.htweather.user.adapter.AddedPlantAdapter;
 import com.diesel.htweather.user.adapter.PlantCategoryAdapter;
 import com.diesel.htweather.user.model.PlantBean;

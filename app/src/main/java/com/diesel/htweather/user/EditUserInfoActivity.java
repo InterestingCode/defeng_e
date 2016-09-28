@@ -375,11 +375,13 @@ public class EditUserInfoActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0x01 && resultCode == RESULT_OK) { // 相机
-            if (TextUtils.isEmpty(mWatermarkFile.getAbsolutePath())) {
+            String imagePath = mWatermarkFile.getAbsolutePath();
+            Log.d(TAG, "onActivityResult() #相机# imagePath="+imagePath);
+            if (TextUtils.isEmpty(imagePath)) {
                 ToastUtils.show(getString(R.string.cannot_get_image_source));
                 return;
             }
-            mUserAvatarView.setImageURI(mWatermarkFile.getAbsolutePath());
+            mUserAvatarView.setImageURI(Uri.parse("file://"+imagePath));
         } else if (requestCode == 0x02 && resultCode == RESULT_OK) { // 本地照片
             if (null != data && null != data.getData()) {
                 mUserAvatarView.setImageURI(data.getData());
