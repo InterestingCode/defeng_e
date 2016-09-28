@@ -36,9 +36,9 @@ import okhttp3.OkHttpClient;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class HTApplication extends Application {
+public class DFApplication extends Application {
 
-    private static HTApplication mInstance = null;
+    private static DFApplication mInstance = null;
 
 //    public static ArrayList<RegionObject> provinces;
 //
@@ -52,7 +52,7 @@ public class HTApplication extends Application {
 
     public static ArrayList<ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity.CountryEntity>>> countries;
 
-    public static HTApplication getInstance() {
+    public static DFApplication getInstance() {
         return mInstance;
     }
 
@@ -76,9 +76,10 @@ public class HTApplication extends Application {
                 .newBuilder()
                 .cookieJar(cookieJar)
                 .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
-                .addInterceptor(new LoggerInterceptor("DFWeather"))
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
+                .addInterceptor(new LoggerInterceptor("defeng_e"))
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
                 .hostnameVerifier(new HostnameVerifier() {
                     @Override
                     public boolean verify(String s, SSLSession sslSession) {

@@ -4,11 +4,9 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
-import com.diesel.htweather.base.HTApplication;
+import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.db.AreaDao;
-import com.diesel.htweather.model.RegionObject;
 import com.diesel.htweather.response.AreaResJo;
-import com.diesel.htweather.response.CheckVersionResJo;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.webapi.AreaWebService;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -59,9 +57,9 @@ public class AreaIntentService extends IntentService {
 //            }
 //            countries.add(country);
 //        }
-//        HTApplication.provinces = provinces;
-//        HTApplication.cities = cities;
-//        HTApplication.countries = countries;
+//        DFApplication.provinces = provinces;
+//        DFApplication.cities = cities;
+//        DFApplication.countries = countries;
 //        Log.i("AreaDao", "----------- 获取地区数据结束 --------------cost time:"
 //                + (System.currentTimeMillis() - curr) + " ms");
 
@@ -99,9 +97,9 @@ public class AreaIntentService extends IntentService {
                             cities.add(city);
                             countries.add(country1);
                         }
-                        HTApplication.provinces = provinces;
-                        HTApplication.cities = cities;
-                        HTApplication.countries = countries;
+                        DFApplication.provinces = provinces;
+                        DFApplication.cities = cities;
+                        DFApplication.countries = countries;
                     }
                 } catch (Exception e) {
                     Log.e("AreaDao", "checkVersion#onResponse() " + e.getMessage());

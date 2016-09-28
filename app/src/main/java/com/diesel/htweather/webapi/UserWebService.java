@@ -1,6 +1,7 @@
 package com.diesel.htweather.webapi;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.model.UserInfoBean;
@@ -9,6 +10,18 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Comments：
@@ -283,16 +296,64 @@ public class UserWebService extends WebService {
     public void uploadPhoto(String path, Callback callback) {
         File file = new File(path);
         if (!file.exists()) {
-            ToastUtils.show("图片资源不存在，请重新选择");
+            ToastUtils.show("图片不存在，请重新选择");
             return;
         }
+        Map<String, String> params = new HashMap<>();
+        params.put("drivenType", getDriveType());
+        params.put("appkey", getAppKey());
+        String fileName = path.substring(path.lastIndexOf("/") + 1);
+        Log.i("TAG", "uploadPhoto  fileName=" + fileName);
+
+//        OkHttpUtils
+//                .postFile()
+//                .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
+//                .file(file)
+//                .headers(params)
+//                .build()
+//                .execute(callback);
+
         OkHttpUtils
-                .postFile()
-                .url(Api.UPLOAD_FILE_URL)
-                .addHeader("Content-Type", "multipart/form-data")
-                .file(file)
+                .post()
+                .addFile("file", fileName, file)
+                .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
+//                .params(params)
                 .build()
                 .execute(callback);
+
+        //-------------------------------------------------------------------------
+
+//////        File file = new File("fileDir", "test.jpg");
+//        RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
+//        RequestBody requestBody = new MultipartBody.Builder()
+//                .setType(MultipartBody.FORM)
+//                .addFormDataPart("image", "test.jpg", fileBody)
+//                .addFormDataPart("drivenType", getDriveType())
+//                .addFormDataPart("appkey", getAppKey())
+//                .build();
+//        Request request = new Request.Builder()
+//                .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
+//                .post(requestBody)
+//                .build();
+//
+//
+//        final okhttp3.OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
+//        OkHttpClient okHttpClient  = httpBuilder
+//                //设置超时
+//                .connectTimeout(10, TimeUnit.SECONDS)
+//                .writeTimeout(15, TimeUnit.SECONDS)
+//                .build();
+//        okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("TAG", "uploadPicture#onError() " + e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                Log.d("TAG", "uploadPicture#onResponse() " + response.body().string());
+//            }
+//        });
     }
 
 }

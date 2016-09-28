@@ -127,14 +127,15 @@ public class PlantAndAreaActivity extends BaseActivity {
         PlantWebService.getInstance().getPlantsAndArea(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Log.e(TAG, "login#onError() " + e.getMessage());
+                Log.e(TAG, "getPlants#onError() " + e.getMessage());
                 dismissDialog();
                 ToastUtils.show(getString(R.string.tips_request_failure));
             }
 
             @Override
             public void onResponse(String response, int id) {
-
+                Log.d(TAG, "getPlants#onResponse() " + response);
+                dismissDialog();
             }
         });
     }

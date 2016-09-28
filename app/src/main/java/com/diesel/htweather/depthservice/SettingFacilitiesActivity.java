@@ -1,16 +1,14 @@
 package com.diesel.htweather.depthservice;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.base.HTApplication;
+import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.util.DialogUtils;
 import com.diesel.pickerview.OptionsPickerView;
 import com.diesel.pickerview.TimePickerView;
@@ -95,8 +93,8 @@ public class SettingFacilitiesActivity extends BaseActivity {
             mCityPickerView = new OptionsPickerView(this);
             mCityPickerView.setTitle(getString(R.string.choose_area));
             mCityPickerView
-                    .setPicker(HTApplication.provinces, HTApplication.cities,
-                            HTApplication.countries,
+                    .setPicker(DFApplication.provinces, DFApplication.cities,
+                            DFApplication.countries,
                             true);
             mCityPickerView.setCyclic(true, true, true);
             mCityPickerView.setSelectOptions(0, 0, 0);
@@ -107,9 +105,9 @@ public class SettingFacilitiesActivity extends BaseActivity {
                         @Override
                         public void onOptionsSelect(int options1, int option2, int options3) {
                             // 返回的分别是三个级别的选中位置
-                            String tx = HTApplication.provinces.get(options1).pvName + "-"
-                                    + HTApplication.cities.get(options1).get(option2).ctName + "-"
-                                    + HTApplication.countries.get(options1).get(option2)
+                            String tx = DFApplication.provinces.get(options1).pvName + "-"
+                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
+                                    + DFApplication.countries.get(options1).get(option2)
                                     .get(options3).arName;
                             tvAddress.setText(tx);
                         }

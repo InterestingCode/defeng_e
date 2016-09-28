@@ -15,13 +15,14 @@ import android.widget.LinearLayout;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.base.HTApplication;
+import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.listener.RecyclerItemClickListener;
 import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.response.BaseResJo;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.DialogUtils;
 import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.PhotoUtils;
 import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
@@ -282,8 +283,8 @@ public class EditUserInfoActivity extends BaseActivity {
             mCityPickerView = new OptionsPickerView(this);
             mCityPickerView.setTitle(getString(R.string.choose_area));
             mCityPickerView
-                    .setPicker(HTApplication.provinces, HTApplication.cities,
-                            HTApplication.countries,
+                    .setPicker(DFApplication.provinces, DFApplication.cities,
+                            DFApplication.countries,
                             true);
             mCityPickerView.setCyclic(true, true, true);
             mCityPickerView.setCancelable(true);
@@ -295,9 +296,9 @@ public class EditUserInfoActivity extends BaseActivity {
                         @Override
                         public void onOptionsSelect(int options1, int option2, int options3) {
                             // 返回的分别是三个级别的选中位置
-                            String tx = HTApplication.provinces.get(options1).pvName + "-"
-                                    + HTApplication.cities.get(options1).get(option2).ctName + "-"
-                                    + HTApplication.countries.get(options1).get(option2)
+                            String tx = DFApplication.provinces.get(options1).pvName + "-"
+                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
+                                    + DFApplication.countries.get(options1).get(option2)
                                     .get(options3).arName;
                             mUserAreaView.setContent(tx);
                         }
@@ -375,8 +376,9 @@ public class EditUserInfoActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0x01 && resultCode == RESULT_OK) { // 相机
+            String path = mWatermarkFile.getPath();
             String imagePath = mWatermarkFile.getAbsolutePath();
-            Log.d(TAG, "onActivityResult() #相机# imagePath="+imagePath);
+            Log.d(TAG, "onActivityResult() #相机# imagePath="+imagePath+"; path="+path);
             if (TextUtils.isEmpty(imagePath)) {
                 ToastUtils.show(getString(R.string.cannot_get_image_source));
                 return;
@@ -386,6 +388,9 @@ public class EditUserInfoActivity extends BaseActivity {
         } else if (requestCode == 0x02 && resultCode == RESULT_OK) { // 本地照片
             if (null != data && null != data.getData()) {
                 mUserAvatarView.setImageURI(data.getData());
+                String imagePath = PhotoUtils.getPath(mContext, data.getData());
+                Log.d(TAG, "onActivityResult() #照片# imagePath="+imagePath);
+                uploadPicture(imagePath);
             } else {
                 ToastUtils.show(getString(R.string.cannot_get_image_source));
             }

@@ -3,7 +3,7 @@ package com.diesel.htweather.util;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
-import com.diesel.htweather.base.HTApplication;
+import com.diesel.htweather.base.DFApplication;
 
 /**
  * Comments：
@@ -23,7 +23,7 @@ public class ToastUtils {
 
     public static void show(@StringRes String msg, boolean showLong) {
         if (null == mToast) {
-            mToast = Toast.makeText(HTApplication.getInstance(), msg,
+            mToast = Toast.makeText(DFApplication.getInstance(), msg,
                     showLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         } else {
             mToast.setText(msg);
