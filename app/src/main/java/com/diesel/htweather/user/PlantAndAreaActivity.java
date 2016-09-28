@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +17,11 @@ import com.diesel.htweather.user.model.AddPlantBean;
 import com.diesel.htweather.user.model.PlantAndAreaBean;
 import com.diesel.htweather.user.model.PlantBaseBean;
 import com.diesel.htweather.util.DialogUtils;
+import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
+import com.diesel.htweather.webapi.PlantWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,6 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class PlantAndAreaActivity extends BaseActivity {
 
@@ -117,6 +122,21 @@ public class PlantAndAreaActivity extends BaseActivity {
         mPlants.add(new AddPlantBean());
 
         mAdapter.notifyDataSetChanged();
+
+        showDialog();
+        PlantWebService.getInstance().getPlantsAndArea(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "login#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+            }
+        });
     }
 
     @Subscribe

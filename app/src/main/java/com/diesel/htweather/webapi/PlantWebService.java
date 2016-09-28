@@ -69,4 +69,32 @@ public class PlantWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 获取种植作物列表
+     */
+    public void getPlantsAndArea(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.GET_PLANTS_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 添加种植作物
+     */
+    public void addPlant(String plantName, String area, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.ADD_PLANT_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("cropName", plantName)
+                .addParams("area", area)
+                .build()
+                .execute(callback);
+    }
+
 }

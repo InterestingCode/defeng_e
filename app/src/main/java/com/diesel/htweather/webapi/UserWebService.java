@@ -4,8 +4,11 @@ import android.support.annotation.NonNull;
 
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.model.UserInfoBean;
+import com.diesel.htweather.util.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
+
+import java.io.File;
 
 /**
  * Comments：
@@ -277,6 +280,19 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
-//    public void uploadPhoto()
+    public void uploadPhoto(String path, Callback callback) {
+        File file = new File(path);
+        if (!file.exists()) {
+            ToastUtils.show("图片资源不存在，请重新选择");
+            return;
+        }
+        OkHttpUtils
+                .postFile()
+                .url(Api.UPLOAD_FILE_URL)
+                .addHeader("Content-Type", "multipart/form-data")
+                .file(file)
+                .build()
+                .execute(callback);
+    }
 
 }

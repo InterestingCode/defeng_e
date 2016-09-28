@@ -89,6 +89,12 @@ public class Api {
     // 关注农作物
     public static final String GET_FOCUS_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addFocusCropForUser";
 
+    // 获取种植作物列表
+    public static final String GET_PLANTS_URL = SERVER_URL + "/session/user/process.c?do=getUserCropSetList";
+
+    // 添加种植作物
+    public static final String ADD_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addUserCropSet";
+
     // 所有职业信息
     public static final String GET_JOB_LIST_URL = SERVER_URL + "/nologin/common/process.c?do=getAllJobList";
 
@@ -100,5 +106,8 @@ public class Api {
 
     // 首页
     public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";
+
+    // 图片上传
+    public static final String UPLOAD_FILE_URL = SERVER_URL + "/nologin/common/process.c?do=uploadMediaFile";
 
 }

@@ -382,6 +382,7 @@ public class EditUserInfoActivity extends BaseActivity {
                 return;
             }
             mUserAvatarView.setImageURI(Uri.parse("file://"+imagePath));
+            uploadPicture(imagePath);
         } else if (requestCode == 0x02 && resultCode == RESULT_OK) { // 本地照片
             if (null != data && null != data.getData()) {
                 mUserAvatarView.setImageURI(data.getData());
@@ -389,6 +390,22 @@ public class EditUserInfoActivity extends BaseActivity {
                 ToastUtils.show(getString(R.string.cannot_get_image_source));
             }
         }
+    }
+
+    private void uploadPicture(String path) {
+        UserWebService.getInstance().uploadPhoto(path, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "uploadPicture#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "uploadPicture#onResponse() " + response);
+            }
+        });
     }
 
 }
