@@ -299,61 +299,14 @@ public class UserWebService extends WebService {
             ToastUtils.show("图片不存在，请重新选择");
             return;
         }
-        Map<String, String> params = new HashMap<>();
-        params.put("drivenType", getDriveType());
-        params.put("appkey", getAppKey());
         String fileName = path.substring(path.lastIndexOf("/") + 1);
-        Log.i("TAG", "uploadPhoto  fileName=" + fileName);
-
-//        OkHttpUtils
-//                .postFile()
-//                .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
-//                .file(file)
-//                .headers(params)
-//                .build()
-//                .execute(callback);
 
         OkHttpUtils
                 .post()
                 .addFile("file", fileName, file)
                 .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
-//                .params(params)
                 .build()
                 .execute(callback);
-
-        //-------------------------------------------------------------------------
-
-//////        File file = new File("fileDir", "test.jpg");
-//        RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file);
-//        RequestBody requestBody = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("image", "test.jpg", fileBody)
-//                .addFormDataPart("drivenType", getDriveType())
-//                .addFormDataPart("appkey", getAppKey())
-//                .build();
-//        Request request = new Request.Builder()
-//                .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
-//                .post(requestBody)
-//                .build();
-//
-//
-//        final okhttp3.OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-//        OkHttpClient okHttpClient  = httpBuilder
-//                //设置超时
-//                .connectTimeout(10, TimeUnit.SECONDS)
-//                .writeTimeout(15, TimeUnit.SECONDS)
-//                .build();
-//        okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.e("TAG", "uploadPicture#onError() " + e.getMessage());
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                Log.d("TAG", "uploadPicture#onResponse() " + response.body().string());
-//            }
-//        });
     }
 
 }
