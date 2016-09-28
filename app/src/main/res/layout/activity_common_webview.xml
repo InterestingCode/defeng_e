@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.diesel.htweather.user.CommonWebViewActivity">
+    tools:context="com.diesel.htweather.user.CommonWebActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

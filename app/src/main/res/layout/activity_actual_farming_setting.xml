@@ -41,6 +41,7 @@
         android:id="@+id/watch_plants_tv"
         style="@style/UserCenterButton"
         android:drawableLeft="@drawable/icon_care_black"
-        android:text="@string/watch_plants" />
+        android:text="@string/watch_plants"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -85,7 +85,7 @@
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.FindPasswordActivity" />
-        <activity android:name=".user.CommonWebViewActivity" />
+        <activity android:name=".user.CommonWebActivity" />
     </application>
 
 </manifest>
