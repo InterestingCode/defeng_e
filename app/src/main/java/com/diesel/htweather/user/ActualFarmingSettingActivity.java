@@ -2,20 +2,28 @@ package com.diesel.htweather.user;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.HTApplication;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.util.ViewUtils;
 import com.diesel.pickerview.OptionsPickerView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ActualFarmingSettingActivity extends BaseActivity {
 
+    @BindView(R.id.watch_plants_tv)
+    TextView mWatchPlantsTv;
+
     private OptionsPickerView mCityPickerView;
+
+    private int mAreaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +42,7 @@ public class ActualFarmingSettingActivity extends BaseActivity {
                 showAreaPickerView();
                 break;
             case R.id.watch_plants_tv:
-                ActivityNav.getInstance().startAddWatchPlantActivity(this);
+                ActivityNav.getInstance().startAddWatchPlantActivity(this, mAreaId);
                 break;
         }
     }
@@ -61,6 +69,8 @@ public class ActualFarmingSettingActivity extends BaseActivity {
                                     + HTApplication.countries.get(options1).get(option2)
                                     .get(options3).arName;
                             ToastUtils.show("添加 \"" + tx + "\" 成功");
+                            mAreaId = HTApplication.countries.get(options1).get(option2).get(options3).arId;
+                            ViewUtils.visible(mWatchPlantsTv);
                         }
                     });
         }

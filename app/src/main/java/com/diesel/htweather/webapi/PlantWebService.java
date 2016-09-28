@@ -1,7 +1,5 @@
 package com.diesel.htweather.webapi;
 
-import android.support.annotation.NonNull;
-
 import com.diesel.htweather.constant.Api;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
@@ -33,13 +31,13 @@ public class PlantWebService extends WebService {
         super();
     }
 
-    public void getPlantCategory(Callback callback) {
+    public void getPlantCategory(int areaId, Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.GET_PLANT_CATEGORY_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
-                .addParams("arId", "1")
+                .addParams("arId", String.valueOf(areaId))
                 .build()
                 .execute(callback);
     }

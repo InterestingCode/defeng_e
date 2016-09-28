@@ -21,6 +21,7 @@ import com.diesel.htweather.user.adapter.PlantCategoryAdapter;
 import com.diesel.htweather.user.model.PlantBean;
 import com.diesel.htweather.user.model.PlantCategoryBean;
 import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.IntentExtras;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.PlantWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
@@ -56,6 +57,8 @@ public class AddWatchPlantActivity extends BaseActivity {
 
     private int mCurrIndex;
 
+    private int mAreaId;
+
     private PlantCategoryAdapter mAdapter;
 
         private List<PlantCategoryBean> mCategories = new ArrayList<>();
@@ -87,6 +90,7 @@ public class AddWatchPlantActivity extends BaseActivity {
         setContentView(R.layout.activity_add_watch_plant);
         ButterKnife.bind(this);
 
+        mAreaId = IntentExtras.getAreaId(getIntent());
         getPlantCategory();
         initCategories();
         initAddedPlants();
@@ -96,7 +100,7 @@ public class AddWatchPlantActivity extends BaseActivity {
 
     private void getPlantCategory() {
         showDialog();
-        PlantWebService.getInstance().getPlantCategory(new StringCallback() {
+        PlantWebService.getInstance().getPlantCategory(mAreaId, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "getPlantCategory#onError() " + e.getMessage());

@@ -71,7 +71,7 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.actual_farming_setting_btn)
     public void addPlant() {
-        ActivityNav.getInstance().startAddWatchPlantActivity(itemView.getContext());
+        ActivityNav.getInstance().startAddWatchPlantActivity(itemView.getContext(), 0);
     }
 
     private static class ActualFramingAdapter extends PagerAdapter {

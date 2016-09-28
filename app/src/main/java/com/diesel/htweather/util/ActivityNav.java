@@ -138,8 +138,9 @@ public class ActivityNav {
         context.startActivity(intent);
     }
 
-    public void startAddWatchPlantActivity(Context context) {
+    public void startAddWatchPlantActivity(Context context, int areaId) {
         Intent intent = new Intent(context, AddWatchPlantActivity.class);
+        IntentExtras.setAreaId(intent, areaId);
         context.startActivity(intent);
     }
 

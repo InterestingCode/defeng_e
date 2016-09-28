@@ -25,6 +25,16 @@ public class IntentExtras {
         return intent.getIntExtra(FARMING_TYPE, 0);
     }
 
+    private static final String AREA_ID = "area_id";
+
+    public static void setAreaId(@NonNull Intent intent, int areaId) {
+        intent.putExtra(AREA_ID, areaId);
+    }
+
+    public static int getAreaId(@NonNull Intent intent) {
+        return intent.getIntExtra(AREA_ID, 0);
+    }
+
     private static final String WEB_TITLE = "web_title";
 
     public static void setWebTitle(@NonNull Intent intent, String webTitle) {
