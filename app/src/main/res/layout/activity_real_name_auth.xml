@@ -77,7 +77,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/shape_gray_bg"
-                    android:scaleType="centerInside"
+                    android:scaleType="center"
                     android:src="@drawable/ic_add_photo" />
 
                 <ImageView

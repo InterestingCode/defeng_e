@@ -124,12 +124,12 @@ public class RealNameAuthActivity extends BaseActivity {
 
     private void realNameAuth() {
         String realName = mYourNameView.getInputContent();
-        if (!TextUtils.isEmpty(realName)) {
+        if (TextUtils.isEmpty(realName)) {
             ToastUtils.show(getString(R.string.tips_input_real_name));
             return;
         }
         String cardId = mYourIdNumberView.getInputContent();
-        if (!TextUtils.isEmpty(cardId)) {
+        if (TextUtils.isEmpty(cardId)) {
             ToastUtils.show(getString(R.string.tips_input_card_id));
             return;
         }
