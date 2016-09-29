@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.diesel.htweather.base.BaseFragment;
+import com.diesel.htweather.event.UpdateUserInfoEvent;
 import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.response.LoginResJO;
 import com.diesel.htweather.util.ActivityNav;
@@ -17,6 +18,9 @@ import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.webapi.UserWebService;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +67,7 @@ public class UserInfoFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         bindUserInfo();
         getUserInfo();
     }
@@ -145,5 +150,16 @@ public class UserInfoFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onUpdateUserInfoEvent(UpdateUserInfoEvent event) {
+        getUserInfo();
     }
 }

@@ -198,7 +198,7 @@ public class FindPasswordActivity extends BaseActivity {
 
     private void verifyMobile(String authCode) {
         showDialog();
-        UserWebService.getInstance().verifyAuthCode(mMobile, authCode, new StringCallback() {
+        UserWebService.getInstance().verifyMobile(mMobile, authCode, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "verifyMobile#onError() " + e.getMessage());

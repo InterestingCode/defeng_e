@@ -4,21 +4,29 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.constant.Api;
+import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.util.DialogUtils;
+import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.PhotoUtils;
+import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.EditUserInfoView;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class RealNameAuthActivity extends BaseActivity {
 
@@ -43,6 +51,8 @@ public class RealNameAuthActivity extends BaseActivity {
     ImageView mIdPhoto4Iv;
 
     private int mCurrPhotoItem;
+
+    private String[] mImagePath = new String[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,22 +89,23 @@ public class RealNameAuthActivity extends BaseActivity {
                         });
                 break;
             case R.id.id_photo_1_iv:
-                mCurrPhotoItem = 1;
+                mCurrPhotoItem = 0;
                 openAlbums();
                 break;
             case R.id.id_photo_2_iv:
-                mCurrPhotoItem = 2;
+                mCurrPhotoItem = 1;
                 openAlbums();
                 break;
             case R.id.id_photo_3_iv:
-                mCurrPhotoItem = 3;
+                mCurrPhotoItem = 2;
                 openAlbums();
                 break;
             case R.id.id_photo_4_iv:
-                mCurrPhotoItem = 4;
+                mCurrPhotoItem = 3;
                 openAlbums();
                 break;
             case R.id.save_setting_view:
+                realNameAuth();
                 break;
         }
     }
@@ -111,27 +122,78 @@ public class RealNameAuthActivity extends BaseActivity {
         startActivityForResult(intent, REQUEST_CODE_OPEN_ALBUM);
     }
 
+    private void realNameAuth() {
+        String realName = mYourNameView.getInputContent();
+        if (!TextUtils.isEmpty(realName)) {
+            ToastUtils.show(getString(R.string.tips_input_real_name));
+            return;
+        }
+        String cardId = mYourIdNumberView.getInputContent();
+        if (!TextUtils.isEmpty(cardId)) {
+            ToastUtils.show(getString(R.string.tips_input_card_id));
+            return;
+        }
+        StringBuilder imgPath = new StringBuilder();
+        for (int i = 0; i < mImagePath.length; i ++) {
+            if (!TextUtils.isEmpty(mImagePath[i])) {
+                imgPath.append(mImagePath[i]).append(";");
+            }
+        }
+        String path = "";
+        if (!TextUtils.isEmpty(imgPath.toString())) {
+            path = imgPath.substring(0, imgPath.length() - 1);
+        }
+        showDialog();
+        UserWebService.getInstance().realNameAuth(realName, cardId, path, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "realNameAuth#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "realNameAuth#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        ToastUtils.show(getString(R.string.tips_real_name_auth_success));
+                        finish();
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "realNameAuth#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_OPEN_ALBUM) {
             if (resultCode == RESULT_OK && null != data) {
+                String imagePath = PhotoUtils.getPath(mContext, data.getData());
+                uploadPicture(imagePath);
                 Bitmap bitmap = PhotoUtils.decodeUriToBitmap(this, data.getData());
                 if (null != bitmap) {
                     switch (mCurrPhotoItem) {
-                        case 1:
+                        case 0:
                             mIdPhoto1Iv
                                     .setImageDrawable(new BitmapDrawable(getResources(), bitmap));
                             break;
-                        case 2:
+                        case 1:
                             mIdPhoto2Iv
                                     .setImageDrawable(new BitmapDrawable(getResources(), bitmap));
                             break;
-                        case 3:
+                        case 2:
                             mIdPhoto3Iv
                                     .setImageDrawable(new BitmapDrawable(getResources(), bitmap));
                             break;
-                        case 4:
+                        case 3:
                             mIdPhoto4Iv
                                     .setImageDrawable(new BitmapDrawable(getResources(), bitmap));
                             break;
@@ -139,6 +201,31 @@ public class RealNameAuthActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    private void uploadPicture(String path) {
+        UserWebService.getInstance().uploadPhoto(1, path, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "uploadPicture#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "uploadPicture#onResponse() " + response);
+                try {
+                    BaseResJO resJo = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJo && resJo.status == 0) {
+                        mImagePath[mCurrPhotoItem] = Api.SERVER_URL + resJo.msg;
+                    } else {
+                        ToastUtils.show(getString(R.string.tips_upload_picture_failed));
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "uploadPicture#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
     }
 
 //    private void crop(Uri uri) {

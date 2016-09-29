@@ -67,6 +67,19 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
+    public void verifyMobile(@NonNull String mobile, @NonNull String authCode,
+            Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.VERIFY_MOBILE_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("mobile", mobile)
+                .addParams("smsCode", authCode)
+                .build()
+                .execute(callback);
+    }
+
     /**
      * 登录
      */

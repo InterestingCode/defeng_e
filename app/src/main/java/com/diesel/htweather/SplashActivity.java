@@ -22,6 +22,8 @@ public class SplashActivity extends BaseActivity {
                 ActivityNav.getInstance().startMainActivity(mActivity);
             } else if (msg.what == 1) {
                 ActivityNav.getInstance().startGuideActivity(mActivity);
+            } else if (msg.what == 2) {
+                ActivityNav.getInstance().startLoginActivity(mActivity);
             }
             finish();
         }
@@ -38,6 +40,9 @@ public class SplashActivity extends BaseActivity {
         if (!TextUtils.isEmpty(userInfo.userMobile) && !TextUtils.isEmpty(userInfo.password)) {
             Log.d(TAG, "onCreate() " + userInfo.toString());
             UserWebService.getInstance().login(userInfo.userMobile, userInfo.password, null);
+        } else {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler.sendEmptyMessageDelayed(2, 3000);
         }
     }
 

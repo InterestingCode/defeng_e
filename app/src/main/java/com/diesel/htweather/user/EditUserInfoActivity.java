@@ -17,6 +17,7 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.constant.Api;
+import com.diesel.htweather.event.UpdateUserInfoEvent;
 import com.diesel.htweather.listener.RecyclerItemClickListener;
 import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.response.BaseResJO;
@@ -35,6 +36,8 @@ import com.diesel.pickerview.OptionsPickerView;
 import com.diesel.pickerview.TimePickerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -376,6 +379,7 @@ public class EditUserInfoActivity extends BaseActivity {
                     if (resJO.status != 0) {
                         ToastUtils.show(resJO.msg);
                     } else {
+                        EventBus.getDefault().post(new UpdateUserInfoEvent());
                         SharedPreferencesUtils.getInstance(mContext).updateUserInfo(bean);
                         ToastUtils.show(getString(R.string.tips_modify_user_info_success));
                         finish();
