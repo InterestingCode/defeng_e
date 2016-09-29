@@ -11,12 +11,16 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.event.ShowAddPlantDialogEvent;
+import com.diesel.htweather.event.AddPlantAndAreaEvent;
+import com.diesel.htweather.event.DeletePlantAndAreaEvent;
+import com.diesel.htweather.response.BaseResJO;
+import com.diesel.htweather.response.PlantAndAreaResJO;
 import com.diesel.htweather.user.adapter.PlantAndAreaAdapter;
 import com.diesel.htweather.user.model.AddPlantBean;
 import com.diesel.htweather.user.model.PlantAndAreaBean;
 import com.diesel.htweather.user.model.PlantBaseBean;
 import com.diesel.htweather.util.DialogUtils;
+import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.webapi.PlantWebService;
@@ -104,44 +108,46 @@ public class PlantAndAreaActivity extends BaseActivity {
     }
 
     private void getPlants() {
-        PlantAndAreaBean plant1 = new PlantAndAreaBean();
-        plant1.plantName = "水稻";
-        plant1.plantArea = "234";
-
-        PlantAndAreaBean plant2 = new PlantAndAreaBean();
-        plant2.plantName = "玉米";
-        plant2.plantArea = "78";
-
-        PlantAndAreaBean plant3 = new PlantAndAreaBean();
-        plant3.plantName = "小麦";
-        plant3.plantArea = "148";
-
-        mPlants.add(plant1);
-        mPlants.add(plant2);
-        mPlants.add(plant3);
-        mPlants.add(new AddPlantBean());
-
-        mAdapter.notifyDataSetChanged();
-
         showDialog();
         PlantWebService.getInstance().getPlantsAndArea(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "getPlants#onError() " + e.getMessage());
-                dismissDialog();
                 ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+                mPlants.add(new AddPlantBean());
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getPlants#onResponse() " + response);
                 dismissDialog();
+                try {
+                    PlantAndAreaResJO resJO = FastJsonUtils
+                            .getSingleBean(response, PlantAndAreaResJO.class);
+                    if (null != resJO && resJO.status == 0 && null != resJO.data && !resJO.data
+                            .isEmpty()) {
+                        mPlants.clear();
+                        for (PlantAndAreaResJO.PlantAndAreaEntity entity : resJO.data) {
+                            PlantAndAreaBean plant = new PlantAndAreaBean();
+                            plant.resJOToBean(entity);
+                            mPlants.add(plant);
+                        }
+                        mPlants.add(new AddPlantBean());
+                    } else {
+                        mPlants.add(new AddPlantBean());
+                    }
+                    mAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    Log.e(TAG, "getPlants#onResponse() #Exception# " + e.getMessage());
+                }
             }
         });
     }
 
     @Subscribe
-    public void onShowAddPlantDialogEvent(ShowAddPlantDialogEvent event) {
+    public void onAddPlantAndAreaEvent(AddPlantAndAreaEvent event) {
         DialogUtils.showAddPlantDialog(this,
                 new DialogUtils.DialogOnClickListener() {
                     @Override
@@ -149,13 +155,77 @@ public class PlantAndAreaActivity extends BaseActivity {
                             String inputContent) {
                         String[] s = inputContent.split("&");
                         if (s.length == 2) {
-                            PlantAndAreaBean plant = new PlantAndAreaBean();
-                            plant.plantName = s[0];
-                            plant.plantArea = s[1];
-                            mPlants.add(mPlants.size() - 1, plant);
-                            mAdapter.notifyDataSetChanged();
+                            addPlantAndArea(s[0], s[1]);
                         }
                     }
                 });
+    }
+
+    @Subscribe
+    public void onDeletePlantAndAreaEvent(DeletePlantAndAreaEvent event) {
+        PlantAndAreaBean bean = event.mBean;
+        if (null != bean) {
+            deletePlantAndArea(bean.ucId, event.mPosition);
+        }
+    }
+
+    private void addPlantAndArea(final String plantName, final String area) {
+        showDialog();
+        PlantWebService.getInstance().addPlantAndArea(plantName, area, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "addPlantAndArea#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "addPlantAndArea#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        PlantAndAreaBean plant = new PlantAndAreaBean();
+                        plant.plantName = plantName;
+                        plant.plantArea = area;
+                        mPlants.add(mPlants.size() - 1, plant);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "addPlantAndArea#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void deletePlantAndArea(int plantId, final int position) {
+        showDialog();
+        PlantWebService.getInstance().deletePlantAndArea(plantId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "deletePlantAndArea#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "deletePlantAndArea#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        ToastUtils.show(getString(R.string.tips_delete_plant_area_success));
+                        mPlants.remove(position);
+                        mAdapter.notifyDataSetChanged();
+                    } else {
+                        ToastUtils.show(getString(R.string.tips_delete_plant_area_failure));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

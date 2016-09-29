@@ -3,7 +3,7 @@ package com.diesel.htweather.user.holder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.diesel.htweather.event.ShowAddPlantDialogEvent;
+import com.diesel.htweather.event.AddPlantAndAreaEvent;
 import com.diesel.htweather.user.model.AddPlantBean;
 import com.diesel.htweather.user.model.PlantBaseBean;
 
@@ -19,17 +19,17 @@ import org.greenrobot.eventbus.EventBus;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class AddPlantHolder extends RecyclerView.ViewHolder {
+public class AddPlantAndAreaHolder extends RecyclerView.ViewHolder {
 
     View mView;
 
-    public AddPlantHolder(final View itemView) {
+    public AddPlantAndAreaHolder(final View itemView) {
         super(itemView);
         mView = itemView;
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new ShowAddPlantDialogEvent());
+                EventBus.getDefault().post(new AddPlantAndAreaEvent());
             }
         });
     }

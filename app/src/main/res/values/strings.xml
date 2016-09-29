@@ -158,6 +158,8 @@
     <string name="tips_upload_picture_failed">图片提交失败，请重新选择</string>
     <string name="again_back_to_exit">再按一次退出程序...</string>
     <string name="cannot_get_image_source">未获取到图片资源，请重新选择</string>
+    <string name="tips_delete_plant_area_success">作物删除成功</string>
+    <string name="tips_delete_plant_area_failure">作物删除失败</string>
 
     <string-array name="occupation_ary">
         <item>会计</item>

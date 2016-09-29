@@ -98,6 +98,8 @@ public class Api {
     // 添加种植作物
     public static final String ADD_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addUserCropSet";
 
+    public static final String DELETE_PLANT_AND_AREA_URL = SERVER_URL + "/session/user/process.c?do=delUserCropSet";
+
     // 所有职业信息
     public static final String GET_JOB_LIST_URL = SERVER_URL + "/nologin/common/process.c?do=getAllJobList";
 

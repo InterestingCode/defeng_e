@@ -10,8 +10,8 @@ package com.diesel.htweather.event;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class ShowAddPlantDialogEvent {
+public class AddPlantAndAreaEvent {
 
-    public ShowAddPlantDialogEvent() {
+    public AddPlantAndAreaEvent() {
     }
 }

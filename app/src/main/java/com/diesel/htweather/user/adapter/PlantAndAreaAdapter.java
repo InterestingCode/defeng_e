@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.user.holder.AddPlantHolder;
+import com.diesel.htweather.user.holder.AddPlantAndAreaHolder;
 import com.diesel.htweather.user.holder.PlantAndAreaHolder;
 import com.diesel.htweather.user.model.AddPlantBean;
 import com.diesel.htweather.user.model.PlantAndAreaBean;
@@ -44,7 +44,7 @@ public class PlantAndAreaAdapter extends RecyclerView.Adapter {
             holder = new PlantAndAreaHolder(
                     inflater.inflate(R.layout.list_item_plant_and_area, parent, false));
         } else if (viewType == TYPE_SHOW_DELETE) {
-            holder = new AddPlantHolder(
+            holder = new AddPlantAndAreaHolder(
                     inflater.inflate(R.layout.list_item_add_plant, parent, false));
         } else {
             View emptyView = new View(parent.getContext());
@@ -61,7 +61,7 @@ public class PlantAndAreaAdapter extends RecyclerView.Adapter {
         if (viewType == TYPE_SHOW_LIST) {
             ((PlantAndAreaHolder) holder).bindData((PlantAndAreaBean) bean);
         } else if (viewType == TYPE_SHOW_DELETE) {
-            ((AddPlantHolder) holder).bindData((AddPlantBean) bean);
+            ((AddPlantAndAreaHolder) holder).bindData((AddPlantBean) bean);
         }
     }
 

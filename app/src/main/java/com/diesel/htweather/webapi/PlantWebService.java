@@ -85,7 +85,7 @@ public class PlantWebService extends WebService {
     /**
      * 添加种植作物
      */
-    public void addPlant(String plantName, String area, Callback callback) {
+    public void addPlantAndArea(String plantName, String area, Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.ADD_PLANT_URL)
@@ -93,6 +93,20 @@ public class PlantWebService extends WebService {
                 .addParams("appkey", getAppKey())
                 .addParams("cropName", plantName)
                 .addParams("area", area)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * @param ucId 种植作物设置ID
+     */
+    public void deletePlantAndArea(int ucId, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.DELETE_PLANT_AND_AREA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("ucId", String.valueOf(ucId))
                 .build()
                 .execute(callback);
     }

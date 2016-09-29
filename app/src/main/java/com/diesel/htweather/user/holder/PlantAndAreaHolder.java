@@ -7,8 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.event.DeletePlantAndAreaEvent;
 import com.diesel.htweather.user.model.PlantAndAreaBean;
 import com.diesel.htweather.user.model.PlantBaseBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +40,8 @@ public class PlantAndAreaHolder extends RecyclerView.ViewHolder {
 
     Resources mResources;
 
+    private PlantAndAreaBean mBean;
+
     public PlantAndAreaHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -44,6 +49,7 @@ public class PlantAndAreaHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(PlantAndAreaBean bean) {
+        mBean = bean;
         mPlantNameTv.setText(mResources.getString(R.string.plants_name_with_args, bean.plantName));
         mPlantAreaTv.setText(mResources.getString(R.string.plants_area_with_args, bean.plantArea));
         mDeleteBtn.setVisibility(bean.showStatus == PlantBaseBean.SHOW_STATUS_DELETE ? View.VISIBLE
@@ -52,6 +58,6 @@ public class PlantAndAreaHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.delete_btn)
     public void deletePlant() {
-
+        EventBus.getDefault().post(new DeletePlantAndAreaEvent(getAdapterPosition(), mBean));
     }
 }
