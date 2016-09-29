@@ -1,6 +1,5 @@
 package com.diesel.htweather;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -75,7 +74,7 @@ public class UserInfoFragment extends BaseFragment {
 
     private void bindUserInfo() {
         UserInfoBean userInfo = SharedPreferencesUtils.getInstance(getContext()).getUserInfo();
-        mUserAvatarView.setImageURI(Uri.parse(userInfo.userFace));
+        mUserAvatarView.setImageURI(userInfo.userFace);
         mUserNameTv.setText(userInfo.userNickname);
         String[] rank = {"普通会员", "种植大户", "信息员"};
         mUserRankTv.setText(rank[userInfo.userType]);
