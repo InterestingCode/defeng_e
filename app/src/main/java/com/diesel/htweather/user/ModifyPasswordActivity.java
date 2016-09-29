@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
@@ -90,7 +90,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                 Log.d(TAG, "modifyPassword#onResponse() " + response);
                 dismissDialog();
                 try {
-                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null == resJO) {
                         ToastUtils.show(getString(R.string.tips_request_failure));
                         return;

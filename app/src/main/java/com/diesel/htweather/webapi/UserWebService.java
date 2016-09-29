@@ -1,7 +1,6 @@
 package com.diesel.htweather.webapi;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.model.UserInfoBean;
@@ -10,18 +9,6 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.Call;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Comments：
@@ -293,7 +280,12 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
-    public void uploadPhoto(String path, Callback callback) {
+    /**
+     * 上传图片
+     *
+     * @param type 1-头像  2-实名认证  3--信息采集
+     */
+    public void uploadPhoto(int type, String path, Callback callback) {
         File file = new File(path);
         if (!file.exists()) {
             ToastUtils.show("图片不存在，请重新选择");
@@ -304,7 +296,8 @@ public class UserWebService extends WebService {
         OkHttpUtils
                 .post()
                 .addFile("file", fileName, file)
-                .url(Api.UPLOAD_FILE_URL+"&drivenType="+getDriveType()+"&appkey="+getAppKey())
+                .url(Api.UPLOAD_FILE_URL + "&drivenType=" + getDriveType() + "&appkey="
+                        + getAppKey() + "&type=" + type)
                 .build()
                 .execute(callback);
     }

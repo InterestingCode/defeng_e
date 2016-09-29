@@ -10,7 +10,7 @@ package com.diesel.htweather.response;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class BaseResJo {
+public class BaseResJO {
 
     /**
      * msg : 数据获取成功！

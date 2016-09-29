@@ -12,7 +12,7 @@ import java.util.List;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class MessageResJO extends BaseResJo {
+public class MessageResJO extends BaseResJO {
 
     /**
      * count : 1

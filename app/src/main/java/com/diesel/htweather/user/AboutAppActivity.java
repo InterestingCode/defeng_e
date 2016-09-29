@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.response.CheckVersionResJo;
+import com.diesel.htweather.response.CheckVersionResJO;
 import com.diesel.htweather.util.AppUtils;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
@@ -61,8 +61,8 @@ public class AboutAppActivity extends BaseActivity {
                 Log.d(TAG, "checkVersion#onResponse() " + response);
                 dismissDialog();
                 try {
-                    CheckVersionResJo resJo = FastJsonUtils
-                            .getSingleBean(response, CheckVersionResJo.class);
+                    CheckVersionResJO resJo = FastJsonUtils
+                            .getSingleBean(response, CheckVersionResJO.class);
                     if (null == resJo || null == resJo.obj) {
                         ToastUtils.show(getString(R.string.tips_request_failure));
                         return;

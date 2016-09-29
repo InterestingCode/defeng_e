@@ -12,7 +12,7 @@ import com.diesel.htweather.model.UserInfoBean;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class LoginResJo extends BaseResJo {
+public class LoginResJO extends BaseResJO {
 
     /**
      * userMobile : 18782941024

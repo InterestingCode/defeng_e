@@ -152,6 +152,7 @@
     <string name="tips_request_failure">请求失败，请重试</string>
     <string name="tips_connection_error">您的网络有问题，请稍后再试</string>
     <string name="tips_modify_user_info_success">您的个人信息修改成功</string>
+    <string name="tips_upload_picture_failed">图片提交失败，请重新选择</string>
     <string name="again_back_to_exit">再按一次退出程序...</string>
     <string name="cannot_get_image_source">未获取到图片资源，请重新选择</string>
 

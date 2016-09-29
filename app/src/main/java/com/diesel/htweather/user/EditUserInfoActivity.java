@@ -16,9 +16,11 @@ import android.widget.LinearLayout;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.DFApplication;
+import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.listener.RecyclerItemClickListener;
 import com.diesel.htweather.model.UserInfoBean;
-import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.response.BaseResJO;
+import com.diesel.htweather.response.JobResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.DialogUtils;
 import com.diesel.htweather.util.FastJsonUtils;
@@ -37,7 +39,6 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -91,13 +92,17 @@ public class EditUserInfoActivity extends BaseActivity {
 
     private OptionsPickerView mCityPickerView, mOccupationPickerView;
 
-    private ArrayList<String> mOccupations = new ArrayList<>();
+//    private ArrayList<String> mOccupations = new ArrayList<>();
 
     private CommonActionDialog mDialog;
 
     private List<ActionDialogAdapter.FontColor> mFontColorList = new ArrayList<>();
 
     private File mWatermarkFile = null;
+
+    private int mAreaId, mJobId;
+
+    private String mImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,6 +306,7 @@ public class EditUserInfoActivity extends BaseActivity {
                                     + DFApplication.countries.get(options1).get(option2)
                                     .get(options3).arName;
                             mUserAreaView.setContent(tx);
+                            mAreaId = DFApplication.countries.get(options1).get(option2).get(options3).arId;
                         }
                     });
         }
@@ -309,19 +315,21 @@ public class EditUserInfoActivity extends BaseActivity {
 
     private void showOccupationPickerView() {
         if (null == mOccupationPickerView) {
-            List<String> strings = Arrays
-                    .asList(getResources().getStringArray(R.array.occupation_ary));
-            mOccupations.addAll(strings);
+//            List<String> strings = Arrays
+//                    .asList(getResources().getStringArray(R.array.occupation_ary));
+//            mOccupations.addAll(strings);
             mOccupationPickerView = new OptionsPickerView(this);
             mOccupationPickerView.setTitle(getString(R.string.modify_occupation));
-            mOccupationPickerView.setPicker(mOccupations);
+            mOccupationPickerView.setPicker(DFApplication.jobs);
             mOccupationPickerView.setCyclic(true);
             mOccupationPickerView.setSelectOptions(0);
             mOccupationPickerView.setOnoptionsSelectListener(
                     new OptionsPickerView.OnOptionsSelectListener() {
                         @Override
                         public void onOptionsSelect(int options1, int option2, int options3) {
-                            mUserOccupationView.setContent(mOccupations.get(options1));
+                            JobResJO.JobEntity jobEntity = DFApplication.jobs.get(options1);
+                            mUserOccupationView.setContent(jobEntity.jobName);
+                            mJobId = jobEntity.jobId;
                         }
                     });
         }
@@ -335,10 +343,17 @@ public class EditUserInfoActivity extends BaseActivity {
         bean.userNickname = mUserAppellationView.getInputContent();
         bean.userSex = "男".equals(mUserGenderView.getInputContent()) ? 1 : 2;
         bean.birthday = mUserBirthView.getInputContent();
-        bean.arId = 0;
-        bean.jobId = 0;
         bean.address = mUserAddressView.getInputContent();
         bean.userMobile = mUserTelephoneView.getInputContent();
+        if (mAreaId > 0) {
+            bean.arId = 0;
+        }
+        if (mJobId > 0) {
+            bean.jobId = 0;
+        }
+        if (!TextUtils.isEmpty(mImagePath)) {
+            bean.userFace = mImagePath;
+        }
 
         UserWebService.getInstance().modifyUserInfo(bean, new StringCallback() {
             @Override
@@ -353,7 +368,7 @@ public class EditUserInfoActivity extends BaseActivity {
                 Log.d(TAG, "updateUserInfo#onResponse() " + response);
                 dismissDialog();
                 try {
-                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null == resJO) {
                         ToastUtils.show(getString(R.string.tips_request_failure));
                         return;
@@ -376,20 +391,19 @@ public class EditUserInfoActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0x01 && resultCode == RESULT_OK) { // 相机
-            String path = mWatermarkFile.getPath();
             String imagePath = mWatermarkFile.getAbsolutePath();
-            Log.d(TAG, "onActivityResult() #相机# imagePath="+imagePath+"; path="+path);
+            Log.d(TAG, "onActivityResult() #相机# imagePath=" + imagePath);
             if (TextUtils.isEmpty(imagePath)) {
                 ToastUtils.show(getString(R.string.cannot_get_image_source));
                 return;
             }
-            mUserAvatarView.setImageURI(Uri.parse("file://"+imagePath));
+            mUserAvatarView.setImageURI(Uri.parse("file://" + imagePath));
             uploadPicture(imagePath);
         } else if (requestCode == 0x02 && resultCode == RESULT_OK) { // 本地照片
             if (null != data && null != data.getData()) {
                 mUserAvatarView.setImageURI(data.getData());
                 String imagePath = PhotoUtils.getPath(mContext, data.getData());
-                Log.d(TAG, "onActivityResult() #照片# imagePath="+imagePath);
+                Log.d(TAG, "onActivityResult() #相册# imagePath=" + imagePath);
                 uploadPicture(imagePath);
             } else {
                 ToastUtils.show(getString(R.string.cannot_get_image_source));
@@ -398,17 +412,26 @@ public class EditUserInfoActivity extends BaseActivity {
     }
 
     private void uploadPicture(String path) {
-        UserWebService.getInstance().uploadPhoto(path, new StringCallback() {
+        UserWebService.getInstance().uploadPhoto(1, path, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "uploadPicture#onError() " + e.getMessage());
-                dismissDialog();
                 ToastUtils.show(getString(R.string.tips_request_failure));
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "uploadPicture#onResponse() " + response);
+                try {
+                    BaseResJO resJo = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJo && resJo.status == 0) {
+                        mImagePath = Api.SERVER_URL + resJo.msg;
+                    } else {
+                        ToastUtils.show(getString(R.string.tips_upload_picture_failed));
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "uploadPicture#onResponse() #Exception# " + e.getMessage());
+                }
             }
         });
     }

@@ -9,8 +9,7 @@ import android.widget.ImageView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.model.UserInfoBean;
-import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.SharedPreferencesUtils;
@@ -72,8 +71,8 @@ public class SystemSettingActivity extends BaseActivity {
                                     public void onResponse(String response, int id) {
                                         Log.d(TAG, "onCheckedChanged#onResponse() " + response);
                                         try {
-                                            BaseResJo resJO = FastJsonUtils
-                                                    .getSingleBean(response, BaseResJo.class);
+                                            BaseResJO resJO = FastJsonUtils
+                                                    .getSingleBean(response, BaseResJO.class);
                                             if (null == resJO) {
                                                 return;
                                             }

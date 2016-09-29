@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.response.BaseResJo;
+import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.StringUtils;
 import com.diesel.htweather.util.ToastUtils;
@@ -135,7 +135,7 @@ public class RegisterActivity extends BaseActivity {
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getAuthCode#onResponse() " + response);
                 try {
-                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null == resJO) {
                         return;
                     }
@@ -163,7 +163,7 @@ public class RegisterActivity extends BaseActivity {
                 Log.d(TAG, "verifyAuthCode#onResponse() " + response);
                 dismissDialog();
                 try {
-                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null == resJO) {
                         return;
                     }
@@ -194,7 +194,7 @@ public class RegisterActivity extends BaseActivity {
                 Log.d(TAG, "register#onResponse() " + response);
                 dismissDialog();
                 try {
-                    BaseResJo resJO = FastJsonUtils.getSingleBean(response, BaseResJo.class);
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null == resJO) {
                         ToastUtils.show(getString(R.string.tips_request_failure));
                         return;

@@ -10,7 +10,7 @@ package com.diesel.htweather.response;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class CheckVersionResJo extends BaseResJo {
+public class CheckVersionResJO extends BaseResJO {
 
     /**
      * status : 1

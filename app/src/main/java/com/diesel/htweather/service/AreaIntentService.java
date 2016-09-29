@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.db.AreaDao;
-import com.diesel.htweather.response.AreaResJo;
+import com.diesel.htweather.response.AreaResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.webapi.AreaWebService;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -73,21 +73,21 @@ public class AreaIntentService extends IntentService {
             public void onResponse(String response, int id) {
                 Log.d("AreaDao", "onResponse() " + response);
                 try {
-                    AreaResJo resJo = FastJsonUtils.getSingleBean(response, AreaResJo.class);
+                    AreaResJO resJo = FastJsonUtils.getSingleBean(response, AreaResJO.class);
                     if (null != resJo && resJo.status == 0 && null != resJo.data && !resJo.data.isEmpty()) {
-                        ArrayList<AreaResJo.ProvinceEntity> provinces = new ArrayList<>();
-                        ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity>> cities = new ArrayList<>();
-                        ArrayList<ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity.CountryEntity>>> countries = new ArrayList<>();
+                        ArrayList<AreaResJO.ProvinceEntity> provinces = new ArrayList<>();
+                        ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity>> cities = new ArrayList<>();
+                        ArrayList<ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity.CountryEntity>>> countries = new ArrayList<>();
                         for (int i = 0; i < resJo.data.size(); i ++) {
-                            AreaResJo.ProvinceEntity province = resJo.data.get(i);
+                            AreaResJO.ProvinceEntity province = resJo.data.get(i);
                             // city
-                            ArrayList<AreaResJo.ProvinceEntity.CityEntity> city = new ArrayList<>();
-                            ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity.CountryEntity>> country1 = new ArrayList<>();
+                            ArrayList<AreaResJO.ProvinceEntity.CityEntity> city = new ArrayList<>();
+                            ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity.CountryEntity>> country1 = new ArrayList<>();
                             for (int j = 0; j < province.faCityList.size(); j ++) {
-                                AreaResJo.ProvinceEntity.CityEntity c = province.faCityList.get(j);
+                                AreaResJO.ProvinceEntity.CityEntity c = province.faCityList.get(j);
                                 city.add(c);
                                 // country
-                                ArrayList<AreaResJo.ProvinceEntity.CityEntity.CountryEntity> country2 = new ArrayList<>();
+                                ArrayList<AreaResJO.ProvinceEntity.CityEntity.CountryEntity> country2 = new ArrayList<>();
                                 for (int k = 0; k < c.faAreaList.size(); k ++) {
                                     country2.add(c.faAreaList.get(k));
                                 }

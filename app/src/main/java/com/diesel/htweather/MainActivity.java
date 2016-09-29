@@ -1,5 +1,6 @@
 package com.diesel.htweather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,7 @@ import android.view.View;
 
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.map.BMapLocationClient;
+import com.diesel.htweather.service.JobIntentService;
 import com.diesel.htweather.util.BackToExitUtil;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
@@ -59,6 +61,7 @@ public class MainActivity extends BaseActivity {
 
 //        getUserInfo();
 
+        startService(new Intent(this, JobIntentService.class));
         mBMapLocationClient = new BMapLocationClient(getApplicationContext());
     }
 

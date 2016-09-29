@@ -15,7 +15,7 @@ import java.util.List;
  * @version 5.0.0
  */
 
-public class PlantResJo extends BaseResJo {
+public class PlantResJO extends BaseResJO {
 
     /**
      * count : 2

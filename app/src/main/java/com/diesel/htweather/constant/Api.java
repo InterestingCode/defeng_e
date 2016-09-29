@@ -12,7 +12,7 @@ package com.diesel.htweather.constant;
  */
 public class Api {
 
-    private static final String SERVER_URL = "http://183.230.182.143:7016";
+    public static final String SERVER_URL = "http://183.230.182.143:7016";
 
     // 登陆
     public static final String LOGIN_URL = SERVER_URL + "/nologin/personal/process.c?do=loginForNormal";

@@ -15,7 +15,7 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.event.DeletePlantEvent;
 import com.diesel.htweather.event.RecyclerItemEvent;
-import com.diesel.htweather.response.PlantCategoryResJo;
+import com.diesel.htweather.response.PlantCategoryResJO;
 import com.diesel.htweather.user.adapter.AddedPlantAdapter;
 import com.diesel.htweather.user.adapter.PlantCategoryAdapter;
 import com.diesel.htweather.user.model.PlantBean;
@@ -62,10 +62,10 @@ public class AddWatchPlantActivity extends BaseActivity {
     private PlantCategoryAdapter mAdapter;
 
         private List<PlantCategoryBean> mCategories = new ArrayList<>();
-//    private List<PlantCategoryResJo.PlantCategoryEntity> mCategories;
+//    private List<PlantCategoryResJO.PlantCategoryEntity> mCategories;
 
     private List<List<PlantBean>> mPlants = new ArrayList<>();
-//    private List<List<PlantResJo.PlantEntity>> mPlants = new ArrayList<>();
+//    private List<List<PlantResJO.PlantEntity>> mPlants = new ArrayList<>();
 
     private AddedPlantAdapter mAddedPlantAdapter;
 
@@ -112,8 +112,8 @@ public class AddWatchPlantActivity extends BaseActivity {
                 Log.d(TAG, "getPlantCategory#onResponse() " + response);
                 dismissDialog();
                 try {
-                    PlantCategoryResJo resJO = FastJsonUtils
-                            .getSingleBean(response, PlantCategoryResJo.class);
+                    PlantCategoryResJO resJO = FastJsonUtils
+                            .getSingleBean(response, PlantCategoryResJO.class);
                     if (null != resJO && resJO.status == 0) {
 
                     } else {

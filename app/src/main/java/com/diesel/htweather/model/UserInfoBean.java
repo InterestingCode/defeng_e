@@ -1,7 +1,5 @@
 package com.diesel.htweather.model;
 
-import com.diesel.htweather.response.BaseResJo;
-
 /**
  * Comments：
  *

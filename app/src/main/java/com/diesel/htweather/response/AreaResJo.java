@@ -12,7 +12,7 @@ import java.util.List;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class AreaResJo extends BaseResJo {
+public class AreaResJO extends BaseResJO {
 
     /**
      * data : [{"firstChar":"","zipCode":"","jianpin":"","lng":"","cityCode":"","faCityList":[{"firstChar":"","zipCode":"","ctId":1,"jianpin":"","lng":"","cityCode":"","ctName":"重庆","pinyin":"","pvId":1,"locationId":"","locationCode":"","shortName":"","faAreaList":[{"firstChar":"","arId":1,"zipCode":"","ctId":1,"jianpin":"","lng":"","cityCode":"","arName":"江北区","isOpen":1,"pinyin":"","locationId":"","locationCode":"","shortName":"","isHot":2,"lat":""},{"firstChar":"","arId":2,"zipCode":"","ctId":1,"jianpin":"","lng":"","cityCode":"","arName":"渝北区","isOpen":2,"pinyin":"","locationId":"","locationCode":"","shortName":"","isHot":1,"lat":""}],"lat":""}],"pinyin":"","pvName":"重庆市","pvId":1,"locationId":"","locationCode":"","shortName":"","lat":""},{"firstChar":"","zipCode":"","jianpin":"","lng":"","cityCode":"","faCityList":[{"firstChar":"","zipCode":"","ctId":2,"jianpin":"","lng":"","cityCode":"","ctName":"四川","pinyin":"","pvId":2,"locationId":"","locationCode":"","shortName":"","faAreaList":[{"firstChar":"","arId":3,"zipCode":"","ctId":2,"jianpin":"","lng":"","cityCode":"","arName":"成都","isOpen":2,"pinyin":"","locationId":"","locationCode":"","shortName":"","isHot":2,"lat":""},{"firstChar":"","arId":4,"zipCode":"","ctId":2,"jianpin":"","lng":"","cityCode":"","arName":"南充","isOpen":2,"pinyin":"","locationId":"","locationCode":"","shortName":"","isHot":2,"lat":""}],"lat":""}],"pinyin":"","pvName":"四川省","pvId":2,"locationId":"","locationCode":"","shortName":"","lat":""}]

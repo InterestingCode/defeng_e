@@ -7,7 +7,8 @@ import android.provider.Settings;
 
 import com.diesel.htweather.constant.Consts;
 import com.diesel.htweather.db.DBHelper;
-import com.diesel.htweather.response.AreaResJo;
+import com.diesel.htweather.response.AreaResJO;
+import com.diesel.htweather.response.JobResJO;
 import com.diesel.htweather.service.AreaIntentService;
 import com.diesel.htweather.util.CrashHandler;
 import com.diesel.htweather.util.Drawables;
@@ -46,11 +47,13 @@ public class DFApplication extends Application {
 //
 //    public static ArrayList<ArrayList<ArrayList<RegionObject>>> countries;
 
-    public static ArrayList<AreaResJo.ProvinceEntity> provinces;
+    public static ArrayList<AreaResJO.ProvinceEntity> provinces;
 
-    public static ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity>> cities;
+    public static ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity>> cities;
 
-    public static ArrayList<ArrayList<ArrayList<AreaResJo.ProvinceEntity.CityEntity.CountryEntity>>> countries;
+    public static ArrayList<ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity.CountryEntity>>> countries;
+
+    public static ArrayList<JobResJO.JobEntity> jobs;
 
     public static DFApplication getInstance() {
         return mInstance;

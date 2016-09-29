@@ -15,7 +15,7 @@ import java.util.List;
  * @version 5.0.0
  */
 
-public class PlantCategoryResJo extends BaseResJo {
+public class PlantCategoryResJO extends BaseResJO {
 
 
     /**

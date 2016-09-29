@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.model.UserInfoBean;
-import com.diesel.htweather.response.LoginResJo;
+import com.diesel.htweather.response.LoginResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.SharedPreferencesUtils;
@@ -115,7 +115,7 @@ public class UserInfoFragment extends BaseFragment {
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getUserInfo#onResponse() " + response);
                 try {
-                    LoginResJo resJO = FastJsonUtils.getSingleBean(response, LoginResJo.class);
+                    LoginResJO resJO = FastJsonUtils.getSingleBean(response, LoginResJO.class);
                     if (null != resJO && null != resJO.obj && resJO.status == 0) {
                         UserInfoBean userInfo = SharedPreferencesUtils.getInstance(getContext())
                                 .getUserInfo();

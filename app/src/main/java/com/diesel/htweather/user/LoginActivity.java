@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.model.UserInfoBean;
-import com.diesel.htweather.response.LoginResJo;
+import com.diesel.htweather.response.LoginResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.SharedPreferencesUtils;
@@ -77,7 +77,7 @@ public class LoginActivity extends BaseActivity {
                 Log.d(TAG, "login#onResponse() " + response);
                 dismissDialog();
                 try {
-                    LoginResJo resJO = FastJsonUtils.getSingleBean(response, LoginResJo.class);
+                    LoginResJO resJO = FastJsonUtils.getSingleBean(response, LoginResJO.class);
                     if (null != resJO && null != resJO.obj && resJO.status == 0) {
                         UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext)
                                 .getUserInfo();
