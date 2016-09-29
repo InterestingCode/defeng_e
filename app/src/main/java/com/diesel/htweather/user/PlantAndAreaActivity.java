@@ -191,6 +191,8 @@ public class PlantAndAreaActivity extends BaseActivity {
                         plant.plantArea = area;
                         mPlants.add(mPlants.size() - 1, plant);
                         mAdapter.notifyDataSetChanged();
+
+                        getPlants();
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "addPlantAndArea#onResponse() #Exception# " + e.getMessage());
