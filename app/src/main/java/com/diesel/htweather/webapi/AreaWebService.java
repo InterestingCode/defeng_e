@@ -130,7 +130,7 @@ public class AreaWebService extends WebService {
                 .url(Api.CANCEL_FOCUS_AREA_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
-                .addParams("arId", areaId)
+                .addParams("uaId", areaId)
                 .build()
                 .execute(callback);
     }

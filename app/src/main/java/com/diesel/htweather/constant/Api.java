@@ -57,10 +57,10 @@ public class Api {
     public static final String CHECK_VERSION_URL = SERVER_URL + "/nologin/common/process.c?do=getVersion";
 
     // 帮助中心-常见问题
-    public static final String COMMON_PROBLEMS_URL = SERVER_URL + "/nologin/apppage/process.c?do=FAQ";
+    public static final String COMMON_PROBLEMS_URL = SERVER_URL + "/nologin/apppage/process.c?do=FAQ&drivenType=02&appkey=b66a5c46acf46c10a601bc8cabe4c074";
 
     // 帮助中心-操作指南
-    public static final String OPERATION_GUIDE_URL = SERVER_URL + "/nologin/apppage/process.c?do=useGuide";
+    public static final String OPERATION_GUIDE_URL = SERVER_URL + "/nologin/apppage/process.c?do=useGuide&drivenType=02&appkey=b66a5c46acf46c10a601bc8cabe4c074";
 
     // 获取用户已关注区域
     public static final String GET_FOCUS_AREA_URL = SERVER_URL + "/session/user/process.c?do=findFocusAreaByUserId";

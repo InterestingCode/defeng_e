@@ -11,6 +11,7 @@
         android:layout_centerVertical="true"
         android:background="@drawable/shape_white_bg_with_radius_and_yellow_stroke"
         android:gravity="center"
+        android:text="大白菜"
         android:paddingLeft="@dimen/px30"
         android:paddingRight="@dimen/px30"
         android:textColor="@color/high_temperature_line"

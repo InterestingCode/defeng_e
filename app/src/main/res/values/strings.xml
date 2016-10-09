@@ -38,6 +38,7 @@
     <string name="manage_weather_city">天气地区管理</string>
     <string name="add_weather_city">新增区域</string>
     <string name="choose_area">区域选择</string>
+    <string name="focus_area_with_args">%1$s - %2$s - %3$s</string>
 
     <string name="my_message">我的消息</string>
     <string name="system_message">系统消息</string>

@@ -14,7 +14,7 @@ import com.diesel.htweather.farming.TruthDataSettingActivity;
 import com.diesel.htweather.farming.WeatherTrendActivity;
 import com.diesel.htweather.user.AboutAppActivity;
 import com.diesel.htweather.user.ActualFarmingSettingActivity;
-import com.diesel.htweather.user.AddWatchPlantActivity;
+import com.diesel.htweather.user.AddCropsActivity;
 import com.diesel.htweather.user.CommonWebActivity;
 import com.diesel.htweather.user.EditUserInfoActivity;
 import com.diesel.htweather.user.FeedbackActivity;
@@ -139,7 +139,7 @@ public class ActivityNav {
     }
 
     public void startAddWatchPlantActivity(Context context, int areaId) {
-        Intent intent = new Intent(context, AddWatchPlantActivity.class);
+        Intent intent = new Intent(context, AddCropsActivity.class);
         IntentExtras.setAreaId(intent, areaId);
         context.startActivity(intent);
     }

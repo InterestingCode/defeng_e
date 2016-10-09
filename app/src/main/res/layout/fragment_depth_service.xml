@@ -6,23 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_header_height"
-        android:background="@color/bg_top_header">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="深度服务"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/font_36px" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,20 +17,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/weather_page_lr_margin"
                     android:layout_marginRight="@dimen/weather_page_lr_margin"
                     android:layout_marginTop="@dimen/weather_page_lr_margin"
-                    android:background="@drawable/bg_farming_info"
+                    android:background="@drawable/bg_crop_parameters"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvDepthFacilities"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/px62"
+                        android:layout_height="@dimen/px60"
                         android:layout_marginLeft="@dimen/px20"
                         android:layout_marginRight="@dimen/px20"
                         android:drawableLeft="@drawable/ic_depth_location"
@@ -55,22 +38,19 @@
                         android:gravity="center_vertical"
                         android:text="四川省成都市崇州市 水稻 深度服务1"
                         android:textColor="@color/black_333"
-                        android:textSize="@dimen/font_30px" />
-
-                    <View style="@style/BaseHorizontalLine" />
+                        android:textSize="@dimen/font_24px" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingBottom="@dimen/px30"
-                        android:paddingLeft="@dimen/px20"
-                        android:paddingRight="@dimen/px20"
-                        android:paddingTop="@dimen/px20">
+                        android:paddingBottom="@dimen/px25"
+                        android:paddingLeft="@dimen/px25"
+                        android:paddingTop="@dimen/px25">
 
                         <ImageView
-                            android:layout_width="@dimen/px300"
-                            android:layout_height="@dimen/px300"
+                            android:layout_width="@dimen/px270"
+                            android:layout_height="@dimen/px270"
                             android:layout_marginRight="@dimen/px20"
                             android:scaleType="centerCrop"
                             android:src="@drawable/test_depth" />
@@ -84,24 +64,49 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_gray_bg_with_radius"
+                                android:background="@drawable/shape_gray_f0f0f0_bg_with_radius"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/px10">
+                                android:paddingBottom="@dimen/px5"
+                                android:paddingLeft="@dimen/px15"
+                                android:paddingRight="@dimen/px15"
+                                android:paddingTop="@dimen/px5">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="种植作物"
-                                    android:textColor="@color/main_tab_txt_color_select"
-                                    android:textSize="@dimen/font_20px" />
+                                    style="@style/BaseText.green_24px"
+                                    android:text="种植作物" />
 
                                 <TextView
+                                    style="@style/BaseText.gray666_24px"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
                                     android:gravity="right"
-                                    android:text="超级杂交稻"
-                                    android:textColor="@color/gray_666"
-                                    android:textSize="@dimen/font_20px" />
+                                    android:maxLines="1"
+                                    android:text="超级杂交稻" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/px7"
+                                android:background="@drawable/shape_gray_f0f0f0_bg_with_radius"
+                                android:orientation="horizontal"
+                                android:paddingBottom="@dimen/px5"
+                                android:paddingLeft="@dimen/px15"
+                                android:paddingRight="@dimen/px15"
+                                android:paddingTop="@dimen/px5">
+
+                                <TextView
+                                    style="@style/BaseText.green_24px"
+                                    android:text="作物品种" />
+
+                                <TextView
+                                    style="@style/BaseText.gray666_24px"
+                                    android:layout_width="match_parent"
+                                    android:ellipsize="end"
+                                    android:gravity="right"
+                                    android:maxLines="1"
+                                    android:text="两优1128" />
 
                             </LinearLayout>
 
@@ -113,143 +118,99 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_gray_bg_with_radius"
+                                android:layout_marginTop="@dimen/px7"
+                                android:background="@drawable/shape_gray_f0f0f0_bg_with_radius"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/px10">
+                                android:paddingBottom="@dimen/px5"
+                                android:paddingLeft="@dimen/px15"
+                                android:paddingRight="@dimen/px15"
+                                android:paddingTop="@dimen/px5">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="作物品种"
-                                    android:textColor="@color/main_tab_txt_color_select"
-                                    android:textSize="@dimen/font_20px" />
+                                    style="@style/BaseText.green_24px"
+                                    android:text="作物特性" />
 
                                 <TextView
+                                    style="@style/BaseText.gray666_24px"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
                                     android:gravity="right"
-                                    android:text="两优1128"
-                                    android:textColor="@color/gray_666"
-                                    android:textSize="@dimen/font_20px" />
-
+                                    android:maxLines="1"
+                                    android:text="晚熟稻" />
                             </LinearLayout>
-
-                            <View
-                                android:layout_width="@dimen/px1"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_gray_bg_with_radius"
+                                android:layout_marginTop="@dimen/px7"
+                                android:background="@drawable/shape_gray_f0f0f0_bg_with_radius"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/px10">
+                                android:paddingBottom="@dimen/px5"
+                                android:paddingLeft="@dimen/px15"
+                                android:paddingRight="@dimen/px15"
+                                android:paddingTop="@dimen/px5">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="作物特性"
-                                    android:textColor="@color/main_tab_txt_color_select"
-                                    android:textSize="@dimen/font_20px" />
+                                    style="@style/BaseText.green_24px"
+                                    android:text="播种期" />
 
                                 <TextView
+                                    style="@style/BaseText.gray666_24px"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
                                     android:gravity="right"
-                                    android:text="晚熟稻"
-                                    android:textColor="@color/gray_666"
-                                    android:textSize="@dimen/font_20px" />
-
+                                    android:maxLines="1"
+                                    android:text="2016-01-12" />
                             </LinearLayout>
-
-                            <View
-                                android:layout_width="@dimen/px1"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_gray_bg_with_radius"
+                                android:layout_marginTop="@dimen/px7"
+                                android:background="@drawable/shape_gray_f0f0f0_bg_with_radius"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/px10">
+                                android:paddingBottom="@dimen/px5"
+                                android:paddingLeft="@dimen/px15"
+                                android:paddingRight="@dimen/px15"
+                                android:paddingTop="@dimen/px5">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="播种期"
-                                    android:textColor="@color/main_tab_txt_color_select"
-                                    android:textSize="@dimen/font_20px" />
+                                    style="@style/BaseText.green_24px"
+                                    android:text="定植期" />
 
                                 <TextView
+                                    style="@style/BaseText.gray666_24px"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
                                     android:gravity="right"
-                                    android:text="2016-01-12"
-                                    android:textColor="@color/gray_666"
-                                    android:textSize="@dimen/font_20px" />
-
+                                    android:text="2016-01-12" />
                             </LinearLayout>
-
-                            <View
-                                android:layout_width="@dimen/px1"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_gray_bg_with_radius"
+                                android:layout_marginTop="@dimen/px7"
+                                android:background="@drawable/shape_gray_f0f0f0_bg_with_radius"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:orientation="horizontal"
-                                android:padding="@dimen/px10">
+                                android:paddingBottom="@dimen/px5"
+                                android:paddingLeft="@dimen/px15"
+                                android:paddingRight="@dimen/px15"
+                                android:paddingTop="@dimen/px5">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="定植期"
-                                    android:textColor="@color/main_tab_txt_color_select"
-                                    android:textSize="@dimen/font_20px" />
+                                    android:id="@+id/textView"
+                                    style="@style/BaseText.green_24px"
+                                    android:text="种植面积亩" />
 
                                 <TextView
+                                    style="@style/BaseText.gray666_24px"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
                                     android:gravity="right"
-                                    android:text="2016-01-12"
-                                    android:textColor="@color/gray_666"
-                                    android:textSize="@dimen/font_20px" />
-
+                                    android:maxLines="1"
+                                    android:text="100" />
                             </LinearLayout>
-
-                            <View
-                                android:layout_width="@dimen/px1"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/shape_gray_bg_with_radius"
-                                android:orientation="horizontal"
-                                android:padding="@dimen/px10">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="种植面积亩"
-                                    android:textColor="@color/main_tab_txt_color_select"
-                                    android:textSize="@dimen/font_20px" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="right"
-                                    android:text="100"
-                                    android:textColor="@color/gray_666"
-                                    android:textSize="@dimen/font_20px" />
-
-                            </LinearLayout>
-
 
                         </LinearLayout>
 
@@ -257,16 +218,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/px10"
+                            android:padding="@dimen/px10"
                             android:src="@drawable/ic_right_gray_arrow" />
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/px330"
+                    android:layout_height="@dimen/px350"
                     android:layout_marginLeft="@dimen/weather_page_lr_margin"
                     android:layout_marginRight="@dimen/weather_page_lr_margin"
                     android:layout_marginTop="@dimen/weather_page_lr_margin"
@@ -294,14 +253,16 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/px15">
+                        android:paddingLeft="@dimen/px15"
+                        android:paddingRight="@dimen/px10"
+                        android:paddingTop="@dimen/px30">
 
                         <TextView
                             android:id="@+id/tvLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="崇州市"
-                            android:textColor="@color/gray_666"
+                            android:textColor="@color/black_333"
                             android:textSize="@dimen/font_30px" />
 
                         <TextView
@@ -314,27 +275,22 @@
                             android:textSize="@dimen/font_30px" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/BaseText.gray999_24px"
                             android:layout_alignParentRight="true"
-                            android:text="2016.08.28"
-                            android:textColor="@color/gray_999"
-                            android:textSize="@dimen/font_30px" />
+                            android:text="2016.08.28" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_below="@+id/tvLocation"
-                            android:layout_marginTop="@dimen/px20"
+                            android:layout_marginTop="@dimen/px30"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="@dimen/px10"
                             android:text="棚内温度30~35℃,与昨天同期相比,棚内温度偏高0.5~1.5℃;近段时间平均偏高0.9~1.1℃.棚内大部分区域温度不足60%,其余大部分60%~65%之间;棚内日照10小时,相较昨天的日照有所增加,平易日照每日11小时。与常年同期相比,全省除本区域北部及西部部分区域偏多.."
-                            android:textColor="@color/gray_666"
-                            android:textSize="@dimen/font_28px" />
-
+                            android:textColor="@color/black_333"
+                            android:textSize="@dimen/font_24px" />
                     </RelativeLayout>
-
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -503,7 +459,8 @@
             android:layout_height="@dimen/px128"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/px200"
-            android:background="@drawable/ic_depth_log">
+            android:background="@drawable/ic_depth_log"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/px36"
@@ -514,6 +471,21 @@
 
         </RelativeLayout>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="深度服务"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
     </RelativeLayout>
 
 

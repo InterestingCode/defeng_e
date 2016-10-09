@@ -33,16 +33,15 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        boolean needEnterGuidePage = SharedPreferencesUtils.getInstance(this).needEnterGuidePage();
-        mHandler.sendEmptyMessageDelayed(needEnterGuidePage ? 1 : 0, 3000);
 
         UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext).getUserInfo();
         if (!TextUtils.isEmpty(userInfo.userMobile) && !TextUtils.isEmpty(userInfo.password)) {
             Log.d(TAG, "onCreate() " + userInfo.toString());
             UserWebService.getInstance().login(userInfo.userMobile, userInfo.password, null);
+            mHandler.sendEmptyMessageDelayed(0, 3000);
         } else {
-            mHandler.removeCallbacksAndMessages(null);
-            mHandler.sendEmptyMessageDelayed(2, 3000);
+            boolean needEnterGuidePage = SharedPreferencesUtils.getInstance(this).needEnterGuidePage();
+            mHandler.sendEmptyMessageDelayed(needEnterGuidePage ? 1 : 2, 3000);
         }
     }
 

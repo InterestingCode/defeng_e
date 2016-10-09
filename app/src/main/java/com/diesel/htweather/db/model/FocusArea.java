@@ -1,10 +1,7 @@
 package com.diesel.htweather.db.model;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.diesel.htweather.farming.holder.FocusAreaHolder;
+import com.diesel.htweather.user.model.PlantBaseBean;
 
 /**
  * Comments：
@@ -19,15 +16,49 @@ import java.util.List;
  * @version 5.0.0
  */
 
-public final class FocusArea {
+public final class FocusArea extends PlantBaseBean {
 
-    public static List<FocusArea> getFocusArea() {
-        List<FocusArea> focusAreas = new ArrayList<>();
+    public String provinceCode = "";
+    public String provinceName = "";
+    public String cityCode = "";
+    public String cityName = "";
+    public String countryCode = "";
+    public String countryName = "";
+    public String data = "";
 
-        Cursor cursor = null;
-        SQLiteDatabase db = null;
-
-        return focusAreas;
+    @Override
+    public String toString() {
+        return "FocusArea{" +
+                "provinceCode='" + provinceCode + '\'' +
+                ", provinceName='" + provinceName + '\'' +
+                ", cityCode='" + cityCode + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", countryName='" + countryName + '\'' +
+                ", data='" + data + '\'' +
+                '}';
     }
+
+    //    /**
+//     * 以下方法仅在{@link FocusAreaHolder}使用
+//     */
+//
+//    public static final int SHOW_STATUS_LIST = 101;
+//
+//    public static final int SHOW_STATUS_DELETE = 102;
+//
+//    public int showStatus = SHOW_STATUS_LIST;
+//
+//    public void changeToList() {
+//        showStatus = SHOW_STATUS_LIST;
+//    }
+//
+//    public void changeToDelete() {
+//        showStatus = SHOW_STATUS_DELETE;
+//    }
+//
+//    public void changeToListStatus(boolean showList) {
+//        showStatus = showList ? SHOW_STATUS_LIST : SHOW_STATUS_DELETE;
+//    }
 
 }

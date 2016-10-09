@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.response.PlantCategoryResJO;
 import com.diesel.htweather.user.holder.AddedPlantHolder;
 import com.diesel.htweather.user.model.PlantBean;
 
@@ -22,9 +23,9 @@ import java.util.List;
  */
 public class AddedPlantAdapter extends RecyclerView.Adapter<AddedPlantHolder> {
 
-    private List<PlantBean> mAddedPlants;
+    private List<PlantCategoryResJO.CategoryEntity.CategoryListEntity> mAddedPlants;
 
-    public AddedPlantAdapter(List<PlantBean> addedPlants) {
+    public AddedPlantAdapter(List<PlantCategoryResJO.CategoryEntity.CategoryListEntity> addedPlants) {
         mAddedPlants = addedPlants;
     }
 

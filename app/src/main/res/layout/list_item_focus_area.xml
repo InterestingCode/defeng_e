@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px100"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/px20"
+    android:paddingRight="@dimen/px20">
+
+    <TextView
+        android:id="@+id/city_three_tv"
+        style="@style/WeatherCityTextStyle"
+        android:text="江苏省-南京市-雨花区" />
+
+    <ImageView
+        android:id="@+id/arrow_or_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/px24"
+        android:paddingRight="@dimen/px24"
+        android:src="@drawable/ic_delete_weather_city" />
+
+</LinearLayout>

@@ -63,12 +63,12 @@ public class ActualFarmingSettingActivity extends BaseActivity {
 
                         @Override
                         public void onOptionsSelect(int options1, int option2, int options3) {
-                            // 返回的分别是三个级别的选中位置
-                            String tx = DFApplication.provinces.get(options1).pvName + "-"
-                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
-                                    + DFApplication.countries.get(options1).get(option2)
-                                    .get(options3).arName;
-                            ToastUtils.show("添加 \"" + tx + "\" 成功");
+//                            // 返回的分别是三个级别的选中位置
+//                            String tx = DFApplication.provinces.get(options1).pvName + "-"
+//                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
+//                                    + DFApplication.countries.get(options1).get(option2)
+//                                    .get(options3).arName;
+//                            ToastUtils.show("添加 \"" + tx + "\" 成功");
                             mAreaId = DFApplication.countries.get(options1).get(option2).get(options3).arId;
                             ViewUtils.visible(mWatchPlantsTv);
                         }

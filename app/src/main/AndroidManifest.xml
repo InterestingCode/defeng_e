@@ -64,6 +64,7 @@
         <activity android:name=".user.RealNameAuthActivity" />
         <activity android:name=".user.GatherDataActivity" android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name=".user.ActualFarmingSettingActivity" />
+        <activity android:name=".user.AddCropsActivity" />
         <activity android:name=".user.AddWatchPlantActivity" />
         <activity android:name=".user.AboutAppActivity" />
         <activity android:name=".user.FeedbackActivity" />
