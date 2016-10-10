@@ -160,7 +160,14 @@ public class ActivityNav {
     }
 
     public void startLoginActivity(Context context) {
+        startLoginActivity(context, false);
+    }
+
+    public void startLoginActivity(Context context, boolean clearTop) {
         Intent intent = new Intent(context, LoginActivity.class);
+        if (clearTop) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(intent);
     }
 

@@ -38,6 +38,9 @@ public class SharedPreferencesUtils {
         mVersionName = AppUtils.getVersionName(ctx);
     }
 
+    public void clearCaches() {
+        mShared.edit().clear().apply();
+    }
 
     public boolean getBoolean(String key, boolean defValue) {
         return mShared.getBoolean(key, defValue);
@@ -46,7 +49,6 @@ public class SharedPreferencesUtils {
     public void putBoolean(String key, boolean value) {
         mShared.edit().putBoolean(key, value).apply();
     }
-
 
     public float getFloat(String key, float defValue) {
         return mShared.getFloat(key, defValue);

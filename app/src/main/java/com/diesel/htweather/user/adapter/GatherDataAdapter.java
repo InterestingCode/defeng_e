@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.response.GatherDataResJO;
 import com.diesel.htweather.user.holder.GatherDataHolder;
-import com.diesel.htweather.user.model.GatherDataBean;
 
 import java.util.List;
 
@@ -22,17 +22,16 @@ import java.util.List;
  */
 public class GatherDataAdapter extends RecyclerView.Adapter<GatherDataHolder> {
 
-    private List<GatherDataBean> mList;
+    private List<GatherDataResJO.GatherDataEntity> mList;
 
-    public GatherDataAdapter(List<GatherDataBean> list) {
+    public GatherDataAdapter(List<GatherDataResJO.GatherDataEntity> list) {
         mList = list;
     }
 
     @Override
     public GatherDataHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        GatherDataHolder holder = new GatherDataHolder(LayoutInflater.from(parent.getContext())
+        return new GatherDataHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_gather_data, parent, false));
-        return holder;
     }
 
     @Override

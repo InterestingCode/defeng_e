@@ -109,6 +109,9 @@ public class Api {
     // 获取提醒消息
     public static final String GET_NOTIFY_MESSAGE_LIST_URL = SERVER_URL + "/session/user/process.c?do=getUserWarnMsg";
 
+    // 获取采集信息列表
+    public static final String GET_GATHER_DATA_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getCollContentList";
+
     // 首页
     public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";
 

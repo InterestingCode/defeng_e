@@ -16,6 +16,7 @@ import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.EditUserInfoView;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
@@ -101,7 +102,13 @@ public class SystemSettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.clear_cache_view:
+                Fresco.getImagePipeline().clearCaches();
+                Fresco.getImagePipeline().clearDiskCaches();
+                Fresco.getImagePipeline().clearMemoryCaches();
+                SharedPreferencesUtils.getInstance(mContext).clearCaches();
                 ToastUtils.show(getString(R.string.tips_cache_had_cleared));
+                ActivityNav.getInstance().startLoginActivity(mActivity, true);
+                finish();
                 break;
             case R.id.modify_password_view:
                 ActivityNav.getInstance().startModifyPasswordActivity(this);
@@ -116,7 +123,7 @@ public class SystemSettingActivity extends BaseActivity {
                 ActivityNav.getInstance().startAboutAppActivity(this);
                 break;
             case R.id.exit_app_btn:
-                ActivityNav.getInstance().startLoginActivity(this);
+                ActivityNav.getInstance().startLoginActivity(mActivity, true);
                 finish();
                 break;
         }

@@ -3,17 +3,19 @@ package com.diesel.htweather.user.holder;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.response.GatherDataResJO;
 import com.diesel.htweather.user.adapter.GatherDataPhotoAdapter;
-import com.diesel.htweather.user.model.GatherDataBean;
-import com.diesel.htweather.util.ImageUrlUtils;
+import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -67,10 +69,10 @@ public class GatherDataHolder extends RecyclerView.ViewHolder {
         super(itemView);
         ButterKnife.bind(this, itemView);
 
-        // TODO 测试代码
-        mPhotos.add(ImageUrlUtils.getImageUrls()[0]);
-        mPhotos.add(ImageUrlUtils.getImageUrls()[1]);
-        mPhotos.add(ImageUrlUtils.getImageUrls()[2]);
+//        // TODO 测试代码
+//        mPhotos.add(ImageUrlUtils.getImageUrls()[0]);
+//        mPhotos.add(ImageUrlUtils.getImageUrls()[1]);
+//        mPhotos.add(ImageUrlUtils.getImageUrls()[2]);
 
         Context context = itemView.getContext();
         mRecyclerView.setLayoutManager(
@@ -83,8 +85,23 @@ public class GatherDataHolder extends RecyclerView.ViewHolder {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public void bindData(GatherDataBean bean) {
-
+    public void bindData(GatherDataResJO.GatherDataEntity bean) {
+        mUserAvatarView.setImageURI(bean.userFace);
+        mUserNameTv.setText(bean.userNickName);
+        mUserRankTv.setText(bean.userType);
+        mUserAddrTv.setText(bean.locationAddr);
+        mPublishTimeTv.setText(bean.creatTime);
+        mGatherDataContentTv.setText(bean.content);
+        if (!TextUtils.isEmpty(bean.imgPaths)) {
+            ViewUtils.visible(mRecyclerView);
+            String[] photos = bean.imgPaths.split(";");
+            mPhotos.addAll(Arrays.asList(photos));
+            mAdapter.notifyDataSetChanged();
+        } else {
+            ViewUtils.gone(mRecyclerView);
+        }
+        mBrowseNumberTv.setText(itemView.getResources().getString(R.string.browse_number, bean.counts));
+        mCommentNumberTv.setText(itemView.getResources().getString(R.string.comment_number, bean.ups));
     }
 
     @OnClick(R.id.comment_btn)
