@@ -8,7 +8,6 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.util.ActivityNav;
-import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.pickerview.OptionsPickerView;
 
@@ -43,6 +42,7 @@ public class ActualFarmingSettingActivity extends BaseActivity {
                 break;
             case R.id.watch_plants_tv:
                 ActivityNav.getInstance().startAddWatchPlantActivity(this, mAreaId);
+                ViewUtils.gone(mWatchPlantsTv);
                 break;
         }
     }

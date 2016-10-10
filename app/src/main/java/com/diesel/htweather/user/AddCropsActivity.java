@@ -10,8 +10,10 @@ import android.widget.LinearLayout;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.event.AddCropsEvent;
 import com.diesel.htweather.event.DeletePlantEvent;
 import com.diesel.htweather.event.RecyclerItemEvent;
+import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.response.PlantCategoryResJO;
 import com.diesel.htweather.user.adapter.AddCropsAdapter;
 import com.diesel.htweather.user.adapter.AddedPlantAdapter;
@@ -58,21 +60,21 @@ public class AddCropsActivity extends BaseActivity {
 
     private AddCropsAdapter mCropsAdapter;
 
-    private AddedPlantAdapter mAddedPlantAdapter;
+    private AddedPlantAdapter mAddedCropsAdapter;
 
     private List<PlantCategoryBean> mCategories = new ArrayList<>();
 
     private List<List<PlantCategoryResJO.CategoryEntity.CategoryListEntity>> mCropList = new ArrayList<>();
 
-    private List<PlantCategoryResJO.CategoryEntity.CategoryListEntity> mAddedPlants = new ArrayList<>();
+    private List<PlantCategoryResJO.CategoryEntity.CategoryListEntity> mAddedCrops = new ArrayList<>();
 
     private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
             super.onChanged();
-            if (null != mAddedPlantAdapter) {
+            if (null != mAddedCropsAdapter) {
                 mAddedPlantsLayout.setVisibility(
-                        mAddedPlantAdapter.getItemCount() > 0 ? View.VISIBLE : View.GONE);
+                        mAddedCropsAdapter.getItemCount() > 0 ? View.VISIBLE : View.GONE);
             }
         }
     };
@@ -143,14 +145,14 @@ public class AddCropsActivity extends BaseActivity {
     }
 
     private void initAddedPlants() {
-        mAddedPlantAdapter = new AddedPlantAdapter(mAddedPlants);
-        mAddedPlantAdapter.registerAdapterDataObserver(mObserver);
+        mAddedCropsAdapter = new AddedPlantAdapter(mAddedCrops);
+        mAddedCropsAdapter.registerAdapterDataObserver(mObserver);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mAddedPlantsView.setLayoutManager(layoutManager);
         mAddedPlantsView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
-        mAddedPlantsView.setAdapter(mAddedPlantAdapter);
+        mAddedPlantsView.setAdapter(mAddedCropsAdapter);
     }
 
     @OnClick({R.id.back_btn, R.id.save_btn})
@@ -160,6 +162,11 @@ public class AddCropsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.save_btn:
+                if (mAddedCrops.isEmpty()) {
+                    ToastUtils.show("请选择农作物");
+                    return;
+                }
+                focusCrops();
                 break;
         }
     }
@@ -179,7 +186,7 @@ public class AddCropsActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAddedPlantAdapter.unregisterAdapterDataObserver(mObserver);
+        mAddedCropsAdapter.unregisterAdapterDataObserver(mObserver);
     }
 
     @Subscribe
@@ -199,9 +206,66 @@ public class AddCropsActivity extends BaseActivity {
     public void onDeletePlantEvent(DeletePlantEvent event) {
         int position = event.position;
         if (position >= 0) {
-            PlantCategoryResJO.CategoryEntity.CategoryListEntity plantBean = mAddedPlants.get(position);
-            mAddedPlants.remove(position);
-            mAddedPlantAdapter.notifyDataSetChanged();
+            PlantCategoryResJO.CategoryEntity.CategoryListEntity plantBean = mAddedCrops.get(position);
+            mAddedCrops.remove(position);
+            mAddedCropsAdapter.notifyDataSetChanged();
+            for (int i = 0; i < mCropList.size(); i ++) {
+                if (mCropList.get(i).contains(plantBean)) {
+                    int index = mCropList.get(i).indexOf(plantBean);
+                    PlantCategoryResJO.CategoryEntity.CategoryListEntity categoryListEntity
+                            = mCropList.get(i).get(index);
+                    categoryListEntity.isSelected = false;
+                    mCropsAdapter.notifyDataSetChanged();
+                    break;
+                }
+            }
         }
+    }
+
+    @Subscribe
+    public void onAddCropsEvent(AddCropsEvent event) {
+        if (!mAddedCrops.contains(event.mEntity)) {
+            mAddedCrops.add(event.mEntity);
+            mAddedCropsAdapter.notifyDataSetChanged();
+            int index = mCropList.get(mCurrIndex).indexOf(event.mEntity);
+            PlantCategoryResJO.CategoryEntity.CategoryListEntity categoryListEntity
+                    = mCropList.get(mCurrIndex).get(index);
+            categoryListEntity.isSelected = true;
+            mCropsAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void focusCrops() {
+        showDialog();
+        StringBuilder sb = new StringBuilder();
+        for (PlantCategoryResJO.CategoryEntity.CategoryListEntity entity : mAddedCrops) {
+            sb.append(entity.cropcategoryid).append(";");
+        }
+        String cropsId = sb.toString().substring(0, sb.toString().length()-1);
+        PlantWebService.getInstance().focusCrops(String.valueOf(mAreaId), cropsId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "focusCrops#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "focusCrops#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJo = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJo && resJo.status == 0) {
+                        ToastUtils.show("农作物关注成功");
+                        finish();
+                    } else {
+                        ToastUtils.show(resJo.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "focusCrops#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
     }
 }

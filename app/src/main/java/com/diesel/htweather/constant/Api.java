@@ -90,7 +90,7 @@ public class Api {
     public static final String GET_PLANT_CATEGORY_URL = SERVER_URL + "/nologin/common/process.c?do=getAllCropTypeList";
 
     // 关注农作物
-    public static final String GET_FOCUS_PLANT_URL = SERVER_URL + "/session/user/process.c?do=addFocusCropForUser";
+    public static final String FOCUS_CROPS_URL = SERVER_URL + "/session/user/process.c?do=addFocusCropForUser";
 
     // 获取种植作物列表
     public static final String GET_PLANTS_URL = SERVER_URL + "/session/user/process.c?do=getUserCropSetList";

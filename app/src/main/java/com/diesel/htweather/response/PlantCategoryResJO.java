@@ -57,6 +57,8 @@ public class PlantCategoryResJO extends BaseResJO {
 
         public static class CategoryListEntity {
 
+            public boolean isSelected;
+
             /**
              * time : 1458553916257
              * minutes : 51
