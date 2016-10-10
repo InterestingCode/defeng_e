@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.diesel.htweather.base.DFApplication;
-import com.diesel.htweather.db.AreaDao;
 import com.diesel.htweather.response.AreaResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.webapi.AreaWebService;
@@ -27,51 +26,23 @@ import okhttp3.Call;
  */
 public class AreaIntentService extends IntentService {
 
-    private AreaDao mAreaDao;
-
     public AreaIntentService() {
         super("AreaIntentService");
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        mAreaDao = new AreaDao(this);
-    }
-
-    @Override
     protected void onHandleIntent(Intent intent) {
-//        Log.i("AreaDao", "----------- 开始获取地区数据 --------------");
-//        long curr = System.currentTimeMillis();
-//        ArrayList<RegionObject> provinces = mAreaDao.loadLevel01Data();
-//        ArrayList<ArrayList<RegionObject>> cities = new ArrayList<>();
-//        ArrayList<ArrayList<ArrayList<RegionObject>>> countries = new ArrayList<>();
-//
-//        for (RegionObject province : provinces) {
-//            ArrayList<RegionObject> city = mAreaDao.loadLevel02Data(province);
-//            cities.add(city);
-//
-//            ArrayList<ArrayList<RegionObject>> country = new ArrayList<>();
-//            for (RegionObject c : city) {
-//                country.add(mAreaDao.loadLevel03Data(c));
-//            }
-//            countries.add(country);
-//        }
-//        DFApplication.provinces = provinces;
-//        DFApplication.cities = cities;
-//        DFApplication.countries = countries;
-//        Log.i("AreaDao", "----------- 获取地区数据结束 --------------cost time:"
-//                + (System.currentTimeMillis() - curr) + " ms");
+        Log.d("AreaDao", "----------- 开始获取地区数据 --------------");
 
         AreaWebService.getInstance().getAllArea(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                Log.e("AreaDao", "onError() " + e.getMessage());
+                Log.e("AreaIntentService", "onError() " + e.getMessage());
             }
 
             @Override
             public void onResponse(String response, int id) {
-                Log.d("AreaDao", "onResponse() " + response);
+                Log.d("AreaIntentService", "onResponse() " + response);
                 try {
                     AreaResJO resJo = FastJsonUtils.getSingleBean(response, AreaResJO.class);
                     if (null != resJo && resJo.status == 0 && null != resJo.data && !resJo.data.isEmpty()) {
@@ -102,16 +73,10 @@ public class AreaIntentService extends IntentService {
                         DFApplication.countries = countries;
                     }
                 } catch (Exception e) {
-                    Log.e("AreaDao", "checkVersion#onResponse() " + e.getMessage());
+                    Log.e("AreaIntentService", "#Exception# " + e.getMessage());
                 }
             }
         });
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mAreaDao.release();
-        Log.d("AreaDao", "onDestroy()...............");
-    }
 }
