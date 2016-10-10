@@ -14,65 +14,44 @@ import java.util.List;
  */
 public class FarmingResJO extends BaseResJO {
 
-    /**
-     * readCounts : 0
-     * weatherCropColl : [{"arId":1,"dayWeatherList":[{"currTemp":"17℃","weatherContent":"小雨","week":"星期三","windPower":"北风","currDate":"2016-04-13","currLunarDate":"农历三月初七","tempBucket":"16/19℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"},{"currTemp":"19℃","weatherContent":"小雨","week":"星期四","windPower":"南风","currDate":"2016-04-14","currLunarDate":"农历三月初八","tempBucket":"16/22℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"},{"currTemp":"14℃","weatherContent":"小雨","week":"星期五","windPower":"南风","currDate":"2016-04-15","currLunarDate":"农历三月初九","tempBucket":"14/23℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"}],"timelyCropsNewsList":[{"cropId":4193,"newsId":1,"cropName":"榨菜（茎用芥菜）","title":"","content":"近期土壤较干旱，可以适当中耕，中耕可以疏松土壤，利于根系发育，同时可去除田间杂草并使土壤更多地接纳雨水。","desc":"","sendTime":"2016-04-13"},{"cropId":4194,"newsId":2,"cropName":"冬瓜","title":"","content":"禾本科作物对精禾草克比较敏感，喷药时切勿喷到邻近的水稻、玉米、大麦、小麦等禾本科作物上，以免产生药害。","desc":"","sendTime":"2016-04-13"}],"arName":"重庆"},{"arId":2,"dayWeatherList":[{"currTemp":"17℃","weatherContent":"小雨","week":"星期三","windPower":"北风","currDate":"2016-04-13","currLunarDate":"农历三月初七","tempBucket":"16/19℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"},{"currTemp":"19℃","weatherContent":"小雨","week":"星期四","windPower":"南风","currDate":"2016-04-14","currLunarDate":"农历三月初八","tempBucket":"16/22℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"},{"currTemp":"14℃","weatherContent":"小雨","week":"星期五","windPower":"南风","currDate":"2016-04-15","currLunarDate":"农历三月初九","tempBucket":"14/23℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"}],"timelyCropsNewsList":[{"cropId":4193,"newsId":1,"cropName":"榨菜（茎用芥菜）","title":"","content":"近期土壤较干旱，可以适当中耕，中耕可以疏松土壤，利于根系发育，同时可去除田间杂草并使土壤更多地接纳雨水。","desc":"","sendTime":"2016-04-13"},{"cropId":4194,"newsId":2,"cropName":"冬瓜","title":"","content":"禾本科作物对精禾草克比较敏感，喷药时切勿喷到邻近的水稻、玉米、大麦、小麦等禾本科作物上，以免产生药害。","desc":"","sendTime":"2016-04-13"}],"arName":"成都"}]
-     * articleCropsNews : [{"newsId":1,"counts":150,"title":"柑橘花期的管理是柑橘丰","desc":"柑橘花期的管理是柑橘丰产优质的关键环节，需做好花期管理工作，采取保花保果","sendTime":"2016-04-13"}]
-     * advertiseList : [{"picUrl":"http://","bannerId":2,"httpUrl":"http://www.iqiyi.com"}]
-     * activityList : [{"picUrl":"http://","bannerId":1,"httpUrl":"http://www.baidu.com"}]
-     * polcyCropsNews : [{"newsId":2,"counts":150,"title":"未来三天可能出现较大强度的降水","desc":"未来三天可能出现较大强度的降水，雨后注意排除田间积水，以防造成根部渍害；同时加强田间锈病、白粉病、赤霉病等病虫害的检查。","sendTime":"2016-04-13"}]
-     */
-
     public ObjEntity obj;
 
     public static class ObjEntity {
 
-        public int readCounts;
+        /**
+         * 未读消息数
+         */
+        public int unreadCounts;
 
         /**
-         * arId : 1
-         * dayWeatherList : [{"currTemp":"17℃","weatherContent":"小雨","week":"星期三","windPower":"北风","currDate":"2016-04-13","currLunarDate":"农历三月初七","tempBucket":"16/19℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"},{"currTemp":"19℃","weatherContent":"小雨","week":"星期四","windPower":"南风","currDate":"2016-04-14","currLunarDate":"农历三月初八","tempBucket":"16/22℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"},{"currTemp":"14℃","weatherContent":"小雨","week":"星期五","windPower":"南风","currDate":"2016-04-15","currLunarDate":"农历三月初九","tempBucket":"14/23℃","weatherContentUrl":"http://","windPowerLevel":"1-3级"}]
-         * timelyCropsNewsList : [{"cropId":4193,"newsId":1,"cropName":"榨菜（茎用芥菜）","title":"","content":"近期土壤较干旱，可以适当中耕，中耕可以疏松土壤，利于根系发育，同时可去除田间杂草并使土壤更多地接纳雨水。","desc":"","sendTime":"2016-04-13"},{"cropId":4194,"newsId":2,"cropName":"冬瓜","title":"","content":"禾本科作物对精禾草克比较敏感，喷药时切勿喷到邻近的水稻、玉米、大麦、小麦等禾本科作物上，以免产生药害。","desc":"","sendTime":"2016-04-13"}]
-         * arName : 重庆
+         * 小贴士信息
          */
+        public String tips = "";
 
+        /**
+         * 用户关注的区域相关信息,包括：天气信息.精准农技。实况数据
+         */
         public List<WeatherCropCollEntity> weatherCropColl;
 
         /**
-         * newsId : 1
-         * counts : 150
-         * title : 柑橘花期的管理是柑橘丰
-         * desc : 柑橘花期的管理是柑橘丰产优质的关键环节，需做好花期管理工作，采取保花保果
-         * sendTime : 2016-04-13
+         * 广告图，位置：首页中间部分
          */
-
-        public List<ArticleCropsNewsEntity> articleCropsNews;
-
-        /**
-         * picUrl : http://
-         * bannerId : 2
-         * httpUrl : http://www.iqiyi.com
-         */
-
         public List<AdvertiseListEntity> advertiseList;
 
         /**
-         * picUrl : http://
-         * bannerId : 1
-         * httpUrl : http://www.baidu.com
+         * 农气情报
          */
-
-        public List<ActivityListEntity> activityList;
+        public List<ArticleCropsNewsEntity> articleCropsNews;
 
         /**
-         * newsId : 2
-         * counts : 150
-         * title : 未来三天可能出现较大强度的降水
-         * desc : 未来三天可能出现较大强度的降水，雨后注意排除田间积水，以防造成根部渍害；同时加强田间锈病、白粉病、赤霉病等病虫害的检查。
-         * sendTime : 2016-04-13
+         * 农业政策
          */
-
         public List<PolcyCropsNewsEntity> polcyCropsNews;
+
+        /**
+         * 活动图，位置：首页下面部分
+         */
+        public List<ActivityListEntity> activityList;
 
         public static class WeatherCropCollEntity {
 
@@ -81,29 +60,13 @@ public class FarmingResJO extends BaseResJO {
             public String arName;
 
             /**
-             * currTemp : 17℃
-             * weatherContent : 小雨
-             * week : 星期三
-             * windPower : 北风
-             * currDate : 2016-04-13
-             * currLunarDate : 农历三月初七
-             * tempBucket : 16/19℃
-             * weatherContentUrl : http://
-             * windPowerLevel : 1-3级
+             * 用户关注区域7天天气情况（当天+未来6天天气预测，日期根据数组下标递增，即：第一条表示当天天气情况）
              */
-
             public List<DayWeatherListEntity> dayWeatherList;
 
             /**
-             * cropId : 4193
-             * newsId : 1
-             * cropName : 榨菜（茎用芥菜）
-             * title :
-             * content : 近期土壤较干旱，可以适当中耕，中耕可以疏松土壤，利于根系发育，同时可去除田间杂草并使土壤更多地接纳雨水。
-             * desc :
-             * sendTime : 2016-04-13
+             * 精准农技信息，具体展示数量和用户关注的农作物有关
              */
-
             public List<TimelyCropsNewsListEntity> timelyCropsNewsList;
 
             public static class DayWeatherListEntity {

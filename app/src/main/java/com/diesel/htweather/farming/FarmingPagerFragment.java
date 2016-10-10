@@ -98,7 +98,7 @@ public class FarmingPagerFragment extends BaseFragment
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
-        getFarmingData();
+//        getFarmingData();
     }
 
     @Override

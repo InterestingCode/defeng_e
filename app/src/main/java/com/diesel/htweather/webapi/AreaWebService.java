@@ -135,4 +135,14 @@ public class AreaWebService extends WebService {
                 .execute(callback);
     }
 
+    public void getFocusAreaFarmingData(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.FARMING_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
 }

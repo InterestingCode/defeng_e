@@ -4,19 +4,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.farming.FarmingPagerFragment;
+import com.diesel.htweather.response.BaseResJO;
+import com.diesel.htweather.response.FarmingResJO;
+import com.diesel.htweather.response.FocusAreaResJO;
 import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.AreaWebService;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * Comments：农事
@@ -55,6 +64,36 @@ public class FarmingFragment extends BaseFragment {
         MainPagerAdapter adapter = new MainPagerAdapter(getChildFragmentManager());
         adapter.setList(mFragments);
         mWeatherPager.setAdapter(adapter);
+
+        getFocusAreaFarmingData();
+    }
+
+    private void getFocusAreaFarmingData() {
+        showDialog();
+        AreaWebService.getInstance().getFocusAreaFarmingData(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getFocusAreaFarmingData#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getFocusAreaFarmingData#onResponse() " + response);
+                dismissDialog();
+                try {
+                    FarmingResJO resJO = FastJsonUtils.getSingleBean(response, FarmingResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "getFocusAreaFarmingData#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
     }
 
 }
