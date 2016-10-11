@@ -9,6 +9,7 @@
     <string name="take_photo">拍照</string>
     <string name="album">从相册中选择</string>
     <string name="cancel_tv">取消</string>
+    <string name="send">发送</string>
 
     <string name="main_tab_one_class">com.diesel.htweather.FarmingFragment</string>
     <string name="main_tab_two_class">com.diesel.htweather.DepthServiceFragment</string>
@@ -120,6 +121,8 @@
     <string name="setting_password_success">密码设置成功</string>
     <string name="next_step">下一步</string>
     <string name="back_to_login">返回登录</string>
+    <string name="edit_problem">编辑问题</string>
+    <string name="hint_input_problem">黄豆怎么老是长虫？</string>
 
     <string name="browse_number">阅读 %1$d</string>
     <string name="comment_number">评论 %1$d</string>
@@ -161,6 +164,7 @@
     <string name="cannot_get_image_source">未获取到图片资源，请重新选择</string>
     <string name="tips_delete_plant_area_success">作物删除成功</string>
     <string name="tips_delete_plant_area_failure">作物删除失败</string>
+    <string name="tips_input_problem">请输入问题</string>
 
     <string-array name="occupation_ary">
         <item>会计</item>

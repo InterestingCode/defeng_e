@@ -13,6 +13,7 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.response.GatherDataResJO;
 import com.diesel.htweather.user.adapter.GatherDataAdapter;
+import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.PlantWebService;
@@ -83,6 +84,7 @@ public class GatherDataActivity extends BaseActivity
                 finish();
                 break;
             case R.id.edit_btn:
+//                ActivityNav.getInstance().sta
                 break;
             case R.id.search_btn:
                 break;

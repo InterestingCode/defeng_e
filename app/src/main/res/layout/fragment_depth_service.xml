@@ -23,7 +23,7 @@
                     android:layout_marginLeft="@dimen/weather_page_lr_margin"
                     android:layout_marginRight="@dimen/weather_page_lr_margin"
                     android:layout_marginTop="@dimen/weather_page_lr_margin"
-                    android:background="@drawable/bg_crop_parameters"
+                    android:background="@drawable/bg_actual_farming"
                     android:orientation="vertical">
 
                     <TextView

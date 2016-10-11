@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/px200"
+    android:layout_height="@dimen/px200">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/problem_photo_view"
+        android:layout_width="@dimen/px200"
+        android:layout_height="@dimen/px200" />
+
+    <ImageView
+        android:id="@+id/delete_photo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/px10"
+        android:src="@drawable/ic_circle_close" />
+
+</RelativeLayout>

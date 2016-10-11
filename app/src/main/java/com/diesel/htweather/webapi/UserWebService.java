@@ -236,6 +236,7 @@ public class UserWebService extends WebService {
         OkHttpUtils
                 .get()
                 .url(Api.MODIFY_USER_INFO_URL)
+                .addHeader("contentType", "application/json; charset=ISO-8859-1")
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("userFace", bean.userFace)
