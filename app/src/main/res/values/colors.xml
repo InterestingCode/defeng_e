@@ -39,4 +39,8 @@
     <color name="password_commit_btn_color">#FF876F00</color>
     <color name="bg_login_page">#FF7FA60B</color>
 
+    <color name="online_btn_press">#85B902</color>
+    <color name="online_btn_normal">#DCDCDC</color>
+
+
 </resources>

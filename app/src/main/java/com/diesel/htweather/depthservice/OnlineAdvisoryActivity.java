@@ -1,19 +1,22 @@
 package com.diesel.htweather.depthservice;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.depthservice.adapter.OnlineAdvisoryAdapter;
-import com.diesel.htweather.event.RecyclerItemEvent;
-import com.diesel.htweather.widget.DividerItemDecoration;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.diesel.htweather.base.BaseFragment;
+import com.diesel.htweather.widget.NoScrollViewPager;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,44 +26,93 @@ import butterknife.OnClick;
  * 在线咨询
  */
 public class OnlineAdvisoryActivity extends BaseActivity {
-    @BindView(R.id.farming_policy_recycler_view)
-    XRecyclerView mRecyclerView;
+
+    @BindView(R.id.allMsgTab)
+    RelativeLayout allMsgTab;
+
+    @BindView(R.id.tvAll)
+    TextView tvAll;
+
+    @BindView(R.id.myMsgTab)
+    RelativeLayout myMsgTab;
+
+    @BindView(R.id.tvMe)
+    TextView tvMe;
+
+    @BindView(R.id.online_pager)
+    NoScrollViewPager mViewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_advisory);
         ButterKnife.bind(this);
-        mRecyclerView.setPullRefreshEnabled(false);
-        mRecyclerView.setLoadingMoreEnabled(false);
-        mRecyclerView.addItemDecoration(
-                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST,
-                        R.drawable.recycler_view_1px_divider_shape));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new OnlineAdvisoryAdapter());
+        mViewPager.setAdapter(new FragmentAdapter(initFragments(), getSupportFragmentManager()));
+        allMsgTab.setOnClickListener(new CustomOnClickListener(0));
+        myMsgTab.setOnClickListener(new CustomOnClickListener(1));
     }
+
 
     @OnClick(R.id.back_btn)
     public void onClick() {
         finish();
     }
 
-    @Subscribe
-    public void onRecyclerItemEvent(RecyclerItemEvent event) {
-        int position = event.position;
-        startActivity(new Intent(this, OnlineAdvisoryDetailsActivity.class));
+    class CustomOnClickListener implements View.OnClickListener {
 
+        private int index = 0;
+
+        public CustomOnClickListener(int i) {
+            index = i;
+        }
+
+        public void onClick(View v) {
+            mViewPager.setCurrentItem(index);
+            if (index == 0) {
+                allMsgTab.setBackgroundColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.online_btn_press));
+                myMsgTab.setBackgroundColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.online_btn_normal));
+                tvAll.setTextColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, android.R.color.white));
+                tvMe.setTextColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.gray_666));
+            } else {
+                allMsgTab.setBackgroundColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.online_btn_normal));
+                myMsgTab.setBackgroundColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.online_btn_press));
+                tvAll.setTextColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.gray_666));
+                tvMe.setTextColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, android.R.color.white));
+            }
+        }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
+
+    private List<BaseFragment> initFragments() {
+        List<BaseFragment> fragments = new ArrayList<BaseFragment>();
+
+        BaseFragment allMsgFragment = new OnlineFragment();
+        fragments.add(allMsgFragment);
+
+        BaseFragment myMsgFragment = new OnlineFragment();
+        fragments.add(myMsgFragment);
+
+        return fragments;
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
+    class FragmentAdapter extends FragmentPagerAdapter {
+
+        private List<BaseFragment> mFragments;
+
+        public FragmentAdapter(List<BaseFragment> fragments, FragmentManager fm) {
+            super(fm);
+            mFragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
     }
+
 }

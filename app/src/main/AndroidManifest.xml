@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.diesel.htweather"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.diesel.htweather">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -55,15 +55,21 @@
         <activity android:name=".farming.FarmingListActivity" />
         <activity android:name=".farming.FarmingDetailsActivity" />
         <activity android:name=".farming.WeatherTrendActivity" />
-        <activity android:name=".farming.TruthDataSettingActivity" android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity
+            android:name=".farming.TruthDataSettingActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
 
         <activity android:name=".user.EditUserInfoActivity" />
         <activity android:name=".user.SystemSettingActivity" />
         <activity android:name=".user.HelpCenterActivity" />
         <activity android:name=".user.PlantAndAreaActivity" />
         <activity android:name=".user.RealNameAuthActivity" />
-        <activity android:name=".user.GatherDataActivity" android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity android:name=".user.EditProblemActivity" android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity
+            android:name=".user.GatherDataActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity
+            android:name=".user.EditProblemActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name=".user.ActualFarmingSettingActivity" />
         <activity android:name=".user.AddCropsActivity" />
         <!--<activity android:name=".user.AddWatchPlantActivity" />-->
@@ -82,7 +88,10 @@
         <activity android:name=".depthservice.GrowthDiaryDetailsActivity" />
         <activity android:name=".depthservice.ProfileActivity" />
         <activity android:name=".depthservice.AgricultureDoctorActivity" />
-        <activity android:name=".depthservice.OnlineAdvisoryActivity" />
+        <activity
+            android:name=".depthservice.OnlineAdvisoryActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".depthservice.OnlineAdvisoryDetailsActivity" />
         <activity android:name=".depthservice.FarmingAdviceActivity" />
     </application>
