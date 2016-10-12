@@ -105,10 +105,10 @@ public class SystemSettingActivity extends BaseActivity {
                 Fresco.getImagePipeline().clearCaches();
                 Fresco.getImagePipeline().clearDiskCaches();
                 Fresco.getImagePipeline().clearMemoryCaches();
-                SharedPreferencesUtils.getInstance(mContext).clearCaches();
+//                SharedPreferencesUtils.getInstance(mContext).clearCaches();
                 ToastUtils.show(getString(R.string.tips_cache_had_cleared));
-                ActivityNav.getInstance().startLoginActivity(mActivity, true);
-                finish();
+//                ActivityNav.getInstance().startLoginActivity(mActivity, true);
+//                finish();
                 break;
             case R.id.modify_password_view:
                 ActivityNav.getInstance().startModifyPasswordActivity(this);

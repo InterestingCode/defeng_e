@@ -123,10 +123,16 @@ public class EditUserInfoActivity extends BaseActivity {
         mUserGenderView.setContent(userInfo.userSex == 1 ? "男" : "女");
         mUserBirthView.setContent(userInfo.birthday);
         mUserAreaView.setContent(userInfo.areaAddr);
-        mUserOccupationView.setContent("");
         mUserAddressView.setContent(userInfo.address);
-
         mUserTelephoneView.setContent(userInfo.userMobile);
+        if (null != DFApplication.jobs && !DFApplication.jobs.isEmpty() && userInfo.jobId > 0) {
+            for (JobResJO.JobEntity entity : DFApplication.jobs) {
+                if (entity.jobId == userInfo.jobId) {
+                    mUserOccupationView.setContent(entity.jobName);
+                    break;
+                }
+            }
+        }
     }
 
     @OnClick({R.id.back_btn, R.id.right_arrow_iv, R.id.user_avatar_view, R.id.user_appellation_view,
@@ -139,6 +145,7 @@ public class EditUserInfoActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.right_arrow_iv:
+                showChooseDialog();
                 break;
             case R.id.user_avatar_view:
                 showChooseDialog();
@@ -176,7 +183,7 @@ public class EditUserInfoActivity extends BaseActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which,
                                     String inputContent) {
-                                mUserAppellationView.setContent(inputContent);
+                                mUserAddressView.setContent(inputContent);
                             }
                         });
                 break;
@@ -349,14 +356,15 @@ public class EditUserInfoActivity extends BaseActivity {
         bean.address = mUserAddressView.getInputContent();
         bean.userMobile = mUserTelephoneView.getInputContent();
         if (mAreaId > 0) {
-            bean.arId = 0;
+            bean.arId = mAreaId;
         }
         if (mJobId > 0) {
-            bean.jobId = 0;
+            bean.jobId = mJobId;
         }
         if (!TextUtils.isEmpty(mImagePath)) {
             bean.userFace = mImagePath;
         }
+        Log.i(TAG, "updateUserInfo() "+bean.toString());
 
         UserWebService.getInstance().modifyUserInfo(bean, new StringCallback() {
             @Override

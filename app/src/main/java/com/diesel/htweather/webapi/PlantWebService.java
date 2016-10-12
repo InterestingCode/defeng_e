@@ -61,6 +61,7 @@ public class PlantWebService extends WebService {
         OkHttpUtils
                 .get()
                 .url(Api.FOCUS_CROPS_URL)
+//                .addHeader("contentType", "application/json; charset=ISO-8859-1")
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("uaId", areaId)

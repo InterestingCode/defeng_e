@@ -11,6 +11,9 @@ import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.webapi.UserWebService;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import okhttp3.Call;
 
 public class SplashActivity extends BaseActivity {
 
@@ -37,7 +40,18 @@ public class SplashActivity extends BaseActivity {
         UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext).getUserInfo();
         if (!TextUtils.isEmpty(userInfo.userMobile) && !TextUtils.isEmpty(userInfo.password)) {
             Log.d(TAG, "onCreate() " + userInfo.toString());
-            UserWebService.getInstance().login(userInfo.userMobile, userInfo.password, null);
+            UserWebService.getInstance().login(userInfo.userMobile, userInfo.password,
+                    new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.e(TAG, "onCreate#login#onError() " + e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.d(TAG, "onCreate#login#onResponse() " + response);
+                        }
+                    });
             mHandler.sendEmptyMessageDelayed(0, 3000);
         } else {
             boolean needEnterGuidePage = SharedPreferencesUtils.getInstance(this).needEnterGuidePage();
