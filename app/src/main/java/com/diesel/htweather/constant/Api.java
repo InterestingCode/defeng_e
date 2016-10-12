@@ -112,6 +112,9 @@ public class Api {
     // 获取采集信息列表
     public static final String GET_GATHER_DATA_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getCollContentList";
 
+    // 发布采集信息
+    public static final String PUBLISH_PROBLEM_URL = SERVER_URL + "/session/content/process.c?do=createCollContent";
+
     // 首页
     public static final String FARMING_URL = SERVER_URL + "/session/home/process.c?do=enterHomePage";
 

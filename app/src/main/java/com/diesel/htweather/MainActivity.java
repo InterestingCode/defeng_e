@@ -10,7 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.map.BMapLocationClient;
 import com.diesel.htweather.service.JobIntentService;
 import com.diesel.htweather.util.BackToExitUtil;
 import com.diesel.htweather.util.ToastUtils;
@@ -44,8 +43,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_pager)
     NoScrollViewPager mMainPager;
 
-    private BMapLocationClient mBMapLocationClient;
-
     private BackToExitUtil mBackToExit = new BackToExitUtil();
 
     @Override
@@ -59,23 +56,8 @@ public class MainActivity extends BaseActivity {
         mTabBar.setCurrentTabBar(0);
         mMainPager.setCurrentItem(0, false);
 
-//        getUserInfo();
-
         startService(new Intent(this, JobIntentService.class));
-        mBMapLocationClient = new BMapLocationClient(getApplicationContext());
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        mBMapLocationClient.startLocation();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        mBMapLocationClient.stopLocation();
-//    }
 
     private void initView() {
         ArrayList<Fragment> fragments = new ArrayList<>();

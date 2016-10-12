@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.event.ProblemPhotoEvent;
 import com.diesel.htweather.listener.RecyclerItemClickListener;
@@ -23,6 +24,7 @@ import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.user.adapter.EditProblemAdapter;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.PhotoUtils;
+import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.ActionDialogAdapter;
@@ -86,6 +88,12 @@ public class EditProblemActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(new DividerGridItemDecoration(mContext));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
+
+        String location = SharedPreferencesUtils.getInstance(mContext).getLocation();
+        mLocationTv.setText(location);
+        if (TextUtils.isEmpty(location)) {
+            DFApplication.getInstance().sendStartLocationBroadcast();
+        }
     }
 
     @OnClick({R.id.back_btn, R.id.send_btn})
@@ -100,6 +108,20 @@ public class EditProblemActivity extends BaseActivity {
                     ToastUtils.show(getString(R.string.tips_input_problem));
                     return;
                 }
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < mPhotos.size() - 1; i ++) {
+                    sb.append(mPhotos.get(i)).append(";");
+                }
+                String imagePath = "";
+                if (TextUtils.isEmpty(sb.toString())) {
+                    imagePath = sb.substring(0, sb.toString().length() - 1);
+                }
+                String location = SharedPreferencesUtils.getInstance(mContext).getLocation();
+                if (TextUtils.isEmpty(location)) {
+                    ToastUtils.show("未获取到定位城市，请稍等");
+                    return;
+                }
+                publishProblem(problem, imagePath, location);
                 break;
         }
     }
@@ -223,5 +245,35 @@ public class EditProblemActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void publishProblem(String content, String imagePath, String location) {
+        showDialog();
+        UserWebService.getInstance().publishProblem(content, imagePath, location,
+                new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e(TAG, "publishProblem#onError() " + e.getMessage());
+                        ToastUtils.show(getString(R.string.tips_request_failure));
+                        dismissDialog();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.d(TAG, "publishProblem#onResponse() " + response);
+                        dismissDialog();
+                        try {
+                            BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                            if (null != resJO && resJO.status == 0) {
+                                ToastUtils.show("您的问题发布成功");
+                                finish();
+                            } else {
+                                ToastUtils.show(resJO.msg);
+                            }
+                        } catch (Exception e) {
+                            Log.e(TAG, "publishProblem#onResponse() #Exception# " + e.getMessage());
+                        }
+                    }
+                });
     }
 }

@@ -316,4 +316,22 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 发布采集信息
+     *
+     * @param imagePath 图片地址；多张图片分号分割
+     */
+    public void publishProblem(String content, String imagePath, String arName, Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.PUBLISH_PROBLEM_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("content", content)
+                .addParams("faTitleimg", imagePath)
+                .addParams("arName", arName)
+                .build()
+                .execute(callback);
+    }
+
 }

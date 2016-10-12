@@ -84,6 +84,16 @@ public class SharedPreferencesUtils {
         mShared.edit().putString(key, value).apply();
     }
 
+    private static final String SP_KEY_LOCATION = "sp_key_location";
+
+    public void saveLocation(String location) {
+        putString(SP_KEY_LOCATION, location);
+    }
+
+    public String getLocation() {
+        return getString(SP_KEY_LOCATION, "");
+    }
+
     private static final String SP_KEY_NEED_ENTER_GUIDE_PAGE = "sp_key_need_enter_guide_page";
 
     public void updateEnterGuidePageStatus() {
