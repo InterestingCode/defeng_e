@@ -3,6 +3,10 @@ package com.diesel.htweather.user.holder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.diesel.htweather.event.ProblemPhotoEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Comments：
  *
@@ -20,7 +24,7 @@ public class AddPhotoHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                EventBus.getDefault().post(new ProblemPhotoEvent(ProblemPhotoEvent.ACTION_ADD_PHOTO, getLayoutPosition()));
             }
         });
     }

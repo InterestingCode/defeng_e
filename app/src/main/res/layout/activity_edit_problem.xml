@@ -54,6 +54,7 @@
             style="@style/BaseText.black333_24px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:maxLength="120"
             android:text="@string/hint_input_problem" />
 

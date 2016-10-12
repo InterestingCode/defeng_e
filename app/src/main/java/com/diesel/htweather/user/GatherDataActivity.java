@@ -84,7 +84,7 @@ public class GatherDataActivity extends BaseActivity
                 finish();
                 break;
             case R.id.edit_btn:
-//                ActivityNav.getInstance().sta
+                ActivityNav.getInstance().startEditProblemActivity(mActivity);
                 break;
             case R.id.search_btn:
                 break;

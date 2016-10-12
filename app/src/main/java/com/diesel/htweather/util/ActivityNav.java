@@ -16,6 +16,7 @@ import com.diesel.htweather.user.AboutAppActivity;
 import com.diesel.htweather.user.ActualFarmingSettingActivity;
 import com.diesel.htweather.user.AddCropsActivity;
 import com.diesel.htweather.user.CommonWebActivity;
+import com.diesel.htweather.user.EditProblemActivity;
 import com.diesel.htweather.user.EditUserInfoActivity;
 import com.diesel.htweather.user.FeedbackActivity;
 import com.diesel.htweather.user.FindPasswordActivity;
@@ -130,6 +131,11 @@ public class ActivityNav {
 
     public void startGatherDataActivity(Context context) {
         Intent intent = new Intent(context, GatherDataActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startEditProblemActivity(Context context) {
+        Intent intent = new Intent(context, EditProblemActivity.class);
         context.startActivity(intent);
     }
 

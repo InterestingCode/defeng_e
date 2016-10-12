@@ -4,7 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.event.ProblemPhotoEvent;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +33,12 @@ public class PhotoHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
+    public void bindData(String imagePath) {
+        mProblemPhotoView.setImageURI(imagePath);
+    }
+
     @OnClick(R.id.delete_photo_btn)
     public void onClick() {
+        EventBus.getDefault().post(new ProblemPhotoEvent(ProblemPhotoEvent.ACTION_DEL_PHOTO, getLayoutPosition()));
     }
 }

@@ -47,7 +47,9 @@ public class EditProblemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        if (getItemViewType(position) == TYPE_PHOTO) {
+            ((PhotoHolder) holder).bindData(mPhotos.get(position));
+        }
     }
 
     @Override
