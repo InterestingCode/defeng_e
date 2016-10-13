@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.BaseFragment;
+import com.diesel.htweather.user.EditProblemActivity;
 import com.diesel.htweather.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 /**
  * 在线咨询
@@ -68,7 +70,7 @@ public class OnlineAdvisoryActivity extends BaseActivity {
                 startActivity(new Intent(this, SearchActivity.class));
                 break;
             case R.id.share_layout:
-                //startActivity(new Intent(this, SearchActivity.class));
+                startActivity(new Intent(this, EditProblemActivity.class));
                 break;
         }
 

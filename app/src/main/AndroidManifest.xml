@@ -69,6 +69,7 @@
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity
             android:name=".user.EditProblemActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name=".user.ActualFarmingSettingActivity" />
         <activity android:name=".user.AddCropsActivity" />
@@ -95,6 +96,7 @@
             android:name=".depthservice.SearchActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
     </application>
 
 </manifest>
