@@ -3,6 +3,7 @@ package com.diesel.htweather.user;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -49,6 +50,8 @@ public class GatherDataActivity extends BaseActivity
     @BindView(R.id.scroll_to_top_btn)
     ImageButton mScrollToTopBtn;
 
+    private int mPage = 1;
+
     private GatherDataAdapter mAdapter;
 
     private List<GatherDataResJO.GatherDataEntity> mList = new ArrayList<>();
@@ -59,14 +62,10 @@ public class GatherDataActivity extends BaseActivity
         setContentView(R.layout.activity_gather_data);
         ButterKnife.bind(this);
 
-        BGARefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(this, false);
-        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
-        mRefreshLayout.setPullDownRefreshEnable(false);
         mRefreshLayout.setDelegate(this);
+        BGARefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(this, true);
+        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
 
-//        mList.add(new GatherDataBean());
-//        mList.add(new GatherDataBean());
-//        mList.add(new GatherDataBean());
         mAdapter = new GatherDataAdapter(mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(
@@ -87,6 +86,12 @@ public class GatherDataActivity extends BaseActivity
                 ActivityNav.getInstance().startEditProblemActivity(mActivity);
                 break;
             case R.id.search_btn:
+                String keywords = mSearchContentEt.getText().toString();
+                if (TextUtils.isEmpty(keywords)) {
+                    ToastUtils.show("请输入搜索关键词");
+                    return;
+                }
+                getGatherData(keywords);
                 break;
             case R.id.scroll_to_top_btn:
                 break;
@@ -95,28 +100,34 @@ public class GatherDataActivity extends BaseActivity
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        mPage = 1;
+        getGatherData("");
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
+        getGatherData("");
+        return true;
     }
 
     private void getGatherData(String keywords) {
         showDialog();
-        PlantWebService.getInstance().getGatherData(keywords, new StringCallback() {
+        PlantWebService.getInstance().getGatherData(mPage, keywords, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "getGatherData#onError() " + e.getMessage());
                 dismissDialog();
                 ToastUtils.show(getString(R.string.tips_request_failure));
+                mRefreshLayout.endRefreshing();
+                mRefreshLayout.endLoadingMore();
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getGatherData#onResponse() " + response);
                 dismissDialog();
+                mRefreshLayout.endRefreshing();
+                mRefreshLayout.endLoadingMore();
                 try {
                     GatherDataResJO resJO = FastJsonUtils.getSingleBean(response, GatherDataResJO.class);
                     if (null == resJO) {
@@ -127,8 +138,12 @@ public class GatherDataActivity extends BaseActivity
                         ToastUtils.show(resJO.msg);
                     } else {
                         if (null != resJO.data && !resJO.data.isEmpty()) {
+                            if (mPage == 1) {
+                                mList.clear();
+                            }
                             mList.addAll(resJO.data);
                             mAdapter.notifyDataSetChanged();
+                            mPage ++;
                         }
                     }
                 } catch (Exception e) {

@@ -117,7 +117,7 @@ public class EditProblemActivity extends BaseActivity {
                     sb.append(mPhotos.get(i)).append(";");
                 }
                 String imagePath = "";
-                if (TextUtils.isEmpty(sb.toString())) {
+                if (!TextUtils.isEmpty(sb.toString())) {
                     imagePath = sb.substring(0, sb.toString().length() - 1);
                 }
                 LocationAddress address = SharedPreferencesUtils.getInstance(mContext).getLocation();

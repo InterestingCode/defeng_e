@@ -116,13 +116,15 @@ public class PlantWebService extends WebService {
      * 获取采集信息列表
      * @param keywords 标题（模糊筛选）
      */
-    public void getGatherData(String keywords, Callback callback) {
+    public void getGatherData(int page, String keywords, Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.GET_GATHER_DATA_LIST_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
                 .addParams("faTitle", keywords)
+                .addParams("page", String.valueOf(page))
+                .addParams("rows", "20")
                 .build()
                 .execute(callback);
     }

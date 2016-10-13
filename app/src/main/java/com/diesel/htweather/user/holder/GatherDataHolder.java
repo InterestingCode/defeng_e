@@ -92,6 +92,7 @@ public class GatherDataHolder extends RecyclerView.ViewHolder {
         mUserAddrTv.setText(bean.locationAddr);
         mPublishTimeTv.setText(bean.creatTime);
         mGatherDataContentTv.setText(bean.content);
+        mPhotos.clear();
         if (!TextUtils.isEmpty(bean.imgPaths)) {
             ViewUtils.visible(mRecyclerView);
             String[] photos = bean.imgPaths.split(";");
