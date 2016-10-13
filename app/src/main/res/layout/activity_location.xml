@@ -28,7 +28,12 @@
             android:textSize="@dimen/font_30px" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/area_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px90"
         android:background="@android:color/white"
@@ -62,6 +67,6 @@
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/px20"
             android:src="@drawable/ic_right_gray_arrow" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </LinearLayout>

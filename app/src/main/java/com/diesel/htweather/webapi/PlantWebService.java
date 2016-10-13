@@ -64,7 +64,7 @@ public class PlantWebService extends WebService {
 //                .addHeader("contentType", "application/json; charset=ISO-8859-1")
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
-                .addParams("uaId", areaId)
+                .addParams("arId", areaId)
                 .addParams("cropIds", cropIds)
                 .build()
                 .execute(callback);

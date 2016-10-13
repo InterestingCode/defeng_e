@@ -16,7 +16,6 @@ import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
 import com.diesel.htweather.farming.model.ActualFarmingBean;
-import com.diesel.htweather.farming.model.FarmingBannerBean;
 import com.diesel.htweather.farming.model.FarmingInfoBean;
 import com.diesel.htweather.farming.model.FarmingPolicyBean;
 import com.diesel.htweather.farming.model.WeatherDataBean;
@@ -76,12 +75,12 @@ public class FarmingPagerFragment extends BaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFarmingData.add(new WeatherDataBean());
-        mFarmingData.add(new ActualFarmingBean());
-        mFarmingData.add(new FarmingBannerBean());
-        mFarmingData.add(new FarmingInfoBean());
-        mFarmingData.add(new FarmingPolicyBean());
-        mFarmingData.add(new FarmingBannerBean());
+//        mFarmingData.add(new WeatherDataBean());
+//        mFarmingData.add(new ActualFarmingBean());
+//        mFarmingData.add(new FarmingBannerBean());
+//        mFarmingData.add(new FarmingInfoBean());
+//        mFarmingData.add(new FarmingPolicyBean());
+//        mFarmingData.add(new FarmingBannerBean());
         mAdapter = new FarmingPagerAdapter(mFarmingData);
 
         View headerView = LayoutInflater.from(getContext())

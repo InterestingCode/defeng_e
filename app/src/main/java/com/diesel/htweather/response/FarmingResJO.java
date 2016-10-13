@@ -1,5 +1,7 @@
 package com.diesel.htweather.response;
 
+import com.diesel.htweather.base.BaseBean;
+
 import java.util.List;
 
 /**
@@ -69,6 +71,11 @@ public class FarmingResJO extends BaseResJO {
              */
             public List<TimelyCropsNewsListEntity> timelyCropsNewsList;
 
+            /**
+             * 实况数据
+             */
+            public List<HoursDataListEntity> hoursDataList;
+
             public static class DayWeatherListEntity {
 
                 public String currTemp;
@@ -106,6 +113,72 @@ public class FarmingResJO extends BaseResJO {
 
                 public String sendTime;
             }
+
+            public static class HoursDataListEntity {
+
+                public List<AirMoistureListEntity> airMoistureList;
+
+                public List<PrecipitationListEntity> precipitationList;
+
+                public List<SoilTempLlistEntity> soilTempLlist;
+
+                public List<SoilMoistureListEntity> soilMoistureList;
+
+                public List<SunshineListEntity> sunshineList;
+
+                public List<AirTempListEntity> airTempList;
+
+                public List<WindPowerListEntity> windPowerList;
+
+                public static class AirMoistureListEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+
+                public static class PrecipitationListEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+
+                public static class SoilTempLlistEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+
+                public static class SoilMoistureListEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+
+                public static class SunshineListEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+
+                public static class AirTempListEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+
+                public static class WindPowerListEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
+            }
         }
 
         public static class ArticleCropsNewsEntity {
@@ -121,7 +194,7 @@ public class FarmingResJO extends BaseResJO {
             public String sendTime;
         }
 
-        public static class AdvertiseListEntity {
+        public static class AdvertiseListEntity extends BaseBean {
 
             public String picUrl;
 
@@ -130,7 +203,7 @@ public class FarmingResJO extends BaseResJO {
             public String httpUrl;
         }
 
-        public static class ActivityListEntity {
+        public static class ActivityListEntity extends BaseBean {
 
             public String picUrl;
 
@@ -152,4 +225,5 @@ public class FarmingResJO extends BaseResJO {
             public String sendTime;
         }
     }
+
 }
