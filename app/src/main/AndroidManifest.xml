@@ -37,17 +37,6 @@
         <activity android:name=".GuideActivity" />
         <activity android:name=".MainActivity" />
 
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-        <service android:name=".service.AreaIntentService" />
-        <service android:name=".service.JobIntentService" />
-
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="g0yjMVUM2cwVmCN66oGL2ehXWL6aGvG3" />
-
         <activity android:name=".farming.CityManageActivity" />
         <activity android:name=".farming.LocationActivity" />
         <activity android:name=".farming.MessageActivity" />
@@ -97,6 +86,13 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
+        <service android:name=".service.AreaIntentService" />
+        <service android:name=".service.JobIntentService" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="f966252b6e014e329e4eb281a48a6419" />
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>

@@ -5,25 +5,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.map.MapLocationClient;
 import com.diesel.htweather.service.JobIntentService;
 import com.diesel.htweather.util.BackToExitUtil;
 import com.diesel.htweather.util.ToastUtils;
-import com.diesel.htweather.webapi.UserWebService;
 import com.diesel.htweather.widget.MainTab;
 import com.diesel.htweather.widget.MainTabBar;
 import com.diesel.htweather.widget.NoScrollViewPager;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
 
 /**
  * Comments：主页
@@ -45,6 +42,8 @@ public class MainActivity extends BaseActivity {
 
     private BackToExitUtil mBackToExit = new BackToExitUtil();
 
+    private MapLocationClient mMapLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +56,8 @@ public class MainActivity extends BaseActivity {
         mMainPager.setCurrentItem(0, false);
 
         startService(new Intent(this, JobIntentService.class));
+        mMapLocationClient = new MapLocationClient(this);
+        mMapLocationClient.startLocation();
     }
 
     private void initView() {
@@ -95,20 +96,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void getUserInfo() {
-        UserWebService.getInstance().getUserInfo(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Log.e(TAG, "getUserInfo#onError() " + e.getMessage());
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.d(TAG, "getUserInfo#onResponse() " + response);
-            }
-        });
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -125,6 +112,15 @@ public class MainActivity extends BaseActivity {
         } else {
             ToastUtils.show(getString(R.string.again_back_to_exit));
             mBackToExit.doExitInOneSecond();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != mMapLocationClient) {
+            mMapLocationClient.destroy();
+            mMapLocationClient = null;
         }
     }
 

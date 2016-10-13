@@ -48,7 +48,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/AMap_Location_V3.00_20160922.jar')
     compile files('libs/fastjson-1.2.9.jar')
     compile project(':pickerview')
     testCompile 'junit:junit:4.12'

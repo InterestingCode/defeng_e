@@ -1,15 +1,9 @@
 package com.diesel.htweather.base;
 
 import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.provider.Settings;
 
-import com.diesel.htweather.constant.Consts;
 import com.diesel.htweather.db.DBHelper;
-import com.diesel.htweather.map.BMapLocationClient;
 import com.diesel.htweather.response.AreaResJO;
 import com.diesel.htweather.response.JobResJO;
 import com.diesel.htweather.service.AreaIntentService;
@@ -44,12 +38,6 @@ public class DFApplication extends Application {
 
     private static DFApplication mInstance = null;
 
-//    public static ArrayList<RegionObject> provinces;
-//
-//    public static ArrayList<ArrayList<RegionObject>> cities;
-//
-//    public static ArrayList<ArrayList<ArrayList<RegionObject>>> countries;
-
     public static ArrayList<AreaResJO.ProvinceEntity> provinces;
 
     public static ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity>> cities;
@@ -57,22 +45,6 @@ public class DFApplication extends Application {
     public static ArrayList<ArrayList<ArrayList<AreaResJO.ProvinceEntity.CityEntity.CountryEntity>>> countries;
 
     public static ArrayList<JobResJO.JobEntity> jobs;
-
-    private BMapLocationClient mBMapLocationClient;
-
-    public static final String ACTION_START_LOCATION = "action_start_location";
-    public static final String ACTION_STOP_LOCATION = "action_stop_location";
-
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (ACTION_START_LOCATION.equals(intent.getAction())) {
-                mBMapLocationClient.startLocation();
-            } else if (ACTION_STOP_LOCATION.equals(intent.getAction())) {
-                mBMapLocationClient.stopLocation();
-            }
-        }
-    };
 
     public static DFApplication getInstance() {
         return mInstance;
@@ -82,22 +54,12 @@ public class DFApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        DBHelper.init(this);
         CrashHandler.getInstance().init(this);
-        Consts.sDeviceToken = getDrivenToken(this);
+        DBHelper.init(this);
         initOkHttp();
         Drawables.init(this);
         Fresco.initialize(this);
         startService(new Intent(this, AreaIntentService.class));
-        initMapLocation();
-        sendStartLocationBroadcast();
-    }
-
-    private void initMapLocation() {
-        mBMapLocationClient = new BMapLocationClient(mInstance);
-        IntentFilter filter = new IntentFilter(ACTION_STOP_LOCATION);
-        filter.addAction(ACTION_START_LOCATION);
-        registerReceiver(mReceiver, filter);
     }
 
     private void initOkHttp() {
@@ -119,28 +81,6 @@ public class DFApplication extends Application {
                 })
                 .build();
         OkHttpUtils.initClient(okHttpClient);
-    }
-
-    public static String getDrivenToken(Context context) {
-        String drivenToken = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        if (drivenToken == null) {
-            drivenToken = android.provider.Settings.System.getString(
-                    context.getContentResolver(),
-                    android.provider.Settings.System.ANDROID_ID);
-            if (drivenToken == null) {
-                return "AAAAAAAAAAAAA";
-            }
-        }
-        return drivenToken;
-    }
-
-    public void sendStartLocationBroadcast() {
-        sendBroadcast(new Intent(ACTION_START_LOCATION));
-    }
-
-    public void sendStopLocationBroadcast() {
-        sendBroadcast(new Intent(ACTION_STOP_LOCATION));
     }
 
 }

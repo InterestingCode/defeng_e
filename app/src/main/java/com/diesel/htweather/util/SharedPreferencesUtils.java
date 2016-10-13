@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.diesel.htweather.constant.Consts;
+import com.diesel.htweather.map.LocationAddress;
 import com.diesel.htweather.model.UserInfoBean;
 
 /**
@@ -86,12 +87,19 @@ public class SharedPreferencesUtils {
 
     private static final String SP_KEY_LOCATION = "sp_key_location";
 
-    public void saveLocation(String location) {
-        putString(SP_KEY_LOCATION, location);
+    public void saveLocation(LocationAddress location) {
+        putString(SP_KEY_LOCATION, FastJsonUtils.toJsonString(location));
     }
 
-    public String getLocation() {
-        return getString(SP_KEY_LOCATION, "");
+    public LocationAddress getLocation() {
+        LocationAddress locationAddress;
+        try {
+            locationAddress = FastJsonUtils.getSingleBean(getString(SP_KEY_LOCATION, ""), LocationAddress.class);
+        } catch (Exception e) {
+            locationAddress = new LocationAddress();
+            e.printStackTrace();
+        }
+        return locationAddress;
     }
 
     private static final String SP_KEY_NEED_ENTER_GUIDE_PAGE = "sp_key_need_enter_guide_page";

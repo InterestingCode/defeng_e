@@ -16,10 +16,11 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.event.ProblemPhotoEvent;
 import com.diesel.htweather.listener.RecyclerItemClickListener;
+import com.diesel.htweather.map.MapLocationClient;
+import com.diesel.htweather.map.LocationAddress;
 import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.user.adapter.EditProblemAdapter;
 import com.diesel.htweather.util.FastJsonUtils;
@@ -75,6 +76,8 @@ public class EditProblemActivity extends BaseActivity {
 
     private File mWatermarkFile = null;
 
+    private MapLocationClient mMapLocationClient;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,10 +92,11 @@ public class EditProblemActivity extends BaseActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
 
-        String location = SharedPreferencesUtils.getInstance(mContext).getLocation();
-        mLocationTv.setText(location);
-        if (TextUtils.isEmpty(location)) {
-            DFApplication.getInstance().sendStartLocationBroadcast();
+        mMapLocationClient = new MapLocationClient(this);
+        LocationAddress address = SharedPreferencesUtils.getInstance(mContext).getLocation();
+        mLocationTv.setText(address.getLocation());
+        if (TextUtils.isEmpty(address.getLocation())) {
+            mMapLocationClient.startLocation();
         }
     }
 
@@ -116,12 +120,12 @@ public class EditProblemActivity extends BaseActivity {
                 if (TextUtils.isEmpty(sb.toString())) {
                     imagePath = sb.substring(0, sb.toString().length() - 1);
                 }
-                String location = SharedPreferencesUtils.getInstance(mContext).getLocation();
-                if (TextUtils.isEmpty(location)) {
+                LocationAddress address = SharedPreferencesUtils.getInstance(mContext).getLocation();
+                if (TextUtils.isEmpty(address.getLocation())) {
                     ToastUtils.show("未获取到定位城市，请稍等");
                     return;
                 }
-                publishProblem(problem, imagePath, location);
+                publishProblem(problem, imagePath, address.getLocation());
                 break;
         }
     }
@@ -245,6 +249,10 @@ public class EditProblemActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (null != mMapLocationClient) {
+            mMapLocationClient.destroy();
+            mMapLocationClient = null;
+        }
     }
 
     private void publishProblem(String content, String imagePath, String location) {
