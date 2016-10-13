@@ -88,12 +88,13 @@
         <activity android:name=".depthservice.GrowthDiaryDetailsActivity" />
         <activity android:name=".depthservice.ProfileActivity" />
         <activity android:name=".depthservice.AgricultureDoctorActivity" />
-        <activity
-            android:name=".depthservice.OnlineAdvisoryActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".depthservice.OnlineAdvisoryActivity" />
         <activity android:name=".depthservice.OnlineAdvisoryDetailsActivity" />
         <activity android:name=".depthservice.FarmingAdviceActivity" />
+        <activity
+            android:name=".depthservice.SearchActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
     </application>
 
 </manifest>

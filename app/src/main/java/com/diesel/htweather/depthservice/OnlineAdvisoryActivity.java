@@ -1,5 +1,6 @@
 package com.diesel.htweather.depthservice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import butterknife.OnClick;
  */
 public class OnlineAdvisoryActivity extends BaseActivity {
 
+
     @BindView(R.id.allMsgTab)
     RelativeLayout allMsgTab;
 
@@ -42,6 +44,9 @@ public class OnlineAdvisoryActivity extends BaseActivity {
     @BindView(R.id.online_pager)
     NoScrollViewPager mViewPager;
 
+    @BindView(R.id.share_layout)
+    RelativeLayout mQuestionBtn;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +58,20 @@ public class OnlineAdvisoryActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.back_btn)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.back_btn, R.id.online_search_btn, R.id.share_layout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.back_btn:
+                finish();
+                break;
+            case R.id.online_search_btn:
+                startActivity(new Intent(this, SearchActivity.class));
+                break;
+            case R.id.share_layout:
+                //startActivity(new Intent(this, SearchActivity.class));
+                break;
+        }
+
     }
 
     class CustomOnClickListener implements View.OnClickListener {
@@ -86,10 +102,10 @@ public class OnlineAdvisoryActivity extends BaseActivity {
     private List<BaseFragment> initFragments() {
         List<BaseFragment> fragments = new ArrayList<BaseFragment>();
 
-        BaseFragment allMsgFragment = new OnlineFragment();
+        BaseFragment allMsgFragment = new OnlineAllFragment();
         fragments.add(allMsgFragment);
 
-        BaseFragment myMsgFragment = new OnlineFragment();
+        BaseFragment myMsgFragment = new OnlineMeFragment();
         fragments.add(myMsgFragment);
 
         return fragments;

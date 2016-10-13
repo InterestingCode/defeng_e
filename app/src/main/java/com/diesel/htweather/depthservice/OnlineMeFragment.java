@@ -1,6 +1,5 @@
 package com.diesel.htweather.depthservice;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +10,8 @@ import android.view.ViewGroup;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.depthservice.adapter.OnlineAdvisoryAdapter;
-import com.diesel.htweather.event.RecyclerItemEvent;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +21,7 @@ import butterknife.ButterKnife;
  * 在线咨询页
  */
 
-public class OnlineFragment extends BaseFragment {
+public class OnlineMeFragment extends BaseFragment {
 
     @BindView(R.id.farming_policy_recycler_view)
     XRecyclerView mRecyclerView;
@@ -44,12 +40,4 @@ public class OnlineFragment extends BaseFragment {
         mRecyclerView.setAdapter(new OnlineAdvisoryAdapter());
         return view;
     }
-
-
-    @Subscribe
-    public void onRecyclerItemEvent(RecyclerItemEvent event) {
-        int position = event.position;
-        startActivity(new Intent(getActivity(), OnlineAdvisoryDetailsActivity.class));
-    }
-
 }
