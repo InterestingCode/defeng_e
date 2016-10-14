@@ -77,10 +77,10 @@ public class FarmingPagerFragment extends BaseFragment
         super.onViewCreated(view, savedInstanceState);
 //        mFarmingData.add(new WeatherDataBean());
 //        mFarmingData.add(new ActualFarmingBean());
-//        mFarmingData.add(new FarmingBannerBean());
+//        mFarmingData.add(new AdvertiseBannerBean());
 //        mFarmingData.add(new FarmingInfoBean());
 //        mFarmingData.add(new FarmingPolicyBean());
-//        mFarmingData.add(new FarmingBannerBean());
+//        mFarmingData.add(new AdvertiseBannerBean());
         mAdapter = new FarmingPagerAdapter(mFarmingData);
 
         View headerView = LayoutInflater.from(getContext())

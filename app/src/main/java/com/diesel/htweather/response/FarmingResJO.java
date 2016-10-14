@@ -21,6 +21,11 @@ public class FarmingResJO extends BaseResJO {
     public static class ObjEntity {
 
         /**
+         * 用户关注的地区个数
+         */
+        public int count;
+
+        /**
          * 未读消息数
          */
         public int unreadCounts;

@@ -14,7 +14,7 @@ import com.diesel.htweather.farming.holder.FarmingPolicyHolder;
 import com.diesel.htweather.farming.holder.WeatherDataHolder;
 import com.diesel.htweather.farming.holder.WeatherPageHeaderHolder;
 import com.diesel.htweather.farming.model.ActualFarmingBean;
-import com.diesel.htweather.farming.model.FarmingBannerBean;
+import com.diesel.htweather.farming.model.AdvertiseBannerBean;
 import com.diesel.htweather.farming.model.FarmingInfoBean;
 import com.diesel.htweather.farming.model.FarmingPolicyBean;
 import com.diesel.htweather.farming.model.WeatherDataBean;
@@ -131,7 +131,7 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
             viewType = TYPE_FARMING_INFO;
         } else if (bean instanceof FarmingPolicyBean) {
             viewType = TYPE_FARMING_POLICY;
-        } else if (bean instanceof FarmingBannerBean) {
+        } else if (bean instanceof AdvertiseBannerBean) {
             viewType = TYPE_FARMING_BANNER;
         } else {
             viewType = TYPE_PAGE_HEADER;

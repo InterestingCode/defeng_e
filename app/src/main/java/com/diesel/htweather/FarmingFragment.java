@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.farming.FarmingPagerFragment;
+import com.diesel.htweather.farming.model.ActivityBannerBean;
+import com.diesel.htweather.farming.model.ActualFarmingBean;
+import com.diesel.htweather.farming.model.AdvertiseBannerBean;
 import com.diesel.htweather.farming.model.FarmingInfoBean;
 import com.diesel.htweather.farming.model.FarmingPolicyBean;
+import com.diesel.htweather.farming.model.WeatherDataBean;
 import com.diesel.htweather.response.FarmingResJO;
+import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.AreaWebService;
@@ -89,11 +94,17 @@ public class FarmingFragment extends BaseFragment {
                 try {
                     FarmingResJO resJO = FastJsonUtils.getSingleBean(response, FarmingResJO.class);
                     if (null == resJO) {
-
+                        ToastUtils.show(getString(R.string.tips_request_failure));
                         return;
                     }
                     FarmingResJO.ObjEntity obj = resJO.obj;
                     if (resJO.status == 0 && null != obj) {
+                        if (obj.count == 0) {
+                            ToastUtils.show("您还没有关注地区，请先关注地区");
+                            ActivityNav.getInstance().startLocationActivity(mActivity);
+                            return;
+                        }
+
                         // 未读消息数
                         mUnreadMsgCnt = obj.unreadCounts;
 
@@ -102,44 +113,64 @@ public class FarmingFragment extends BaseFragment {
                         if (null != weatherCropColl && !weatherCropColl.isEmpty()) {
                             for (int i = 0; i < weatherCropColl.size(); i++) {
                                 List<BaseBean> baseBeen = new ArrayList<>();
+                                WeatherDataBean weatherDataBean = new WeatherDataBean();
+                                ActualFarmingBean actualFarmingBean = new ActualFarmingBean();
 
                                 FarmingResJO.ObjEntity.WeatherCropCollEntity weatherCropCollEntity = weatherCropColl.get(i);
                                 // 用户关注区域7天天气情况
-                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList = weatherCropCollEntity.dayWeatherList;
+//                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList = weatherCropCollEntity.dayWeatherList;
+                                weatherDataBean.dayWeatherList = weatherCropCollEntity.dayWeatherList;
                                 // 实况数据
-                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity> hoursDataList = weatherCropCollEntity.hoursDataList;
+//                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity> hoursDataList = weatherCropCollEntity.hoursDataList;
+                                weatherDataBean.hoursDataList = weatherCropCollEntity.hoursDataList;
                                 // 精准农技
-                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity> timelyCropsNewsList = weatherCropCollEntity.timelyCropsNewsList;
+//                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity> timelyCropsNewsList = weatherCropCollEntity.timelyCropsNewsList;
+                                actualFarmingBean.mTimelyCropsNewsListEntities = weatherCropCollEntity.timelyCropsNewsList;
+
+                                baseBeen.add(weatherDataBean);
+                                baseBeen.add(actualFarmingBean);
+                                mFarmingData.add(baseBeen);
                             }
                         }
 
                         // 中间部分广告图
                         List<FarmingResJO.ObjEntity.AdvertiseListEntity> advertiseList = obj.advertiseList;
                         if (null != advertiseList && !advertiseList.isEmpty()) {
-
+                            for (int i = 0; i < advertiseList.size(); i ++) {
+                                AdvertiseBannerBean bannerBean = new AdvertiseBannerBean();
+                                bannerBean.advertiseEntity = advertiseList.get(i);
+                                mFarmingData.get(i).add(bannerBean);
+                            }
                         }
 
                         // 农气情报
-                        List<FarmingResJO.ObjEntity.ArticleCropsNewsEntity>
-                                articleCropsNews = resJO.obj.articleCropsNews;
+                        List<FarmingResJO.ObjEntity.ArticleCropsNewsEntity> articleCropsNews = resJO.obj.articleCropsNews;
                         if (null != articleCropsNews && !articleCropsNews.isEmpty()) {
-                            FarmingInfoBean farmingInfo = new FarmingInfoBean();
-                            farmingInfo.convertArticleCropsNewsEntity(articleCropsNews.get(0));
-//                            mFarmingData.add(farmingInfo);
+                            for (int i = 0; i < articleCropsNews.size(); i ++) {
+                                FarmingInfoBean farmingInfo = new FarmingInfoBean();
+                                farmingInfo.convertArticleCropsNewsEntity(articleCropsNews.get(i));
+                                mFarmingData.get(i).add(farmingInfo);
+                            }
                         }
 
                         // 农业政策
                         List<FarmingResJO.ObjEntity.PolcyCropsNewsEntity> polcyCropsNews = obj.polcyCropsNews;
                         if (null != polcyCropsNews && !polcyCropsNews.isEmpty()) {
-                            FarmingPolicyBean farmingPolicy = new FarmingPolicyBean();
-                            farmingPolicy.convertPolcyCropsNewsEntity(polcyCropsNews.get(0));
-//                            mFarmingData.add(farmingPolicy);
+                            for (int i = 0; i < polcyCropsNews.size(); i++) {
+                                FarmingPolicyBean farmingPolicy = new FarmingPolicyBean();
+                                farmingPolicy.convertPolcyCropsNewsEntity(polcyCropsNews.get(0));
+                                mFarmingData.get(i).add(farmingPolicy);
+                            }
                         }
 
                         // 下面部分活动图
                         List<FarmingResJO.ObjEntity.ActivityListEntity> activityList = obj.activityList;
                         if (null != activityList && !activityList.isEmpty()) {
-
+                            for (int i = 0; i < activityList.size(); i ++) {
+                                ActivityBannerBean bannerBean = new ActivityBannerBean();
+                                bannerBean.activityEntity = activityList.get(i);
+                                mFarmingData.get(i).add(bannerBean);
+                            }
                         }
 
                     } else {

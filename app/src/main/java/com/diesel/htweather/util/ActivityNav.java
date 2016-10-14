@@ -8,6 +8,7 @@ import com.diesel.htweather.MainActivity;
 import com.diesel.htweather.farming.CityManageActivity;
 import com.diesel.htweather.farming.FarmingDetailsActivity;
 import com.diesel.htweather.farming.FarmingListActivity;
+import com.diesel.htweather.farming.LocationActivity;
 import com.diesel.htweather.farming.MessageActivity;
 import com.diesel.htweather.farming.MessageDetailsActivity;
 import com.diesel.htweather.farming.TruthDataSettingActivity;
@@ -97,6 +98,11 @@ public class ActivityNav {
 
     public void startTruthDataSettingActivity(Context context) {
         Intent intent = new Intent(context, TruthDataSettingActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void startLocationActivity(Context context) {
+        Intent intent = new Intent(context, LocationActivity.class);
         context.startActivity(intent);
     }
 

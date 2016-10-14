@@ -33,40 +33,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px90"
-        android:background="@android:color/white"
-        android:paddingLeft="@dimen/px24"
-        android:paddingRight="@dimen/px24">
-
-        <TextView
-            android:id="@+id/location_city_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableLeft="@drawable/ic_location_city"
-            android:drawablePadding="@dimen/px20"
-            android:gravity="center_vertical"
-            android:text="重庆"
-            android:textColor="@color/black_333"
-            android:textSize="@dimen/font_30px" />
-
-        <ImageView
-            android:id="@+id/relocation_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/location_city_tv"
-            android:paddingLeft="@dimen/px20"
-            android:paddingRight="@dimen/px20"
-            android:src="@drawable/ic_relocation" />
-
-        <ImageView
-            android:id="@+id/more_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:paddingLeft="@dimen/px20"
-            android:src="@drawable/ic_right_gray_arrow" />
-    </RelativeLayout>-->
-
 </LinearLayout>

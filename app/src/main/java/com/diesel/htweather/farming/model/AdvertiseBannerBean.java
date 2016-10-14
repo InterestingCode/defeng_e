@@ -1,6 +1,7 @@
 package com.diesel.htweather.farming.model;
 
 import com.diesel.htweather.base.BaseBean;
+import com.diesel.htweather.response.FarmingResJO;
 
 /**
  * Comments：广告
@@ -12,6 +13,8 @@ import com.diesel.htweather.base.BaseBean;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class FarmingBannerBean extends BaseBean {
+public class AdvertiseBannerBean extends BaseBean {
+
+    public FarmingResJO.ObjEntity.AdvertiseListEntity advertiseEntity;
 
 }

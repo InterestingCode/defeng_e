@@ -62,7 +62,7 @@ public class AreaWebService extends WebService {
     /**
      * 热门推荐区域
      */
-    public void getHotArea(Callback callback) {
+    public void getHotAndRecommendArea(Callback callback) {
         OkHttpUtils
                 .get()
                 .url(Api.GET_HOT_AREA_URL)

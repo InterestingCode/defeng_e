@@ -19,9 +19,9 @@ import java.util.List;
 public class WeatherDataBean extends BaseBean {
 
     // 用户关注区域7天天气情况
-    List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList;
+    public List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList;
     // 实况数据
-    List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity> hoursDataList;
+    public List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity> hoursDataList;
 
     public String currTemp;
 
