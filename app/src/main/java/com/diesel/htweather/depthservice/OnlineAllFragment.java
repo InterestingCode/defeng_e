@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,20 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.depthservice.adapter.OnlineAdvisoryAdapter;
 import com.diesel.htweather.event.RecyclerItemEvent;
+import com.diesel.htweather.response.OnlineAdvisoryResJO;
+import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 
 /**
  * Created by zhoujiangsen
@@ -38,12 +45,43 @@ public class OnlineAllFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
         mRecyclerView.setPullRefreshEnabled(false);
-        mRecyclerView.setLoadingMoreEnabled(false);
+        mRecyclerView.setLoadingMoreEnabled(true);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST,
                 R.drawable.recycler_view_1px_divider_shape));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(new OnlineAdvisoryAdapter());
+        initDatas();
         return view;
+    }
+
+    private void initDatas() {
+        showDialog();
+        DepthWebService.getInstance().getOnlineConsultationMessages("1", new StringCallback() {
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "OnlineAllMsg#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show(getString(R.string.tips_request_failure));
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "OnlineAllMsg#onResponse() " + response);
+                dismissDialog();
+                try {
+
+                    OnlineAdvisoryResJO resJO = FastJsonUtils.getSingleBean(response, OnlineAdvisoryResJO.class);
+                    if (null != resJO && !resJO.getData().isEmpty() && resJO.status == 0) {
+                        mRecyclerView.setAdapter(new OnlineAdvisoryAdapter(resJO.getData()));
+                    }
+
+                } catch (Exception e) {
+                    Log.e(TAG, "OnlineAllMsg#onResponse() " + e.getMessage());
+                }
+
+
+            }
+        });
     }
 
 

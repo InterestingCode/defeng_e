@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.depthservice.adapter.OnlineAdvisoryAdapter;
 import com.diesel.htweather.event.RecyclerItemEvent;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -40,7 +39,7 @@ public class SearchActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST,
                 R.drawable.recycler_view_1px_divider_shape));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new OnlineAdvisoryAdapter());
+        // mRecyclerView.setAdapter(new OnlineAdvisoryAdapter());
     }
 
     @OnClick(R.id.back_btn)

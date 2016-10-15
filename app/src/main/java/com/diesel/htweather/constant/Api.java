@@ -121,4 +121,16 @@ public class Api {
     // 图片上传
     public static final String UPLOAD_FILE_URL = SERVER_URL + "/nologin/common/process.c?do=uploadMediaFile";
 
+    // 发布在线咨询
+    public static final String RELEASE_ONLINE_CONSULTATION_URL = SERVER_URL + "/session/content/process.c?do=createAskContent";
+
+    // 在线咨询评论
+    public static final String COMMENT_ONLINE_CONSULTATION_URL = SERVER_URL + "/session/content/process.c?do=addAskContentComment";
+
+    // 获取在线咨询列表
+    public static final String GET_ONLINE_CONSULTATION_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getAskContentList";
+
+    // 在线咨询点赞
+    public static final String ONLINE_CONSULTATION_AGREE_URL = SERVER_URL + "/nologin/content/process.c?do=askContentUps";
+
 }
