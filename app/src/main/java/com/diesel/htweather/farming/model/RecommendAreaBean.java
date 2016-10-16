@@ -20,6 +20,6 @@ import java.util.List;
 
 public class RecommendAreaBean extends BaseBean {
 
-    public List<LocationResJO.AreaListEntity.RecommendAreaListEntity> recommendAreaList;
+    public List<LocationResJO.AreaListEntity.HotAreaListEntity> recommendAreaList;
 
 }

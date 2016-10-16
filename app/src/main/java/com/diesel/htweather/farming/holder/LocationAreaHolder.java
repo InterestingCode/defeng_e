@@ -2,8 +2,13 @@ package com.diesel.htweather.farming.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
+import com.diesel.htweather.R;
 import com.diesel.htweather.farming.model.LocationBean;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Comments：
@@ -20,9 +25,15 @@ import com.diesel.htweather.farming.model.LocationBean;
 
 public class LocationAreaHolder extends RecyclerView.ViewHolder {
 
+    @BindView(R.id.location_city_tv)
+    TextView mTextView;
+
     public LocationAreaHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
     }
 
-    public void bindData(LocationBean bean) {}
+    public void bindData(LocationBean bean) {
+        mTextView.setText(bean.location.city);
+    }
 }

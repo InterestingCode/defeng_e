@@ -38,7 +38,7 @@
         <activity android:name=".MainActivity" />
 
         <activity android:name=".farming.CityManageActivity" />
-        <activity android:name=".farming.LocationActivity" />
+        <activity android:name=".farming.LocationActivity" android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name=".farming.MessageActivity" />
         <activity android:name=".farming.MessageDetailsActivity" />
         <activity android:name=".farming.FarmingListActivity" />

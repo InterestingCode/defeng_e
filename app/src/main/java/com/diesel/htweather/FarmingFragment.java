@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
+import com.diesel.htweather.event.RefreshFarmingDataEvent;
 import com.diesel.htweather.farming.FarmingPagerFragment;
 import com.diesel.htweather.farming.model.ActivityBannerBean;
 import com.diesel.htweather.farming.model.ActualFarmingBean;
@@ -24,6 +25,9 @@ import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.AreaWebService;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +71,7 @@ public class FarmingFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         mFragments.add(FarmingPagerFragment.newInstance());
         MainPagerAdapter adapter = new MainPagerAdapter(getChildFragmentManager());
         adapter.setList(mFragments);
@@ -107,6 +112,8 @@ public class FarmingFragment extends BaseFragment {
 
                         // 未读消息数
                         mUnreadMsgCnt = obj.unreadCounts;
+
+                        mFarmingData.clear();
 
                         // 实况数据+精准农技
                         List<FarmingResJO.ObjEntity.WeatherCropCollEntity> weatherCropColl = resJO.obj.weatherCropColl;
@@ -183,4 +190,14 @@ public class FarmingFragment extends BaseFragment {
         });
     }
 
+    @Subscribe
+    public void onRefreshFarmingDataEvent(RefreshFarmingDataEvent event) {
+        getFocusAreaFarmingData();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

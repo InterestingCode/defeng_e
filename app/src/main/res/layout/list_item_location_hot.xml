@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/px65"
+    android:paddingLeft="@dimen/px24"
+    android:paddingRight="@dimen/px24">
+
+    <View style="@style/BaseHorizontalLine" />
+
+    <TextView
+        style="@style/BaseText.black333_30px"
+        android:layout_marginTop="@dimen/px40"
+        android:text="热门城市" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hot_area_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px50" />
 
 </LinearLayout>

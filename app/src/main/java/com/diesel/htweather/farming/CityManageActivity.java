@@ -15,6 +15,7 @@ import com.diesel.htweather.db.DBHelperFocusArea;
 import com.diesel.htweather.db.model.FocusArea;
 import com.diesel.htweather.event.AddFocusAreaEvent;
 import com.diesel.htweather.event.DeleteFocusAreaEvent;
+import com.diesel.htweather.event.RefreshFarmingDataEvent;
 import com.diesel.htweather.farming.adapter.AreaManageAdapter;
 import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.response.FocusAreaResJO;
@@ -180,6 +181,8 @@ public class CityManageActivity extends BaseActivity {
 //                        mPlants.add(mPlants.size() == 1 ? 0 : mPlants.size() - 1, area);
 //                        mAdapter.notifyDataSetChanged();
 //                        DBHelperFocusArea.insertArea(area);
+                        EventBus.getDefault().post(new RefreshFarmingDataEvent());
+
                         getFocusArea();
                     }
                 } catch (Exception e) {
@@ -216,6 +219,8 @@ public class CityManageActivity extends BaseActivity {
 //                        mPlants.remove(area);
 //                        mAdapter.notifyDataSetChanged();
 //                        DBHelperFocusArea.deleteArea(area);
+//                        EventBus.getDefault().post(new RefreshFarmingDataEvent());
+
                         getFocusArea();
                     }
                 } catch (Exception e) {

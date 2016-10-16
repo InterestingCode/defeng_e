@@ -23,7 +23,7 @@ public class LocationResJO extends BaseResJO {
 
         public List<HotAreaListEntity> hotAreaList;
 
-        public List<RecommendAreaListEntity> recommendAreaList;
+        public List<HotAreaListEntity> recommendAreaList;
 
         public static class HotAreaListEntity {
 
