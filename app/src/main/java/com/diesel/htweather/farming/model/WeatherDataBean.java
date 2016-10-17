@@ -18,6 +18,10 @@ import java.util.List;
  */
 public class WeatherDataBean extends BaseBean {
 
+    public int arId;
+
+    public String arName;
+
     // 用户关注区域7天天气情况
     public List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList;
     // 实况数据

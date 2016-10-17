@@ -51,9 +51,11 @@ public class FarmingFragment extends BaseFragment {
     @BindView(R.id.weather_pager)
     ViewPager mWeatherPager;
 
-    private List<List<BaseBean>> mFarmingData = new ArrayList<>();
+    private ArrayList<ArrayList<BaseBean>> mFarmingData = new ArrayList<>();
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
+
+    private MainPagerAdapter mAdapter = null;
 
     public static FarmingFragment newInstance() {
         return new FarmingFragment();
@@ -73,9 +75,9 @@ public class FarmingFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         EventBus.getDefault().register(this);
         mFragments.add(FarmingPagerFragment.newInstance());
-        MainPagerAdapter adapter = new MainPagerAdapter(getChildFragmentManager());
-        adapter.setList(mFragments);
-        mWeatherPager.setAdapter(adapter);
+        mAdapter = new MainPagerAdapter(getChildFragmentManager());
+        mAdapter.setList(mFragments);
+        mWeatherPager.setAdapter(mAdapter);
 
         getFocusAreaFarmingData();
     }
@@ -119,11 +121,13 @@ public class FarmingFragment extends BaseFragment {
                         List<FarmingResJO.ObjEntity.WeatherCropCollEntity> weatherCropColl = resJO.obj.weatherCropColl;
                         if (null != weatherCropColl && !weatherCropColl.isEmpty()) {
                             for (int i = 0; i < weatherCropColl.size(); i++) {
-                                List<BaseBean> baseBeen = new ArrayList<>();
+                                ArrayList<BaseBean> baseBeen = new ArrayList<>();
                                 WeatherDataBean weatherDataBean = new WeatherDataBean();
                                 ActualFarmingBean actualFarmingBean = new ActualFarmingBean();
 
                                 FarmingResJO.ObjEntity.WeatherCropCollEntity weatherCropCollEntity = weatherCropColl.get(i);
+                                weatherDataBean.arId = weatherCropCollEntity.arId;
+                                weatherDataBean.arName = weatherCropCollEntity.arName;
                                 // 用户关注区域7天天气情况
 //                                List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList = weatherCropCollEntity.dayWeatherList;
                                 weatherDataBean.dayWeatherList = weatherCropCollEntity.dayWeatherList;
@@ -180,6 +184,18 @@ public class FarmingFragment extends BaseFragment {
                             }
                         }
 
+                        mFragments.clear();
+                        for (int i = 0; i < mFarmingData.size(); i ++) {
+//                            mFragments.add(FarmingPagerFragment.newInstance(mFarmingData.get(i)));
+                            FarmingPagerFragment fragment = FarmingPagerFragment.newInstance();
+                            fragment.setData(mFarmingData.get(i));
+                            mFragments.add(fragment);
+                        }
+                        mAdapter.notifyDataSetChanged();
+
+
+
+
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -200,4 +216,5 @@ public class FarmingFragment extends BaseFragment {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
 }

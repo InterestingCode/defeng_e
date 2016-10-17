@@ -2,6 +2,7 @@ package com.diesel.htweather.farming;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
@@ -49,18 +51,39 @@ import okhttp3.Call;
 public class FarmingPagerFragment extends BaseFragment
         implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
 
+    private static final String KEY_ARGS_DATA = "key_args_data";
+
     @BindView(R.id.refresh_layout)
     BGARefreshLayout mRefreshLayout;
 
     @BindView(R.id.farming_data_view)
     RecyclerView mRecyclerView;
 
+    private TextView nameTv, msgCntTv;
+
     private FarmingPagerAdapter mAdapter;
 
     private List<BaseBean> mFarmingData = new ArrayList<>();
 
+    public static FarmingPagerFragment newInstance(ArrayList<BaseBean> data) {
+        FarmingPagerFragment fragment = new FarmingPagerFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList(KEY_ARGS_DATA, data);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public static FarmingPagerFragment newInstance() {
         return new FarmingPagerFragment();
+    }
+
+    public void setData(List<BaseBean> data) {
+        mFarmingData.clear();
+        mFarmingData.addAll(data);
+        Log.e(TAG, "setData().....................");
+
+//        WeatherDataBean weatherDataBean = (WeatherDataBean) mFarmingData.get(0);
+//        nameTv.setText(weatherDataBean.arName);
     }
 
     @Nullable
@@ -75,29 +98,23 @@ public class FarmingPagerFragment extends BaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        mFarmingData.add(new WeatherDataBean());
-//        mFarmingData.add(new ActualFarmingBean());
-//        mFarmingData.add(new AdvertiseBannerBean());
-//        mFarmingData.add(new FarmingInfoBean());
-//        mFarmingData.add(new FarmingPolicyBean());
-//        mFarmingData.add(new AdvertiseBannerBean());
-        mAdapter = new FarmingPagerAdapter(mFarmingData);
-
+        Log.e(TAG, "onViewCreated().....................");
         View headerView = LayoutInflater.from(getContext())
                 .inflate(R.layout.weather_page_header_layout,
                         (ViewGroup) getActivity().findViewById(android.R.id.content), false);
         headerView.findViewById(R.id.area_layout).setOnClickListener(this);
         headerView.findViewById(R.id.message_iv).setOnClickListener(this);
+        nameTv = (TextView) headerView.findViewById(R.id.city_name_tv);
+        msgCntTv = (TextView) headerView.findViewById(R.id.new_msg_cnt_tv);
         mRefreshLayout.setCustomHeaderView(headerView, false);
         BGARefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(getContext(),
                 false);
         mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
         mRefreshLayout.setDelegate(this);
 
+        mAdapter = new FarmingPagerAdapter(mFarmingData);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-
-//        getFarmingData();
     }
 
     @Override
@@ -127,89 +144,4 @@ public class FarmingPagerFragment extends BaseFragment
         }
     }
 
-    private void getFarmingData() {
-        OkHttpUtils
-                .get()
-                .url(Api.FARMING_URL)
-                .addParams("drivenType", "02")
-                .addParams("appkey", "b66a5c46acf46c10a601bc8cabe4c074")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.d(TAG, "getFarmingData#onError() " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.d(TAG, "getFarmingData#onResponse() " + response);
-                        try {
-                            FarmingResJO resJO = FastJsonUtils
-                                    .getSingleBean(response, FarmingResJO.class);
-                            if (null == resJO) {
-                                return;
-                            }
-                            if (resJO.status != 0 || null == resJO.obj) {
-                                ToastUtils.show(resJO.msg);
-                                return;
-                            }
-
-                            mFarmingData.clear();
-                            List<FarmingResJO.ObjEntity.WeatherCropCollEntity>
-                                    weatherCropColl = resJO.obj.weatherCropColl;
-                            if (null != weatherCropColl && !weatherCropColl.isEmpty()) {
-                                for (int i = 0; i < weatherCropColl.size(); i++) {
-                                    // FIXME:当前只添加一个页面的数据
-                                    if (weatherCropColl.get(i).arId > 1) break;
-                                    // 区域天气情况
-                                    List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity>
-                                            dayWeatherList = weatherCropColl.get(i).dayWeatherList;
-                                    if (null != dayWeatherList && !dayWeatherList.isEmpty()) {
-                                        for (int m = 0; m < dayWeatherList.size(); m++) {
-                                            FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity
-                                                    dayWeatherListEntity = dayWeatherList.get(m);
-                                            // FIXME:当前数据为测试数据
-                                            if ("2016-04-13"
-                                                    .equals(dayWeatherListEntity.currDate)) {
-                                                WeatherDataBean weatherData = new WeatherDataBean();
-                                                weatherData.convertDayWeatherListEntity(
-                                                        dayWeatherListEntity);
-                                                mFarmingData.add(0, weatherData);
-                                            }
-                                        }
-                                    }
-                                    // 精准农技信息
-                                    List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity>
-                                            timelyCropsNewsList = weatherCropColl.get(i).timelyCropsNewsList;
-                                    if (null != timelyCropsNewsList && !timelyCropsNewsList.isEmpty()) {
-                                        ActualFarmingBean actualFarming = new ActualFarmingBean();
-                                        actualFarming.mTimelyCropsNewsListEntities = timelyCropsNewsList;
-                                        mFarmingData.add(actualFarming);
-                                    }
-                                }
-
-                            }
-                            // 农气情报
-                            List<FarmingResJO.ObjEntity.ArticleCropsNewsEntity>
-                                    articleCropsNews = resJO.obj.articleCropsNews;
-                            if (null != articleCropsNews && !articleCropsNews.isEmpty()) {
-                                FarmingInfoBean farmingInfo = new FarmingInfoBean();
-                                farmingInfo.convertArticleCropsNewsEntity(articleCropsNews.get(0));
-                                mFarmingData.add(farmingInfo);
-                            }
-                            // 农业政策
-                            List<FarmingResJO.ObjEntity.PolcyCropsNewsEntity>
-                                    polcyCropsNews = resJO.obj.polcyCropsNews;
-                            if (null != polcyCropsNews && !polcyCropsNews.isEmpty()) {
-                                FarmingPolicyBean farmingPolicy = new FarmingPolicyBean();
-                                farmingPolicy.convertPolcyCropsNewsEntity(polcyCropsNews.get(0));
-                                mFarmingData.add(farmingPolicy);
-                            }
-                            mAdapter.notifyDataSetChanged();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-    }
 }

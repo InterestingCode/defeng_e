@@ -62,11 +62,11 @@ public class FarmingResJO extends BaseResJO {
 
         public static class WeatherCropCollEntity {
 
-            public HoursDataListEntity hoursDataList;
-
             public int arId;
 
             public String arName;
+
+            public HoursDataListEntity hoursDataList;
 
             public List<DayWeatherListEntity> dayWeatherList;
 
