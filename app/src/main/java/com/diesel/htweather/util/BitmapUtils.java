@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -24,9 +25,9 @@ import java.io.IOException;
  * Comments：
  *
  * @author Diesel
- *
+ *         <p>
  *         Time: 2016/9/26
- *
+ *         <p>
  *         Modified By:
  *         Modified Date:
  *         Why & What is modified:
@@ -88,6 +89,32 @@ public class BitmapUtils {
      */
     public static Bitmap getBitmaoFrombyte(byte[] b) {
         return BitmapFactory.decodeByteArray(b, 0, b.length);
+    }
+
+    /**
+     * 指定大小的 Drawable
+     *
+     * @param bitmap
+     * @param w
+     * @param h
+     * @return
+     */
+    public static Drawable resizeImage(Bitmap bitmap, int w, int h) {
+        Bitmap BitmapOrg = bitmap;
+        int width = BitmapOrg.getWidth();
+        int height = BitmapOrg.getHeight();
+        int newWidth = w;
+        int newHeight = h;
+
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // if you want to rotate the Bitmap  
+        // matrix.postRotate(45);  
+        Bitmap resizedBitmap = Bitmap.createBitmap(BitmapOrg, 0, 0, width, height, matrix, true);
+        return new BitmapDrawable(resizedBitmap);
     }
 
 

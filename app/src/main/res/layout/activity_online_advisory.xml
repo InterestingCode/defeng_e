@@ -71,7 +71,8 @@
                 android:gravity="center"
                 android:text="98"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/font_28px" />
+                android:textSize="@dimen/font_28px"
+                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -93,15 +94,17 @@
                 android:textSize="@dimen/font_32px" />
 
             <TextView
-                android:layout_width="@dimen/px45"
-                android:layout_height="@dimen/px45"
+                android:layout_width="@dimen/px50"
+                android:layout_height="@dimen/px50"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/tvMe"
                 android:background="@drawable/ic_notice"
                 android:gravity="center"
-                android:text="..."
+                android:padding="@dimen/px4"
+                android:singleLine="true"
+                android:text="99+"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/font_28px" />
+                android:textSize="@dimen/font_24px" />
 
         </RelativeLayout>
     </LinearLayout>

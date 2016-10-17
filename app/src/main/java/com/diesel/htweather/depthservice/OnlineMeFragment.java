@@ -68,6 +68,8 @@ public class OnlineMeFragment extends BaseFragment {
                     OnlineAdvisoryResJO resJO = FastJsonUtils.getSingleBean(response, OnlineAdvisoryResJO.class);
                     if (null != resJO && !resJO.getData().isEmpty() && resJO.status == 0) {
                         mRecyclerView.setAdapter(new OnlineAdvisoryAdapter(resJO.getData()));
+                    } else {
+                        ToastUtils.show(resJO.msg);
                     }
 
                 } catch (Exception e) {

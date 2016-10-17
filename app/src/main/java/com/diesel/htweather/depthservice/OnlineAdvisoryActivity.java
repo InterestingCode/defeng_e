@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.BaseFragment;
-import com.diesel.htweather.user.EditProblemActivity;
 import com.diesel.htweather.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class OnlineAdvisoryActivity extends BaseActivity {
                 startActivity(new Intent(this, SearchActivity.class));
                 break;
             case R.id.share_layout:
-                startActivity(new Intent(this, EditProblemActivity.class));
+                startActivity(new Intent(this, PublishedIssuesActivity.class));
                 break;
         }
 

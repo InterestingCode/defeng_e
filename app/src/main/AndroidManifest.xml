@@ -38,7 +38,9 @@
         <activity android:name=".MainActivity" />
 
         <activity android:name=".farming.CityManageActivity" />
-        <activity android:name=".farming.LocationActivity" android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity
+            android:name=".farming.LocationActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name=".farming.MessageActivity" />
         <activity android:name=".farming.MessageDetailsActivity" />
         <activity android:name=".farming.FarmingListActivity" />
@@ -81,6 +83,10 @@
         <activity android:name=".depthservice.OnlineAdvisoryActivity" />
         <activity android:name=".depthservice.OnlineAdvisoryDetailsActivity" />
         <activity android:name=".depthservice.FarmingAdviceActivity" />
+        <activity
+            android:name=".depthservice.PublishedIssuesActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".depthservice.SearchActivity"
             android:configChanges="orientation|keyboardHidden"
