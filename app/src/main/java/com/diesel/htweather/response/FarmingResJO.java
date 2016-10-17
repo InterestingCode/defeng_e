@@ -62,62 +62,15 @@ public class FarmingResJO extends BaseResJO {
 
         public static class WeatherCropCollEntity {
 
+            public HoursDataListEntity hoursDataList;
+
             public int arId;
 
             public String arName;
 
-            /**
-             * 用户关注区域7天天气情况（当天+未来6天天气预测，日期根据数组下标递增，即：第一条表示当天天气情况）
-             */
             public List<DayWeatherListEntity> dayWeatherList;
 
-            /**
-             * 精准农技信息，具体展示数量和用户关注的农作物有关
-             */
             public List<TimelyCropsNewsListEntity> timelyCropsNewsList;
-
-            /**
-             * 实况数据
-             */
-            public List<HoursDataListEntity> hoursDataList;
-
-            public static class DayWeatherListEntity {
-
-                public String currTemp;
-
-                public String weatherContent;
-
-                public String week;
-
-                public String windPower;
-
-                public String currDate;
-
-                public String currLunarDate;
-
-                public String tempBucket;
-
-                public String weatherContentUrl;
-
-                public String windPowerLevel;
-            }
-
-            public static class TimelyCropsNewsListEntity {
-
-                public int cropId;
-
-                public int newsId;
-
-                public String cropName;
-
-                public String title;
-
-                public String content;
-
-                public String desc;
-
-                public String sendTime;
-            }
 
             public static class HoursDataListEntity {
 
@@ -184,7 +137,206 @@ public class FarmingResJO extends BaseResJO {
                     public String value;
                 }
             }
+
+            public static class DayWeatherListEntity {
+
+                public String currDate;
+
+                public String currTemp;
+
+                public String windPowerLevel;
+
+                public String currLunarDate;
+
+                public String tempBucket;
+
+                public String weatherContentUrl;
+
+                public String solarTerms;
+
+                public String windPower;
+
+                public String weatherContent;
+
+                public String week;
+            }
+
+            public static class TimelyCropsNewsListEntity {
+
+                public String content;
+
+                public String sourceWay;
+
+                public String title;
+
+                public String desc;
+
+                public int newsId;
+
+                public int cropId;
+
+                public String sendTime;
+
+                public String cropName;
+
+                public int counts;
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        public static class WeatherCropCollEntity {
+//
+//            public int arId;
+//
+//            public String arName;
+//
+//            /**
+//             * 用户关注区域7天天气情况（当天+未来6天天气预测，日期根据数组下标递增，即：第一条表示当天天气情况）
+//             */
+//            public List<DayWeatherListEntity> dayWeatherList;
+//
+//            /**
+//             * 精准农技信息，具体展示数量和用户关注的农作物有关
+//             */
+//            public List<TimelyCropsNewsListEntity> timelyCropsNewsList;
+//
+//            /**
+//             * 实况数据
+//             */
+//            public List<HoursDataListEntity> hoursDataList;
+//
+//            public static class DayWeatherListEntity {
+//
+//                public String currTemp;
+//
+//                public String weatherContent;
+//
+//                public String week;
+//
+//                public String windPower;
+//
+//                public String currDate;
+//
+//                public String currLunarDate;
+//
+//                public String tempBucket;
+//
+//                public String weatherContentUrl;
+//
+//                public String windPowerLevel;
+//            }
+//
+//            public static class TimelyCropsNewsListEntity {
+//
+//                public int cropId;
+//
+//                public int newsId;
+//
+//                public String cropName;
+//
+//                public String title;
+//
+//                public String content;
+//
+//                public String desc;
+//
+//                public String sendTime;
+//            }
+//
+//            public static class HoursDataListEntity {
+//
+//                public List<AirMoistureListEntity> airMoistureList;
+//
+//                public List<PrecipitationListEntity> precipitationList;
+//
+//                public List<SoilTempLlistEntity> soilTempLlist;
+//
+//                public List<SoilMoistureListEntity> soilMoistureList;
+//
+//                public List<SunshineListEntity> sunshineList;
+//
+//                public List<AirTempListEntity> airTempList;
+//
+//                public List<WindPowerListEntity> windPowerList;
+//
+//                public static class AirMoistureListEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//
+//                public static class PrecipitationListEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//
+//                public static class SoilTempLlistEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//
+//                public static class SoilMoistureListEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//
+//                public static class SunshineListEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//
+//                public static class AirTempListEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//
+//                public static class WindPowerListEntity {
+//
+//                    public String hours;
+//
+//                    public String value;
+//                }
+//            }
+//        }
 
         public static class ArticleCropsNewsEntity {
 
