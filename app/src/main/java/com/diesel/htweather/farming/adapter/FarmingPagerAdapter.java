@@ -13,6 +13,7 @@ import com.diesel.htweather.farming.holder.FarmingInfoHolder;
 import com.diesel.htweather.farming.holder.FarmingPolicyHolder;
 import com.diesel.htweather.farming.holder.WeatherDataHolder;
 import com.diesel.htweather.farming.holder.WeatherPageHeaderHolder;
+import com.diesel.htweather.farming.model.ActivityBannerBean;
 import com.diesel.htweather.farming.model.ActualFarmingBean;
 import com.diesel.htweather.farming.model.AdvertiseBannerBean;
 import com.diesel.htweather.farming.model.FarmingInfoBean;
@@ -33,6 +34,8 @@ import java.util.List;
  */
 public class FarmingPagerAdapter extends RecyclerView.Adapter {
 
+    private static final int TYPE_NONE = 0;
+
     private static final int TYPE_WEATHER_DATA = 1;
 
     private static final int TYPE_ACTUAL_FARM = 2;
@@ -41,9 +44,11 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
 
     private static final int TYPE_FARMING_POLICY = 4;
 
-    private static final int TYPE_FARMING_BANNER = 5;
+    private static final int TYPE_ADVERTISE_BANNER = 5;
 
-    private static final int TYPE_PAGE_HEADER = 6;
+    private static final int TYPE_ACTIVITY_BANNER = 6;
+
+    private static final int TYPE_PAGE_HEADER = 7;
 
     private List<BaseBean> mFarmingData;
 
@@ -72,9 +77,13 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
                 holder = new FarmingPolicyHolder(
                         inflater.inflate(R.layout.list_item_farming_policy, parent, false));
                 break;
-            case TYPE_FARMING_BANNER:
+            case TYPE_ADVERTISE_BANNER:
                 holder = new FarmingBannerHolder(
-                        inflater.inflate(R.layout.list_item_farming_banner, parent, false));
+                        inflater.inflate(R.layout.list_item_advertise_banner, parent, false));
+                break;
+            case TYPE_ACTIVITY_BANNER:
+                holder = new FarmingBannerHolder(
+                        inflater.inflate(R.layout.list_item_activity_banner, parent, false));
                 break;
             case TYPE_PAGE_HEADER:
                 holder = new WeatherPageHeaderHolder(
@@ -106,8 +115,11 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
             case TYPE_FARMING_POLICY:
                 ((FarmingPolicyHolder) holder).bindData((FarmingPolicyBean) bean);
                 break;
-            case TYPE_FARMING_BANNER:
-                ((FarmingBannerHolder) holder).bindData();
+            case TYPE_ADVERTISE_BANNER:
+                ((FarmingBannerHolder) holder).bindData((AdvertiseBannerBean) bean);
+                break;
+            case TYPE_ACTIVITY_BANNER:
+                ((FarmingBannerHolder) holder).bindData((ActivityBannerBean) bean);
                 break;
             default:
                 break;
@@ -132,9 +144,11 @@ public class FarmingPagerAdapter extends RecyclerView.Adapter {
         } else if (bean instanceof FarmingPolicyBean) {
             viewType = TYPE_FARMING_POLICY;
         } else if (bean instanceof AdvertiseBannerBean) {
-            viewType = TYPE_FARMING_BANNER;
+            viewType = TYPE_ADVERTISE_BANNER;
+        } else if (bean instanceof ActivityBannerBean) {
+            viewType = TYPE_ACTIVITY_BANNER;
         } else {
-            viewType = TYPE_PAGE_HEADER;
+            viewType = TYPE_NONE;
         }
         return viewType;
     }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/px130"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="@dimen/weather_page_lr_margin"
+    android:layout_marginRight="@dimen/weather_page_lr_margin">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/farming_banner_iv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px100"
+        fresco:placeholderImage="@drawable/banner_farming_info" />
+
+    <ImageButton
+        android:id="@+id/close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@null"
+        android:padding="@dimen/px20"
+        android:src="@drawable/icon_close" />
+
+</FrameLayout>

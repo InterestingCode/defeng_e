@@ -43,6 +43,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/air_temp_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -52,6 +53,7 @@
                 android:textSize="@dimen/font_24px" />
 
             <TextView
+                android:id="@+id/rainfall_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -61,6 +63,7 @@
                 android:textSize="@dimen/font_24px" />
 
             <TextView
+                android:id="@+id/soil_temp_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -70,6 +73,7 @@
                 android:textSize="@dimen/font_24px" />
 
             <TextView
+                android:id="@+id/soil_humidity_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

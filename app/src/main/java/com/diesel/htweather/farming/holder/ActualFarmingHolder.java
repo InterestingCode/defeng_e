@@ -64,9 +64,6 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
         } else {
             mAdapter.setEntities(entities);
         }
-//        if (null != entities && !entities.isEmpty()) {
-//            mAdapter.setEntities(entities);
-//        }
     }
 
     @OnClick(R.id.actual_farming_setting_btn)

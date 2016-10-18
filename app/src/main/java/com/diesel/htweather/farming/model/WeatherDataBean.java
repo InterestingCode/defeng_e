@@ -22,6 +22,8 @@ public class WeatherDataBean extends BaseBean {
 
     public String arName;
 
+    public String tips;
+
     // 用户关注区域7天天气情况
     public List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList;
     // 实况数据

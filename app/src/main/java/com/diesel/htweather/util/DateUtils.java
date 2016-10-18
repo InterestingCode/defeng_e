@@ -1,6 +1,7 @@
 package com.diesel.htweather.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -176,6 +177,8 @@ public class DateUtils {
         Calendar calendar1 = Calendar.getInstance();
         calendar1.setTime(new Date(day));
         Calendar calendar2 = Calendar.getInstance();
+        Log.d("TAG", "isToday() #calendar1# "+calendar1.get(Calendar.YEAR)+"-"+calendar1.get(Calendar.MONTH)+"-"+calendar1.get(Calendar.DAY_OF_MONTH));
+        Log.d("TAG", "isToday() #calendar2# "+calendar2.get(Calendar.YEAR)+"-"+calendar2.get(Calendar.MONTH)+"-"+calendar2.get(Calendar.DAY_OF_MONTH));
         return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
                 && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
                 && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH);
