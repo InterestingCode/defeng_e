@@ -1,11 +1,8 @@
 package com.diesel.htweather.farming.holder;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,15 +10,13 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.farming.model.WeatherDataBean;
+import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
-import com.diesel.htweather.util.DataProcessUtils;
+import com.diesel.htweather.util.DateUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.widget.Trend24HourView;
-import com.diesel.htweather.widget.XHorizontalScrollView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,10 +65,17 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(WeatherDataBean bean) {
-        Log.d("Trend24HourView", "=============== bindData() ===============");
-        if (null == bean) {
-            return;
+        List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList = bean.dayWeatherList;
+        if (null != bean.dayWeatherList && !bean.dayWeatherList.isEmpty()) {
+            for (int i = 0; i < bean.dayWeatherList.size(); i ++) {
+                FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity entity = bean.dayWeatherList.get(i);
+                if (DateUtils.isToday(entity.currDate)) {
+                    mTemperatureTv.setText(Integer.valueOf(entity.currTemp));
+                    break;
+                }
+            }
         }
+
         Integer[] temp = new Integer[]{32, 33, 33, 35, 35, 36, 35, 37, 39, 38, 36, 33};
         List<Integer> temperatures = Arrays.asList(temp);
         mTruthDataView.setTemperatures(temperatures);

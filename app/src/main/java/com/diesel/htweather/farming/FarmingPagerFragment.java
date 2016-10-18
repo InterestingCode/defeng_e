@@ -1,8 +1,8 @@
 package com.diesel.htweather.farming;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,21 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.diesel.htweather.FarmingFragment;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
-import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.farming.adapter.FarmingPagerAdapter;
-import com.diesel.htweather.farming.model.ActualFarmingBean;
-import com.diesel.htweather.farming.model.FarmingInfoBean;
-import com.diesel.htweather.farming.model.FarmingPolicyBean;
 import com.diesel.htweather.farming.model.WeatherDataBean;
-import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
-import com.diesel.htweather.util.FastJsonUtils;
-import com.diesel.htweather.util.ToastUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +28,6 @@ import butterknife.ButterKnife;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
-import okhttp3.Call;
 
 /**
  * Comments：
@@ -80,10 +71,23 @@ public class FarmingPagerFragment extends BaseFragment
     public void setData(List<BaseBean> data) {
         mFarmingData.clear();
         mFarmingData.addAll(data);
+        mAdapter.notifyDataSetChanged();
         Log.e(TAG, "setData().....................");
 
-//        WeatherDataBean weatherDataBean = (WeatherDataBean) mFarmingData.get(0);
-//        nameTv.setText(weatherDataBean.arName);
+        WeatherDataBean weatherDataBean = (WeatherDataBean) mFarmingData.get(0);
+        nameTv.setText(weatherDataBean.arName);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.e(TAG, "onAttach().....................Arguments="+getArguments());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate().....................Arguments="+getArguments());
     }
 
     @Nullable
@@ -92,13 +96,14 @@ public class FarmingPagerFragment extends BaseFragment
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pager_item_farming, container, false);
         ButterKnife.bind(this, view);
+        Log.e(TAG, "onCreateView().....................Arguments="+getArguments());
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e(TAG, "onViewCreated().....................");
+        Log.e(TAG, "onViewCreated().....................Arguments="+getArguments());
         View headerView = LayoutInflater.from(getContext())
                 .inflate(R.layout.weather_page_header_layout,
                         (ViewGroup) getActivity().findViewById(android.R.id.content), false);
@@ -112,9 +117,27 @@ public class FarmingPagerFragment extends BaseFragment
         mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
         mRefreshLayout.setDelegate(this);
 
+        Bundle arguments = getArguments();
+        if (null != arguments) {
+            ArrayList<BaseBean> data = arguments.getParcelableArrayList(KEY_ARGS_DATA);
+            if (null != data && !data.isEmpty()) {
+                mFarmingData.addAll(data);
+
+                WeatherDataBean weatherDataBean = (WeatherDataBean) mFarmingData.get(0);
+                nameTv.setText(weatherDataBean.arName);
+            }
+        }
+
         mAdapter = new FarmingPagerAdapter(mFarmingData);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        List<BaseBean> data = ((FarmingFragment) getParentFragment()).getData(0);
+        Log.i(TAG, "onActivityCreated().....................Arguments="+getArguments()+"; data="+data);
     }
 
     @Override

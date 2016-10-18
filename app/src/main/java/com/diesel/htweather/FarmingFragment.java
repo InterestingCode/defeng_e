@@ -1,6 +1,7 @@
 package com.diesel.htweather;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -186,16 +187,13 @@ public class FarmingFragment extends BaseFragment {
 
                         mFragments.clear();
                         for (int i = 0; i < mFarmingData.size(); i ++) {
-//                            mFragments.add(FarmingPagerFragment.newInstance(mFarmingData.get(i)));
-                            FarmingPagerFragment fragment = FarmingPagerFragment.newInstance();
-                            fragment.setData(mFarmingData.get(i));
+                            FarmingPagerFragment fragment = FarmingPagerFragment.newInstance(mFarmingData.get(i));
                             mFragments.add(fragment);
                         }
                         mAdapter.notifyDataSetChanged();
 
-
-
-
+//                        mHandler.removeCallbacks(mRunnable);
+//                        mHandler.postDelayed(mRunnable, 1500);
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -215,6 +213,26 @@ public class FarmingFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (null != mHandler) {
+            mHandler.removeCallbacks(mRunnable);
+        }
     }
+
+    public List<BaseBean> getData(int i) {
+        return i < mFarmingData.size() ? mFarmingData.get(i) : null;
+    }
+
+    private Handler mHandler = new Handler();
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            for (int i = 0; i < mFarmingData.size(); i ++) {
+                FarmingPagerFragment fragment = (FarmingPagerFragment) mFragments.get(i);
+                fragment.setData(mFarmingData.get(i));
+            }
+//            mAdapter.notifyDataSetChanged();
+        }
+    };
 
 }

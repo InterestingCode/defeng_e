@@ -172,4 +172,13 @@ public class DateUtils {
         return false;
     }
 
+    public static boolean isToday(String day) {
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(new Date(day));
+        Calendar calendar2 = Calendar.getInstance();
+        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+                && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
+                && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH);
+    }
+
 }
