@@ -79,7 +79,7 @@ public class PublishedIssuesActivity extends BaseActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         mPhotos.add("add_photo");
-        mAdapter = new PublishIssuesAdapter(mPhotos);
+        mAdapter = new PublishIssuesAdapter(this, mPhotos);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.addItemDecoration(new DividerGridItemDecoration(mContext));
         mRecyclerView.setHasFixedSize(true);

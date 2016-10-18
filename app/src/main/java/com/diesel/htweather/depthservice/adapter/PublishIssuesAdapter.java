@@ -1,5 +1,6 @@
 package com.diesel.htweather.depthservice.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -28,7 +29,10 @@ public class PublishIssuesAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private List<String> mPhotos;
 
-    public PublishIssuesAdapter(List<String> photos) {
+    private Context mContext;
+
+    public PublishIssuesAdapter(Context context, List<String> photos) {
+        mContext = context;
         mPhotos = photos;
     }
 
@@ -36,7 +40,7 @@ public class PublishIssuesAdapter extends RecyclerView.Adapter<RecyclerView.View
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
         if (viewType == TYPE_PHOTO) {
-            holder = new PublishIssuesHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_edit_problem_photo, parent, false));
+            holder = new PublishIssuesHolder(mContext, LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_edit_problem_photo, parent, false));
         } else if (viewType == TYPE_ADD_PHOTO) {
             holder = new AddPublishIssuesHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_edit_problem_add_photo, parent, false));
         }

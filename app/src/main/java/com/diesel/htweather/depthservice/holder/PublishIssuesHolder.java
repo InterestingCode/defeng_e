@@ -1,5 +1,6 @@
 package com.diesel.htweather.depthservice.holder;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,7 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.event.PublishIssuesEvent;
 import com.diesel.htweather.util.BitmapUtils;
+import com.diesel.htweather.util.PicassoUtils;
 import com.diesel.htweather.webapi.DepthWebService;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.http.okhttp.callback.BitmapCallback;
@@ -38,14 +40,19 @@ public class PublishIssuesHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.problem_photo_view)
     SimpleDraweeView mProblemPhotoView;
 
-    public PublishIssuesHolder(View itemView) {
+    Context mContext;
+
+    public PublishIssuesHolder(Context context, View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+        mContext = context;
     }
 
     public void bindData(String imagePath) {
         String path = Api.SERVER_URL + imagePath;
-        setImageViewBitmap(mProblemPhotoView, path);
+        PicassoUtils.loadImageViewSize(mContext, path, 270, 270, mProblemPhotoView);
+        //PicassoUtils.loadImageViewHolder(mContext, path, R.drawable.test_depth, mProblemPhotoView);
+        // setImageViewBitmap(mProblemPhotoView, path);
 
     }
 
