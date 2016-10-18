@@ -1,5 +1,7 @@
 package com.diesel.htweather.depthservice.model;
 
+import java.util.List;
+
 /**
  * Created by mac14 on 16/9/6.
  */
@@ -26,6 +28,8 @@ public class OnlineAdvisoryBean {
     String userNickName; // 用户昵称
 
     String userType; // 用户类型
+
+    List<CommentsBean> cmList; // 评论列表
 
     public String getContent() {
         return content;
@@ -123,6 +127,15 @@ public class OnlineAdvisoryBean {
 
     public OnlineAdvisoryBean setUserType(String userType) {
         this.userType = userType;
+        return this;
+    }
+
+    public List<CommentsBean> getCmList() {
+        return cmList;
+    }
+
+    public OnlineAdvisoryBean setCmList(List<CommentsBean> cmList) {
+        this.cmList = cmList;
         return this;
     }
 }

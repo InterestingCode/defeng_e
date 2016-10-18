@@ -100,9 +100,9 @@ public class BitmapUtils {
      * @return
      */
     public static Drawable resizeImage(Bitmap bitmap, int w, int h) {
-        Bitmap BitmapOrg = bitmap;
-        int width = BitmapOrg.getWidth();
-        int height = BitmapOrg.getHeight();
+        Bitmap bitmapOrg = bitmap;
+        int width = bitmapOrg.getWidth();
+        int height = bitmapOrg.getHeight();
         int newWidth = w;
         int newHeight = h;
 
@@ -113,7 +113,8 @@ public class BitmapUtils {
         matrix.postScale(scaleWidth, scaleHeight);
         // if you want to rotate the Bitmap  
         // matrix.postRotate(45);  
-        Bitmap resizedBitmap = Bitmap.createBitmap(BitmapOrg, 0, 0, width, height, matrix, true);
+        Bitmap resizedBitmap = Bitmap.createBitmap(bitmapOrg, 0, 0, width, height, matrix, true);
+        bitmapOrg.recycle();
         return new BitmapDrawable(resizedBitmap);
     }
 

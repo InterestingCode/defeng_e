@@ -75,5 +75,58 @@ public class DepthWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 在线咨询详情
+     *
+     * @param contentId 评论ID
+     */
+    public void getCommentsDetails(String contentId, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.ONLINE_CONSULTATION_DETAILS_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("contentId", contentId)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 点赞
+     *
+     * @param contentId 信息采集ID
+     */
+    public void thumbsUpComments(String contentId, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.ONLINE_CONSULTATION_AGREE_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("contentId", contentId)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 发表评论
+     *
+     * @param contentId  信息采集ID
+     * @param comment    评论内容
+     * @param parentCmId 父级评论ID
+     * @param callback   回调
+     */
+    public void publishComments(String contentId, String comment, String parentCmId, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.COMMENT_ONLINE_CONSULTATION_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("contentId", contentId)
+                .addParams("cId", "4")
+                .addParams("comment", comment)
+                .addParams("parentCmId", parentCmId)
+                .build()
+                .execute(callback);
+    }
 
 }

@@ -133,4 +133,7 @@ public class Api {
     // 在线咨询点赞
     public static final String ONLINE_CONSULTATION_AGREE_URL = SERVER_URL + "/nologin/content/process.c?do=askContentUps";
 
+    // 在线咨询详情
+    public static final String ONLINE_CONSULTATION_DETAILS_URL = SERVER_URL + "/nologin/content/process.c?do=lookAskContentInfo";
+
 }

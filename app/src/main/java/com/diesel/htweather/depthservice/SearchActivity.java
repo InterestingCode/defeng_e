@@ -39,7 +39,7 @@ public class SearchActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST,
                 R.drawable.recycler_view_1px_divider_shape));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        // mRecyclerView.setAdapter(new OnlineAdvisoryAdapter());
+        // mRecyclerView.setAdapter(new OnlineAllMsgAdapter());
     }
 
     @OnClick(R.id.back_btn)
