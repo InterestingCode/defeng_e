@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.depthservice.holder.OnlineAdvisoryHolder;
+import com.diesel.htweather.depthservice.holder.OnlineAllMsgHolder;
 import com.diesel.htweather.depthservice.model.OnlineAdvisoryBean;
 import com.diesel.htweather.webapi.DepthWebService;
 import com.zhy.http.okhttp.callback.BitmapCallback;
@@ -23,22 +23,22 @@ import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 /**
  * Created by mac14 on 16/9/6.
  */
-public class OnlineAdvisoryAdapter extends RecyclerView.Adapter<OnlineAdvisoryHolder> {
+public class OnlineAllMsgAdapter extends RecyclerView.Adapter<OnlineAllMsgHolder> {
 
     List<OnlineAdvisoryBean> mOnlineAdvisoryBeanList;
 
-    public OnlineAdvisoryAdapter(List<OnlineAdvisoryBean> onlineAdvisoryBeanList) {
+    public OnlineAllMsgAdapter(List<OnlineAdvisoryBean> onlineAdvisoryBeanList) {
         mOnlineAdvisoryBeanList = onlineAdvisoryBeanList;
     }
 
     @Override
-    public OnlineAdvisoryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public OnlineAllMsgHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_online_advisory, parent, false);
-        return new OnlineAdvisoryHolder(itemView);
+        return new OnlineAllMsgHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(OnlineAdvisoryHolder holder, int position) {
+    public void onBindViewHolder(OnlineAllMsgHolder holder, int position) {
         OnlineAdvisoryBean advisoryBean = mOnlineAdvisoryBeanList.get(position);
 //        setImageViewBitmap(holder.tvUserFace, Api.SERVER_URL + advisoryBean.getUserFace());
         holder.tvName.setText(advisoryBean.getUserNickName());
@@ -47,6 +47,7 @@ public class OnlineAdvisoryAdapter extends RecyclerView.Adapter<OnlineAdvisoryHo
         holder.tvCreateTime.setText(advisoryBean.getCreatTime());
         holder.mContent.setText(advisoryBean.getContent());
         String imagePath[] = getImageViewUriPath(advisoryBean.getImgPaths());
+        // TODO 下载图片
 //        if (imagePath != null && imagePath.length >= 3) {
 //            setImageViewBitmap(holder.tvImage1, Api.SERVER_URL + imagePath[0]);
 //            setImageViewBitmap(holder.tvImage2, Api.SERVER_URL + imagePath[1]);
@@ -62,6 +63,10 @@ public class OnlineAdvisoryAdapter extends RecyclerView.Adapter<OnlineAdvisoryHo
     @Override
     public int getItemCount() {
         return mOnlineAdvisoryBeanList.size();
+    }
+
+    public List<OnlineAdvisoryBean> getAdvisoryBeanList() {
+        return mOnlineAdvisoryBeanList;
     }
 
     private String[] getImageViewUriPath(String path) {
@@ -82,6 +87,5 @@ public class OnlineAdvisoryAdapter extends RecyclerView.Adapter<OnlineAdvisoryHo
             }
         });
     }
-
 
 }

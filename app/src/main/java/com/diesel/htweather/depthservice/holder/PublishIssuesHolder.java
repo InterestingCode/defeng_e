@@ -65,7 +65,7 @@ public class PublishIssuesHolder extends RecyclerView.ViewHolder {
             @Override
             public void onResponse(Bitmap response, int id) {
                 Log.v(TAG, "getNetworkBitmap#onResponse() " + "缓存图片成功");
-                imageView.setImageDrawable(BitmapUtils.resizeImage(response, 270, 270));
+                imageView.setImageDrawable(BitmapUtils.resizeImage(response, 200, 200));
             }
         });
     }

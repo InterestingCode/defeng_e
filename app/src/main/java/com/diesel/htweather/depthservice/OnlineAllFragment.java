@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseFragment;
-import com.diesel.htweather.depthservice.adapter.OnlineAdvisoryAdapter;
-import com.diesel.htweather.event.RecyclerItemEvent;
+import com.diesel.htweather.depthservice.adapter.OnlineAllMsgAdapter;
+import com.diesel.htweather.event.AllMsgItemEvent;
+import com.diesel.htweather.event.ThumbsUpEvent;
+import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.response.OnlineAdvisoryResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
@@ -37,6 +39,8 @@ public class OnlineAllFragment extends BaseFragment {
 
     @BindView(R.id.farming_policy_recycler_view)
     XRecyclerView mRecyclerView;
+
+    OnlineAllMsgAdapter mAdapter = null;
 
     @Nullable
     @Override
@@ -72,7 +76,8 @@ public class OnlineAllFragment extends BaseFragment {
 
                     OnlineAdvisoryResJO resJO = FastJsonUtils.getSingleBean(response, OnlineAdvisoryResJO.class);
                     if (null != resJO && !resJO.getData().isEmpty() && resJO.status == 0) {
-                        mRecyclerView.setAdapter(new OnlineAdvisoryAdapter(resJO.getData()));
+                        mAdapter = new OnlineAllMsgAdapter(resJO.getData());
+                        mRecyclerView.setAdapter(mAdapter);
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -88,9 +93,48 @@ public class OnlineAllFragment extends BaseFragment {
 
 
     @Subscribe
-    public void onRecyclerItemEvent(RecyclerItemEvent event) {
+    public void onAllMsgItemEvent(AllMsgItemEvent event) {
         int position = event.position;
-        startActivity(new Intent(getActivity(), OnlineAdvisoryDetailsActivity.class));
+        String id = mAdapter.getAdvisoryBeanList().get(position).getContentId();
+        Intent intent = new Intent(getActivity(), OnlineAdvisoryDetailsActivity.class);
+        intent.putExtra("contentId", id);
+        startActivity(intent);
+    }
+
+    @Subscribe
+    public void onThumbsUpEvent(ThumbsUpEvent event) {
+        int position = event.position;
+        String id = mAdapter.getAdvisoryBeanList().get(position).getContentId();
+        thumbsUpComments(id);
+    }
+
+
+    private void thumbsUpComments(String contentId) {
+        showDialog();
+        DepthWebService.getInstance().thumbsUpComments(contentId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "thumbsUpComments#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "thumbsUpComments#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        ToastUtils.show(resJO.msg);
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "thumbsUpComments#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
     }
 
     @Override

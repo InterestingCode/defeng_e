@@ -6,7 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.event.RecyclerItemEvent;
+import com.diesel.htweather.event.MeMsgItemEvent;
+import com.diesel.htweather.event.ThumbsUpEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -16,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  * Created by mac14 on 16/9/6.
  */
-public class OnlineAdvisoryHolder extends RecyclerView.ViewHolder {
+public class OnlineMeMsgHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.tvUserFace)
     public ImageView tvUserFace;
@@ -61,16 +62,23 @@ public class OnlineAdvisoryHolder extends RecyclerView.ViewHolder {
     public ImageView tvCommentsBtn;
 
 
-    public OnlineAdvisoryHolder(View itemView) {
+    public OnlineMeMsgHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new RecyclerItemEvent(getLayoutPosition()));
+                EventBus.getDefault().post(new MeMsgItemEvent(getLayoutPosition()));
+            }
+        });
+
+        tvUpsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new ThumbsUpEvent(getLayoutPosition()));
             }
         });
     }
-
 
 }
