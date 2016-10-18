@@ -72,6 +72,7 @@ public class FarmingPagerFragment extends BaseFragment {
         if (null != arguments) {
             ArrayList<BaseBean> data = arguments.getParcelableArrayList(KEY_ARGS_DATA);
             if (null != data && !data.isEmpty()) {
+                mFarmingData.clear();
                 mFarmingData.addAll(data);
             }
         }
