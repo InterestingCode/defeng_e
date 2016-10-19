@@ -1,24 +1,18 @@
 package com.diesel.htweather.depthservice.adapter;
 
-import android.graphics.Bitmap;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.depthservice.holder.OnlineMeMsgHolder;
 import com.diesel.htweather.depthservice.model.OnlineAdvisoryBean;
-import com.diesel.htweather.webapi.DepthWebService;
-import com.zhy.http.okhttp.callback.BitmapCallback;
+import com.diesel.htweather.util.PicassoUtils;
 
 import java.util.List;
-
-import okhttp3.Call;
-
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 /**
  * Created by mac14 on 16/9/6.
@@ -26,8 +20,10 @@ import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 public class OnlineMeMsgAdapter extends RecyclerView.Adapter<OnlineMeMsgHolder> {
 
     List<OnlineAdvisoryBean> mOnlineAdvisoryBeanList;
+    Context mContext;
 
-    public OnlineMeMsgAdapter(List<OnlineAdvisoryBean> onlineAdvisoryBeanList) {
+    public OnlineMeMsgAdapter(Context context, List<OnlineAdvisoryBean> onlineAdvisoryBeanList) {
+        mContext = context;
         mOnlineAdvisoryBeanList = onlineAdvisoryBeanList;
     }
 
@@ -40,7 +36,8 @@ public class OnlineMeMsgAdapter extends RecyclerView.Adapter<OnlineMeMsgHolder> 
     @Override
     public void onBindViewHolder(OnlineMeMsgHolder holder, int position) {
         OnlineAdvisoryBean advisoryBean = mOnlineAdvisoryBeanList.get(position);
-//        setImageViewBitmap(holder.tvUserFace, Api.SERVER_URL + advisoryBean.getUserFace());
+        String userFacePath = Api.SERVER_URL + advisoryBean.getUserFace();
+        PicassoUtils.loadImageViewHolder(mContext, userFacePath, R.drawable.ic_gather_data_avatar, holder.tvUserFace);
         holder.tvName.setText(advisoryBean.getUserNickName());
         holder.userType.setText(advisoryBean.getUserType());
         holder.locationAddr.setText(advisoryBean.getLocationAddr());
@@ -48,11 +45,11 @@ public class OnlineMeMsgAdapter extends RecyclerView.Adapter<OnlineMeMsgHolder> 
         holder.mContent.setText(advisoryBean.getContent());
         String imagePath[] = getImageViewUriPath(advisoryBean.getImgPaths());
         // TODO 下载图片
-//        if (imagePath != null && imagePath.length >= 3) {
-//            setImageViewBitmap(holder.tvImage1, Api.SERVER_URL + imagePath[0]);
-//            setImageViewBitmap(holder.tvImage2, Api.SERVER_URL + imagePath[1]);
-//            setImageViewBitmap(holder.tvImage3, Api.SERVER_URL + imagePath[2]);
-//        }
+        if (imagePath != null && imagePath.length == 3) {
+            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+        }
 
         holder.tvUps.setText(advisoryBean.getUps());
         holder.tvComments.setText(advisoryBean.getComments());
@@ -73,19 +70,19 @@ public class OnlineMeMsgAdapter extends RecyclerView.Adapter<OnlineMeMsgHolder> 
         return path.split(";");
     }
 
-    private void setImageViewBitmap(final ImageView imageView, String imageUrl) {
-        DepthWebService.getInstance().getNetworkBitmap(imageUrl, new BitmapCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Log.e(TAG, "getNetworkBitmap#onError() " + e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Bitmap response, int id) {
-                Log.v(TAG, "getNetworkBitmap#onResponse() " + "缓存图片成功");
-                imageView.setImageBitmap(response);
-            }
-        });
-    }
+//    private void setImageViewBitmap(final ImageView imageView, String imageUrl) {
+//        DepthWebService.getInstance().getNetworkBitmap(imageUrl, new BitmapCallback() {
+//            @Override
+//            public void onError(Call call, Exception e, int id) {
+//                Log.e(TAG, "getNetworkBitmap#onError() " + e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Bitmap response, int id) {
+//                Log.v(TAG, "getNetworkBitmap#onResponse() " + "缓存图片成功");
+//                imageView.setImageBitmap(response);
+//            }
+//        });
+//    }
 
 }

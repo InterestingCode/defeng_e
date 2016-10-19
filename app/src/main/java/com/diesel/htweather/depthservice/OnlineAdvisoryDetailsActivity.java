@@ -14,12 +14,14 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
+import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.depthservice.adapter.CommentsAdapter;
 import com.diesel.htweather.depthservice.model.CommentsBean;
 import com.diesel.htweather.depthservice.model.OnlineAdvisoryBean;
 import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.response.OnlineDetailsResJO;
 import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.PicassoUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.DepthWebService;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -91,7 +93,6 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
         setContentView(R.layout.activity_online_advisory_details);
         ButterKnife.bind(this);
         contentId = getIntent().getStringExtra("contentId");
-        Log.v("tttttttttt", "contentId = " + contentId);
         commentList.setOnItemClickListener(this);
         initDatas();
     }
@@ -115,11 +116,20 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
 
                     if (null != resJO && resJO.status == 0) {
                         OnlineAdvisoryBean obj = resJO.getObj();
+                        String userFacePath = Api.SERVER_URL + obj.getUserFace();
+                        PicassoUtils.loadImageViewHolder(mContext, userFacePath, R.drawable.ic_gather_data_avatar, tvUserFace);
                         tvName.setText(obj.getUserNickName());
                         tvUserType.setText(obj.getUserType());
                         tvAddress.setText(obj.getLocationAddr());
                         tvCreateTime.setText(obj.getCreatTime());
                         tvContent.setText(obj.getContent());
+                        String imagePath[] = getImageViewUriPath(obj.getImgPaths());
+                        if (imagePath != null && imagePath.length == 3) {
+                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
+                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
+                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, ivImage3);
+                        }
+
                         tvUpsNum.setText(obj.getUps());
                         tvCommentsNum.setText(obj.getComments());
                         tvReadNum.setText(obj.getCounts());
@@ -133,6 +143,10 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                 }
             }
         });
+    }
+
+    private String[] getImageViewUriPath(String path) {
+        return path.split(";");
     }
 
     @OnClick({R.id.back_btn, R.id.ivUpsBtn, R.id.ivCommentsBtn, R.id.commentBtn})
