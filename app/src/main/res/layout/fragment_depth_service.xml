@@ -458,7 +458,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/px200"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:layout_width="@dimen/px184"

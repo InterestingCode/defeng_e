@@ -36,51 +36,55 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/px30"
-            android:paddingLeft="@dimen/px24"
-            android:paddingRight="@dimen/px24"
+            android:paddingLeft="@dimen/px23"
+            android:paddingRight="@dimen/px23"
             android:paddingTop="@dimen/px30">
 
             <TextView
-                android:id="@+id/farming_title_tv"
+                android:id="@+id/tvGrowthDetailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="德丰e农崇州气象为弄深度服务探索"
                 android:textColor="@color/black_333"
                 android:textSize="@dimen/font_36px"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/farming_time_and_source_tv"
-                style="@style/BaseText.gray999_24px"
-                android:layout_below="@id/farming_title_tv"
-                android:layout_marginTop="@dimen/px25"
-                android:text="德丰e农 08-24 08:42" />
 
-            <TextView
-                android:id="@+id/farming_browse_tv"
-                style="@style/BaseText.gray999_24px"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/farming_time_and_source_tv"
-                android:layout_alignParentRight="true"
-                android:text="阅读：1238" />
+                android:layout_marginBottom="@dimen/px30"
+                android:layout_marginTop="@dimen/px30">
 
+                <TextView
+                    android:id="@+id/tvGrowthDetailTime"
+                    style="@style/BaseText.gray999_24px" />
+
+                <TextView
+                    android:id="@+id/tvGrowthDetailReadNum"
+                    style="@style/BaseText.gray999_24px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/farming_time_and_source_tv"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <View style="@style/BaseHorizontalLine" />
 
             <TextView
-
+                android:id="@+id/tvGrowthDetailContent"
                 style="@style/BaseText.black333_24px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/farming_browse_tv"
-                android:layout_marginTop="@dimen/px25"
-                android:lineSpacingExtra="@dimen/px25"
-                android:text="近期天气情况:崇州市预计示来一周以降雨天气为主,15日有阵雨,16日-19日有小雨,20日小雨转晴,21日有小雨,9日、12日中雨转小雨:平均气温29度左右,平均最高气温33度左右,平均最低气温23度左右。过去一周以阴雨天气为主,累计降水量为28.1毫米;平均气温为26.8度;光照条件较好,累计日照数为42.2小时;空气相对湿度较高,平均为85.3%。【详细天气预报及实况信息请点击&quot;天气查询&quot;】" />
-        </RelativeLayout>
+                android:layout_marginTop="@dimen/px30"
+                android:lineSpacingExtra="@dimen/px25" />
+        </LinearLayout>
     </ScrollView>
 
     <ImageView

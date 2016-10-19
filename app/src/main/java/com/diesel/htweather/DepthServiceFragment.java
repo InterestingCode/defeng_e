@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,19 +28,16 @@ import com.diesel.htweather.depthservice.model.GrowthDiaryBean;
 import com.diesel.htweather.depthservice.model.SuggestBean;
 import com.diesel.htweather.response.AgriculturalDoctorResJO;
 import com.diesel.htweather.response.AgriculturalSuggestResJO;
+import com.diesel.htweather.response.GrowthDiaryResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.widget.FullListView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import okhttp3.Call;
 
 /**
@@ -52,7 +50,7 @@ import okhttp3.Call;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class DepthServiceFragment extends BaseFragment {
+public class DepthServiceFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
     @BindView(R.id.diaryList)
     FullListView diaryList;
@@ -87,6 +85,8 @@ public class DepthServiceFragment extends BaseFragment {
 
     SuggestBean suggestBean;
 
+    DepthDiaryAdapter mAdapter = null;
+
 
     public static DepthServiceFragment newInstance() {
         return new DepthServiceFragment();
@@ -97,6 +97,7 @@ public class DepthServiceFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_depth_service, container, false);
         ButterKnife.bind(this, view);
+        diaryList.setOnItemClickListener(this);
         initData();
         return view;
     }
@@ -109,11 +110,8 @@ public class DepthServiceFragment extends BaseFragment {
         // 农事建议
         getAgriculturalSuggest();
 
-        List<GrowthDiaryBean> data = new ArrayList<GrowthDiaryBean>();
-        for (int i = 0; i < 3; i++) {
-            data.add(new GrowthDiaryBean());
-        }
-        diaryList.setAdapter(new DepthDiaryAdapter(mActivity, data));
+        // 获取第一页前三条数据
+        getGrowthDiaryList("1", "3");
     }
 
     @OnClick({R.id.tvDepthFacilities, R.id.tvAgriculturalFacilities, R.id.agriculture_ll, R.id.btnDepthDiary, R.id.btnJust,
@@ -166,10 +164,6 @@ public class DepthServiceFragment extends BaseFragment {
         }
     }
 
-    @OnItemClick({R.id.diaryList})
-    public void onItemClick() {
-        startActivity(new Intent(mActivity, GrowthDiaryDetailsActivity.class));
-    }
 
     private void getAgricultureDoctor() {
         showDialog();
@@ -233,5 +227,44 @@ public class DepthServiceFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    private void getGrowthDiaryList(String pageNum, String rows) {
+        showDialog();
+        DepthWebService.getInstance().getGrowthDiaryList(pageNum, rows, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getGrowthDiaryList#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getGrowthDiaryList#onResponse() " + response);
+                dismissDialog();
+                try {
+                    GrowthDiaryResJO resJO = FastJsonUtils.getSingleBean(response, GrowthDiaryResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        mAdapter = new DepthDiaryAdapter(mActivity, resJO.getData());
+                        diaryList.setAdapter(mAdapter);
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "getGrowthDiaryList#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        if (mAdapter != null) {
+            GrowthDiaryBean growthDiaryBean = mAdapter.getGrowthDiaryBeanList().get(position);
+            Intent intent = new Intent(mActivity, GrowthDiaryDetailsActivity.class);
+            intent.putExtra("growthId", growthDiaryBean.getId());
+            startActivity(intent);
+        }
     }
 }

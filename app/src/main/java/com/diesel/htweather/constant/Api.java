@@ -146,10 +146,18 @@ public class Api {
     public static final String AGRICULTURE_SUGGEST_URL = SERVER_URL + "/nologin/content/process.c?do=getAgriculturalSuggestInfo";
 
     // 成长日记列表
-    public static final String GROWTHDIRARY_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getGrowthDiraryList";
+    public static final String GROWTHDIARY_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getGrowthDiraryList";
 
     // 成长日记详情
-    public static final String GROWTHDIRARY_DETAILS_URL = SERVER_URL + "/nologin/content/process.c?do=lookGrowthDiraryInfo";
+    public static final String GROWTHDIARY_DETAILS_URL = SERVER_URL + "/nologin/content/process.c?do=lookGrowthDiraryInfo";
 
+    // 设施农业申请
+    public static final String APPLY_AGRICULTURE_URL = SERVER_URL + "/session/content/process.c?do=reqCropSet";
+
+    // 设施农业详情
+    public static final String FACILITIES_AGRICULTURE_DETAILS_URL = SERVER_URL + "/session/content/process.c?do=lookCropSetInfo";
+
+    // 深度服务简介
+    public static final String DEEP_SERVICE_DESC_URL = SERVER_URL + "/nologin/common/process.c?do=deepServiceDesc";
 
 }

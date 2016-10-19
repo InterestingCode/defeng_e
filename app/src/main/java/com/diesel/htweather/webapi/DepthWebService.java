@@ -174,5 +174,57 @@ public class DepthWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 获取成长日记列表
+     *
+     * @param page     页码
+     * @param rows     每页数量
+     * @param callback 回调
+     */
+    public void getGrowthDiaryList(String page, String rows, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.GROWTHDIARY_LIST_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("page", page)
+                .addParams("rows", rows)
+                .build()
+                .execute(callback);
+    }
+
+
+    /**
+     * 获取成长日详情
+     *
+     * @param id       成长ID
+     * @param callback 回调
+     */
+    public void getGrowthDiaryDetails(String id, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.GROWTHDIARY_DETAILS_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("id", id)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 深度服务简介
+     *
+     * @param callback 回调
+     */
+    public void getDeepServiceDesc(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.DEEP_SERVICE_DESC_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
 
 }
