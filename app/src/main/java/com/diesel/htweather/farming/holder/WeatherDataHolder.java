@@ -18,7 +18,6 @@ import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.widget.Trend24HourView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -158,11 +157,13 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                     soilMoistureList = mHoursDataList.soilMoistureList;
             if (null != soilMoistureList && !soilMoistureList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
-                for (int i = 0; i <soilMoistureList.size(); i ++) {
+                List<String> hours = new ArrayList<>();
+                for (int i = 0; i < soilMoistureList.size(); i ++) {
                     float temp = Float.valueOf(soilMoistureList.get(i).value);
                     temperatures.add((int) temp);
+                    hours.add(soilMoistureList.get(i).hours);
                 }
-                mTruthDataView.setTemperatures(temperatures);
+                mTruthDataView.setTemperatures(temperatures, hours);
             }
         }
     }
@@ -173,11 +174,13 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                     soilTempLlist = mHoursDataList.soilTempLlist;
             if (null != soilTempLlist && !soilTempLlist.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
-                for (int i = 0; i <soilTempLlist.size(); i ++) {
+                List<String> hours = new ArrayList<>();
+                for (int i = 0; i < soilTempLlist.size(); i ++) {
                     float temp = Float.valueOf(soilTempLlist.get(i).value);
                     temperatures.add((int) temp);
+                    hours.add(soilTempLlist.get(i).hours);
                 }
-                mTruthDataView.setTemperatures(temperatures);
+                mTruthDataView.setTemperatures(temperatures, hours);
             }
         }
     }
@@ -188,11 +191,13 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                     precipitationList = mHoursDataList.precipitationList;
             if (null != precipitationList && !precipitationList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
+                List<String> hours = new ArrayList<>();
                 for (int i = 0; i < precipitationList.size(); i ++) {
                     float temp = Float.valueOf(precipitationList.get(i).value);
                     temperatures.add((int) temp);
+                    hours.add(precipitationList.get(i).hours);
                 }
-                mTruthDataView.setTemperatures(temperatures);
+                mTruthDataView.setTemperatures(temperatures, hours);
             }
         }
     }
@@ -203,11 +208,13 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                     airTempList = mHoursDataList.airTempList;
             if (null != airTempList && !airTempList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
+                List<String> hours = new ArrayList<>();
                 for (int i = 0; i < airTempList.size(); i ++) {
                     float temp = Float.valueOf(airTempList.get(i).value);
                     temperatures.add((int) temp);
+                    hours.add(airTempList.get(i).hours);
                 }
-                mTruthDataView.setTemperatures(temperatures);
+                mTruthDataView.setTemperatures(temperatures, hours);
             }
         }
     }

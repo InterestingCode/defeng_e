@@ -174,14 +174,21 @@ public class DateUtils {
     }
 
     public static boolean isToday(String day) {
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.setTime(new Date(day));
-        Calendar calendar2 = Calendar.getInstance();
-        Log.d("TAG", "isToday() #calendar1# "+calendar1.get(Calendar.YEAR)+"-"+calendar1.get(Calendar.MONTH)+"-"+calendar1.get(Calendar.DAY_OF_MONTH));
-        Log.d("TAG", "isToday() #calendar2# "+calendar2.get(Calendar.YEAR)+"-"+calendar2.get(Calendar.MONTH)+"-"+calendar2.get(Calendar.DAY_OF_MONTH));
-        return calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
-                && calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
-                && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH);
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日");
+            Date date = dateFormat.parse(day);
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.setTime(date);
+            Calendar calendar2 = Calendar.getInstance();
+            Log.d("TAG", "isToday() #calendar1# "/*+calendar1.get(Calendar.YEAR)+"-"*/+calendar1.get(Calendar.MONTH)+"-"+calendar1.get(Calendar.DAY_OF_MONTH));
+            Log.d("TAG", "isToday() #calendar2# "/*+calendar2.get(Calendar.YEAR)+"-"*/+calendar2.get(Calendar.MONTH)+"-"+calendar2.get(Calendar.DAY_OF_MONTH));
+            return /*calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)
+                    &&*/ calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)
+                    && calendar1.get(Calendar.DAY_OF_MONTH) == calendar2.get(Calendar.DAY_OF_MONTH);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

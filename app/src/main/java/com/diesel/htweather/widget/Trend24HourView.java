@@ -46,6 +46,10 @@ public class Trend24HourView extends View {
 
     private List<Integer> temperatures = new ArrayList<>(); // 24小时温度集合
 
+    private List<String> mHours = new ArrayList<>(); // x
+
+    private List<Integer> mValues = new ArrayList<>(); // y
+
     //最高温和最低温
     private int mMinTemperature;
 
@@ -56,6 +60,8 @@ public class Trend24HourView extends View {
     private int leftRightMargin = 0; // 折线左右间距
 
     private int mTemperatureDiff = 1; // 温度差
+
+    private int mGridNumber = 1; //
 
     private int timeHeight;
 
@@ -110,15 +116,23 @@ public class Trend24HourView extends View {
     /**
      * 设置温度
      */
-    public void setTemperatures(List<Integer> temperatures) {
+    public void setTemperatures(List<Integer> temperatures, List<String> hours) {
         this.temperatures = temperatures;
+        this.mHours = hours;
         mMaxTemperature = Collections.max(this.temperatures);
         mMinTemperature = Collections.min(this.temperatures);
-        mTemperatureDiff = mMaxTemperature - mMinTemperature;
+        mGridNumber = mTemperatureDiff = mMaxTemperature - mMinTemperature;
         if (mTemperatureDiff == 0) {
             mTemperatureDiff = 1;
+            mGridNumber = 1;
         }
-        Log.i(tag, "setTemperatures maxTemp(" + mMaxTemperature + "), minTemp(" + mMinTemperature
+        if (mGridNumber > 5) {
+            mGridNumber = 5;
+        }
+        for (int i = 0; i < mGridNumber; i ++) {
+            mValues.add(mMinTemperature + i * mTemperatureDiff / mGridNumber);
+        }
+        Log.i(tag, "setTemperatures() maxTemp(" + mMaxTemperature + "), minTemp(" + mMinTemperature
                 + "), tempDiff(" + mTemperatureDiff + ")");
         requestLayout();
         invalidate();
@@ -138,24 +152,30 @@ public class Trend24HourView extends View {
         // draw four horizontal divider line
         int dividerLineStartX = leftRightMargin / 2 + unitWidth;
         int dividerLineStopX = width - leftRightMargin / 2;
-        int y1 = gridSpaceHeight + topBottomMargin;//height / 4;
-        int y2 = gridSpaceHeight * 2 + topBottomMargin;//height / 2;
-        int y3 = gridSpaceHeight * 3 + topBottomMargin;//height * 3 / 4;
-        int y4 = gridSpaceHeight * 4 + topBottomMargin;//height;
-        int y5 = gridSpaceHeight * 5 + topBottomMargin;//height;
-        canvas.drawLine(dividerLineStartX, y1, dividerLineStopX, y1, bgLinePaint);
-        canvas.drawLine(dividerLineStartX, y2, dividerLineStopX, y2, bgLinePaint);
-        canvas.drawLine(dividerLineStartX, y3, dividerLineStopX, y3, bgLinePaint);
-        canvas.drawLine(dividerLineStartX, y4, dividerLineStopX, y4, bgLinePaint);
-        canvas.drawLine(dividerLineStartX, y5, dividerLineStopX, y5, bgLinePaint);
+//        int y1 = gridSpaceHeight + topBottomMargin;
+//        int y2 = gridSpaceHeight * 2 + topBottomMargin;
+//        int y3 = gridSpaceHeight * 3 + topBottomMargin;
+//        int y4 = gridSpaceHeight * 4 + topBottomMargin;
+//        int y5 = gridSpaceHeight * 5 + topBottomMargin;
+//        canvas.drawLine(dividerLineStartX, y1, dividerLineStopX, y1, bgLinePaint);
+//        canvas.drawLine(dividerLineStartX, y2, dividerLineStopX, y2, bgLinePaint);
+//        canvas.drawLine(dividerLineStartX, y3, dividerLineStopX, y3, bgLinePaint);
+//        canvas.drawLine(dividerLineStartX, y4, dividerLineStopX, y4, bgLinePaint);
+//        canvas.drawLine(dividerLineStartX, y5, dividerLineStopX, y5, bgLinePaint);
 
         // draw unit value
         int unitStartX = unitWidth / 2;
-        canvas.drawText("39°", unitStartX, y1, mTextPaint);
-        canvas.drawText("37°", unitStartX, y2, mTextPaint);
-        canvas.drawText("35°", unitStartX, y3, mTextPaint);
-        canvas.drawText("34°", unitStartX, y4, mTextPaint);
-        canvas.drawText("32°", unitStartX, y5, mTextPaint);
+//        canvas.drawText("39°", unitStartX, y1, mTextPaint);
+//        canvas.drawText("37°", unitStartX, y2, mTextPaint);
+//        canvas.drawText("35°", unitStartX, y3, mTextPaint);
+//        canvas.drawText("34°", unitStartX, y4, mTextPaint);
+//        canvas.drawText("32°", unitStartX, y5, mTextPaint);
+
+        for (int i = 0; i < mGridNumber; i ++) {
+            int y = gridSpaceHeight * (i + 1) + topBottomMargin;
+            canvas.drawLine(dividerLineStartX, y, dividerLineStopX, y, bgLinePaint);
+            canvas.drawText(String.valueOf(mValues.get(i)), unitStartX, y, mTextPaint);
+        }
 
         // draw vertical divider line
 //        for (int i = 1; i < tempSize; i++) {
@@ -212,7 +232,7 @@ public class Trend24HourView extends View {
 //            float textStartY = height - (timeHeight - mTextPaint.getFontMetrics().bottom) / 2;
 //            float textStartY = height - timeHeight + (timeHeight - mTextPaint.getFontMetrics().bottom);
             float textStartY = height - 20;
-            canvas.drawText("11:0" + i, startX, textStartY, mTextPaint);
+            canvas.drawText(mHours.get(i), startX, textStartY, mTextPaint);
             Log.i(tag, "onDraw()  draw text  startX=" + startX + "; textStartY=" + textStartY);
         }
 
@@ -232,7 +252,10 @@ public class Trend24HourView extends View {
                 : gridSpaceWidth * temperatures.size() + leftRightMargin * 2 + unitWidth;
         height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 
-        gridSpaceHeight = (height - topBottomMargin * 2 - timeHeight) / 5;
+//        gridSpaceHeight = (height - topBottomMargin * 2 - timeHeight) / 5;
+        gridSpaceHeight = (height - topBottomMargin * 2 - timeHeight) / mGridNumber;
+
+        Log.d(tag, "onMeasure() width="+width+"; height="+height+"; gridSpaceWidth="+gridSpaceWidth+"; gridSpaceHeight="+gridSpaceHeight);
 
         setMeasuredDimension(width, height);
     }
