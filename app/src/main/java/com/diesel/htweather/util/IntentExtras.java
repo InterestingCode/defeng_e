@@ -3,6 +3,10 @@ package com.diesel.htweather.util;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
+import com.diesel.htweather.response.FarmingResJO;
+
+import java.util.ArrayList;
+
 /**
  * Comments：
  *
@@ -53,6 +57,18 @@ public class IntentExtras {
 
     public static String getWebUrl(@NonNull Intent intent) {
         return intent.getStringExtra(WEB_URL);
+    }
+
+    private static final String WEATHER_TREND_DATA = "weather_trend_data";
+
+    public static void setWeatherTrendData(@NonNull Intent intent,
+            ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList) {
+        intent.putParcelableArrayListExtra(WEATHER_TREND_DATA, dayWeatherList);
+    }
+
+    public static ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> getWeatherTrendData(
+            @NonNull Intent intent) {
+        return intent.getParcelableArrayListExtra(WEATHER_TREND_DATA);
     }
 
 }

@@ -13,6 +13,7 @@ import com.diesel.htweather.farming.MessageActivity;
 import com.diesel.htweather.farming.MessageDetailsActivity;
 import com.diesel.htweather.farming.TruthDataSettingActivity;
 import com.diesel.htweather.farming.WeatherTrendActivity;
+import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.user.AboutAppActivity;
 import com.diesel.htweather.user.ActualFarmingSettingActivity;
 import com.diesel.htweather.user.AddCropsActivity;
@@ -29,6 +30,8 @@ import com.diesel.htweather.user.PlantAndAreaActivity;
 import com.diesel.htweather.user.RealNameAuthActivity;
 import com.diesel.htweather.user.RegisterActivity;
 import com.diesel.htweather.user.SystemSettingActivity;
+
+import java.util.ArrayList;
 
 /**
  * Comments：
@@ -91,8 +94,10 @@ public class ActivityNav {
         context.startActivity(intent);
     }
 
-    public void startWeatherTrendActivity(Context context) {
+    public void startWeatherTrendActivity(Context context,
+            ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList) {
         Intent intent = new Intent(context, WeatherTrendActivity.class);
+        IntentExtras.setWeatherTrendData(intent, dayWeatherList);
         context.startActivity(intent);
     }
 

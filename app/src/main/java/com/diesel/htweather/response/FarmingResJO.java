@@ -1,5 +1,8 @@
 package com.diesel.htweather.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.diesel.htweather.base.BaseBean;
 
 import java.util.List;
@@ -138,7 +141,7 @@ public class FarmingResJO extends BaseResJO {
                 }
             }
 
-            public static class DayWeatherListEntity {
+            public static class DayWeatherListEntity implements Parcelable {
 
                 public String currDate;
 
@@ -159,6 +162,54 @@ public class FarmingResJO extends BaseResJO {
                 public String weatherContent;
 
                 public String week;
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(this.currDate);
+                    dest.writeString(this.currTemp);
+                    dest.writeString(this.windPowerLevel);
+                    dest.writeString(this.currLunarDate);
+                    dest.writeString(this.tempBucket);
+                    dest.writeString(this.weatherContentUrl);
+                    dest.writeString(this.solarTerms);
+                    dest.writeString(this.windPower);
+                    dest.writeString(this.weatherContent);
+                    dest.writeString(this.week);
+                }
+
+                public DayWeatherListEntity() {
+                }
+
+                protected DayWeatherListEntity(Parcel in) {
+                    this.currDate = in.readString();
+                    this.currTemp = in.readString();
+                    this.windPowerLevel = in.readString();
+                    this.currLunarDate = in.readString();
+                    this.tempBucket = in.readString();
+                    this.weatherContentUrl = in.readString();
+                    this.solarTerms = in.readString();
+                    this.windPower = in.readString();
+                    this.weatherContent = in.readString();
+                    this.week = in.readString();
+                }
+
+                public static final Parcelable.Creator<DayWeatherListEntity> CREATOR
+                        = new Parcelable.Creator<DayWeatherListEntity>() {
+                    @Override
+                    public DayWeatherListEntity createFromParcel(Parcel source) {
+                        return new DayWeatherListEntity(source);
+                    }
+
+                    @Override
+                    public DayWeatherListEntity[] newArray(int size) {
+                        return new DayWeatherListEntity[size];
+                    }
+                };
             }
 
             public static class TimelyCropsNewsListEntity {
