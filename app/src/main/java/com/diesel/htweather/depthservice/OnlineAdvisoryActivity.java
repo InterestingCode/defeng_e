@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,7 +15,12 @@ import android.widget.TextView;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.BaseFragment;
+import com.diesel.htweather.response.BaseResJO;
+import com.diesel.htweather.util.FastJsonUtils;
+import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.widget.NoScrollViewPager;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 
 /**
@@ -29,6 +36,8 @@ import butterknife.OnClick;
  */
 public class OnlineAdvisoryActivity extends BaseActivity {
 
+    @BindView(R.id.tvNoReadNumber)
+    TextView tvNoReadNumber;
 
     @BindView(R.id.allMsgTab)
     RelativeLayout allMsgTab;
@@ -95,8 +104,40 @@ public class OnlineAdvisoryActivity extends BaseActivity {
                 myMsgTab.setBackgroundColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.online_btn_press));
                 tvAll.setTextColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, R.color.gray_666));
                 tvMe.setTextColor(ContextCompat.getColor(OnlineAdvisoryActivity.this, android.R.color.white));
+                dismissNoReadNumber();
             }
         }
+    }
+
+
+    private void dismissNoReadNumber() {
+        //showDialog();
+        DepthWebService.getInstance().dismissNoReadNumber(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "dismissNoReadNumber#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "dismissNoReadNumber#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+
+                    if (null != resJO && resJO.status == 0) {
+                        tvNoReadNumber.setText("");
+                        tvNoReadNumber.setVisibility(View.GONE);
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "dismissNoReadNumber#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
     }
 
 

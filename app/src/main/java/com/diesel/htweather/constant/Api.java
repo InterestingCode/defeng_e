@@ -136,4 +136,20 @@ public class Api {
     // 在线咨询详情
     public static final String ONLINE_CONSULTATION_DETAILS_URL = SERVER_URL + "/nologin/content/process.c?do=lookAskContentInfo";
 
+    // 在线咨询未读数清零
+    public static final String ONLINE_UNREAD_NUMBER_URL = SERVER_URL + "/session/user/process.c?do=udpateCommentUnread";
+
+    // 农业小博士
+    public static final String AGRICULTURE_DOCTOR_URL = SERVER_URL + "/nologin/content/process.c?do=getAgriculturalEncyInfo";
+
+    // 农事建议
+    public static final String AGRICULTURE_SUGGEST_URL = SERVER_URL + "/nologin/content/process.c?do=getAgriculturalSuggestInfo";
+
+    // 成长日记列表
+    public static final String GROWTHDIRARY_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getGrowthDiraryList";
+
+    // 成长日记详情
+    public static final String GROWTHDIRARY_DETAILS_URL = SERVER_URL + "/nologin/content/process.c?do=lookGrowthDiraryInfo";
+
+
 }

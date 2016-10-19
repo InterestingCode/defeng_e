@@ -129,4 +129,50 @@ public class DepthWebService extends WebService {
                 .execute(callback);
     }
 
+    /**
+     * 未读数清零
+     *
+     * @param callback 回调
+     */
+    public void dismissNoReadNumber(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.ONLINE_UNREAD_NUMBER_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 获取农业小博士信息
+     *
+     * @param callback 回调
+     */
+    public void getAgricultureDoctor(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.AGRICULTURE_DOCTOR_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 获取农事建议信息
+     *
+     * @param callback 回调
+     */
+    public void getAgriculturalSuggest(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.AGRICULTURE_SUGGEST_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+
 }

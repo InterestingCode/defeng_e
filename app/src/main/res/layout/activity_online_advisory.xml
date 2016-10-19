@@ -94,6 +94,7 @@
                 android:textSize="@dimen/font_32px" />
 
             <TextView
+                android:id="@+id/tvNoReadNumber"
                 android:layout_width="@dimen/px50"
                 android:layout_height="@dimen/px50"
                 android:layout_centerVertical="true"
