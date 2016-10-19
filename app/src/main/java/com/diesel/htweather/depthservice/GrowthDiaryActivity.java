@@ -16,11 +16,14 @@ import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +31,7 @@ import butterknife.OnClick;
 import okhttp3.Call;
 
 
-public class GrowthDiaryActivity extends BaseActivity {
+public class GrowthDiaryActivity extends BaseActivity implements XRecyclerView.LoadingListener {
 
     @BindView(R.id.farming_policy_recycler_view)
     XRecyclerView mRecyclerView;
@@ -42,12 +45,15 @@ public class GrowthDiaryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_growth_diary);
         ButterKnife.bind(this);
-        mRecyclerView.setPullRefreshEnabled(false);
-        mRecyclerView.setLoadingMoreEnabled(false);
+        mRecyclerView.setPullRefreshEnabled(true);
+        mRecyclerView.setLoadingMoreEnabled(true);
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST,
                         R.drawable.recycler_view_1px_divider_shape));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLoadingListener(this);
+        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
         getGrowthDiaryList("1", "20"); // 第一页前20个
     }
 
@@ -70,8 +76,16 @@ public class GrowthDiaryActivity extends BaseActivity {
                 try {
                     GrowthDiaryResJO resJO = FastJsonUtils.getSingleBean(response, GrowthDiaryResJO.class);
                     if (null != resJO && resJO.status == 0) {
-                        mAdapter = new GrowthDiaryAdapter(GrowthDiaryActivity.this, resJO.getData());
-                        mRecyclerView.setAdapter(mAdapter);
+                        if (page == 1) {
+                            mAdapter = new GrowthDiaryAdapter(GrowthDiaryActivity.this, resJO.getData());
+                            mRecyclerView.setAdapter(mAdapter);
+                            mRecyclerView.refreshComplete();
+                        } else {
+                            List<GrowthDiaryBean> listData = mAdapter.getGrowthDiaryBeanList();
+                            listData.addAll(resJO.getData());
+                            mAdapter.update(listData);
+                            mRecyclerView.loadMoreComplete();
+                        }
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -107,5 +121,15 @@ public class GrowthDiaryActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        getGrowthDiaryList("1", "20");
+    }
+
+    @Override
+    public void onLoadMore() {
+        getGrowthDiaryList(String.valueOf(page + 1), "20");
     }
 }

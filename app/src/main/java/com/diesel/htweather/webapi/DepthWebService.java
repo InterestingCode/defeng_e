@@ -211,6 +211,70 @@ public class DepthWebService extends WebService {
                 .execute(callback);
     }
 
+
+    /**
+     * 申请设施农业
+     *
+     * @param cropName          种植作物名称
+     * @param cropTypeName      种植作物品种名称
+     * @param cropPropertyNames 种植作物特性，多个特性分号分割
+     * @param areaNum           种植面积
+     * @param arId              大棚所在区域ID
+     * @param sowingTime        播种时间，格式：年月日  如：2016-07-15
+     * @param plantingTime      种植时间，格式，年月日 如：2016-06-25
+     * @param callback          回调
+     */
+    public void applyFacilitiesAgriculture(String cropName, String cropTypeName, String cropPropertyNames, String areaNum, String arId, String sowingTime, String plantingTime, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.APPLY_AGRICULTURE_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("cropName", cropName)
+                .addParams("cropTypeName", cropTypeName)
+                .addParams("cropPropertyNames", cropPropertyNames)
+                .addParams("areaNum", areaNum)
+                .addParams("arId", arId)
+                .addParams("sowingTime", sowingTime)
+                .addParams("plantingTime", plantingTime)
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 获取设施农业列表
+     *
+     * @param callback 回调
+     */
+    public void getFacilitiesAgricultureList(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.FACILITIES_AGRICULTURE_LIST_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    /**
+     * 设施农业详情
+     *
+     * @param csId  深度服务ID
+     * @param callback 回调
+     */
+
+    public void getFacilitiesAgricultureDetails(String csId, Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.FACILITIES_AGRICULTURE_DETAILS_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .addParams("csId", csId)
+                .build()
+                .execute(callback);
+    }
+
+
     /**
      * 深度服务简介
      *

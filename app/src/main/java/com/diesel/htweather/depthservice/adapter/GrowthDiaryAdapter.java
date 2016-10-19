@@ -47,4 +47,9 @@ public class GrowthDiaryAdapter extends RecyclerView.Adapter<GrowthDiaryHolder> 
     public List<GrowthDiaryBean> getGrowthDiaryBeanList() {
         return mGrowthDiaryBeanList;
     }
+
+    public void update(List<GrowthDiaryBean> list) {
+        mGrowthDiaryBeanList = list;
+        notifyDataSetChanged();
+    }
 }
