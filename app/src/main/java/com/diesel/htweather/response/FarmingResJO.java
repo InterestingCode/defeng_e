@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.diesel.htweather.base.BaseBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,7 +72,7 @@ public class FarmingResJO extends BaseResJO {
 
             public HoursDataListEntity hoursDataList;
 
-            public List<DayWeatherListEntity> dayWeatherList;
+            public ArrayList<DayWeatherListEntity> dayWeatherList;
 
             public List<TimelyCropsNewsListEntity> timelyCropsNewsList;
 

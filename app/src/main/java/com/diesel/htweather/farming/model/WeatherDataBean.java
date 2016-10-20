@@ -4,6 +4,7 @@ import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.response.FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class WeatherDataBean extends BaseBean {
     public String tips;
 
     // 用户关注区域7天天气情况
-    public List<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList;
+    public ArrayList<DayWeatherListEntity> dayWeatherList;
     // 实况数据
     public FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity hoursDataList;
 
