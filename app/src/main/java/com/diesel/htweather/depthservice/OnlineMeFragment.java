@@ -42,6 +42,8 @@ public class OnlineMeFragment extends BaseFragment {
 
     OnlineMeMsgAdapter mAdapter = null;
 
+    String unReadNumber;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class OnlineMeFragment extends BaseFragment {
     }
 
     private void initDatas() {
-        //showDialog();
+        showDialog();
         DepthWebService.getInstance().getOnlineConsultationMessages("2", new StringCallback() {
 
             @Override
@@ -77,6 +79,11 @@ public class OnlineMeFragment extends BaseFragment {
                     OnlineAdvisoryResJO resJO = FastJsonUtils.getSingleBean(response, OnlineAdvisoryResJO.class);
                     if (null != resJO && !resJO.getData().isEmpty() && resJO.status == 0) {
                         mAdapter = new OnlineMeMsgAdapter(mActivity, resJO.getData());
+                        unReadNumber = resJO.getCount();
+                        if (Integer.valueOf(unReadNumber) > 0) {
+                            ((OnlineAdvisoryActivity) getActivity()).tvNoReadNumber.setText(unReadNumber);
+                            ((OnlineAdvisoryActivity) getActivity()).tvNoReadNumber.setVisibility(View.VISIBLE);
+                        }
                         mRecyclerView.setAdapter(mAdapter);
                     } else {
                         ToastUtils.show(resJO.msg);

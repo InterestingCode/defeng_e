@@ -12,8 +12,18 @@ import java.util.List;
 public class OnlineAdvisoryResJO extends BaseResJO {
 
 
+    String count;
+
     // 在线咨询bean
     List<OnlineAdvisoryBean> data;
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
 
     public List<OnlineAdvisoryBean> getData() {
         return data;

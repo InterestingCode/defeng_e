@@ -113,7 +113,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.more_btn:
-                ActivityNav.getInstance().startWeatherTrendActivity(mContext);
+               // ActivityNav.getInstance().startWeatherTrendActivity(mContext);
                 break;
             case R.id.close_tips_iv:
                 ViewUtils.gone(mTipsLayout);

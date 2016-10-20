@@ -102,8 +102,8 @@
                 android:background="@drawable/ic_notice"
                 android:gravity="center"
                 android:padding="@dimen/px4"
-                android:singleLine="true"
-                android:text="99+"
+                android:maxLines="1"
+                android:visibility="gone"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/font_24px" />
 

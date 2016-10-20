@@ -37,7 +37,7 @@ import okhttp3.Call;
 public class OnlineAdvisoryActivity extends BaseActivity {
 
     @BindView(R.id.tvNoReadNumber)
-    TextView tvNoReadNumber;
+    public TextView tvNoReadNumber;
 
     @BindView(R.id.allMsgTab)
     RelativeLayout allMsgTab;
