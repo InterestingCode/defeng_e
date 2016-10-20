@@ -157,8 +157,6 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
             case R.id.tvReturnTop:
                 mScrollView.fullScroll(ScrollView.FOCUS_UP);
                 break;
-
-
             default:
                 break;
         }

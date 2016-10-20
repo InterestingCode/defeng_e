@@ -233,7 +233,7 @@ public class DepthWebService extends WebService {
                 .addParams("cropName", cropName)
                 .addParams("cropTypeName", cropTypeName)
                 .addParams("cropPropertyNames", cropPropertyNames)
-                .addParams("areaNum", areaNum)
+                .addParams("areaNumStr", areaNum)
                 .addParams("arId", arId)
                 .addParams("sowingTime", sowingTime)
                 .addParams("plantingTime", plantingTime)

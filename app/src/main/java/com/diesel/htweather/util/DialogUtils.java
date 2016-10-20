@@ -153,8 +153,7 @@ public class DialogUtils {
                 String plantName = plantNameEt.getText().toString();
                 String plantArea = plantAreaEt.getText().toString();
                 if (TextUtils.isEmpty(plantName) || TextUtils.isEmpty(plantArea)) {
-                    ToastUtils.show(
-                            context.getResources().getString(R.string.tips_has_data_is_empty));
+                    ToastUtils.show(context.getResources().getString(R.string.tips_has_data_is_empty));
                     return;
                 }
                 dialog.dismiss();

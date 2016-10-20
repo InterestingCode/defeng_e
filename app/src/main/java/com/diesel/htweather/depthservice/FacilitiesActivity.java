@@ -30,6 +30,5 @@ public class FacilitiesActivity extends BaseActivity {
                 startActivity(new Intent(this, FacilitiesDetailsActivity.class));
                 break;
         }
-
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px26"
+        android:layout_marginLeft="@dimen/px34"
+        android:layout_marginRight="@dimen/px34"
+        android:layout_marginTop="@dimen/px34"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/px50"
+            android:layout_height="@dimen/px50"
+            android:src="@drawable/ic_radio_button_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/px15"
+            android:text="四川省成都市崇州市 冬小麦 深度服务"
+            android:textColor="@color/gray_666"
+            android:textSize="@dimen/font_30px" />
+
+    </LinearLayout>
+</LinearLayout>

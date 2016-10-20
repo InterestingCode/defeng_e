@@ -154,8 +154,8 @@ public class Api {
     // 设施农业申请
     public static final String APPLY_AGRICULTURE_URL = SERVER_URL + "/session/content/process.c?do=reqCropSet";
 
-    // 设施农业列表 TODO 链接有问题
-    public static final String FACILITIES_AGRICULTURE_LIST_URL = SERVER_URL + "/session/content/process.c?do=lookCropSetInfo";
+    // 设施农业列表
+    public static final String FACILITIES_AGRICULTURE_LIST_URL = SERVER_URL + "/session/content/process.c?do=getOwnerCropSetList";
 
     // 设施农业详情
     public static final String FACILITIES_AGRICULTURE_DETAILS_URL = SERVER_URL + "/session/content/process.c?do=lookCropSetInfo";
