@@ -21,7 +21,7 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
 
     WheelTime wheelTime;
 
-    private View btnSubmit, btnCancel;
+    private View btnSubmit/*, btnCancel*/;
 
     private TextView tvTitle;
 
@@ -42,10 +42,10 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
         // -----确定和取消按钮
         btnSubmit = findViewById(R.id.btnSubmit);
         btnSubmit.setTag(TAG_SUBMIT);
-        btnCancel = findViewById(R.id.btnCancel);
-        btnCancel.setTag(TAG_CANCEL);
+//        btnCancel = findViewById(R.id.btnCancel);
+//        btnCancel.setTag(TAG_CANCEL);
         btnSubmit.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+//        btnCancel.setOnClickListener(this);
         // 顶部标题
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         // ----时间转轮
@@ -136,14 +136,14 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
                 }
             }
         } else if (TAG_SUBMIT.equals(tag)) {
-            if (timeSelectListener != null) {
-                try {
-                    Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
-                    timeSelectListener.onTimeSelect(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if (timeSelectListener != null) {
+//                try {
+//                    Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
+//                    timeSelectListener.onTimeSelect(date);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//            }
         }
         dismiss();
     }

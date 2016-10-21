@@ -11,11 +11,13 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
 
     WheelOptions wheelOptions;
 
-    private View btnSubmit, btnCancel;
+    private View btnConfirm, btnSubmit/*, btnCancel*/;
 
     private TextView tvTitle;
 
     private OnOptionsSelectListener optionsSelectListener;
+
+    private static final String TAG_CONFIRM = "confirm";
 
     private static final String TAG_SUBMIT = "submit";
 
@@ -25,13 +27,15 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pickerview_options, contentContainer);
         // -----确定和取消按钮
-//        btnSubmit = findViewById(R.id.btnSubmit);
-        btnSubmit = findViewById(R.id.confirm_btn);
+        btnSubmit = findViewById(R.id.btnSubmit);
         btnSubmit.setTag(TAG_SUBMIT);
-        btnCancel = findViewById(R.id.btnCancel);
-        btnCancel.setTag(TAG_CANCEL);
+        btnConfirm = findViewById(R.id.confirm_btn);
+        btnConfirm.setTag(TAG_CONFIRM);
+//        btnCancel = findViewById(R.id.btnCancel);
+//        btnCancel.setTag(TAG_CANCEL);
         btnSubmit.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+        btnConfirm.setOnClickListener(this);
+//        btnCancel.setOnClickListener(this);
         //顶部标题
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         // ----转轮
@@ -114,18 +118,18 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
     public void onClick(View v) {
         String tag = (String) v.getTag();
         if (tag.equals(TAG_CANCEL)) {
-            dismiss();
-            return;
-        } else {
+
+        } else if (TAG_SUBMIT.equals(tag)) {
+
+        } else if (TAG_CONFIRM.equals(tag)) {
             if (optionsSelectListener != null) {
                 int[] optionsCurrentItems = wheelOptions.getCurrentItems();
                 optionsSelectListener
                         .onOptionsSelect(optionsCurrentItems[0], optionsCurrentItems[1],
                                 optionsCurrentItems[2]);
             }
-            dismiss();
-            return;
         }
+        dismiss();
     }
 
     public interface OnOptionsSelectListener {
