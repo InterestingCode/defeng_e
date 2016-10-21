@@ -219,6 +219,10 @@ public class EditUserInfoActivity extends BaseActivity {
                 mCityPickerView.dismiss();
                 return true;
             }
+            if (null != mOccupationPickerView && mOccupationPickerView.isShowing()) {
+                mOccupationPickerView.dismiss();
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
