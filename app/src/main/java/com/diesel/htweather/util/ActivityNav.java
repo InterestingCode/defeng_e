@@ -83,14 +83,17 @@ public class ActivityNav {
         context.startActivity(intent);
     }
 
-    public void startFarmingPolicyActivity(Context context, int farmingType) {
+    public void startFarmingPolicyActivity(Context context, int areaId, int farmingType) {
         Intent intent = new Intent(context, FarmingListActivity.class);
         IntentExtras.setFarmingType(intent, farmingType);
+        IntentExtras.setAreaId(intent, areaId);
         context.startActivity(intent);
     }
 
-    public void startFarmingDetailsActivity(Context context) {
+    public void startFarmingDetailsActivity(Context context, int newsId, int farmingType) {
         Intent intent = new Intent(context, FarmingDetailsActivity.class);
+        IntentExtras.setFarmingNewsId(intent, newsId);
+        IntentExtras.setFarmingType(intent, farmingType);
         context.startActivity(intent);
     }
 

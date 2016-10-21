@@ -25,6 +25,8 @@ public class FarmingPolicyBean extends BaseBean {
 
     public String sendTime;
 
+    public int areaId;
+
     public void convertPolcyCropsNewsEntity(FarmingResJO.ObjEntity.PolcyCropsNewsEntity entity) {
         newsId = entity.newsId;
         counts = entity.counts;

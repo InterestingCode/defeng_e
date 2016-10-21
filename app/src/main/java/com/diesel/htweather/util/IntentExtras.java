@@ -71,4 +71,14 @@ public class IntentExtras {
         return intent.getParcelableArrayListExtra(WEATHER_TREND_DATA);
     }
 
+    private static final String FARMING_NEWS_ID = "farming_news_id";
+
+    public static void setFarmingNewsId(@NonNull Intent intent, int newsId) {
+        intent.putExtra(FARMING_NEWS_ID, newsId);
+    }
+
+    public static int getFarmingNewsId(@NonNull Intent intent) {
+        return intent.getIntExtra(FARMING_NEWS_ID, 0);
+    }
+
 }

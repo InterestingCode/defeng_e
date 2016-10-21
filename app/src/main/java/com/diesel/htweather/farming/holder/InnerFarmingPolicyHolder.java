@@ -6,9 +6,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.event.RecyclerItemEvent;
-import com.diesel.htweather.farming.model.FarmingInfoPolicyBean;
-import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.response.FarmingInfoResJO;
+import com.diesel.htweather.response.FarmingPolicyResJO;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,9 +51,12 @@ public class InnerFarmingPolicyHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void bindData(FarmingInfoPolicyBean bean) {
-        mFarmingInfoCoverIv.setImageResource(bean.coverResId);
-        mFarmingInfoTitleTv.setText(bean.title);
+    public void bindData(BaseBean bean) {
+        if (bean instanceof FarmingPolicyResJO.ObjEntity.PolicyNewsEntity) {
+        } else if (bean instanceof FarmingInfoResJO.ObjEntity.InfoNewsEntity) {
+        }
+//        mFarmingInfoCoverIv.setImageResource(bean.titleImg);
+//        mFarmingInfoTitleTv.setText(bean.title);
 //        mFarmingInfoSourceTv.setText(bean.publisher);
 //        mFarmingInfoTimeTv.setText(bean.date);
     }

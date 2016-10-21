@@ -163,4 +163,16 @@ public class Api {
     // 深度服务简介
     public static final String DEEP_SERVICE_DESC_URL = SERVER_URL + "/nologin/common/process.c?do=deepServiceDesc";
 
+    // 农业政策列表
+    public static final String FARMING_POLICY_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getAgriContentList";
+
+    // 农业政策详情
+    public static final String FARMING_POLICY_DETAIL_URL = SERVER_URL + "/nologin/content/process.c?do=lookAgriContentInfo";
+
+    // 农气情报列表
+    public static final String FARMING_INFO_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getArticleCropsList";
+
+    //
+    public static final String FARMING_INFO_DETAIL_URL = SERVER_URL + "/nologin/content/process.c?do=lookAgriContentInfo";
+
 }

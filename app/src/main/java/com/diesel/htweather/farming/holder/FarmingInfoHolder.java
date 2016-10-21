@@ -42,19 +42,22 @@ public class FarmingInfoHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.farming_info_browse_tv)
     TextView mFarmingInfoBrowseTv;
 
+    FarmingInfoBean mInfoBean;
+
     public FarmingInfoHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityNav.getInstance().startFarmingPolicyActivity(itemView.getContext(),
+                ActivityNav.getInstance().startFarmingPolicyActivity(itemView.getContext(), mInfoBean.areaId,
                         FarmingListActivity.TYPE_FARMING_INFO);
             }
         });
     }
 
     public void bindData(FarmingInfoBean bean) {
+        mInfoBean = bean;
         mFarmingInfoTitleTv.setText(bean.title);
         mFarmingInfoContentTv.setText(bean.desc);
         mFarmingInfoTimeTv.setText(bean.sendTime);

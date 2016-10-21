@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.farming.FarmingListActivity;
 import com.diesel.htweather.farming.model.ActualFarmingBean;
 import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
@@ -110,18 +111,19 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             final Context context = container.getContext();
+            final FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity
+                    entity = getEntity(position);
             View view = View.inflate(context, R.layout.pager_item_actual_framing_data, null);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ActivityNav.getInstance().startFarmingDetailsActivity(context);
+                    ActivityNav.getInstance().startFarmingDetailsActivity(context, entity.newsId,
+                            FarmingListActivity.TYPE_FARMING_INFO);
                 }
             });
             TextView mTipsTitleTv = (TextView) view.findViewById(R.id.tips_title_tv);
             TextView mTipsTimeTv = (TextView) view.findViewById(R.id.tips_time_tv);
             TextView mTipsDataTv = (TextView) view.findViewById(R.id.tips_data_tv);
-            FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity
-                    entity = getEntity(position);
             mTipsTitleTv.setText(entity.title);
             mTipsTimeTv.setText(entity.sendTime);
             mTipsDataTv.setText(entity.content);

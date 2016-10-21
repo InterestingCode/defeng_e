@@ -1,7 +1,6 @@
 package com.diesel.htweather;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -190,6 +189,8 @@ public class FarmingFragment extends BaseFragment
                             for (int i = 0; i < articleCropsNews.size(); i++) {
                                 FarmingInfoBean farmingInfo = new FarmingInfoBean();
                                 farmingInfo.convertArticleCropsNewsEntity(articleCropsNews.get(i));
+                                WeatherDataBean bean = (WeatherDataBean) mFarmingData.get(i).get(0);
+                                farmingInfo.areaId = bean.arId;
                                 mFarmingData.get(i).add(farmingInfo);
                             }
                         }
@@ -201,6 +202,8 @@ public class FarmingFragment extends BaseFragment
                             for (int i = 0; i < polcyCropsNews.size(); i++) {
                                 FarmingPolicyBean farmingPolicy = new FarmingPolicyBean();
                                 farmingPolicy.convertPolcyCropsNewsEntity(polcyCropsNews.get(0));
+                                WeatherDataBean bean = (WeatherDataBean) mFarmingData.get(i).get(0);
+                                farmingPolicy.areaId = bean.arId;
                                 mFarmingData.get(i).add(farmingPolicy);
                             }
                         }
