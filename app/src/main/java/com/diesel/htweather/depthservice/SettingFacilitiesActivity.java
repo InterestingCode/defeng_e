@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
+import static com.diesel.htweather.base.DFApplication.countries;
+
 
 public class SettingFacilitiesActivity extends BaseActivity {
     @BindView(R.id.tvCrop)
@@ -45,8 +47,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
     @BindView(R.id.plantingTime)
     TextView plantingTime;
 
-
-    private TimePickerView mTimePickerView;
+    private int arId; // 区域ID
 
     private OptionsPickerView mCityPickerView;
 
@@ -136,7 +137,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
             ToastUtils.show("请输入种植面积");
             return;
         }
-        String address = tvAddress.getText().toString();
+        String address = String.valueOf(arId);
         if (TextUtils.isEmpty(area)) {
             ToastUtils.show("请选择地址");
             return;
@@ -152,6 +153,8 @@ public class SettingFacilitiesActivity extends BaseActivity {
             ToastUtils.show("请选择种植时间");
             return;
         }
+
+
         applyFacilitiesAgriculture(cropName, cropType, cropProperty, area, address, sowingTime, planting);
     }
 
@@ -195,26 +198,22 @@ public class SettingFacilitiesActivity extends BaseActivity {
         if (null == mCityPickerView) {
             mCityPickerView = new OptionsPickerView(this);
             mCityPickerView.setTitle(getString(R.string.choose_area));
-            mCityPickerView
-                    .setPicker(DFApplication.provinces, DFApplication.cities,
-                            DFApplication.countries,
-                            true);
+            mCityPickerView.setPicker(DFApplication.provinces, DFApplication.cities, countries, true);
             mCityPickerView.setCyclic(true, true, true);
             mCityPickerView.setSelectOptions(0, 0, 0);
 
-            mCityPickerView
-                    .setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+            mCityPickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
 
-                        @Override
-                        public void onOptionsSelect(int options1, int option2, int options3) {
-                            // 返回的分别是三个级别的选中位置
-                            String tx = DFApplication.provinces.get(options1).pvName + "-"
-                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
-                                    + DFApplication.countries.get(options1).get(option2)
-                                    .get(options3).arName;
-                            tvAddress.setText(tx);
-                        }
-                    });
+                @Override
+                public void onOptionsSelect(int options1, int option2, int options3) {
+                    // 返回的分别是三个级别的选中位置
+                    String tx = DFApplication.provinces.get(options1).pvName + "-" + DFApplication.cities.get(options1).get(option2).ctName + "-"
+                            + countries.get(options1).get(option2).get(options3).arName;
+                    tvAddress.setText(tx);
+                    arId = DFApplication.countries.get(options1).get(option2).get(options3).arId;
+
+                }
+            });
         }
         mCityPickerView.show();
     }

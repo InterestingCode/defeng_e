@@ -61,7 +61,7 @@ public class OnlineMeFragment extends BaseFragment {
 
     private void initDatas() {
         showDialog();
-        DepthWebService.getInstance().getOnlineConsultationMessages("2", new StringCallback() {
+        DepthWebService.getInstance().getOnlineConsultationMessages("", "2", new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {

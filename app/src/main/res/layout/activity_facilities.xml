@@ -25,164 +25,25 @@
             android:text="我的深度服务"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_36px" />
-
-        <ImageView
-            android:id="@+id/edit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:paddingLeft="@dimen/px30"
-            android:paddingRight="@dimen/px30"
-            android:src="@drawable/ic_edit_weather_city"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:paddingLeft="@dimen/px30"
-            android:paddingRight="@dimen/px30"
-            android:text="@string/save"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/font_34px"
-            android:visibility="gone" />
     </RelativeLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/btnFacilities"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/myDeepServiceListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/px34"
-        android:background="@drawable/bg_facilities">
-
-        <TextView
-            android:id="@+id/tvFacilities"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_area_normal"
-            android:drawablePadding="@dimen/px15"
-            android:padding="@dimen/px15"
-            android:text="四川省成都市崇州市 水稻 深度服务1"
-            android:textColor="@color/black_333"
-            android:textSize="@dimen/font_30px" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvFacilities"
-            android:layout_marginLeft="@dimen/px74"
-            android:text="2016.8.15-2017.04.15"
-            android:textColor="@color/gray_666"
-            android:textSize="@dimen/font_30px" />
-
-
-        <ImageView
-            android:layout_width="@dimen/px50"
-            android:layout_height="@dimen/px50"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/px30"
-            android:src="@drawable/ic_radio_button_select" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px34"
-        android:layout_marginLeft="@dimen/px34"
-        android:layout_marginRight="@dimen/px34"
-        android:background="@drawable/bg_facilities">
-
-        <TextView
-            android:id="@+id/tvFacilities1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_area_normal"
-            android:drawablePadding="@dimen/px15"
-            android:padding="@dimen/px15"
-            android:text="四川省成都市崇州市 水稻 深度服务2"
-            android:textColor="@color/black_333"
-            android:textSize="@dimen/font_30px" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvFacilities1"
-            android:layout_marginLeft="@dimen/px74"
-            android:text="2016.8.15-2017.04.15"
-            android:textColor="@color/gray_666"
-            android:textSize="@dimen/font_30px" />
-
-
-        <ImageView
-            android:layout_width="@dimen/px50"
-            android:layout_height="@dimen/px50"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/px30"
-            android:src="@drawable/ic_radio_button_normal" />
-
-    </RelativeLayout>
-
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="@dimen/px40"
         android:text="推荐服务"
         android:textColor="@color/gray_666"
         android:textSize="@dimen/font_34px" />
 
-    <LinearLayout
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recommendServiceListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px26"
-        android:layout_marginLeft="@dimen/px34"
-        android:layout_marginRight="@dimen/px34"
-        android:layout_marginTop="@dimen/px34"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content" />
 
-        <ImageView
-            android:layout_width="@dimen/px50"
-            android:layout_height="@dimen/px50"
-            android:src="@drawable/ic_radio_button_normal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/px15"
-            android:text="四川省成都市崇州市 冬小麦 深度服务"
-            android:textColor="@color/gray_666"
-            android:textSize="@dimen/font_30px" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/px34"
-        android:layout_marginLeft="@dimen/px34"
-        android:layout_marginRight="@dimen/px34"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/px50"
-            android:layout_height="@dimen/px50"
-            android:src="@drawable/ic_radio_button_normal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/px15"
-            android:text="四川省成都市崇州市 大豆 深度服务"
-            android:textColor="@color/gray_666"
-            android:textSize="@dimen/font_30px" />
-
-    </LinearLayout>
 </LinearLayout>

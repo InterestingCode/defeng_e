@@ -35,7 +35,7 @@ public class GrowthDiaryHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new RecyclerItemEvent(getLayoutPosition()));
+                EventBus.getDefault().post(new RecyclerItemEvent(getLayoutPosition() - 1));
             }
         });
     }

@@ -69,14 +69,14 @@ public class OnlineMeMsgHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new MeMsgItemEvent(getLayoutPosition()));
+                EventBus.getDefault().post(new MeMsgItemEvent(getLayoutPosition() - 1));
             }
         });
 
         tvUpsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new ThumbsUpEvent(getLayoutPosition()));
+                EventBus.getDefault().post(new ThumbsUpEvent(getLayoutPosition() - 1));
             }
         });
     }

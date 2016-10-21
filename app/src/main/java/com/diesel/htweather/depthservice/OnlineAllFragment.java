@@ -59,7 +59,7 @@ public class OnlineAllFragment extends BaseFragment {
 
     private void initDatas() {
         showDialog();
-        DepthWebService.getInstance().getOnlineConsultationMessages("1", new StringCallback() {
+        DepthWebService.getInstance().getOnlineConsultationMessages("", "1", new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {

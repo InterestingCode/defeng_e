@@ -73,12 +73,13 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvCropName"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
                 android:text="超级杂交稻"
-                android:layout_marginRight="@dimen/px30"
                 android:textColor="@color/gray_999"
                 android:textSize="@dimen/font_34px" />
         </LinearLayout>
@@ -99,12 +100,13 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvCropTypeName"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
                 android:text="两优1128"
-                android:layout_marginRight="@dimen/px30"
                 android:textColor="@color/gray_999"
                 android:textSize="@dimen/font_34px" />
 
@@ -127,12 +129,13 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvCropPropertyNames"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
                 android:text="晚熟稻"
-                android:layout_marginRight="@dimen/px30"
                 android:textColor="@color/gray_999"
                 android:textSize="@dimen/font_34px" />
 
@@ -154,13 +157,14 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvAreaNum"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
                 android:text="100"
                 android:textColor="@color/gray_999"
-                android:layout_marginRight="@dimen/px30"
                 android:textSize="@dimen/font_34px" />
 
 
@@ -182,12 +186,13 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvCropAddress"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
-                android:text=""
-                android:layout_marginRight="@dimen/px30"
+                android:text="北京"
                 android:textColor="@color/gray_999"
                 android:textSize="@dimen/font_34px" />
 
@@ -210,13 +215,14 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvSowingTime"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
                 android:text="2016-01-12"
                 android:textColor="@color/gray_999"
-                android:layout_marginRight="@dimen/px30"
                 android:textSize="@dimen/font_34px" />
 
         </LinearLayout>
@@ -237,19 +243,19 @@
                 android:textSize="@dimen/font_34px" />
 
             <TextView
+                android:id="@+id/tvPlantingTime"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/px30"
                 android:layout_weight="1"
                 android:gravity="center_vertical|right"
                 android:text="2016-01-12"
                 android:textColor="@color/gray_999"
-                android:layout_marginRight="@dimen/px30"
                 android:textSize="@dimen/font_34px" />
 
 
         </LinearLayout>
     </LinearLayout>
-
 
 
 </LinearLayout>

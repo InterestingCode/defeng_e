@@ -53,7 +53,7 @@ public class GrowthDiaryActivity extends BaseActivity implements XRecyclerView.L
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setLoadingListener(this);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
+        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
         getGrowthDiaryList("1", "20"); // 第一页前20个
     }
 

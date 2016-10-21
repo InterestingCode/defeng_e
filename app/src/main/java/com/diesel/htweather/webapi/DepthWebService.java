@@ -27,15 +27,17 @@ public class DepthWebService extends WebService {
     /**
      * 获取在线咨询列表
      *
+     * @param faTitle     标题模糊筛选
      * @param contentType 1：所有数据； 2：我的咨询
      * @param callback    回调
      */
-    public void getOnlineConsultationMessages(String contentType, Callback callback) {
+    public void getOnlineConsultationMessages(String faTitle, String contentType, Callback callback) {
         OkHttpUtils
                 .post()
                 .url(Api.GET_ONLINE_CONSULTATION_LIST_URL)
                 .addParams("drivenType", getDriveType())
                 .addParams("appkey", getAppKey())
+                .addParams("faTitle", faTitle)
                 .addParams("contentType", contentType)
                 .addParams("rows", "20")
                 .build()
@@ -259,7 +261,7 @@ public class DepthWebService extends WebService {
     /**
      * 设施农业详情
      *
-     * @param csId  深度服务ID
+     * @param csId     深度服务ID
      * @param callback 回调
      */
 

@@ -81,6 +81,9 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
     @BindView(R.id.comment_rl)
     LinearLayout comment_rl;
 
+    @BindView(R.id.content_layout)
+    LinearLayout content_layout;
+
     String contentId;
 
     String cmId;
@@ -115,6 +118,7 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                     OnlineDetailsResJO resJO = FastJsonUtils.getSingleBean(response, OnlineDetailsResJO.class);
 
                     if (null != resJO && resJO.status == 0) {
+                        content_layout.setVisibility(View.VISIBLE);
                         OnlineAdvisoryBean obj = resJO.getObj();
                         String userFacePath = Api.SERVER_URL + obj.getUserFace();
                         PicassoUtils.loadImageViewHolder(mContext, userFacePath, R.drawable.ic_gather_data_avatar, tvUserFace);
@@ -136,6 +140,7 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                         mAdapter = new CommentsAdapter(OnlineAdvisoryDetailsActivity.this, obj.getCmList());
                         commentList.setAdapter(mAdapter);
                     } else {
+                        content_layout.setVisibility(View.INVISIBLE);
                         ToastUtils.show(resJO.msg);
                     }
                 } catch (Exception e) {

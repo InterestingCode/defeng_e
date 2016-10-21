@@ -6,8 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.event.AllMsgItemEvent;
-import com.diesel.htweather.event.ThumbsUpEvent;
+import com.diesel.htweather.event.RecyclerItemEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -15,9 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by mac14 on 16/9/6.
+ * Created by zhoujiangsen on 16/10/21.
  */
-public class OnlineAllMsgHolder extends RecyclerView.ViewHolder {
+public class SearchHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.tvUserFace)
     public ImageView tvUserFace;
@@ -62,21 +61,14 @@ public class OnlineAllMsgHolder extends RecyclerView.ViewHolder {
     public ImageView tvCommentsBtn;
 
 
-    public OnlineAllMsgHolder(View itemView) {
+    public SearchHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new AllMsgItemEvent(getLayoutPosition() - 1));
-            }
-        });
-
-        tvUpsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventBus.getDefault().post(new ThumbsUpEvent(getLayoutPosition() - 1));
+                EventBus.getDefault().post(new RecyclerItemEvent(getLayoutPosition() - 1));
             }
         });
     }
