@@ -103,7 +103,7 @@ public class FarmingFragment extends BaseFragment {
                 Log.e(TAG, "getFocusAreaFarmingData#onError() " + e.getMessage());
                 dismissDialog();
                 ToastUtils.show(getString(R.string.tips_request_failure));
-                if (isRefresh) {
+                if (isRefresh && mCurrIndex < mAdapter.getCount()) {
                     ((FarmingPagerFragment) mFragments.get(mCurrIndex)).onRefreshComplete();
                 }
             }
@@ -112,7 +112,7 @@ public class FarmingFragment extends BaseFragment {
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getFocusAreaFarmingData#onResponse() " + response);
                 dismissDialog();
-                if (isRefresh) {
+                if (isRefresh && mCurrIndex < mAdapter.getCount()) {
                     ((FarmingPagerFragment) mFragments.get(mCurrIndex)).onRefreshComplete();
                 }
                 try {

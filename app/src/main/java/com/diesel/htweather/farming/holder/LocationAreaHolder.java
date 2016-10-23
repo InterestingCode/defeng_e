@@ -34,6 +34,8 @@ public class LocationAreaHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(LocationBean bean) {
-        mTextView.setText(bean.location.city);
+        if (null != bean.location) {
+            mTextView.setText(bean.location.city);
+        }
     }
 }

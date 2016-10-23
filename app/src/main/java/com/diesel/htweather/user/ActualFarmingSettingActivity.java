@@ -8,11 +8,14 @@ import android.widget.TextView;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.DFApplication;
+import com.diesel.htweather.event.RefreshFarmingDataEvent;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.IntentExtras;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.pickerview.OptionsPickerView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,6 +97,7 @@ public class ActualFarmingSettingActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ADD_CROPS && resultCode == RESULT_OK && null != data) {
             mWatchPlantsValueTv.setText(IntentExtras.getCropsName(data));
+            EventBus.getDefault().post(new RefreshFarmingDataEvent());
         }
     }
 }
