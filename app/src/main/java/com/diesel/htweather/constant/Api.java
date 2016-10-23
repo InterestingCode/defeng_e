@@ -172,7 +172,18 @@ public class Api {
     // 农气情报列表
     public static final String FARMING_INFO_LIST_URL = SERVER_URL + "/nologin/content/process.c?do=getArticleCropsList";
 
-    //
-    public static final String FARMING_INFO_DETAIL_URL = SERVER_URL + "/nologin/content/process.c?do=lookAgriContentInfo";
+    // 农气情报详情
+    public static final String FARMING_INFO_DETAIL_URL = SERVER_URL + "/nologin/content/process.c?do=lookArticleCropsInfo";
 
+    // 关于德丰e农
+    public static final String ABOUT_APP_URL = SERVER_URL + "/nologin/common/process.c?do=aboutUs";
+
+    // 查看采集信息详情
+    public static final String GATHER_DATA_DETAILS_URL = SERVER_URL + "/nologin/content/process.c?do=lookCollContentInfo";
+
+    // 评论采集信息
+    public static final String COMMENT_GATHER_DATA_URL = SERVER_URL + "/session/content/process.c?do=addCollContentComment";
+
+    // 信息采集点赞
+    public static final String PRAISE_GATHER_DATA_URL = SERVER_URL + "/nologin/content/process.c?do=collContentUps";
 }

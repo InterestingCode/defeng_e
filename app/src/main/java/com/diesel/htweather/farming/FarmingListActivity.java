@@ -35,8 +35,6 @@ import okhttp3.Call;
 
 public class FarmingListActivity extends BaseActivity {
 
-    public static final int TYPE_ACTUAL_FARMING = 9000;
-
     public static final int TYPE_FARMING_INFO = 9001;
 
     public static final int TYPE_FARMING_POLICY = 9002;
@@ -73,7 +71,7 @@ public class FarmingListActivity extends BaseActivity {
                 new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST,
                         R.drawable.recycler_view_1px_divider_shape));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new FarmingPolicyAdapter(mList));
+        mRecyclerView.setAdapter(mAdapter);
 
         mAreaId = IntentExtras.getAreaId(getIntent());
         mFarmingType = IntentExtras.getFarmingType(getIntent());
@@ -91,32 +89,6 @@ public class FarmingListActivity extends BaseActivity {
     @OnClick(R.id.back_btn)
     public void onClick() {
         finish();
-    }
-
-    @Subscribe
-    public void onRecyclerItemEvent(RecyclerItemEvent event) {
-        int position = event.position;
-        if (mFarmingType == TYPE_FARMING_INFO) {
-            ActivityNav.getInstance().startFarmingDetailsActivity(this,
-                    ((FarmingInfoResJO.ObjEntity.InfoNewsEntity) mList.get(position)).newsId,
-                    mFarmingType);
-        } else if (mFarmingType == TYPE_FARMING_POLICY) {
-            ActivityNav.getInstance().startFarmingDetailsActivity(this,
-                    ((FarmingPolicyResJO.ObjEntity.PolicyNewsEntity) mList.get(position)).newsId,
-                    mFarmingType);
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     private void getFarmingInfoList() {
@@ -143,11 +115,13 @@ public class FarmingListActivity extends BaseActivity {
                     if (resJO.status != 0) {
                         ToastUtils.show(resJO.msg);
                     } else {
-                        if (null != resJO.obj && !resJO.obj.articleNewsList.isEmpty()) {
+                        if (null != resJO.obj && null != resJO.obj.articleNewsList && !resJO.obj.articleNewsList.isEmpty()) {
                             if (mPage == 1) {
                                 mList.clear();
                             }
+                            Log.e(TAG, "getFarmingInfoList#onResponse() #size#" + resJO.obj.articleNewsList.size());
                             mList.addAll(resJO.obj.articleNewsList);
+                            Log.e(TAG, "getFarmingInfoList#onResponse() #list.size#" + mList.size());
                             mAdapter.notifyDataSetChanged();
                             mPage++;
                         }

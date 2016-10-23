@@ -1,6 +1,7 @@
 package com.diesel.htweather.farming;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,17 +54,22 @@ public class WeatherTrendActivity extends BaseActivity {
     @BindView(R.id.weather_details_layout)
     LinearLayout mWeatherDetailsLayout;
 
+    @BindView(R.id.update_time_tv)
+    TextView mUpdateTimeTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_trend);
         ButterKnife.bind(this);
-        testTempTrend();
+//        testTempTrend();
 
         ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList
                 = IntentExtras.getWeatherTrendData(getIntent());
         List<WeatherTrendBean> trendData = new ArrayList<>();
-        if (null != dayWeatherList && dayWeatherList.isEmpty()) {
+        if (null != dayWeatherList && !dayWeatherList.isEmpty()) {
+            List<Integer> highTemp = new ArrayList<>();
+            List<Integer> lowTemp = new ArrayList<>();
             for (int i = 0; i < dayWeatherList.size(); i++) {
                 FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity entity
                         = dayWeatherList.get(i);
@@ -71,17 +77,32 @@ public class WeatherTrendActivity extends BaseActivity {
                     float temp = Float.valueOf(entity.currTemp);
                     mTemperatureTv.setText(String.valueOf((int) temp));
                     mWeatherDescTv.setText(entity.weatherContent + " " + entity.tempBucket + " "
-                            + entity.windPower);
+                            + entity.windPower + entity.windPowerLevel);
                     mWeatherDateTv.setText(
                             entity.currDate + " (" + entity.currLunarDate + ") " + entity.week);
-                    break;
+                    mUpdateTimeTv.setText(getString(R.string.weather_data_update_time,
+                            DateUtils.formatDate(System.currentTimeMillis(), DateUtils.HH_MM)));
                 }
 
                 WeatherTrendBean bean = new WeatherTrendBean();
-                bean.forcastDate = entity.currDate;
-//                bean.
+                bean.forcastDate = DateUtils.formatDate(entity.currDate, DateUtils.MM_DD);
+                bean.weather = entity.weatherContent;
+                bean.windPower = entity.windPower;
+                if (!TextUtils.isEmpty(entity.tempBucket) && entity.tempBucket.contains("/")) {
+                    String[] temp = entity.tempBucket.replaceAll("°", "").split("/");
+                    lowTemp.add(Integer.valueOf(temp[0]));
+                    if (temp.length == 1) {
+                        highTemp.add(25);
+                    } else {
+                        highTemp.add(Integer.valueOf(temp[1]));
+                    }
+                } else {
+                    lowTemp.add(15);
+                    highTemp.add(25);
+                }
                 trendData.add(bean);
             }
+            mWeatherTrendView.setTemperatures(highTemp, lowTemp);
         } else {
             ViewUtils.gone(mWeatherDetailsLayout);
             ToastUtils.show("未获取到天气数据");

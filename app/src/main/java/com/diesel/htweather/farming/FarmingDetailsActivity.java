@@ -1,6 +1,7 @@
 package com.diesel.htweather.farming;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -13,6 +14,7 @@ import com.diesel.htweather.response.FarmingPolicyDetailsResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.IntentExtras;
 import com.diesel.htweather.util.ToastUtils;
+import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.webapi.FarmingWebService;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -23,6 +25,9 @@ import butterknife.OnClick;
 import okhttp3.Call;
 
 public class FarmingDetailsActivity extends BaseActivity {
+
+    @BindView(R.id.header_title_tv)
+    TextView mHeaderTitleTv;
 
     @BindView(R.id.farming_title_tv)
     TextView mFarmingTitleTv;
@@ -54,8 +59,10 @@ public class FarmingDetailsActivity extends BaseActivity {
         int newsId = IntentExtras.getFarmingNewsId(getIntent());
         int farmingType = IntentExtras.getFarmingType(getIntent());
         if (farmingType == FarmingListActivity.TYPE_FARMING_INFO) {
+            mHeaderTitleTv.setText("农气情报详情");
             getFarmingInfoDetails(newsId);
         } else if (farmingType == FarmingListActivity.TYPE_FARMING_POLICY) {
+            mHeaderTitleTv.setText("农业政策详情");
             getFarmingPolicyDetails(newsId);
         }
     }
@@ -99,7 +106,12 @@ public class FarmingDetailsActivity extends BaseActivity {
                         ToastUtils.show(resJO.msg);
                     } else {
                         mFarmingTitleTv.setText(entity.title);
-                        mFarmingCoverIv.setImageURI(entity.titleImg);
+                        if (TextUtils.isEmpty(entity.titleImg)) {
+                            ViewUtils.gone(mFarmingCoverIv);
+                        } else {
+                            ViewUtils.visible(mFarmingCoverIv);
+                            mFarmingCoverIv.setImageURI(entity.titleImg);
+                        }
                         mFarmingTimeAndSourceTv.setText(entity.sourceWay + " " + entity.sendTime);
                         mFarmingBrowseTv.setText(getString(R.string.browse_number, entity.counts));
                         mNewsContentTv.setText(entity.content);
@@ -113,7 +125,7 @@ public class FarmingDetailsActivity extends BaseActivity {
 
     private void getFarmingPolicyDetails(int newsId) {
         showDialog();
-        FarmingWebService.getInstance().getFarmingInfoDetail(newsId, new StringCallback() {
+        FarmingWebService.getInstance().getFarmingPolicyDetail(newsId, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "getFarmingPolicyDetails#onError() " + e.getMessage());
@@ -137,7 +149,12 @@ public class FarmingDetailsActivity extends BaseActivity {
                         ToastUtils.show(resJO.msg);
                     } else {
                         mFarmingTitleTv.setText(entity.title);
-                        mFarmingCoverIv.setImageURI(entity.titleImg);
+                        if (TextUtils.isEmpty(entity.titleImg)) {
+                            ViewUtils.gone(mFarmingCoverIv);
+                        } else {
+                            ViewUtils.visible(mFarmingCoverIv);
+                            mFarmingCoverIv.setImageURI(entity.titleImg);
+                        }
                         mFarmingTimeAndSourceTv.setText(entity.sourceWay + " " + entity.sendTime);
                         mFarmingBrowseTv.setText(getString(R.string.browse_number, entity.counts));
                         mNewsContentTv.setText(entity.content);

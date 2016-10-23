@@ -26,6 +26,8 @@ public class DateUtils {
 
     public static final String HH_MM = "HH:mm";
 
+    public static final String MM_DD = "MM/dd";
+
     public static final String TIME_YYYY_MM_DD = "yyyy-MM-dd";
 
     public static final String TIME_MM_DD_HH_MM_SS = "MM-dd HH:mm:ss";

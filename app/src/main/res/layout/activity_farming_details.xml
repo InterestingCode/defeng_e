@@ -22,6 +22,7 @@
             android:src="@drawable/ic_left_white_arrow" />
 
         <TextView
+            android:id="@+id/header_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -49,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="崇州市 水稻 精准农事建议 "
                 android:textColor="@color/black_333"
                 android:textSize="@dimen/font_36px"
                 android:textStyle="bold" />
@@ -58,8 +58,7 @@
                 android:id="@+id/farming_time_and_source_tv"
                 style="@style/BaseText.gray999_24px"
                 android:layout_below="@id/farming_title_tv"
-                android:layout_marginTop="@dimen/px25"
-                android:text="德丰e农 08-24 08:42" />
+                android:layout_marginTop="@dimen/px25" />
 
             <TextView
                 android:id="@+id/farming_browse_tv"
@@ -67,23 +66,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/farming_time_and_source_tv"
-                android:layout_alignParentRight="true"
-                android:text="阅读：1238" />
+                android:layout_alignParentRight="true" />
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/farming_cover_iv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/px300"
                 android:layout_below="@id/farming_time_and_source_tv"
-                android:layout_marginTop="@dimen/px25"
-                fresco:placeholderImage="@drawable/bg_farming_cover" />
-            <!--<ImageView
-                android:id="@+id/farming_cover_iv"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/px300"
-                android:layout_below="@id/farming_time_and_source_tv"
-                android:layout_marginTop="@dimen/px25"
-                android:src="@drawable/bg_farming_cover" />-->
+                android:layout_marginTop="@dimen/px25" />
 
             <TextView
                 android:id="@+id/news_content_tv"
@@ -92,8 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/farming_cover_iv"
                 android:layout_marginTop="@dimen/px25"
-                android:lineSpacingExtra="@dimen/px25"
-                android:text="@string/test_farming_details_1" />
+                android:lineSpacingExtra="@dimen/px25" />
         </RelativeLayout>
     </ScrollView>
 
@@ -105,7 +94,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/px88"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/feedback_layout"

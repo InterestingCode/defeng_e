@@ -50,12 +50,15 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
 
     private ActualFramingAdapter mAdapter;
 
+    private ActualFarmingBean mActualFarmingBean;
+
     public ActualFarmingHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
     public void bindData(ActualFarmingBean bean) {
+        mActualFarmingBean = bean;
         List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity>
                 entities = bean.mTimelyCropsNewsListEntities;
         if (null == mAdapter) {
@@ -69,7 +72,7 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
 
     @OnClick(R.id.actual_farming_setting_btn)
     public void addPlant() {
-        ActivityNav.getInstance().startAddWatchPlantActivity(itemView.getContext(), 0);
+        ActivityNav.getInstance().startAddWatchPlantActivity(itemView.getContext(), mActualFarmingBean.areaId);
     }
 
     private static class ActualFramingAdapter extends PagerAdapter {
@@ -117,8 +120,7 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ActivityNav.getInstance().startFarmingDetailsActivity(context, entity.newsId,
-                            FarmingListActivity.TYPE_FARMING_INFO);
+                    ActivityNav.getInstance().startActualFarmingActivity(context, entity);
                 }
             });
             TextView mTipsTitleTv = (TextView) view.findViewById(R.id.tips_title_tv);

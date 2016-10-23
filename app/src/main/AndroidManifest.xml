@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.diesel.htweather">
+<manifest package="com.diesel.htweather"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -31,12 +31,12 @@
             android:theme="@style/Theme.App.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".GuideActivity" />
         <activity android:name=".MainActivity" />
-
         <activity android:name=".farming.CityManageActivity" />
         <activity
             android:name=".farming.LocationActivity"
@@ -46,10 +46,10 @@
         <activity android:name=".farming.FarmingListActivity" />
         <activity android:name=".farming.FarmingDetailsActivity" />
         <activity android:name=".farming.WeatherTrendActivity" />
+        <activity android:name=".farming.ActualFarmingActivity" />
         <activity
             android:name=".farming.TruthDataSettingActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-
         <activity android:name=".user.EditUserInfoActivity" />
         <activity android:name=".user.SystemSettingActivity" />
         <activity android:name=".user.HelpCenterActivity" />
@@ -64,7 +64,7 @@
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name=".user.ActualFarmingSettingActivity" />
         <activity android:name=".user.AddCropsActivity" />
-        <!--<activity android:name=".user.AddWatchPlantActivity" />-->
+        <!-- <activity android:name=".user.AddWatchPlantActivity" /> -->
         <activity android:name=".user.AboutAppActivity" />
         <activity android:name=".user.FeedbackActivity" />
         <activity android:name=".user.ModifyPasswordActivity" />
@@ -72,7 +72,6 @@
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.FindPasswordActivity" />
         <activity android:name=".user.CommonWebActivity" />
-
         <activity android:name=".depthservice.SettingFacilitiesActivity" />
         <activity android:name=".depthservice.FacilitiesActivity" />
         <activity android:name=".depthservice.FacilitiesDetailsActivity" />
@@ -98,6 +97,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="f966252b6e014e329e4eb281a48a6419" />
+
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

@@ -1,5 +1,6 @@
 package com.diesel.htweather.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -237,11 +238,14 @@ public class AddCropsActivity extends BaseActivity {
 
     private void focusCrops() {
         showDialog();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder cropId = new StringBuilder();
+        StringBuilder cropName = new StringBuilder();
         for (PlantCategoryResJO.CategoryEntity.CategoryListEntity entity : mAddedCrops) {
-            sb.append(entity.cropcategoryid).append(";");
+            cropId.append(entity.id).append(";");
+            cropName.append(entity.name).append(" ");
         }
-        String cropsId = sb.toString().substring(0, sb.toString().length()-1);
+        String cropsId = cropId.toString().substring(0, cropId.toString().length()-1);
+        final String cropsName = cropName.toString().substring(0, cropName.toString().length()-1);
         PlantWebService.getInstance().focusCrops(String.valueOf(mAreaId), cropsId, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -258,6 +262,9 @@ public class AddCropsActivity extends BaseActivity {
                     BaseResJO resJo = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null != resJo && resJo.status == 0) {
                         ToastUtils.show("农作物关注成功");
+                        Intent data = new Intent();
+                        IntentExtras.setCropsName(data, cropsName);
+                        setResult(RESULT_OK, data);
                         finish();
                     } else {
                         ToastUtils.show(resJo.msg);

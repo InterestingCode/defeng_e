@@ -123,6 +123,7 @@ public class SystemSettingActivity extends BaseActivity {
                 ActivityNav.getInstance().startAboutAppActivity(this);
                 break;
             case R.id.exit_app_btn:
+                SharedPreferencesUtils.getInstance(mContext).clearCaches();
                 ActivityNav.getInstance().startLoginActivity(mActivity, true);
                 finish();
                 break;

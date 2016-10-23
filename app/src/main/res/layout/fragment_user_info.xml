@@ -119,7 +119,8 @@
             android:id="@+id/help_center_tv"
             style="@style/UserCenterButton"
             android:drawableLeft="@drawable/icon_help_center"
-            android:text="@string/help_center" />
+            android:text="@string/help_center"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/system_setting_tv"

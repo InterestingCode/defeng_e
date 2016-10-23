@@ -1,10 +1,12 @@
 package com.diesel.htweather.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 import com.diesel.htweather.GuideActivity;
 import com.diesel.htweather.MainActivity;
+import com.diesel.htweather.farming.ActualFarmingActivity;
 import com.diesel.htweather.farming.CityManageActivity;
 import com.diesel.htweather.farming.FarmingDetailsActivity;
 import com.diesel.htweather.farming.FarmingListActivity;
@@ -97,6 +99,13 @@ public class ActivityNav {
         context.startActivity(intent);
     }
 
+    public void startActualFarmingActivity(Context context,
+            FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity entity) {
+        Intent intent = new Intent(context, ActualFarmingActivity.class);
+        IntentExtras.setActualFarmingData(intent, entity);
+        context.startActivity(intent);
+    }
+
     public void startWeatherTrendActivity(Context context,
             ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList) {
         Intent intent = new Intent(context, WeatherTrendActivity.class);
@@ -162,6 +171,12 @@ public class ActivityNav {
         Intent intent = new Intent(context, AddCropsActivity.class);
         IntentExtras.setAreaId(intent, areaId);
         context.startActivity(intent);
+    }
+
+    public void startAddWatchPlantActivity(Activity context, int areaId, int requestCode) {
+        Intent intent = new Intent(context, AddCropsActivity.class);
+        IntentExtras.setAreaId(intent, areaId);
+        context.startActivityForResult(intent, requestCode);
     }
 
     public void startAboutAppActivity(Context context) {

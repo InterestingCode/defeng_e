@@ -6,14 +6,18 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.event.DeleteBannerEvent;
 import com.diesel.htweather.farming.model.ActivityBannerBean;
 import com.diesel.htweather.farming.model.AdvertiseBannerBean;
 import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Comments：
@@ -34,6 +38,10 @@ public class FarmingBannerHolder extends RecyclerView.ViewHolder {
 
     private String mLinkUrl;
 
+    private AdvertiseBannerBean mAdvertiseBannerBean;
+
+    private ActivityBannerBean mActivityBannerBean;
+
     public FarmingBannerHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -48,6 +56,7 @@ public class FarmingBannerHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(AdvertiseBannerBean entity) {
+        mAdvertiseBannerBean = entity;
         FarmingResJO.ObjEntity.AdvertiseListEntity advertiseEntity = entity.advertiseEntity;
         if (null != advertiseEntity) {
             mBannerIv.setImageURI(advertiseEntity.picUrl);
@@ -56,10 +65,20 @@ public class FarmingBannerHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(ActivityBannerBean entity) {
+        mActivityBannerBean = entity;
         FarmingResJO.ObjEntity.ActivityListEntity activityEntity = entity.activityEntity;
         if (null != activityEntity) {
             mBannerIv.setImageURI(activityEntity.picUrl);
             mLinkUrl = activityEntity.httpUrl;
+        }
+    }
+
+    @OnClick(R.id.close_btn)
+    public void onClick() {
+        if (null != mAdvertiseBannerBean) {
+            EventBus.getDefault().post(new DeleteBannerEvent(mAdvertiseBannerBean));
+        } else if (null != mActivityBannerBean) {
+            EventBus.getDefault().post(new DeleteBannerEvent(mActivityBannerBean));
         }
     }
 }

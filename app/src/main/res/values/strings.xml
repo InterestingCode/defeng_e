@@ -29,6 +29,7 @@
     <string name="lowest">最低</string>
     <string name="truth_data_setting">实况数据设置</string>
     <string name="save_setting">保存设置</string>
+    <string name="weather_data_update_time">%1$s 更新</string>
 
     <string name="real_weather">天气实况</string>
     <string name="gather_data">信息采集</string>

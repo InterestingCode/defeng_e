@@ -110,6 +110,8 @@ public class WeatherTrendView extends View {
     }
 
     public void setTemperatures(@NonNull List<Integer> high, @NonNull List<Integer> low) {
+        Log.d(TAG, "setTemperatures() high="+high);
+        Log.d(TAG, "setTemperatures() low="+low);
         mHighTemperatures = high;
         mLowTemperatures = low;
         mMaxTemperature = Math.max(Collections.max(high), Collections.max(low));

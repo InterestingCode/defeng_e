@@ -53,15 +53,19 @@
             android:id="@+id/problem_et"
             style="@style/BaseText.black333_24px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/content_limit_tv"
             android:background="@null"
-            android:maxLength="120"
-            android:hint="@string/hint_input_problem" />
+            android:gravity="left|top"
+            android:hint="@string/hint_input_problem"
+            android:maxLength="120" />
 
         <TextView
+            android:id="@id/content_limit_tv"
             style="@style/BaseText.gray999_24px"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/px35"
             android:text="限制120个字" />
     </RelativeLayout>
 

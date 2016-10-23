@@ -1,6 +1,7 @@
 package com.diesel.htweather.user.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.depthservice.OnlineAdvisoryDetailsActivity;
 import com.diesel.htweather.response.GatherDataResJO;
 import com.diesel.htweather.user.adapter.GatherDataPhotoAdapter;
 import com.diesel.htweather.util.ViewUtils;
@@ -65,16 +67,12 @@ public class GatherDataHolder extends RecyclerView.ViewHolder {
 
     List<String> mPhotos = new ArrayList<>();
 
+    GatherDataResJO.GatherDataEntity mEntity;
+
     public GatherDataHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-
-//        // TODO 测试代码
-//        mPhotos.add(ImageUrlUtils.getImageUrls()[0]);
-//        mPhotos.add(ImageUrlUtils.getImageUrls()[1]);
-//        mPhotos.add(ImageUrlUtils.getImageUrls()[2]);
-
-        Context context = itemView.getContext();
+        final Context context = itemView.getContext();
         mRecyclerView.setLayoutManager(
                 new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setHasFixedSize(true);
@@ -83,9 +81,20 @@ public class GatherDataHolder extends RecyclerView.ViewHolder {
                         R.drawable.recycler_view_5px_divider_shape));
         mAdapter = new GatherDataPhotoAdapter(mPhotos);
         mRecyclerView.setAdapter(mAdapter);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OnlineAdvisoryDetailsActivity.class);
+                intent.putExtra("contentId", mEntity.contentId+"");
+                intent.putExtra("source", 1);
+                context.startActivity(intent);
+            }
+        });
     }
 
     public void bindData(GatherDataResJO.GatherDataEntity bean) {
+        mEntity = bean;
         mUserAvatarView.setImageURI(bean.userFace);
         mUserNameTv.setText(bean.userNickName);
         mUserRankTv.setText(bean.userType);

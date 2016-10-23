@@ -102,18 +102,18 @@
                 diesel:column_name="@string/belong_area" />
 
             <com.diesel.htweather.widget.EditUserInfoView
-                android:id="@+id/user_occupation_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                diesel:column_content="@string/tips_input_occupation"
-                diesel:column_name="@string/occupation" />
-
-            <com.diesel.htweather.widget.EditUserInfoView
                 android:id="@+id/user_address_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 diesel:column_content="@string/tips_input_address"
                 diesel:column_name="@string/address" />
+
+            <com.diesel.htweather.widget.EditUserInfoView
+                android:id="@+id/user_occupation_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                diesel:column_content="@string/tips_input_occupation"
+                diesel:column_name="@string/occupation" />
 
             <com.diesel.htweather.widget.EditUserInfoView
                 android:id="@+id/user_plant_view"

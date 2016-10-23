@@ -334,4 +334,14 @@ public class UserWebService extends WebService {
                 .execute(callback);
     }
 
+    public void aboutApp(Callback callback) {
+        OkHttpUtils
+                .get()
+                .url(Api.ABOUT_APP_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
 }

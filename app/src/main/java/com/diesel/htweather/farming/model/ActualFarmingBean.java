@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class ActualFarmingBean extends BaseBean {
 
+    public int areaId;
+
     public List<FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity> mTimelyCropsNewsListEntities;
 
 //    public int cropId;

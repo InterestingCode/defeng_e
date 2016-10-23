@@ -1,6 +1,7 @@
 package com.diesel.htweather.farming.holder;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -66,16 +67,46 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.truth_data_bottom_layout)
     RelativeLayout mTruthDataBottomLayout;
 
+    @BindView(R.id.air_temp_tv)
+    TextView mAirTempTv;
+
+    @BindView(R.id.rainfall_tv)
+    TextView mRainfallTv;
+
+    @BindView(R.id.soil_temp_tv)
+    TextView mSoilTempTv;
+
+    @BindView(R.id.soil_humidity_tv)
+    TextView mSoilHumidityTv;
+
+    @BindView(R.id.air_humidity_tv)
+    TextView mAirHumidityTv;
+
+    @BindView(R.id.sunlight_tv)
+    TextView mSunlightTv;
+
+    @BindView(R.id.wind_power_tv)
+    TextView mWindPowerTv;
+
     Context mContext;
 
     WeatherDataBean mWeatherData;
 
     FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity mHoursDataList;
 
+    List<TextView> mTextViews = new ArrayList<>();
+
     public WeatherDataHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         mContext = itemView.getContext();
+        mTextViews.add(mAirTempTv);
+        mTextViews.add(mRainfallTv);
+        mTextViews.add(mSoilTempTv);
+        mTextViews.add(mSoilHumidityTv);
+        mTextViews.add(mAirHumidityTv);
+        mTextViews.add(mSunlightTv);
+        mTextViews.add(mWindPowerTv);
     }
 
     public void bindData(WeatherDataBean bean) {
@@ -83,13 +114,16 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
         // 7天天气数据
         if (null != bean.dayWeatherList && !bean.dayWeatherList.isEmpty()) {
-            for (int i = 0; i < bean.dayWeatherList.size(); i ++) {
-                FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity entity = bean.dayWeatherList.get(i);
+            for (int i = 0; i < bean.dayWeatherList.size(); i++) {
+                FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity entity
+                        = bean.dayWeatherList.get(i);
                 if (DateUtils.isToday(entity.currDate)) {
                     float temp = Float.valueOf(entity.currTemp);
                     mTemperatureTv.setText(String.valueOf((int) temp));
-                    mWeatherDescTv.setText(entity.weatherContent+" "+entity.tempBucket+" "+entity.windPower);
-                    mWeatherDateTv.setText(entity.currDate+" ("+entity.currLunarDate+") "+entity.week);
+                    mWeatherDescTv.setText(entity.weatherContent + " " + entity.tempBucket + " "
+                            + entity.windPower);
+                    mWeatherDateTv.setText(
+                            entity.currDate + " (" + entity.currLunarDate + ") " + entity.week);
                     break;
                 }
             }
@@ -108,12 +142,14 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
         setTemperatureView();
     }
 
-    @OnClick({R.id.more_btn, R.id.close_tips_iv, R.id.truth_data_btn, R.id.truth_data_setting_iv,
-            R.id.air_temp_tv, R.id.rainfall_tv, R.id.soil_temp_tv, R.id.soil_humidity_tv})
+    @OnClick({R.id.weather_data_layout, R.id.close_tips_iv, R.id.truth_data_btn,
+            R.id.truth_data_setting_iv, R.id.air_temp_tv, R.id.rainfall_tv, R.id.soil_temp_tv,
+            R.id.soil_humidity_tv, R.id.air_humidity_tv, R.id.sunlight_tv, R.id.wind_power_tv})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.more_btn:
-                ActivityNav.getInstance().startWeatherTrendActivity(mContext, mWeatherData.dayWeatherList);
+            case R.id.weather_data_layout:
+                ActivityNav.getInstance()
+                        .startWeatherTrendActivity(mContext, mWeatherData.dayWeatherList);
                 break;
             case R.id.close_tips_iv:
                 ViewUtils.gone(mTipsLayout);
@@ -148,6 +184,87 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
             case R.id.soil_humidity_tv: // 土壤湿度
                 setSoilHumidityView();
                 break;
+            case R.id.air_humidity_tv: // 空气湿度
+                setAirHumidityView();
+                break;
+            case R.id.sunlight_tv: // 日照
+                setSunlightView();
+                break;
+            case R.id.wind_power_tv: // 风力
+                setWindPowerView();
+                break;
+        }
+    }
+
+    private void setWindPowerView() {
+        if (null != mHoursDataList) {
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.WindPowerListEntity>
+                    windPowerList = mHoursDataList.windPowerList;
+            if (null != windPowerList && !windPowerList.isEmpty()) {
+                List<Integer> temperatures = new ArrayList<>();
+                List<String> hours = new ArrayList<>();
+                for (int i = 0; i < windPowerList.size(); i++) {
+                    String value = windPowerList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
+                    temperatures.add((int) temp);
+                    hours.add(windPowerList.get(i).hours);
+                }
+                mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mWindPowerTv);
+            }
+        }
+    }
+
+    private void setSunlightView() {
+        if (null != mHoursDataList) {
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.SunshineListEntity>
+                    sunshineList = mHoursDataList.sunshineList;
+            if (null != sunshineList && !sunshineList.isEmpty()) {
+                List<Integer> temperatures = new ArrayList<>();
+                List<String> hours = new ArrayList<>();
+                for (int i = 0; i < sunshineList.size(); i++) {
+                    String value = sunshineList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
+                    temperatures.add((int) temp);
+                    hours.add(sunshineList.get(i).hours);
+                }
+                mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mSunlightTv);
+            }
+        }
+    }
+
+    private void setAirHumidityView() {
+        if (null != mHoursDataList) {
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.AirMoistureListEntity>
+                    airMoistureList = mHoursDataList.airMoistureList;
+            if (null != airMoistureList && !airMoistureList.isEmpty()) {
+                List<Integer> temperatures = new ArrayList<>();
+                List<String> hours = new ArrayList<>();
+                for (int i = 0; i < airMoistureList.size(); i++) {
+                    String value = airMoistureList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
+                    temperatures.add((int) temp);
+                    hours.add(airMoistureList.get(i).hours);
+                }
+                mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mAirHumidityTv);
+            }
         }
     }
 
@@ -158,12 +275,19 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
             if (null != soilMoistureList && !soilMoistureList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
                 List<String> hours = new ArrayList<>();
-                for (int i = 0; i < soilMoistureList.size(); i ++) {
-                    float temp = Float.valueOf(soilMoistureList.get(i).value);
+                for (int i = 0; i < soilMoistureList.size(); i++) {
+                    String value = soilMoistureList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
                     temperatures.add((int) temp);
                     hours.add(soilMoistureList.get(i).hours);
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mSoilHumidityTv);
             }
         }
     }
@@ -171,16 +295,23 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
     private void setSoilTempView() {
         if (null != mHoursDataList) {
             List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.SoilTempLlistEntity>
-                    soilTempLlist = mHoursDataList.soilTempLlist;
-            if (null != soilTempLlist && !soilTempLlist.isEmpty()) {
+                    soilTempList = mHoursDataList.soilTempLlist;
+            if (null != soilTempList && !soilTempList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
                 List<String> hours = new ArrayList<>();
-                for (int i = 0; i < soilTempLlist.size(); i ++) {
-                    float temp = Float.valueOf(soilTempLlist.get(i).value);
+                for (int i = 0; i < soilTempList.size(); i++) {
+                    String value = soilTempList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
                     temperatures.add((int) temp);
-                    hours.add(soilTempLlist.get(i).hours);
+                    hours.add(soilTempList.get(i).hours);
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mSoilTempTv);
             }
         }
     }
@@ -192,12 +323,19 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
             if (null != precipitationList && !precipitationList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
                 List<String> hours = new ArrayList<>();
-                for (int i = 0; i < precipitationList.size(); i ++) {
-                    float temp = Float.valueOf(precipitationList.get(i).value);
+                for (int i = 0; i < precipitationList.size(); i++) {
+                    String value = precipitationList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
                     temperatures.add((int) temp);
                     hours.add(precipitationList.get(i).hours);
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mRainfallTv);
             }
         }
     }
@@ -209,12 +347,30 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
             if (null != airTempList && !airTempList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
                 List<String> hours = new ArrayList<>();
-                for (int i = 0; i < airTempList.size(); i ++) {
-                    float temp = Float.valueOf(airTempList.get(i).value);
+                for (int i = 0; i < airTempList.size(); i++) {
+                    String value = airTempList.get(i).value;
+                    float temp;
+                    if (TextUtils.isEmpty(value)) {
+                        temp = 0;
+                    } else {
+                        temp = Float.valueOf(value);
+                    }
                     temperatures.add((int) temp);
                     hours.add(airTempList.get(i).hours);
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
+                changeTextViewColor(mAirTempTv);
+            }
+        }
+    }
+
+    private void changeTextViewColor(TextView textView) {
+        for (int i = 0; i < mTextViews.size(); i ++) {
+            TextView textView1 = mTextViews.get(i);
+            if (textView1 == textView) {
+                textView1.setTextColor(ContextCompat.getColor(itemView.getContext(), android.R.color.white));
+            } else {
+                textView1.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.gray_ccc));
             }
         }
     }

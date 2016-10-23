@@ -81,4 +81,24 @@ public class IntentExtras {
         return intent.getIntExtra(FARMING_NEWS_ID, 0);
     }
 
+    private static final String CROPS_NAME = "crops_name";
+
+    public static void setCropsName(@NonNull Intent intent, String cropsName) {
+        intent.putExtra(CROPS_NAME, cropsName);
+    }
+
+    public static String getCropsName(@NonNull Intent intent) {
+        return intent.getStringExtra(CROPS_NAME);
+    }
+
+    private static final String ACTUAL_FARMING_DATA = "actual_farming_data";
+
+    public static void setActualFarmingData(@NonNull Intent intent, FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity entity) {
+        intent.putExtra(ACTUAL_FARMING_DATA, entity);
+    }
+
+    public static FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity getActualFarmingData(@NonNull Intent intent) {
+        return (FarmingResJO.ObjEntity.WeatherCropCollEntity.TimelyCropsNewsListEntity) intent.getSerializableExtra(ACTUAL_FARMING_DATA);
+    }
+
 }

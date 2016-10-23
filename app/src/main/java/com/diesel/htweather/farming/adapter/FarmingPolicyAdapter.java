@@ -38,14 +38,7 @@ public class FarmingPolicyAdapter extends RecyclerView.Adapter<InnerFarmingPolic
 
     @Override
     public void onBindViewHolder(InnerFarmingPolicyHolder holder, int position) {
-        int viewType = getItemViewType(position);
-        BaseBean bean = mList.get(position);
-        if (viewType == 1) {
-            holder.bindData((FarmingPolicyResJO.ObjEntity.PolicyNewsEntity) bean);
-        } else if (viewType == 2) {
-            holder.bindData((FarmingInfoResJO.ObjEntity.InfoNewsEntity) bean);
-        }
-
+        holder.bindData(mList.get(position));
     }
 
     @Override
@@ -53,15 +46,4 @@ public class FarmingPolicyAdapter extends RecyclerView.Adapter<InnerFarmingPolic
         return mList == null ? 0 : mList.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        int viewType = 0;
-        BaseBean bean = mList.get(position);
-        if (bean instanceof FarmingPolicyResJO.ObjEntity.PolicyNewsEntity) {
-            viewType = 1;
-        } else if (bean instanceof FarmingInfoResJO.ObjEntity.InfoNewsEntity) {
-            viewType = 2;
-        }
-        return viewType;
-    }
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="com.diesel.htweather.user.AboutAppActivity">
 
     <RelativeLayout
@@ -36,14 +37,36 @@
         android:layout_marginTop="@dimen/px178"
         android:src="@drawable/icon_logo" />
 
-    <TextView
-        style="@style/BaseText.black333_24px"
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/current_version_tv"
         android:layout_below="@id/logo_iv"
+        android:layout_marginBottom="@dimen/px40"
         android:layout_marginLeft="@dimen/px24"
         android:layout_marginRight="@dimen/px24"
         android:layout_marginTop="@dimen/px90"
-        android:lineSpacingExtra="@dimen/px10"
-        android:text="@string/about_defeng_app" />
+        android:background="@android:color/white"
+        android:scrollbars="none" />
+
+    <!--<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/current_version_tv"
+        android:layout_below="@id/logo_iv"
+        android:layout_marginBottom="@dimen/px40"
+        android:layout_marginLeft="@dimen/px24"
+        android:layout_marginRight="@dimen/px24"
+        android:layout_marginTop="@dimen/px90"
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/about_app_info_tv"
+            style="@style/BaseText.black333_24px"
+            android:lineSpacingExtra="@dimen/px10"
+            android:text="@string/about_defeng_app" />
+    </ScrollView>-->
 
     <TextView
         android:id="@+id/check_version_tv"
@@ -55,7 +78,7 @@
         android:text="@string/check_latest_version" />
 
     <TextView
-        android:id="@+id/current_version_tv"
+        android:id="@id/current_version_tv"
         style="@style/BaseText.gray999_30px"
         android:layout_above="@id/check_version_tv"
         android:layout_centerHorizontal="true"

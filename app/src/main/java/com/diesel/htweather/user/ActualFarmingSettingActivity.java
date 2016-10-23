@@ -1,5 +1,6 @@
 package com.diesel.htweather.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,8 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.util.ActivityNav;
+import com.diesel.htweather.util.IntentExtras;
+import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.pickerview.OptionsPickerView;
 
@@ -17,8 +20,13 @@ import butterknife.OnClick;
 
 public class ActualFarmingSettingActivity extends BaseActivity {
 
-    @BindView(R.id.watch_plants_tv)
-    TextView mWatchPlantsTv;
+    private static final int REQUEST_CODE_ADD_CROPS = 99;
+
+    @BindView(R.id.add_area_value_tv)
+    TextView mAddAreaValueTv;
+
+    @BindView(R.id.watch_plants_value_tv)
+    TextView mWatchPlantsValueTv;
 
     private OptionsPickerView mCityPickerView;
 
@@ -31,18 +39,21 @@ public class ActualFarmingSettingActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.back_btn, R.id.add_area_tv, R.id.watch_plants_tv})
+    @OnClick({R.id.back_btn, R.id.add_area_layout, R.id.add_plants_layout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_btn:
                 finish();
                 break;
-            case R.id.add_area_tv:
+            case R.id.add_area_layout:
                 showAreaPickerView();
                 break;
-            case R.id.watch_plants_tv:
-                ActivityNav.getInstance().startAddWatchPlantActivity(this, mAreaId);
-                ViewUtils.gone(mWatchPlantsTv);
+            case R.id.add_plants_layout:
+                if (mAreaId == 0) {
+                    ToastUtils.show("请先选择地区");
+                    return;
+                }
+                ActivityNav.getInstance().startAddWatchPlantActivity(this, mAreaId, REQUEST_CODE_ADD_CROPS);
                 break;
         }
     }
@@ -64,16 +75,25 @@ public class ActualFarmingSettingActivity extends BaseActivity {
                         @Override
                         public void onOptionsSelect(int options1, int option2, int options3) {
 //                            // 返回的分别是三个级别的选中位置
-//                            String tx = DFApplication.provinces.get(options1).pvName + "-"
-//                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
-//                                    + DFApplication.countries.get(options1).get(option2)
-//                                    .get(options3).arName;
+                            String tx = DFApplication.provinces.get(options1).pvName + "-"
+                                    + DFApplication.cities.get(options1).get(option2).ctName + "-"
+                                    + DFApplication.countries.get(options1).get(option2)
+                                    .get(options3).arName;
 //                            ToastUtils.show("添加 \"" + tx + "\" 成功");
-                            mAreaId = DFApplication.countries.get(options1).get(option2).get(options3).arId;
-                            ViewUtils.visible(mWatchPlantsTv);
+                            mAreaId = DFApplication.countries.get(options1).get(option2)
+                                    .get(options3).arId;
+                            mAddAreaValueTv.setText(tx);
                         }
                     });
         }
         mCityPickerView.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_ADD_CROPS && resultCode == RESULT_OK && null != data) {
+            mWatchPlantsValueTv.setText(IntentExtras.getCropsName(data));
+        }
     }
 }

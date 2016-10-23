@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.diesel.htweather.base.BaseBean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,18 +79,39 @@ public class FarmingResJO extends BaseResJO {
 
             public static class HoursDataListEntity {
 
+                /**
+                 * 空气湿度
+                 */
                 public List<AirMoistureListEntity> airMoistureList;
 
+                /**
+                 * 降水实况数据
+                 */
                 public List<PrecipitationListEntity> precipitationList;
 
+                /**
+                 * 土壤温度
+                 */
                 public List<SoilTempLlistEntity> soilTempLlist;
 
+                /**
+                 * 土壤湿度
+                 */
                 public List<SoilMoistureListEntity> soilMoistureList;
 
+                /**
+                 * 日照
+                 */
                 public List<SunshineListEntity> sunshineList;
 
+                /**
+                 * 气温实况数据
+                 */
                 public List<AirTempListEntity> airTempList;
 
+                /**
+                 * 风力
+                 */
                 public List<WindPowerListEntity> windPowerList;
 
                 public static class AirMoistureListEntity {
@@ -213,7 +235,7 @@ public class FarmingResJO extends BaseResJO {
                 };
             }
 
-            public static class TimelyCropsNewsListEntity {
+            public static class TimelyCropsNewsListEntity implements Serializable {
 
                 public String content;
 
@@ -329,7 +351,7 @@ public class FarmingResJO extends BaseResJO {
 //
 //                public List<PrecipitationListEntity> precipitationList;
 //
-//                public List<SoilTempLlistEntity> soilTempLlist;
+//                public List<SoilTempLlistEntity> soilTempList;
 //
 //                public List<SoilMoistureListEntity> soilMoistureList;
 //

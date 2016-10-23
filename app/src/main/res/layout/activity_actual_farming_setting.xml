@@ -29,19 +29,68 @@
             android:textSize="@dimen/font_36px" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/add_area_tv"
-        style="@style/UserCenterButton"
-        android:drawableLeft="@drawable/icon_location_black"
-        android:text="@string/add_area" />
+    <LinearLayout
+        android:id="@+id/add_area_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px90"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BaseText.black333_30px"
+            android:layout_width="@dimen/px250"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/icon_location_black"
+            android:drawablePadding="@dimen/px24"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/px24"
+            android:text="@string/add_area" />
+
+        <TextView
+            android:id="@+id/add_area_value_tv"
+            style="@style/BaseText.gray999_30px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/px15"
+            android:drawableRight="@drawable/ic_right_gray_arrow"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:maxLines="1"
+            android:paddingRight="@dimen/px24" />
+
+    </LinearLayout>
+
 
     <View style="@style/BaseHorizontalLine" />
 
-    <TextView
-        android:id="@+id/watch_plants_tv"
-        style="@style/UserCenterButton"
-        android:drawableLeft="@drawable/icon_care_black"
-        android:text="@string/watch_plants"
-        android:visibility="gone" />
+    <LinearLayout
+        android:id="@+id/add_plants_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px90"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BaseText.black333_30px"
+            android:layout_width="@dimen/px250"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/icon_care_black"
+            android:drawablePadding="@dimen/px15"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/px24"
+            android:text="@string/watch_plants" />
+
+        <TextView
+            android:id="@+id/watch_plants_value_tv"
+            style="@style/BaseText.gray999_30px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawablePadding="@dimen/px15"
+            android:drawableRight="@drawable/ic_right_gray_arrow"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:maxLines="1"
+            android:paddingRight="@dimen/px24" />
+    </LinearLayout>
 
 </LinearLayout>

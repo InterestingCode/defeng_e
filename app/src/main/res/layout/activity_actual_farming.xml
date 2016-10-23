@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/activity_actual_farming"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.diesel.htweather.farming.ActualFarmingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_header_height"
+        android:background="@color/bg_top_header">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/px30"
+            android:paddingRight="@dimen/px30"
+            android:src="@drawable/ic_left_white_arrow" />
+
+        <TextView
+            android:id="@+id/header_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="精准农机详情"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_36px" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/px30"
+        android:paddingLeft="@dimen/px24"
+        android:paddingRight="@dimen/px24"
+        android:paddingTop="@dimen/px30">
+
+        <TextView
+            android:id="@+id/farming_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_36px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/farming_time_and_source_tv"
+            style="@style/BaseText.gray999_24px"
+            android:layout_below="@id/farming_title_tv"
+            android:layout_marginTop="@dimen/px25" />
+
+        <TextView
+            android:id="@+id/farming_browse_tv"
+            style="@style/BaseText.gray999_24px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/farming_time_and_source_tv"
+            android:layout_alignParentRight="true" />
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/farming_time_and_source_tv"
+            android:layout_marginTop="@dimen/px25"
+            android:background="@android:color/white"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
+</LinearLayout>

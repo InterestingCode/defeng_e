@@ -103,8 +103,9 @@
                 android:textColor="@android:color/white" />
 
             <TextView
+                android:id="@+id/update_time_tv"
                 style="@style/BaseText.white_24px"
-                android:text="09:00 更新" />
+                android:text="@string/weather_data_update_time" />
         </LinearLayout>
     </LinearLayout>
 

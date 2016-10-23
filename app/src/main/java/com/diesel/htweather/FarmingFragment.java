@@ -27,6 +27,7 @@ import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.webapi.AreaWebService;
+import com.diesel.htweather.widget.CusViewPager;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,29 +54,20 @@ import okhttp3.Call;
  *         Why & What is modified:
  * @version 1.0.0
  */
-public class FarmingFragment extends BaseFragment
-        implements BGARefreshLayout.BGARefreshLayoutDelegate {
-
-    @BindView(R.id.refresh_layout)
-    public BGARefreshLayout mRefreshLayout;
+public class FarmingFragment extends BaseFragment {
 
     @BindView(R.id.weather_pager)
-    ViewPager mWeatherPager;
-
-    @BindView(R.id.city_name_tv)
-    TextView mCityNameTv;
-
-    @BindView(R.id.page_indicator_layout)
-    LinearLayout mPageIndicatorLayout;
-
-    @BindView(R.id.new_msg_cnt_tv)
-    TextView mNewMsgCntTv;
+    CusViewPager mWeatherPager;
 
     private ArrayList<ArrayList<BaseBean>> mFarmingData = new ArrayList<>();
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
+    private List<Integer> mFragmentIds = new ArrayList<>();
+
     private MainPagerAdapter mAdapter = null;
+
+    private int mCurrIndex;
 
     public static FarmingFragment newInstance() {
         return new FarmingFragment();
@@ -95,19 +87,15 @@ public class FarmingFragment extends BaseFragment
         super.onViewCreated(view, savedInstanceState);
         EventBus.getDefault().register(this);
 
-        BGARefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(getContext(), false);
-        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
-        mRefreshLayout.setDelegate(this);
-
         mAdapter = new MainPagerAdapter(getChildFragmentManager());
         mAdapter.setList(mFragments);
         mWeatherPager.setAdapter(mAdapter);
         mWeatherPager.addOnPageChangeListener(mListener);
 
-        getFocusAreaFarmingData();
+        getFocusAreaFarmingData(false);
     }
 
-    private void getFocusAreaFarmingData() {
+    private void getFocusAreaFarmingData(final boolean isRefresh) {
         showDialog();
         AreaWebService.getInstance().getFocusAreaFarmingData(new StringCallback() {
             @Override
@@ -115,14 +103,18 @@ public class FarmingFragment extends BaseFragment
                 Log.e(TAG, "getFocusAreaFarmingData#onError() " + e.getMessage());
                 dismissDialog();
                 ToastUtils.show(getString(R.string.tips_request_failure));
-                mRefreshLayout.endRefreshing();
+                if (isRefresh) {
+                    ((FarmingPagerFragment) mFragments.get(mCurrIndex)).onRefreshComplete();
+                }
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getFocusAreaFarmingData#onResponse() " + response);
                 dismissDialog();
-                mRefreshLayout.endRefreshing();
+                if (isRefresh) {
+                    ((FarmingPagerFragment) mFragments.get(mCurrIndex)).onRefreshComplete();
+                }
                 try {
                     FarmingResJO resJO = FastJsonUtils.getSingleBean(response, FarmingResJO.class);
                     if (null == resJO) {
@@ -135,12 +127,6 @@ public class FarmingFragment extends BaseFragment
                             ToastUtils.show("您还没有关注地区，请先关注地区");
                             ActivityNav.getInstance().startLocationActivity(mActivity);
                             return;
-                        }
-
-                        // 未读消息数
-                        if (obj.unreadCounts > 0) {
-                            ViewUtils.visible(mNewMsgCntTv);
-                            mNewMsgCntTv.setText(String.valueOf(obj.unreadCounts));
                         }
 
                         mFarmingData.clear();
@@ -163,6 +149,7 @@ public class FarmingFragment extends BaseFragment
                                 // 实况数据
                                 weatherDataBean.hoursDataList = weatherCropCollEntity.hoursDataList;
                                 // 精准农技
+                                actualFarmingBean.areaId = weatherCropCollEntity.arId;
                                 actualFarmingBean.mTimelyCropsNewsListEntities = weatherCropCollEntity.timelyCropsNewsList;
 
                                 baseBeen.add(weatherDataBean);
@@ -175,9 +162,9 @@ public class FarmingFragment extends BaseFragment
                         List<FarmingResJO.ObjEntity.AdvertiseListEntity> advertiseList
                                 = obj.advertiseList;
                         if (null != advertiseList && !advertiseList.isEmpty()) {
-                            for (int i = 0; i < advertiseList.size(); i++) {
-                                AdvertiseBannerBean bannerBean = new AdvertiseBannerBean();
-                                bannerBean.advertiseEntity = advertiseList.get(i);
+                            AdvertiseBannerBean bannerBean = new AdvertiseBannerBean();
+                            bannerBean.advertiseEntity = advertiseList.get(0);
+                            for (int i = 0; i < obj.count; i++) {
                                 mFarmingData.get(i).add(bannerBean);
                             }
                         }
@@ -186,9 +173,9 @@ public class FarmingFragment extends BaseFragment
                         List<FarmingResJO.ObjEntity.ArticleCropsNewsEntity> articleCropsNews
                                 = resJO.obj.articleCropsNews;
                         if (null != articleCropsNews && !articleCropsNews.isEmpty()) {
-                            for (int i = 0; i < articleCropsNews.size(); i++) {
+                            for (int i = 0; i < obj.count; i++) {
                                 FarmingInfoBean farmingInfo = new FarmingInfoBean();
-                                farmingInfo.convertArticleCropsNewsEntity(articleCropsNews.get(i));
+                                farmingInfo.convertArticleCropsNewsEntity(articleCropsNews.get(0));
                                 WeatherDataBean bean = (WeatherDataBean) mFarmingData.get(i).get(0);
                                 farmingInfo.areaId = bean.arId;
                                 mFarmingData.get(i).add(farmingInfo);
@@ -199,7 +186,7 @@ public class FarmingFragment extends BaseFragment
                         List<FarmingResJO.ObjEntity.PolcyCropsNewsEntity> polcyCropsNews
                                 = obj.polcyCropsNews;
                         if (null != polcyCropsNews && !polcyCropsNews.isEmpty()) {
-                            for (int i = 0; i < polcyCropsNews.size(); i++) {
+                            for (int i = 0; i < obj.count; i++) {
                                 FarmingPolicyBean farmingPolicy = new FarmingPolicyBean();
                                 farmingPolicy.convertPolcyCropsNewsEntity(polcyCropsNews.get(0));
                                 WeatherDataBean bean = (WeatherDataBean) mFarmingData.get(i).get(0);
@@ -212,27 +199,32 @@ public class FarmingFragment extends BaseFragment
                         List<FarmingResJO.ObjEntity.ActivityListEntity> activityList
                                 = obj.activityList;
                         if (null != activityList && !activityList.isEmpty()) {
-                            for (int i = 0; i < activityList.size(); i++) {
-                                ActivityBannerBean bannerBean = new ActivityBannerBean();
-                                bannerBean.activityEntity = activityList.get(i);
+                            ActivityBannerBean bannerBean = new ActivityBannerBean();
+                            bannerBean.activityEntity = activityList.get(0);
+                            for (int i = 0; i < obj.count; i++) {
                                 mFarmingData.get(i).add(bannerBean);
                             }
                         }
 
+                        List<Integer> tempFragmentIds = new ArrayList<>();
+                        tempFragmentIds.addAll(mFragmentIds);
+                        mFragmentIds.clear();
                         mFragments.clear();
                         for (int i = 0; i < mFarmingData.size(); i++) {
-                            FarmingPagerFragment fragment = FarmingPagerFragment.newInstance(mFarmingData.get(i));
+                            FarmingPagerFragment fragment = FarmingPagerFragment.newInstance(mFarmingData.get(i), resJO.obj.unreadCounts);
+//                            if (tempFragmentIds.contains(fragment.getId())) {
+//                                fragment.setData(mFarmingData.get(i), resJO.obj.unreadCounts);
+//                            }
                             mFragments.add(fragment);
+                            mFragmentIds.add(fragment.getId());
                         }
                         mAdapter.notifyDataSetChanged();
-
-                        WeatherDataBean weatherDataBean = (WeatherDataBean) mFarmingData.get(0).get(0);
-                        mCityNameTv.setText(weatherDataBean.arName);
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "getFocusAreaFarmingData#onResponse() #Exception# " + e.getMessage());
+                    e.printStackTrace();
+//                    Log.e(TAG, "getFocusAreaFarmingData#onResponse() #Exception# " + e.getMessage());
                 }
             }
         });
@@ -240,7 +232,7 @@ public class FarmingFragment extends BaseFragment
 
     @Subscribe
     public void onRefreshFarmingDataEvent(RefreshFarmingDataEvent event) {
-        getFocusAreaFarmingData();
+        getFocusAreaFarmingData(true);
     }
 
     @Override
@@ -250,28 +242,18 @@ public class FarmingFragment extends BaseFragment
         mWeatherPager.removeOnPageChangeListener(mListener);
     }
 
-    @Override
-    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        getFocusAreaFarmingData();
-    }
-
-    @Override
-    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
-    }
-
-    @OnClick({R.id.area_layout, R.id.message_iv, R.id.new_msg_cnt_tv})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.area_layout:
-                ActivityNav.getInstance().startCityManageActivity(mActivity);
-                break;
-            case R.id.message_iv:
-            case R.id.new_msg_cnt_tv:
-                ActivityNav.getInstance().startMessageActivity(mActivity);
-                break;
-        }
-    }
+//    @OnClick({R.id.area_layout, R.id.message_iv, R.id.new_msg_cnt_tv})
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.area_layout:
+//                ActivityNav.getInstance().startCityManageActivity(mActivity);
+//                break;
+//            case R.id.message_iv:
+//            case R.id.new_msg_cnt_tv:
+//                ActivityNav.getInstance().startMessageActivity(mActivity);
+//                break;
+//        }
+//    }
 
     private ViewPager.OnPageChangeListener mListener = new ViewPager.OnPageChangeListener() {
         @Override
@@ -281,17 +263,7 @@ public class FarmingFragment extends BaseFragment
 
         @Override
         public void onPageSelected(int position) {
-            WeatherDataBean weatherDataBean = (WeatherDataBean) mFarmingData.get(position).get(0);
-            mCityNameTv.setText(weatherDataBean.arName);
-
-//            for (int i = 0; i < mFragments.size(); i ++) {
-//                FarmingPagerFragment fragment = (FarmingPagerFragment) mFragments.get(i);
-//                if (i == position) {
-//                    fragment.addOnScrollListener();
-//                } else {
-//                    fragment.removeOnScrollListener();
-//                }
-//            }
+            mCurrIndex = position;
         }
 
         @Override

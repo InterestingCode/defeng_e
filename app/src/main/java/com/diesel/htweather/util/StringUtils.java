@@ -65,6 +65,6 @@ public class StringUtils {
     }
 
     public static boolean mobileVerify(String telephone) {
-        return regExpVerify(telephone, Consts.MOBILE_REG_EXP);
+        return !TextUtils.isEmpty(telephone) && telephone.length() == 11;
     }
 }

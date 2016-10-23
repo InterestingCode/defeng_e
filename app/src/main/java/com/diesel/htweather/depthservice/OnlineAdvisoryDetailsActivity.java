@@ -24,6 +24,7 @@ import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.PicassoUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.DepthWebService;
+import com.diesel.htweather.webapi.FarmingWebService;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
@@ -88,6 +89,8 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
 
     String cmId;
 
+    int source;
+
     CommentsAdapter mAdapter;
 
     @Override
@@ -95,9 +98,14 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_advisory_details);
         ButterKnife.bind(this);
+        source = getIntent().getIntExtra("source", 0); // 0-深度服务，1-信息采集
         contentId = getIntent().getStringExtra("contentId");
         commentList.setOnItemClickListener(this);
-        initDatas();
+        if (source == 0) {
+            initDatas();
+        } else {
+            getGatherDataDetails();
+        }
     }
 
     private void initDatas() {
@@ -150,6 +158,56 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
         });
     }
 
+    private void getGatherDataDetails() {
+        showDialog();
+        FarmingWebService.getInstance().getGatherDataDetails(contentId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getGatherDataDetails#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getGatherDataDetails#onResponse() " + response);
+                dismissDialog();
+                try {
+                    OnlineDetailsResJO resJO = FastJsonUtils.getSingleBean(response, OnlineDetailsResJO.class);
+
+                    if (null != resJO && resJO.status == 0) {
+                        content_layout.setVisibility(View.VISIBLE);
+                        OnlineAdvisoryBean obj = resJO.getObj();
+                        String userFacePath = Api.SERVER_URL + obj.getUserFace();
+                        PicassoUtils.loadImageViewHolder(mContext, userFacePath, R.drawable.ic_gather_data_avatar, tvUserFace);
+                        tvName.setText(obj.getUserNickName());
+                        tvUserType.setText(obj.getUserType());
+                        tvAddress.setText(obj.getLocationAddr());
+                        tvCreateTime.setText(obj.getCreatTime());
+                        tvContent.setText(obj.getContent());
+                        String imagePath[] = getImageViewUriPath(obj.getImgPaths());
+                        if (imagePath != null && imagePath.length == 3) {
+                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
+                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
+                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, ivImage3);
+                        }
+
+                        tvUpsNum.setText(obj.getUps());
+                        tvCommentsNum.setText(obj.getComments());
+                        tvReadNum.setText(obj.getCounts());
+                        mAdapter = new CommentsAdapter(OnlineAdvisoryDetailsActivity.this, obj.getCmList());
+                        commentList.setAdapter(mAdapter);
+                    } else {
+                        content_layout.setVisibility(View.INVISIBLE);
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "getGatherDataDetails#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
     private String[] getImageViewUriPath(String path) {
         return path.split(";");
     }
@@ -162,7 +220,11 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                 break;
             case R.id.ivUpsBtn:
                 // 点赞
-                thumbsUpComments();
+                if (source == 0) {
+                    thumbsUpComments();
+                } else {
+                    praiseGatherData();
+                }
                 break;
             case R.id.ivCommentsBtn:
                 // 显示评论
@@ -177,7 +239,11 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                     return;
                 }
                 // 一级评论
-                publishComments(contentId, commentsContent, cmId);
+                if (source == 0) {
+                    publishComments(contentId, commentsContent, cmId);
+                } else {
+                    publishGatherDataComments(contentId, commentsContent, cmId);
+                }
                 comment_rl.setVisibility(View.GONE);
                 comment_edit.setText("");
                 break;
@@ -213,6 +279,35 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
         });
     }
 
+    private void praiseGatherData() {
+        showDialog();
+        FarmingWebService.getInstance().thumbsUpComments(contentId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "praiseGatherData#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "praiseGatherData#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        ToastUtils.show(resJO.msg);
+                        getGatherDataDetails();
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "praiseGatherData#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
 
     private void publishComments(String contentId, String comment, String parentCmId) {
         showDialog();
@@ -238,6 +333,36 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "publishComments#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+
+    }
+
+    private void publishGatherDataComments(String contentId, String comment, String parentCmId) {
+        showDialog();
+        FarmingWebService.getInstance().publishComments(contentId, comment, parentCmId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "publishGatherDataComments#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "publishGatherDataComments#onResponse() " + response);
+                dismissDialog();
+                try {
+                    BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        ToastUtils.show(resJO.msg);
+                        getGatherDataDetails();
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "publishGatherDataComments#onResponse() #Exception# " + e.getMessage());
                 }
             }
         });
