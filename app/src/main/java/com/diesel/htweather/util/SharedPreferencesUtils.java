@@ -43,6 +43,10 @@ public class SharedPreferencesUtils {
         mShared.edit().clear().apply();
     }
 
+    public void clearAccount() {
+        mShared.edit().remove(SP_KEY_USER_INFO).apply();
+    }
+
     public boolean getBoolean(String key, boolean defValue) {
         return mShared.getBoolean(key, defValue);
     }
@@ -145,6 +149,16 @@ public class SharedPreferencesUtils {
             bean = new UserInfoBean();
         }
         return bean;
+    }
+
+    private static final String SP_KEY_LAST_ADD_ACTUAL_FARMING = "sp_key_last_add_actual_farming";
+
+    public void updateLastAddActualFarmingInfo(String farmingInfo, String mobile) {
+        putString(SP_KEY_USER_INFO + mobile, farmingInfo);
+    }
+
+    public String getLastAddActualFarmingInfo(String mobile) {
+        return getString(SP_KEY_USER_INFO + mobile, "");
     }
 
 }

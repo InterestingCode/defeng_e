@@ -37,7 +37,8 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/px20"
                 android:paddingRight="@dimen/px20"
-                android:src="@drawable/ic_setting" />
+                android:src="@drawable/ic_setting"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <FrameLayout

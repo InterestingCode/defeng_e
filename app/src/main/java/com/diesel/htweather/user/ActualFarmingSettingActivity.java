@@ -2,6 +2,7 @@ package com.diesel.htweather.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,8 +10,10 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.base.DFApplication;
 import com.diesel.htweather.event.RefreshFarmingDataEvent;
+import com.diesel.htweather.model.UserInfoBean;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.IntentExtras;
+import com.diesel.htweather.util.SharedPreferencesUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.pickerview.OptionsPickerView;
@@ -35,11 +38,24 @@ public class ActualFarmingSettingActivity extends BaseActivity {
 
     private int mAreaId;
 
+    private String mMobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actual_farming_setting);
         ButterKnife.bind(this);
+
+        UserInfoBean userInfo = SharedPreferencesUtils.getInstance(mContext).getUserInfo();
+        mMobile = userInfo.userMobile;
+        String lastFarmingInfo = SharedPreferencesUtils.getInstance(mContext)
+                .getLastAddActualFarmingInfo(mMobile);
+        if (!TextUtils.isEmpty(lastFarmingInfo)) {
+            String[] str = lastFarmingInfo.split("&");
+            mAreaId = Integer.valueOf(str[0]);
+            mAddAreaValueTv.setText(str[1]);
+            mWatchPlantsValueTv.setText(str[2]);
+        }
     }
 
     @OnClick({R.id.back_btn, R.id.add_area_layout, R.id.add_plants_layout})
@@ -56,7 +72,8 @@ public class ActualFarmingSettingActivity extends BaseActivity {
                     ToastUtils.show("请先选择地区");
                     return;
                 }
-                ActivityNav.getInstance().startAddWatchPlantActivity(this, mAreaId, REQUEST_CODE_ADD_CROPS);
+                ActivityNav.getInstance()
+                        .startAddWatchPlantActivity(this, mAreaId, REQUEST_CODE_ADD_CROPS);
                 break;
         }
     }
@@ -96,7 +113,10 @@ public class ActualFarmingSettingActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_ADD_CROPS && resultCode == RESULT_OK && null != data) {
-            mWatchPlantsValueTv.setText(IntentExtras.getCropsName(data));
+            String cropsName = IntentExtras.getCropsName(data);
+            mWatchPlantsValueTv.setText(cropsName);
+            String value = mAreaId + "&" + mAddAreaValueTv.getText().toString() + "&" + cropsName;
+            SharedPreferencesUtils.getInstance(mContext).updateLastAddActualFarmingInfo(value, mMobile);
             EventBus.getDefault().post(new RefreshFarmingDataEvent());
         }
     }

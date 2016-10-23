@@ -219,7 +219,7 @@ public class CityManageActivity extends BaseActivity {
 //                        mPlants.remove(area);
 //                        mAdapter.notifyDataSetChanged();
 //                        DBHelperFocusArea.deleteArea(area);
-//                        EventBus.getDefault().post(new RefreshFarmingDataEvent());
+                        EventBus.getDefault().post(new RefreshFarmingDataEvent());
 
                         getFocusArea();
                     }

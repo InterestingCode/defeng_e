@@ -28,7 +28,10 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
     public void setList(ArrayList<Fragment> mList) {
         if (mList != null) {
-            fragmentList = mList;
+            fragmentList.clear();
+            fragmentList.addAll(mList);
+            notifyDataSetChanged();
+//            fragmentList = mList;
         }
     }
 
@@ -48,5 +51,10 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }

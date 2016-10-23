@@ -218,7 +218,8 @@ public class FarmingFragment extends BaseFragment {
                             mFragments.add(fragment);
                             mFragmentIds.add(fragment.getId());
                         }
-                        mAdapter.notifyDataSetChanged();
+                        mAdapter.setList(mFragments);
+//                        mAdapter.notifyDataSetChanged();
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
