@@ -113,7 +113,7 @@ public class CityManageActivity extends BaseActivity {
         mCityPickerView
                 .setPicker(DFApplication.provinces, DFApplication.cities, DFApplication.countries,
                         true);
-        mCityPickerView.setCyclic(true, true, true);
+        mCityPickerView.setCyclic(false, false, false);
         mCityPickerView.setSelectOptions(0, 0, 0);
 
         mCityPickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {

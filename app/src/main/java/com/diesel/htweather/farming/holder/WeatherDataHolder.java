@@ -15,6 +15,7 @@ import com.diesel.htweather.farming.model.WeatherDataBean;
 import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.DateUtils;
+import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.widget.Trend24HourView;
 
@@ -216,7 +217,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mWindPowerTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 
@@ -240,7 +245,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mSunlightTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 
@@ -264,7 +273,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mAirHumidityTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 
@@ -288,7 +301,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mSoilHumidityTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 
@@ -312,7 +329,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mSoilTempTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 
@@ -336,7 +357,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mRainfallTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 
@@ -360,7 +385,11 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                 }
                 mTruthDataView.setTemperatures(temperatures, hours);
                 changeTextViewColor(mAirTempTv);
+            } else {
+                ToastUtils.show("暂无数据");
             }
+        } else {
+            ToastUtils.show("暂无数据");
         }
     }
 

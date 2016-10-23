@@ -66,7 +66,7 @@ public class ActualFarmingSettingActivity extends BaseActivity {
                     .setPicker(DFApplication.provinces, DFApplication.cities,
                             DFApplication.countries,
                             true);
-            mCityPickerView.setCyclic(true, true, true);
+            mCityPickerView.setCyclic(false, false, false);
             mCityPickerView.setSelectOptions(0, 0, 0);
 
             mCityPickerView
