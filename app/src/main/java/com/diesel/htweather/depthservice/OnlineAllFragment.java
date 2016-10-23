@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseFragment;
 import com.diesel.htweather.depthservice.adapter.OnlineAllMsgAdapter;
+import com.diesel.htweather.depthservice.model.OnlineAdvisoryBean;
 import com.diesel.htweather.event.AllMsgItemEvent;
 import com.diesel.htweather.event.ThumbsUpEvent;
 import com.diesel.htweather.response.BaseResJO;
@@ -41,6 +42,8 @@ public class OnlineAllFragment extends BaseFragment {
     XRecyclerView mRecyclerView;
 
     OnlineAllMsgAdapter mAdapter = null;
+
+    int mPosition;
 
     @Nullable
     @Override
@@ -103,8 +106,8 @@ public class OnlineAllFragment extends BaseFragment {
 
     @Subscribe
     public void onThumbsUpEvent(ThumbsUpEvent event) {
-        int position = event.position;
-        String id = mAdapter.getAdvisoryBeanList().get(position).getContentId();
+        mPosition = event.position;
+        String id = mAdapter.getAdvisoryBeanList().get(mPosition).getContentId();
         thumbsUpComments(id);
     }
 
@@ -126,7 +129,10 @@ public class OnlineAllFragment extends BaseFragment {
                 try {
                     BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null != resJO && resJO.status == 0) {
-                        ToastUtils.show(resJO.msg);
+                        OnlineAdvisoryBean bean = mAdapter.getAdvisoryBeanList().get(mPosition);
+                        int countUps = Integer.valueOf(bean.getUps());
+                        bean.setUps(String.valueOf(countUps + 1));
+                        mAdapter.notifyDataSetChanged();
                     } else {
                         ToastUtils.show(resJO.msg);
                     }

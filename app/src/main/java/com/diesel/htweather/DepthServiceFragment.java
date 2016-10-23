@@ -221,11 +221,9 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
                         List<FacilitiesBean> list = resJO.getObj().getOwnerSetList();
                         for (FacilitiesBean bean : list) {
                             if ("1".equals(bean.getIsChecked())) {
-                                count = 1;
-                                mDepthFacilities.setText(bean.getTitle());
+                                count++;
                                 facilitiesBean = bean;
                                 getFacilitiesAgricultureDetails(bean.getCsId());
-                                break;
                             }
                         }
                         if (count == 0) {
@@ -372,6 +370,7 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
                     FacilitiesDetailsResJO resJO = FastJsonUtils.getSingleBean(response, FacilitiesDetailsResJO.class);
                     if (null != resJO && resJO.status == 0) {
                         FacilitiesBean bean = resJO.getObj();
+                        mDepthFacilities.setText(bean.getTitle());
                         tvCropName.setText(bean.getCropName());
                         tvCropTypeName.setText(bean.getCropTypeName());
                         tvCropPropertyNames.setText(bean.getCropPropertyNames());

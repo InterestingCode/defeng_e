@@ -36,9 +36,9 @@ public class FacilitiesOneAdapter extends RecyclerView.Adapter<FacilitiesOneHold
         holder.tvFacilities.setText(bean.getTitle());
         holder.tvFacilitiesTime.setText(bean.getSowingTime() + " _ " + bean.getPlantingTime());
         if ("1".equals(bean.getIsChecked())) {
-            holder.rbFacilitiesSelect.setChecked(true);
+            holder.rbFacilitiesSelect.setBackgroundResource(R.drawable.ic_radio_button_select);
         } else {
-            holder.rbFacilitiesSelect.setChecked(false);
+            holder.rbFacilitiesSelect.setBackgroundResource(R.drawable.ic_radio_button_normal);
         }
     }
 

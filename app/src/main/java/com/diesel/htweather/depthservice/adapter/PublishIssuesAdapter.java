@@ -30,9 +30,13 @@ public class PublishIssuesAdapter extends RecyclerView.Adapter<RecyclerView.View
     private List<String> mPhotos;
 
     private Context mContext;
+    private LayoutInflater inflate;
+    private LayoutInflater mInflate;
 
     public PublishIssuesAdapter(Context context, List<String> photos) {
         mContext = context;
+        inflate = LayoutInflater.from(context);
+        mInflate = LayoutInflater.from(context);
         mPhotos = photos;
     }
 
@@ -40,9 +44,9 @@ public class PublishIssuesAdapter extends RecyclerView.Adapter<RecyclerView.View
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
         if (viewType == TYPE_PHOTO) {
-            holder = new PublishIssuesHolder(mContext, LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_edit_problem_photo, parent, false));
+            holder = new PublishIssuesHolder(mContext, inflate.inflate(R.layout.list_item_edit_problem_photo, parent, false));
         } else if (viewType == TYPE_ADD_PHOTO) {
-            holder = new AddPublishIssuesHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_edit_problem_add_photo, parent, false));
+            holder = new AddPublishIssuesHolder(mInflate.inflate(R.layout.list_item_edit_problem_add_photo, parent, false));
         }
         return holder;
     }
@@ -57,7 +61,7 @@ public class PublishIssuesAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public int getItemCount() {
         int count = null == mPhotos ? 0 : mPhotos.size();
-        return Math.min(count, 4);
+        return Math.min(count, 3);
     }
 
     @Override

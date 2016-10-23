@@ -56,7 +56,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="top"
-            android:hint="@string/hint_input_problem"
+            android:hint="请输入问题描述"
             android:maxLength="120" />
 
         <TextView

@@ -33,7 +33,7 @@ public class AgricultureDoctorActivity extends BaseActivity {
         doctorBean = (DoctorBean) getIntent().getSerializableExtra("doctorBean");
         tvDoctorTitle.setText(doctorBean.getTitle());
         tvAgricultureTime.setText(doctorBean.getSendTime());
-        tvDoctorContent.setText(doctorBean.getDesc());
+        tvDoctorContent.setText(doctorBean.getContent());
     }
 
     @OnClick(R.id.back_btn)

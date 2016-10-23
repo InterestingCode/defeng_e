@@ -14,12 +14,11 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <RadioButton
+        <ImageView
             android:id="@+id/rbFacilitiesSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/radio_bg"
-            android:button="@null" />
+            android:src="@drawable/ic_radio_button_normal" />
 
         <TextView
             android:id="@+id/tvFacilitiesTitle"

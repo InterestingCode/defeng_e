@@ -221,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:padding="@dimen/px10"
-                            android:src="@drawable/ic_right_gray_arrow" />
+                            android:src="@drawable/right_gray_arrow" />
                     </LinearLayout>
                 </LinearLayout>
 

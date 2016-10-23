@@ -2,7 +2,7 @@ package com.diesel.htweather.depthservice.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
@@ -25,7 +25,7 @@ public class FacilitiesOneHolder extends RecyclerView.ViewHolder {
     public TextView tvFacilitiesTime;
 
     @BindView(R.id.rbFacilitiesSelect)
-    public RadioButton rbFacilitiesSelect;
+    public ImageView rbFacilitiesSelect;
 
     public FacilitiesOneHolder(View itemView) {
         super(itemView);

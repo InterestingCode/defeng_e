@@ -35,9 +35,9 @@ public class FacilitiesTwoAdapter extends RecyclerView.Adapter<FacilitiesTwoHold
         FacilitiesBean bean = recommendSetList.get(position);
         holder.tvFacilitiesTitle.setText(bean.getTitle());
         if ("1".equals(bean.getIsChecked())) {
-            holder.rbFacilitiesSelect.setChecked(true);
+            holder.rbFacilitiesSelect.setBackgroundResource(R.drawable.ic_radio_button_select);
         } else {
-            holder.rbFacilitiesSelect.setChecked(false);
+            holder.rbFacilitiesSelect.setBackgroundResource(R.drawable.ic_radio_button_normal);
         }
     }
 

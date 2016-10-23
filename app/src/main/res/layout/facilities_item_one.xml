@@ -33,15 +33,14 @@
             android:textSize="@dimen/font_30px" />
 
 
-        <RadioButton
+        <ImageView
             android:id="@+id/rbFacilitiesSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/px30"
-            android:background="@drawable/radio_bg"
-            android:button="@null" />
+            android:src="@drawable/ic_radio_button_normal" />
 
     </RelativeLayout>
 </LinearLayout>

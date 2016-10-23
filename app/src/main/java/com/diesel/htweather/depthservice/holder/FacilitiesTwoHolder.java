@@ -2,7 +2,7 @@ package com.diesel.htweather.depthservice.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 public class FacilitiesTwoHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.rbFacilitiesSelect)
-    public RadioButton rbFacilitiesSelect;
+    public ImageView rbFacilitiesSelect;
 
     @BindView(R.id.tvFacilitiesTitle)
     public TextView tvFacilitiesTitle;
