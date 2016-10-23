@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/px50"
-        android:textColor="@color/black_333"
-        android:textSize="@dimen/font_40px"
+        android:layout_marginTop="@dimen/px50"
         android:gravity="center"
         android:text="我们已收到您的信息\n\t稍后客户经理回联系你"
-        android:layout_marginTop="@dimen/px50" />
+        android:textColor="@color/black_333"
+        android:textSize="@dimen/font_40px" />
 
 
     <Button
@@ -28,6 +28,6 @@
         android:layout_marginRight="@dimen/px30"
         android:background="@drawable/shape_green_bg_with_radius"
         android:gravity="center"
-        android:text="@string/commit" />
+        android:text="确定" />
 
 </LinearLayout>

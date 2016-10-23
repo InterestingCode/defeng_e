@@ -24,16 +24,25 @@ import com.diesel.htweather.depthservice.ProfileActivity;
 import com.diesel.htweather.depthservice.SettingFacilitiesActivity;
 import com.diesel.htweather.depthservice.adapter.DepthDiaryAdapter;
 import com.diesel.htweather.depthservice.model.DoctorBean;
+import com.diesel.htweather.depthservice.model.FacilitiesBean;
 import com.diesel.htweather.depthservice.model.GrowthDiaryBean;
 import com.diesel.htweather.depthservice.model.SuggestBean;
+import com.diesel.htweather.event.DepthServiceEvent;
 import com.diesel.htweather.response.AgriculturalDoctorResJO;
 import com.diesel.htweather.response.AgriculturalSuggestResJO;
+import com.diesel.htweather.response.FacilitiesDetailsResJO;
+import com.diesel.htweather.response.FacilitiesResJO;
 import com.diesel.htweather.response.GrowthDiaryResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.widget.FullListView;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +61,9 @@ import okhttp3.Call;
  */
 public class DepthServiceFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
+    @BindView(R.id.tvDepthFacilities)
+    TextView mDepthFacilities;
+
     @BindView(R.id.diaryList)
     FullListView diaryList;
 
@@ -61,6 +73,24 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
     @BindView(R.id.mScrollView)
     ScrollView mScrollView;
 
+    @BindView(R.id.tvCropName)
+    TextView tvCropName;
+
+    @BindView(R.id.tvCropTypeName)
+    TextView tvCropTypeName;
+
+    @BindView(R.id.tvCropPropertyNames)
+    TextView tvCropPropertyNames;
+
+    @BindView(R.id.tvSowingTime)
+    TextView tvSowingTime;
+
+    @BindView(R.id.tvPlantingTime)
+    TextView tvPlantingTime;
+
+    @BindView(R.id.tvAreaNum)
+    TextView tvAreaNum;
+
     @BindView(R.id.tvDoctorTitle)
     TextView tvDoctorTitle;
 
@@ -69,7 +99,6 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
 
     @BindView(R.id.tvDoctorContent)
     TextView tvDoctorContent;
-
 
     @BindView(R.id.tvSuggestTitle)
     TextView tvSuggestTitle;
@@ -85,7 +114,11 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
 
     SuggestBean suggestBean;
 
+    FacilitiesBean facilitiesBean = null;
+
     DepthDiaryAdapter mAdapter = null;
+
+    int count = 0;
 
 
     public static DepthServiceFragment newInstance() {
@@ -95,6 +128,7 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         View view = inflater.inflate(R.layout.fragment_depth_service, container, false);
         ButterKnife.bind(this, view);
         diaryList.setOnItemClickListener(this);
@@ -103,13 +137,12 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
     }
 
     private void initData() {
-
+        // 设施农业列表
+        getFacilitiesAgricultureList();
         // 获取农业小博士信息
         getAgricultureDoctor();
-
         // 农事建议
         getAgriculturalSuggest();
-
         // 获取第一页前三条数据
         getGrowthDiaryList("1", "3");
     }
@@ -123,7 +156,12 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
                 startActivity(intent);
                 break;
             case R.id.tvAgriculturalFacilities:
-                startActivity(new Intent(mActivity, FacilitiesDetailsActivity.class));
+                if (facilitiesBean != null) {
+                    Intent facilitiesIntent = new Intent(mActivity, FacilitiesDetailsActivity.class);
+                    facilitiesIntent.putExtra("csId", facilitiesBean.getCsId());
+                    startActivity(facilitiesIntent);
+                }
+
                 break;
             case R.id.agriculture_ll:
                 if (null != doctorBean) {
@@ -163,6 +201,47 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
     }
 
 
+    private void getFacilitiesAgricultureList() {
+        showDialog();
+        DepthWebService.getInstance().getFacilitiesAgricultureList(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getFacilitiesAgricultureList#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getFacilitiesAgricultureList#onResponse() " + response);
+                dismissDialog();
+                try {
+                    FacilitiesResJO resJO = FastJsonUtils.getSingleBean(response, FacilitiesResJO.class);
+                    if (null != resJO && resJO.status == 0 && resJO.getObj().getOwnerSetList() != null && !resJO.getObj().getOwnerSetList().isEmpty()) {
+                        List<FacilitiesBean> list = resJO.getObj().getOwnerSetList();
+                        for (FacilitiesBean bean : list) {
+                            if ("1".equals(bean.getIsChecked())) {
+                                count = 1;
+                                mDepthFacilities.setText(bean.getTitle());
+                                facilitiesBean = bean;
+                                getFacilitiesAgricultureDetails(bean.getCsId());
+                                break;
+                            }
+                        }
+                        if (count == 0) {
+                            FacilitiesBean bean = resJO.getObj().getOwnerSetList().get(0);
+                            mDepthFacilities.setText(bean.getTitle());
+                        }
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "getFacilitiesAgricultureList#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
     private void getAgricultureDoctor() {
         showDialog();
         DepthWebService.getInstance().getAgricultureDoctor(new StringCallback() {
@@ -184,7 +263,7 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
                         doctorBean = resJO.getObj();
                         tvDoctorTitle.setText(doctorBean.getTitle());
                         tvAgricultureTime.setText(doctorBean.getSendTime());
-                        tvDoctorContent.setText(doctorBean.getContent());
+                        tvDoctorContent.setText(doctorBean.getDesc());
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -216,7 +295,7 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
                         suggestBean = resJO.getObj();
                         tvSuggestTitle.setText(suggestBean.getTitle());
                         tvSuggestTime.setText(suggestBean.getSendTime());
-                        tvSuggestContent.setText(suggestBean.getContent());
+                        tvSuggestContent.setText(suggestBean.getDesc());
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -264,5 +343,54 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
             intent.putExtra("growthId", growthDiaryBean.getId());
             startActivity(intent);
         }
+    }
+
+    @Subscribe
+    public void onDepthServiceEvent(DepthServiceEvent event) {
+        facilitiesBean = event.facilitiesBean;
+        getFacilitiesAgricultureDetails(facilitiesBean.getCsId());
+    }
+
+    /**
+     * @param csId
+     */
+    private void getFacilitiesAgricultureDetails(String csId) {
+        showDialog();
+        DepthWebService.getInstance().getFacilitiesAgricultureDetails(csId, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getFacilitiesAgricultureDetails#onError() " + e.getMessage());
+                ToastUtils.show(getString(R.string.tips_request_failure));
+                dismissDialog();
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getFacilitiesAgricultureDetails#onResponse() " + response);
+                dismissDialog();
+                try {
+                    FacilitiesDetailsResJO resJO = FastJsonUtils.getSingleBean(response, FacilitiesDetailsResJO.class);
+                    if (null != resJO && resJO.status == 0) {
+                        FacilitiesBean bean = resJO.getObj();
+                        tvCropName.setText(bean.getCropName());
+                        tvCropTypeName.setText(bean.getCropTypeName());
+                        tvCropPropertyNames.setText(bean.getCropPropertyNames());
+                        tvSowingTime.setText(bean.getSowingTime());
+                        tvPlantingTime.setText(bean.getPlantingTime());
+                        tvAreaNum.setText(bean.getAreaNum());
+                    } else {
+                        ToastUtils.show(resJO.msg);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "getFacilitiesAgricultureDetails#onResponse() #Exception# " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }

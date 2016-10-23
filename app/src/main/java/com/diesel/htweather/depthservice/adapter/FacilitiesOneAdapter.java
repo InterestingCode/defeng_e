@@ -35,7 +35,11 @@ public class FacilitiesOneAdapter extends RecyclerView.Adapter<FacilitiesOneHold
         FacilitiesBean bean = ownerSetList.get(position);
         holder.tvFacilities.setText(bean.getTitle());
         holder.tvFacilitiesTime.setText(bean.getSowingTime() + " _ " + bean.getPlantingTime());
-        // TODO 选中设置
+        if ("1".equals(bean.getIsChecked())) {
+            holder.rbFacilitiesSelect.setChecked(true);
+        } else {
+            holder.rbFacilitiesSelect.setChecked(false);
+        }
     }
 
     @Override
@@ -43,4 +47,7 @@ public class FacilitiesOneAdapter extends RecyclerView.Adapter<FacilitiesOneHold
         return ownerSetList.size();
     }
 
+    public List<FacilitiesBean> getOwnerSetList() {
+        return ownerSetList;
+    }
 }

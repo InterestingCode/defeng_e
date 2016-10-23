@@ -40,6 +40,8 @@ public class SettingFacilitiesActivity extends BaseActivity {
     TextView cropPropertyNames;
     @BindView(R.id.areaNum)
     TextView areaNum;
+    @BindView(R.id.tvArea)
+    TextView tvArea;
     @BindView(R.id.tvAddress)
     TextView tvAddress;
     @BindView(R.id.tvGetTime)
@@ -58,7 +60,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.back_btn, R.id.btnCrop, R.id.cropTypeName, R.id.cropPropertyNames, R.id.areaNum, R.id.btnGetTime, R.id.btnAddress, R.id.btnPlantingTime, R.id.btnCommit})
+    @OnClick({R.id.back_btn, R.id.btnCrop, R.id.cropTypeName, R.id.cropPropertyNames, R.id.areaNum, R.id.btnGetTime, R.id.btnArea, R.id.btnAddress, R.id.btnPlantingTime, R.id.btnCommit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_btn:
@@ -106,8 +108,17 @@ public class SettingFacilitiesActivity extends BaseActivity {
             case R.id.btnPlantingTime:
                 showPlantingTimePickerView();
                 break;
-            case R.id.btnAddress:
+            case R.id.btnArea:
                 showAreaPickerView();
+                break;
+            case R.id.btnAddress:
+                DialogUtils.showInputDialog(this, "大棚详细地址",
+                        new DialogUtils.DialogOnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which, String inputContent) {
+                                tvAddress.setText(inputContent);
+                            }
+                        });
                 break;
             case R.id.btnCommit:
                 commitApply();
@@ -139,7 +150,13 @@ public class SettingFacilitiesActivity extends BaseActivity {
         }
         String address = String.valueOf(arId);
         if (TextUtils.isEmpty(area)) {
-            ToastUtils.show("请选择地址");
+            ToastUtils.show("请选择省市区地址");
+            return;
+        }
+
+        String addressDetail = tvAddress.getText().toString();
+        if (TextUtils.isEmpty(area)) {
+            ToastUtils.show("请输入详细地址");
             return;
         }
 
@@ -154,8 +171,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
             return;
         }
 
-
-        applyFacilitiesAgriculture(cropName, cropType, cropProperty, area, address, sowingTime, planting);
+        applyFacilitiesAgriculture(cropName, cropType, cropProperty, area, address, addressDetail, sowingTime, planting);
     }
 
     private void showTimePickerView() {
@@ -209,7 +225,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
                     // 返回的分别是三个级别的选中位置
                     String tx = DFApplication.provinces.get(options1).pvName + "-" + DFApplication.cities.get(options1).get(option2).ctName + "-"
                             + countries.get(options1).get(option2).get(options3).arName;
-                    tvAddress.setText(tx);
+                    tvArea.setText(tx);
                     arId = DFApplication.countries.get(options1).get(option2).get(options3).arId;
 
                 }
@@ -229,9 +245,9 @@ public class SettingFacilitiesActivity extends BaseActivity {
      * @param sowingTime
      * @param plantingTime
      */
-    private void applyFacilitiesAgriculture(String cropName, String cropTypeName, String cropPropertyNames, String areaNum, String arId, String sowingTime, String plantingTime) {
+    private void applyFacilitiesAgriculture(String cropName, String cropTypeName, String cropPropertyNames, String areaNum, String arId, String detailAddress, String sowingTime, String plantingTime) {
         showDialog();
-        DepthWebService.getInstance().applyFacilitiesAgriculture(cropName, cropTypeName, cropPropertyNames, areaNum, arId, sowingTime, plantingTime, new StringCallback() {
+        DepthWebService.getInstance().applyFacilitiesAgriculture(cropName, cropTypeName, cropPropertyNames, areaNum, arId, detailAddress, sowingTime, plantingTime, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "applyFacilitiesAgriculture#onError() " + e.getMessage());

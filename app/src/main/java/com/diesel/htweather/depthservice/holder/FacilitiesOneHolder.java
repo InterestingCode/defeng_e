@@ -6,6 +6,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
+import com.diesel.htweather.event.RecyclerItemEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,11 +30,11 @@ public class FacilitiesOneHolder extends RecyclerView.ViewHolder {
     public FacilitiesOneHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                EventBus.getDefault().post(new RecyclerItemEvent(getLayoutPosition()));
-//            }
-//        });
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new RecyclerItemEvent(getLayoutPosition() - 1));
+            }
+        });
     }
 }

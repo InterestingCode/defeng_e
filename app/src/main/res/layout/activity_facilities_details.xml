@@ -166,7 +166,32 @@
                 android:text="100"
                 android:textColor="@color/gray_999"
                 android:textSize="@dimen/font_34px" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px100"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/px24"
+                android:text="省市区"
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
+
+            <TextView
+                android:id="@+id/tvHouseAddr"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text=""
+                android:textColor="@color/gray_999"
+                android:textSize="@dimen/font_34px" />
 
         </LinearLayout>
 

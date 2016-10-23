@@ -27,23 +27,35 @@
             android:textSize="@dimen/font_36px" />
     </RelativeLayout>
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/myDeepServiceListView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/px40"
-        android:text="推荐服务"
-        android:textColor="@color/gray_666"
-        android:textSize="@dimen/font_34px" />
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/recommendServiceListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+
+            <com.jcodecraeer.xrecyclerview.XRecyclerView
+                android:id="@+id/myDeepServiceListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/px40"
+                android:text="推荐服务"
+                android:textColor="@color/gray_666"
+                android:textSize="@dimen/font_34px" />
+
+            <com.jcodecraeer.xrecyclerview.XRecyclerView
+                android:id="@+id/recommendServiceListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

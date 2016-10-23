@@ -37,7 +37,7 @@ public class FarmingAdviceActivity extends BaseActivity {
         suggestBean = (SuggestBean) getIntent().getSerializableExtra("suggestBean");
         tvSuggestTitle.setText(suggestBean.getTitle());
         tvSuggestTime.setText(suggestBean.getSendTime());
-        tvSuggestContent.setText(suggestBean.getContent());
+        tvSuggestContent.setText(suggestBean.getDesc());
     }
 
     @OnClick(R.id.back_btn)

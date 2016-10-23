@@ -34,12 +34,20 @@ public class FacilitiesTwoAdapter extends RecyclerView.Adapter<FacilitiesTwoHold
     public void onBindViewHolder(FacilitiesTwoHolder holder, int position) {
         FacilitiesBean bean = recommendSetList.get(position);
         holder.tvFacilitiesTitle.setText(bean.getTitle());
-        // TODO 选中设置
+        if ("1".equals(bean.getIsChecked())) {
+            holder.rbFacilitiesSelect.setChecked(true);
+        } else {
+            holder.rbFacilitiesSelect.setChecked(false);
+        }
     }
 
     @Override
     public int getItemCount() {
         return recommendSetList.size();
+    }
+
+    public List<FacilitiesBean> getRecommendSetList() {
+        return recommendSetList;
     }
 
 }

@@ -21,11 +21,17 @@ public class FacilitiesBean implements Serializable {
 
     String areaNum;
 
-    String cropAddress;
+    String houseAddr;
+
+    String addr;
+
+    String arId;
 
     String sowingTime; // 播种时间
 
     String plantingTime; // 种植时间
+
+    String isChecked; // 是否选中，1是2否
 
 
     public String getCsId() {
@@ -76,12 +82,29 @@ public class FacilitiesBean implements Serializable {
         this.areaNum = areaNum;
     }
 
-    public String getCropAddress() {
-        return cropAddress;
+
+    public String getHouseAddr() {
+        return houseAddr;
     }
 
-    public void setCropAddress(String cropAddress) {
-        this.cropAddress = cropAddress;
+    public void setHouseAddr(String houseAddr) {
+        this.houseAddr = houseAddr;
+    }
+
+    public String getArId() {
+        return arId;
+    }
+
+    public void setArId(String arId) {
+        this.arId = arId;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
     }
 
     public String getSowingTime() {
@@ -98,5 +121,13 @@ public class FacilitiesBean implements Serializable {
 
     public void setPlantingTime(String plantingTime) {
         this.plantingTime = plantingTime;
+    }
+
+    public String getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(String isChecked) {
+        this.isChecked = isChecked;
     }
 }

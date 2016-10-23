@@ -9,6 +9,10 @@ import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
 import com.diesel.htweather.depthservice.adapter.FacilitiesOneAdapter;
 import com.diesel.htweather.depthservice.adapter.FacilitiesTwoAdapter;
+import com.diesel.htweather.depthservice.model.FacilitiesBean;
+import com.diesel.htweather.event.DepthItemEvent;
+import com.diesel.htweather.event.DepthServiceEvent;
+import com.diesel.htweather.event.RecyclerItemEvent;
 import com.diesel.htweather.response.FacilitiesResJO;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
@@ -16,6 +20,9 @@ import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.widget.DividerItemDecoration;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +37,10 @@ public class FacilitiesActivity extends BaseActivity {
 
     @BindView(R.id.recommendServiceListView)
     XRecyclerView recommendServiceListView;
+
+    FacilitiesOneAdapter mFacilitiesOneAdapter;
+
+    FacilitiesTwoAdapter mFacilitiesTwoAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,8 +76,10 @@ public class FacilitiesActivity extends BaseActivity {
                 try {
                     FacilitiesResJO resJO = FastJsonUtils.getSingleBean(response, FacilitiesResJO.class);
                     if (null != resJO && resJO.status == 0) {
-                        myDeepServiceListView.setAdapter(new FacilitiesOneAdapter(FacilitiesActivity.this, resJO.getObj().getOwnerSetList()));
-                        recommendServiceListView.setAdapter(new FacilitiesTwoAdapter(FacilitiesActivity.this, resJO.getObj().getRecommendSetList()));
+                        mFacilitiesOneAdapter = new FacilitiesOneAdapter(FacilitiesActivity.this, resJO.getObj().getOwnerSetList());
+                        myDeepServiceListView.setAdapter(mFacilitiesOneAdapter);
+                        mFacilitiesTwoAdapter = new FacilitiesTwoAdapter(FacilitiesActivity.this, resJO.getObj().getRecommendSetList());
+                        recommendServiceListView.setAdapter(mFacilitiesTwoAdapter);
                     } else {
                         ToastUtils.show(resJO.msg);
                     }
@@ -78,8 +91,36 @@ public class FacilitiesActivity extends BaseActivity {
     }
 
 
+    @Subscribe
+    public void onRecyclerItemEvent(RecyclerItemEvent event) {
+        int position = event.position;
+        FacilitiesBean bean = mFacilitiesOneAdapter.getOwnerSetList().get(position);
+        EventBus.getDefault().post(new DepthServiceEvent(bean));
+        finish();
+    }
+
+    @Subscribe
+    public void onDepthItemEvent(DepthItemEvent event) {
+        int position = event.position;
+        FacilitiesBean bean = mFacilitiesTwoAdapter.getRecommendSetList().get(position);
+        EventBus.getDefault().post(new DepthServiceEvent(bean));
+        finish();
+    }
+
     @OnClick(R.id.back_btn)
     public void onClick() {
         finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

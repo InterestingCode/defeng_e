@@ -36,6 +36,9 @@ public class FacilitiesDetailsActivity extends BaseActivity {
     @BindView(R.id.tvAreaNum)
     TextView tvAreaNum;
 
+    @BindView(R.id.tvHouseAddr)
+    TextView tvHouseAddr;
+
     @BindView(R.id.tvCropAddress)
     TextView tvCropAddress;
 
@@ -50,7 +53,8 @@ public class FacilitiesDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facilities_details);
         ButterKnife.bind(this);
-        // getFacilitiesAgricultureDetails("");
+        String csId = getIntent().getStringExtra("csId");
+        getFacilitiesAgricultureDetails(csId);
     }
 
     /**
@@ -78,7 +82,8 @@ public class FacilitiesDetailsActivity extends BaseActivity {
                         tvCropTypeName.setText(bean.getCropTypeName());
                         tvCropPropertyNames.setText(bean.getCropPropertyNames());
                         tvAreaNum.setText(bean.getAreaNum());
-                        tvCropAddress.setText(bean.getCropAddress());
+                        tvHouseAddr.setText(bean.getHouseAddr());
+                        tvCropAddress.setText(bean.getAddr());
                         tvSowingTime.setText(bean.getSowingTime());
                         tvPlantingTime.setText(bean.getPlantingTime());
                     } else {

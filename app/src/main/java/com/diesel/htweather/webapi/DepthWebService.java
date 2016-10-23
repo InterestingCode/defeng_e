@@ -226,7 +226,7 @@ public class DepthWebService extends WebService {
      * @param plantingTime      种植时间，格式，年月日 如：2016-06-25
      * @param callback          回调
      */
-    public void applyFacilitiesAgriculture(String cropName, String cropTypeName, String cropPropertyNames, String areaNum, String arId, String sowingTime, String plantingTime, Callback callback) {
+    public void applyFacilitiesAgriculture(String cropName, String cropTypeName, String cropPropertyNames, String areaNum, String arId, String detailAddress, String sowingTime, String plantingTime, Callback callback) {
         OkHttpUtils
                 .post()
                 .url(Api.APPLY_AGRICULTURE_URL)
@@ -237,6 +237,7 @@ public class DepthWebService extends WebService {
                 .addParams("cropPropertyNames", cropPropertyNames)
                 .addParams("areaNumStr", areaNum)
                 .addParams("arId", arId)
+                .addParams("addr", detailAddress)
                 .addParams("sowingTime", sowingTime)
                 .addParams("plantingTime", plantingTime)
                 .build()
