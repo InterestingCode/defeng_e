@@ -6,6 +6,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_item_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/px34"
@@ -32,15 +33,15 @@
             android:textColor="@color/gray_666"
             android:textSize="@dimen/font_30px" />
 
-
-        <ImageView
-            android:id="@+id/rbFacilitiesSelect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/px30"
-            android:src="@drawable/ic_radio_button_normal" />
-
+        <!--
+                <ImageView
+                    android:id="@+id/rbFacilitiesSelect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/px30"
+                    android:src="@drawable/ic_radio_button_normal" />
+        -->
     </RelativeLayout>
 </LinearLayout>

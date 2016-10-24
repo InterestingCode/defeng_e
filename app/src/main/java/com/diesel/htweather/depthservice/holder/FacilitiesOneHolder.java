@@ -2,7 +2,7 @@ package com.diesel.htweather.depthservice.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
@@ -24,8 +24,8 @@ public class FacilitiesOneHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tvFacilitiesTime)
     public TextView tvFacilitiesTime;
 
-    @BindView(R.id.rbFacilitiesSelect)
-    public ImageView rbFacilitiesSelect;
+    @BindView(R.id.rl_item_bg)
+    public RelativeLayout rl_item_bg;
 
     public FacilitiesOneHolder(View itemView) {
         super(itemView);

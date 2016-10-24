@@ -2,7 +2,7 @@ package com.diesel.htweather.depthservice.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
  */
 public class FacilitiesTwoHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.rbFacilitiesSelect)
-    public ImageView rbFacilitiesSelect;
+    @BindView(R.id.ll_item_bg)
+    public LinearLayout ll_item_bg;
 
     @BindView(R.id.tvFacilitiesTitle)
     public TextView tvFacilitiesTitle;
