@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.diesel.htweather.base.BaseBean;
 import com.diesel.htweather.base.BaseFragment;
@@ -25,7 +23,6 @@ import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
-import com.diesel.htweather.util.ViewUtils;
 import com.diesel.htweather.webapi.AreaWebService;
 import com.diesel.htweather.widget.CusViewPager;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -38,10 +35,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
-import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 import okhttp3.Call;
 
 /**
@@ -102,7 +95,8 @@ public class FarmingFragment extends BaseFragment {
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "getFocusAreaFarmingData#onError() " + e.getMessage());
                 dismissDialog();
-                ToastUtils.show(getString(R.string.tips_request_failure));
+                ToastUtils.show("请求失败，请重试");
+//                ToastUtils.show(getString(R.string.tips_request_failure));
                 if (isRefresh && mCurrIndex < mAdapter.getCount()) {
                     ((FarmingPagerFragment) mFragments.get(mCurrIndex)).onRefreshComplete();
                 }
@@ -118,7 +112,7 @@ public class FarmingFragment extends BaseFragment {
                 try {
                     FarmingResJO resJO = FastJsonUtils.getSingleBean(response, FarmingResJO.class);
                     if (null == resJO) {
-                        ToastUtils.show(getString(R.string.tips_request_failure));
+                        ToastUtils.show("请求失败，请重试");
                         return;
                     }
                     FarmingResJO.ObjEntity obj = resJO.obj;
