@@ -131,6 +131,7 @@ public class DepthServiceFragment extends BaseFragment implements AdapterView.On
         EventBus.getDefault().register(this);
         View view = inflater.inflate(R.layout.fragment_depth_service, container, false);
         ButterKnife.bind(this, view);
+        diaryList.setFocusable(false);
         diaryList.setOnItemClickListener(this);
         initData();
         return view;
