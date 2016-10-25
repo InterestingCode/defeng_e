@@ -103,7 +103,8 @@ public class ActualFarmingHolder extends RecyclerView.ViewHolder {
 
         @Override
         public int getCount() {
-            return null == mEntities ? 0 : mEntities.size();
+            int i = null == mEntities ? 0 : mEntities.size();
+            return i > 3 ? 3 : i;
         }
 
         @Override

@@ -3,7 +3,10 @@ package com.diesel.htweather.farming;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
@@ -37,6 +40,9 @@ public class LocationActivity extends BaseActivity {
     @BindView(R.id.area_recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.search_city_et)
+    EditText mSearchAreaEt;
+
     private List<BaseBean> mAreaList = new ArrayList<>();
 
     private LocationAdapter mAdapter;
@@ -55,6 +61,8 @@ public class LocationActivity extends BaseActivity {
         mAdapter = new LocationAdapter(mAreaList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mAdapter);
+
+        mSearchAreaEt.addTextChangedListener(mTextWatcher);
 
         getHotAndRecommendArea();
     }
@@ -143,9 +151,41 @@ public class LocationActivity extends BaseActivity {
         });
     }
 
+    private void searchAreaByName(String area) {
+        AreaWebService.getInstance().getAreaByName(area, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "addFocusArea#onError() " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "addFocusArea#onResponse() " + response);
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mSearchAreaEt.removeTextChangedListener(mTextWatcher);
     }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 }

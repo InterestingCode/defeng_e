@@ -186,4 +186,16 @@ public class Api {
 
     // 信息采集点赞
     public static final String PRAISE_GATHER_DATA_URL = SERVER_URL + "/nologin/content/process.c?do=collContentUps";
+
+    // 获取指定区域的天气数据
+    public static final String GET_WEATHER_DATA_URL = SERVER_URL + "/session/home/process.c?do=homePageByWeather";
+
+    // 获取实况数据
+    public static final String GET_HOURS_DATA_URL = SERVER_URL + "/session/home/process.c?do=homePageByHoursData";
+
+    // 获取精准农技信息
+    public static final String GET_ACTUAL_FARMING_URL = SERVER_URL + "/session/home/process.c?do=homePageByCropsNews";
+
+    // 获取首页剩余数据
+    public static final String GET_OTHER_FARMING_URL = SERVER_URL + "/session/home/process.c?do=homePageByCropsNews";
 }

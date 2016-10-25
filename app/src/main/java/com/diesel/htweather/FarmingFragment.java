@@ -24,6 +24,7 @@ import com.diesel.htweather.util.ActivityNav;
 import com.diesel.htweather.util.FastJsonUtils;
 import com.diesel.htweather.util.ToastUtils;
 import com.diesel.htweather.webapi.AreaWebService;
+import com.diesel.htweather.webapi.FarmingWebService;
 import com.diesel.htweather.widget.CusViewPager;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -238,19 +239,6 @@ public class FarmingFragment extends BaseFragment {
         mWeatherPager.removeOnPageChangeListener(mListener);
     }
 
-//    @OnClick({R.id.area_layout, R.id.message_iv, R.id.new_msg_cnt_tv})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.area_layout:
-//                ActivityNav.getInstance().startCityManageActivity(mActivity);
-//                break;
-//            case R.id.message_iv:
-//            case R.id.new_msg_cnt_tv:
-//                ActivityNav.getInstance().startMessageActivity(mActivity);
-//                break;
-//        }
-//    }
-
     private ViewPager.OnPageChangeListener mListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -267,4 +255,22 @@ public class FarmingFragment extends BaseFragment {
 
         }
     };
+
+    private void getWeatherData() {
+        showDialog();
+        FarmingWebService.getInstance().getWeatherData(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e(TAG, "getFocusAreaFarmingData#onError() " + e.getMessage());
+                dismissDialog();
+                ToastUtils.show("请求失败，请重试");
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                Log.d(TAG, "getFocusAreaFarmingData#onResponse() " + response);
+                dismissDialog();
+            }
+        });
+    }
 }

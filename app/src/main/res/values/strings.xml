@@ -33,7 +33,7 @@
 
     <string name="real_weather">天气实况</string>
     <string name="gather_data">信息采集</string>
-    <string name="user_message">个人信息</string>
+    <string name="user_message">我的消息</string>
     <string name="help_center">帮助中心</string>
     <string name="system_setting">系统设置</string>
 

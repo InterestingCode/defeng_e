@@ -120,6 +120,7 @@ public class Trend24HourView extends View {
     public void setTemperatures(List<Integer> temperatures, List<String> hours) {
         this.temperatures = temperatures;
         this.mHours = hours;
+        mValues.clear();
         mMaxTemperature = Collections.max(this.temperatures);
         mMinTemperature = Collections.min(this.temperatures);
         mGridNumber = mTemperatureDiff = mMaxTemperature - mMinTemperature;
@@ -130,9 +131,17 @@ public class Trend24HourView extends View {
         if (mGridNumber > 5) {
             mGridNumber = 5;
         }
-        for (int i = 0; i < mGridNumber; i ++) {
-            mValues.add(mMinTemperature + i * mTemperatureDiff / mGridNumber);
+
+        if (mGridNumber == 1) {
+            mValues.add(mMinTemperature);
+        } else if (mGridNumber > 1) {
+            mValues.add(mMinTemperature);
+            for (int i = 1; i < mGridNumber -1; i ++) {
+                mValues.add(mMinTemperature + i * mTemperatureDiff / mGridNumber);
+            }
+            mValues.add(mMaxTemperature);
         }
+
         Collections.sort(mValues, new Comparator<Integer>() {
             @Override
             public int compare(Integer t0, Integer t1) {
@@ -141,7 +150,7 @@ public class Trend24HourView extends View {
         });
 
         Log.i(tag, "setTemperatures() maxTemp(" + mMaxTemperature + "), minTemp(" + mMinTemperature
-                + "), tempDiff(" + mTemperatureDiff + ")");
+                + "), tempDiff(" + mTemperatureDiff + "), mValues="+mValues);
         requestLayout();
         invalidate();
     }

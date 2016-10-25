@@ -25,7 +25,8 @@
             android:hint="@string/search_city"
             android:textColor="@color/gray_ccc"
             android:textColorHint="@color/gray_ccc"
-            android:textSize="@dimen/font_30px" />
+            android:textSize="@dimen/font_30px"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

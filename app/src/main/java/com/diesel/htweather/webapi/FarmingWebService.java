@@ -117,4 +117,44 @@ public class FarmingWebService extends WebService {
                 .execute(callback);
     }
 
+    public void getWeatherData(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.GET_WEATHER_DATA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    public void getHoursData(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.GET_HOURS_DATA_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    public void getActualFarming(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.GET_ACTUAL_FARMING_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
+    public void getOtherFarming(Callback callback) {
+        OkHttpUtils
+                .post()
+                .url(Api.GET_OTHER_FARMING_URL)
+                .addParams("drivenType", getDriveType())
+                .addParams("appkey", getAppKey())
+                .build()
+                .execute(callback);
+    }
+
 }
