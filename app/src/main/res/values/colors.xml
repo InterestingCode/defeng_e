@@ -42,5 +42,7 @@
     <color name="online_btn_press">#85B902</color>
     <color name="online_btn_normal">#DCDCDC</color>
 
+    <color name="facilities_holder_color">#EEF4D3</color>
+
 
 </resources>

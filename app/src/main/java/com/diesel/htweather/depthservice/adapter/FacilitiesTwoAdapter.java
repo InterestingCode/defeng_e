@@ -42,7 +42,7 @@ public class FacilitiesTwoAdapter extends RecyclerView.Adapter<FacilitiesTwoHold
         holder.tvFacilitiesTitle.setText(bean.getTitle());
 
         if ("1".equals(bean.getIsChecked())) {
-            holder.ll_item_bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.polyline_blue_point_color));
+            holder.ll_item_bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.facilities_holder_color));
         } else {
             holder.ll_item_bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.txt_color_header_title));
         }

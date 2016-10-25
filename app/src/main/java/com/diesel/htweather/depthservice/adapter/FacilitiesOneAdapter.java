@@ -1,7 +1,6 @@
 package com.diesel.htweather.depthservice.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -42,9 +41,9 @@ public class FacilitiesOneAdapter extends RecyclerView.Adapter<FacilitiesOneHold
         holder.tvFacilities.setText(bean.getTitle());
         holder.tvFacilitiesTime.setText(bean.getSowingTime() + " - " + bean.getPlantingTime());
         if ("1".equals(bean.getIsChecked())) {
-            holder.rl_item_bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.polyline_blue_point_color));
+            holder.rl_item_bg.setBackgroundResource(R.drawable.bg_facilities_selected);
         } else {
-            holder.rl_item_bg.setBackgroundColor(ContextCompat.getColor(mContext, R.color.txt_color_header_title));
+            holder.rl_item_bg.setBackgroundResource(R.drawable.bg_facilities);
         }
     }
 
