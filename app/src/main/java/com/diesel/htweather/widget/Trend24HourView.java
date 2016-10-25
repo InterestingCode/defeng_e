@@ -191,7 +191,7 @@ public class Trend24HourView extends View {
         for (int i = 0; i < mGridNumber; i ++) {
             int y = gridSpaceHeight * (i + 1) + topBottomMargin;
             canvas.drawLine(dividerLineStartX, y, dividerLineStopX, y, bgLinePaint);
-            canvas.drawText(String.valueOf(mValues.get(i)), unitStartX, y, mTextPaint);
+//            canvas.drawText(String.valueOf(mValues.get(i)), unitStartX, y, mTextPaint);
         }
 
         // draw vertical divider line
