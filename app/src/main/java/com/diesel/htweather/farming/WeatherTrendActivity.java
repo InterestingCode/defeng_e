@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.diesel.htweather.R;
 import com.diesel.htweather.base.BaseActivity;
-import com.diesel.htweather.model.WeatherTrendBean;
 import com.diesel.htweather.response.FarmingResJO;
 import com.diesel.htweather.util.DateUtils;
 import com.diesel.htweather.util.IntentExtras;
@@ -66,7 +65,7 @@ public class WeatherTrendActivity extends BaseActivity {
 
         ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList
                 = IntentExtras.getWeatherTrendData(getIntent());
-        List<WeatherTrendBean> trendData = new ArrayList<>();
+//        List<WeatherTrendBean> trendData = new ArrayList<>();
         if (null != dayWeatherList && !dayWeatherList.isEmpty()) {
             List<Integer> highTemp = new ArrayList<>();
             List<Integer> lowTemp = new ArrayList<>();
@@ -84,10 +83,10 @@ public class WeatherTrendActivity extends BaseActivity {
                             DateUtils.formatDate(System.currentTimeMillis(), DateUtils.HH_MM)));
                 }
 
-                WeatherTrendBean bean = new WeatherTrendBean();
-                bean.forcastDate = DateUtils.formatDate(entity.currDate, DateUtils.MM_DD);
-                bean.weather = entity.weatherContent;
-                bean.windPower = entity.windPower;
+//                WeatherTrendBean bean = new WeatherTrendBean();
+//                bean.forcastDate = DateUtils.formatDate(entity.currDate, DateUtils.MM_DD);
+//                bean.weather = entity.weatherContent;
+//                bean.windPower = entity.windPower;
                 if (!TextUtils.isEmpty(entity.tempBucket) && entity.tempBucket.contains("/")) {
                     String[] temp = entity.tempBucket.replaceAll("°", "").split("/");
                     lowTemp.add(Integer.valueOf(temp[0]));
@@ -100,22 +99,26 @@ public class WeatherTrendActivity extends BaseActivity {
                     lowTemp.add(15);
                     highTemp.add(25);
                 }
-                trendData.add(bean);
+//                trendData.add(bean);
             }
             mWeatherTrendView.setTemperatures(highTemp, lowTemp);
+
+            ViewUtils.visible(mWeatherTrendLayout);
+            WeatherTrendHelper trendHelper = new WeatherTrendHelper(this, mWeatherLayout,
+                    mWindLayout, dayWeatherList);
         } else {
             ViewUtils.gone(mWeatherDetailsLayout);
+            ViewUtils.gone(mWeatherTrendLayout);
             ToastUtils.show("未获取到天气数据");
         }
 
-        if (!trendData.isEmpty()) {
-            ViewUtils.visible(mWeatherTrendLayout);
-            WeatherTrendHelper trendHelper = new WeatherTrendHelper(this, mWeatherLayout,
-                    mWindLayout,
-                    trendData);
-        } else {
-            ViewUtils.gone(mWeatherTrendLayout);
-        }
+//        if (!trendData.isEmpty()) {
+//            ViewUtils.visible(mWeatherTrendLayout);
+//            WeatherTrendHelper trendHelper = new WeatherTrendHelper(this, mWeatherLayout,
+//                    mWindLayout, dayWeatherList);
+//        } else {
+//            ViewUtils.gone(mWeatherTrendLayout);
+//        }
 
 //        for (int i = 0; i < 6; i++) {
 //            WeatherTrendBean bean = new WeatherTrendBean();

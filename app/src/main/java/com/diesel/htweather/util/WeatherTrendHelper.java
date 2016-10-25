@@ -1,7 +1,6 @@
 package com.diesel.htweather.util;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.diesel.htweather.R;
-import com.diesel.htweather.model.WeatherTrendBean;
+import com.diesel.htweather.response.FarmingResJO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Comments：
@@ -35,12 +34,14 @@ public class WeatherTrendHelper {
 
     LinearLayout mWeatherLayout, mWindLayout;
 
-    private List<WeatherTrendBean> mWeatherTrendData;
+//    private List<WeatherTrendBean> mWeatherTrendData;
+
+    private ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> mWeatherTrendData;
 
     private int mDayCnt;
 
     public WeatherTrendHelper(Context context, LinearLayout weatherLayout, LinearLayout windLayout,
-            @NonNull List<WeatherTrendBean> weatherTrendData) {
+            ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> weatherTrendData) {
         mContext = context;
         mWeatherLayout = weatherLayout;
         mWindLayout = windLayout;
@@ -48,7 +49,7 @@ public class WeatherTrendHelper {
 
         mDayCnt = mWeatherTrendData.size();
         mWeatherLayouts = new LinearLayout[mDayCnt];
-        mWeatherLayouts = new LinearLayout[mDayCnt];
+        mWindLayouts = new LinearLayout[mDayCnt];
 
         ViewTreeObserver vto = mWeatherLayout.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -71,10 +72,16 @@ public class WeatherTrendHelper {
         Log.d("WeatherTrendHelper", "addChildView() parentWidth=" + parentWidth);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         for (int i = 0; i < mDayCnt; i++) {
+            FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity entity = mWeatherTrendData.get(i);
+
             View weatherChild = inflater.inflate(R.layout.weather_trend_data_item_layout, null);
             TextView weekTv = (TextView) weatherChild.findViewById(R.id.week_tv);
             TextView dateTv = (TextView) weatherChild.findViewById(R.id.date_tv);
-            setTextValue(weekTv, dateTv, i);
+            TextView weatherTv = (TextView) weatherChild.findViewById(R.id.weather_or_wind_tv);
+            weekTv.setText(entity.week);
+            dateTv.setText(DateUtils.formatDate(entity.currDate, DateUtils.MM_DD));
+            weatherTv.setText(entity.weatherContent);
+//            setTextValue(weekTv, dateTv, i);
             ViewGroup.LayoutParams weatherLp = weatherChild.getLayoutParams();
             if (null == weatherLp) {
                 weatherLp = new ViewGroup.LayoutParams(childWidth,
@@ -85,8 +92,10 @@ public class WeatherTrendHelper {
             mWeatherLayout.addView(weatherChild, weatherLp);
 
             View windChild = inflater.inflate(R.layout.weather_trend_data_item_layout, null);
+            TextView windTv = (TextView) windChild.findViewById(R.id.weather_or_wind_tv);
             windChild.findViewById(R.id.week_tv).setVisibility(View.GONE);
             windChild.findViewById(R.id.date_tv).setVisibility(View.GONE);
+            windTv.setText(entity.windPower);
             ViewGroup.LayoutParams windLp = windChild.getLayoutParams();
             if (null == windLp) {
                 windLp = new ViewGroup.LayoutParams(childWidth,
