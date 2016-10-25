@@ -76,14 +76,13 @@ public class OnlineAllMsgAdapter extends RecyclerView.Adapter<OnlineAllMsgHolder
         return mOnlineAdvisoryBeanList;
     }
 
+    public void update(List<OnlineAdvisoryBean> list) {
+        mOnlineAdvisoryBeanList = list;
+        notifyDataSetChanged();
+    }
+
     private String[] getImageViewUriPath(String path) {
         return path.split(";");
     }
-
-//    @Override
-//    public void onViewRecycled(OnlineAllMsgHolder holder) {
-//        super.onViewRecycled(holder);
-//
-//    }
 
 }

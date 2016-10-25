@@ -57,7 +57,7 @@ public class SearchActivity extends BaseActivity implements TextWatcher {
 
     private void searchDatas(String faTitle) {
         showDialog();
-        DepthWebService.getInstance().getOnlineConsultationMessages(faTitle, "1", new StringCallback() {
+        DepthWebService.getInstance().getOnlineConsultationMessages(faTitle, "", "1", new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {

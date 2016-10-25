@@ -18,6 +18,7 @@ import com.diesel.htweather.constant.Api;
 import com.diesel.htweather.depthservice.adapter.CommentsAdapter;
 import com.diesel.htweather.depthservice.model.CommentsBean;
 import com.diesel.htweather.depthservice.model.OnlineAdvisoryBean;
+import com.diesel.htweather.event.RefreshDataEvent;
 import com.diesel.htweather.response.BaseResJO;
 import com.diesel.htweather.response.OnlineDetailsResJO;
 import com.diesel.htweather.util.FastJsonUtils;
@@ -27,12 +28,12 @@ import com.diesel.htweather.webapi.DepthWebService;
 import com.diesel.htweather.webapi.FarmingWebService;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
-
-import static com.diesel.htweather.R.id.tvImage2;
 
 /**
  * 咨询详情
@@ -139,15 +140,15 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                         tvContent.setText(obj.getContent());
                         String imagePath[] = getImageViewUriPath(obj.getImgPaths());
 
-                        if (imagePath != null) {
+                        if (imagePath.length > 0) {
                             if (imagePath.length == 1) {
                                 PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
-                                ivImage2.setVisibility(View.VISIBLE);
-                                ivImage3.setVisibility(View.VISIBLE);
+                                ivImage2.setVisibility(View.INVISIBLE);
+                                ivImage3.setVisibility(View.INVISIBLE);
                             } else if (imagePath.length == 2) {
                                 PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
                                 PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
-                                ivImage3.setVisibility(View.VISIBLE);
+                                ivImage3.setVisibility(View.INVISIBLE);
                             } else if (imagePath.length == 3) {
                                 PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
                                 PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
@@ -263,6 +264,9 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
         }
     }
 
+    /**
+     * 点赞
+     */
     private void thumbsUpComments() {
         showDialog();
         DepthWebService.getInstance().thumbsUpComments(contentId, new StringCallback() {
@@ -280,8 +284,10 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                 try {
                     BaseResJO resJO = FastJsonUtils.getSingleBean(response, BaseResJO.class);
                     if (null != resJO && resJO.status == 0) {
+                        int countUps = Integer.valueOf(tvUpsNum.getText().toString()) + 1;
+                        tvUpsNum.setText(String.valueOf(countUps));
+                        EventBus.getDefault().post(new RefreshDataEvent());
                         ToastUtils.show(resJO.msg);
-                        initDatas();
                     } else {
                         ToastUtils.show(resJO.msg);
                     }

@@ -2,7 +2,6 @@ package com.diesel.htweather.webapi;
 
 import com.diesel.htweather.constant.Api;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.callback.Callback;
 
 /**
@@ -31,7 +30,7 @@ public class DepthWebService extends WebService {
      * @param contentType 1：所有数据； 2：我的咨询
      * @param callback    回调
      */
-    public void getOnlineConsultationMessages(String faTitle, String contentType, Callback callback) {
+    public void getOnlineConsultationMessages(String faTitle, String page, String contentType, Callback callback) {
         OkHttpUtils
                 .post()
                 .url(Api.GET_ONLINE_CONSULTATION_LIST_URL)
@@ -39,23 +38,8 @@ public class DepthWebService extends WebService {
                 .addParams("appkey", getAppKey())
                 .addParams("faTitle", faTitle)
                 .addParams("contentType", contentType)
+                .addParams("page", page)
                 .addParams("rows", "20")
-                .build()
-                .execute(callback);
-    }
-
-    /**
-     * 获取网络图片
-     *
-     * @param imagePath 文件路径
-     * @param callback
-     */
-    public void getNetworkBitmap(String imagePath, BitmapCallback callback) {
-        OkHttpUtils
-                .get()
-                .url(imagePath)
-                .addParams("drivenType", getDriveType())
-                .addParams("appkey", getAppKey())
                 .build()
                 .execute(callback);
     }

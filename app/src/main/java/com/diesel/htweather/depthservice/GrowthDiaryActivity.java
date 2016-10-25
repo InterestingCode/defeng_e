@@ -53,7 +53,7 @@ public class GrowthDiaryActivity extends BaseActivity implements XRecyclerView.L
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setLoadingListener(this);
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
         getGrowthDiaryList("1", "20"); // 第一页前20个
     }
 
@@ -66,12 +66,16 @@ public class GrowthDiaryActivity extends BaseActivity implements XRecyclerView.L
             public void onError(Call call, Exception e, int id) {
                 Log.e(TAG, "getGrowthDiaryList#onError() " + e.getMessage());
                 ToastUtils.show(getString(R.string.tips_request_failure));
+                mRecyclerView.refreshComplete();
+                mRecyclerView.loadMoreComplete();
                 dismissDialog();
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.d(TAG, "getGrowthDiaryList#onResponse() " + response);
+                mRecyclerView.refreshComplete();
+                mRecyclerView.loadMoreComplete();
                 dismissDialog();
                 try {
                     GrowthDiaryResJO resJO = FastJsonUtils.getSingleBean(response, GrowthDiaryResJO.class);
@@ -79,12 +83,10 @@ public class GrowthDiaryActivity extends BaseActivity implements XRecyclerView.L
                         if (page == 1) {
                             mAdapter = new GrowthDiaryAdapter(GrowthDiaryActivity.this, resJO.getData());
                             mRecyclerView.setAdapter(mAdapter);
-                            mRecyclerView.refreshComplete();
-                        } else {
+                        } else if (page > 1) {
                             List<GrowthDiaryBean> listData = mAdapter.getGrowthDiaryBeanList();
                             listData.addAll(resJO.getData());
                             mAdapter.update(listData);
-                            mRecyclerView.loadMoreComplete();
                         }
                     } else {
                         ToastUtils.show(resJO.msg);
