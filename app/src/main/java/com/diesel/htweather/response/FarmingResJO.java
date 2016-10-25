@@ -82,37 +82,44 @@ public class FarmingResJO extends BaseResJO {
                 /**
                  * 空气湿度
                  */
-                public List<AirMoistureListEntity> airMoistureList;
+                public List<RealDataEntity> airMoistureList;
 
                 /**
                  * 降水实况数据
                  */
-                public List<PrecipitationListEntity> precipitationList;
+                public List<RealDataEntity> precipitationList;
 
                 /**
                  * 土壤温度
                  */
-                public List<SoilTempLlistEntity> soilTempLlist;
+                public List<RealDataEntity> soilTempLlist;
 
                 /**
                  * 土壤湿度
                  */
-                public List<SoilMoistureListEntity> soilMoistureList;
+                public List<RealDataEntity> soilMoistureList;
 
                 /**
                  * 日照
                  */
-                public List<SunshineListEntity> sunshineList;
+                public List<RealDataEntity> sunshineList;
 
                 /**
                  * 气温实况数据
                  */
-                public List<AirTempListEntity> airTempList;
+                public List<RealDataEntity> airTempList;
 
                 /**
                  * 风力
                  */
-                public List<WindPowerListEntity> windPowerList;
+                public List<RealDataEntity> windPowerList;
+
+                public static class RealDataEntity {
+
+                    public String hours;
+
+                    public String value;
+                }
 
                 public static class AirMoistureListEntity {
 

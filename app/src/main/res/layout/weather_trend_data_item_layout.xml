@@ -32,6 +32,8 @@
         android:id="@+id/weather_or_wind_tv"
         style="@style/BaseText.black333_24px"
         android:layout_marginTop="@dimen/px10"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="微风" />
 
 </LinearLayout>

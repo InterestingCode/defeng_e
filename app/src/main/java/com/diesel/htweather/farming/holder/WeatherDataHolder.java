@@ -123,8 +123,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
                     mTemperatureTv.setText(String.valueOf((int) temp));
                     mWeatherDescTv.setText(entity.weatherContent + " " + entity.tempBucket + " "
                             + entity.windPower);
-                    mWeatherDateTv.setText(
-                            entity.currDate + " (" + entity.currLunarDate + ") " + entity.week);
+                    mWeatherDateTv.setText(DateUtils.formatDate(entity.currDate, DateUtils.TIME_YYYY_MM_DD, DateUtils.TIME_YYYY_MM_DD_DOT) + " (" + entity.currLunarDate + ") " + entity.week);
                     break;
                 }
             }
@@ -199,7 +198,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setWindPowerView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.WindPowerListEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     windPowerList = mHoursDataList.windPowerList;
             if (null != windPowerList && !windPowerList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
@@ -227,7 +226,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setSunlightView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.SunshineListEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     sunshineList = mHoursDataList.sunshineList;
             if (null != sunshineList && !sunshineList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
@@ -255,7 +254,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setAirHumidityView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.AirMoistureListEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     airMoistureList = mHoursDataList.airMoistureList;
             if (null != airMoistureList && !airMoistureList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
@@ -283,7 +282,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setSoilHumidityView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.SoilMoistureListEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     soilMoistureList = mHoursDataList.soilMoistureList;
             if (null != soilMoistureList && !soilMoistureList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
@@ -311,7 +310,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setSoilTempView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.SoilTempLlistEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     soilTempList = mHoursDataList.soilTempLlist;
             if (null != soilTempList && !soilTempList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
@@ -339,7 +338,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setRainfallView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.PrecipitationListEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     precipitationList = mHoursDataList.precipitationList;
             if (null != precipitationList && !precipitationList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();
@@ -367,7 +366,7 @@ public class WeatherDataHolder extends RecyclerView.ViewHolder {
 
     private void setTemperatureView() {
         if (null != mHoursDataList) {
-            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.AirTempListEntity>
+            List<FarmingResJO.ObjEntity.WeatherCropCollEntity.HoursDataListEntity.RealDataEntity>
                     airTempList = mHoursDataList.airTempList;
             if (null != airTempList && !airTempList.isEmpty()) {
                 List<Integer> temperatures = new ArrayList<>();

@@ -47,7 +47,7 @@ public class WeatherTrendHelper {
         mWindLayout = windLayout;
         mWeatherTrendData = weatherTrendData;
 
-        mDayCnt = mWeatherTrendData.size();
+        mDayCnt = mWeatherTrendData.size() > 6 ? 6 : mWeatherTrendData.size();
         mWeatherLayouts = new LinearLayout[mDayCnt];
         mWindLayouts = new LinearLayout[mDayCnt];
 
@@ -78,10 +78,9 @@ public class WeatherTrendHelper {
             TextView weekTv = (TextView) weatherChild.findViewById(R.id.week_tv);
             TextView dateTv = (TextView) weatherChild.findViewById(R.id.date_tv);
             TextView weatherTv = (TextView) weatherChild.findViewById(R.id.weather_or_wind_tv);
-            weekTv.setText(entity.week);
-            dateTv.setText(DateUtils.formatDate(entity.currDate, DateUtils.MM_DD));
+            weekTv.setText(DateUtils.convertWeek(entity.week));
+            dateTv.setText(DateUtils.formatDate(entity.currDate, DateUtils.TIME_YYYY_MM_DD, DateUtils.MM_DD));
             weatherTv.setText(entity.weatherContent);
-//            setTextValue(weekTv, dateTv, i);
             ViewGroup.LayoutParams weatherLp = weatherChild.getLayoutParams();
             if (null == weatherLp) {
                 weatherLp = new ViewGroup.LayoutParams(childWidth,
@@ -107,32 +106,4 @@ public class WeatherTrendHelper {
         }
     }
 
-    private void setTextValue(TextView weekTv, TextView dateTv, int i) {
-        switch (i) {
-            case 0:
-                weekTv.setText("明天");
-                dateTv.setText("09/10");
-                break;
-            case 1:
-                weekTv.setText("周六");
-                dateTv.setText("09/11");
-                break;
-            case 2:
-                weekTv.setText("周日");
-                dateTv.setText("09/12");
-                break;
-            case 3:
-                weekTv.setText("周一");
-                dateTv.setText("09/13");
-                break;
-            case 4:
-                weekTv.setText("周二");
-                dateTv.setText("09/14");
-                break;
-            case 5:
-                weekTv.setText("周三");
-                dateTv.setText("09/15");
-                break;
-        }
-    }
 }

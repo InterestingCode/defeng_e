@@ -142,6 +142,7 @@ public class FarmingFragment extends BaseFragment {
                                 weatherDataBean.dayWeatherList = weatherCropCollEntity.dayWeatherList;
                                 // 实况数据
                                 weatherDataBean.hoursDataList = weatherCropCollEntity.hoursDataList;
+
                                 // 精准农技
                                 actualFarmingBean.areaId = weatherCropCollEntity.arId;
                                 actualFarmingBean.mTimelyCropsNewsListEntities = weatherCropCollEntity.timelyCropsNewsList;

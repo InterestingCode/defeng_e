@@ -1,9 +1,12 @@
 package com.diesel.htweather.farming;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,8 +41,8 @@ public class FarmingDetailsActivity extends BaseActivity {
     @BindView(R.id.farming_browse_tv)
     TextView mFarmingBrowseTv;
 
-    @BindView(R.id.farming_cover_iv)
-    SimpleDraweeView mFarmingCoverIv;
+//    @BindView(R.id.farming_cover_iv)
+//    SimpleDraweeView mFarmingCoverIv;
 
     @BindView(R.id.feedback_layout)
     RelativeLayout mFeedbackLayout;
@@ -47,8 +50,11 @@ public class FarmingDetailsActivity extends BaseActivity {
     @BindView(R.id.share_layout)
     RelativeLayout mShareLayout;
 
-    @BindView(R.id.news_content_tv)
-    TextView mNewsContentTv;
+//    @BindView(R.id.news_content_tv)
+//    TextView mNewsContentTv;
+
+    @BindView(R.id.web_view)
+    WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class FarmingDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_farming_details);
         ButterKnife.bind(this);
 
+        initWebView();
         int newsId = IntentExtras.getFarmingNewsId(getIntent());
         int farmingType = IntentExtras.getFarmingType(getIntent());
         if (farmingType == FarmingListActivity.TYPE_FARMING_INFO) {
@@ -106,15 +113,16 @@ public class FarmingDetailsActivity extends BaseActivity {
                         ToastUtils.show(resJO.msg);
                     } else {
                         mFarmingTitleTv.setText(entity.title);
-                        if (TextUtils.isEmpty(entity.titleImg)) {
-                            ViewUtils.gone(mFarmingCoverIv);
-                        } else {
-                            ViewUtils.visible(mFarmingCoverIv);
-                            mFarmingCoverIv.setImageURI(entity.titleImg);
-                        }
+//                        if (TextUtils.isEmpty(entity.titleImg)) {
+//                            ViewUtils.gone(mFarmingCoverIv);
+//                        } else {
+//                            ViewUtils.visible(mFarmingCoverIv);
+//                            mFarmingCoverIv.setImageURI(entity.titleImg);
+//                        }
                         mFarmingTimeAndSourceTv.setText(entity.sourceWay + " " + entity.sendTime);
                         mFarmingBrowseTv.setText(getString(R.string.browse_number, entity.counts));
-                        mNewsContentTv.setText(entity.content);
+//                        mNewsContentTv.setText(entity.content);
+                        mWebView.loadData(entity.content, "text/html; charset=UTF-8", null);
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "getFarmingInfoDetails#onResponse() #Exception#" + e.getMessage());
@@ -149,20 +157,35 @@ public class FarmingDetailsActivity extends BaseActivity {
                         ToastUtils.show(resJO.msg);
                     } else {
                         mFarmingTitleTv.setText(entity.title);
-                        if (TextUtils.isEmpty(entity.titleImg)) {
-                            ViewUtils.gone(mFarmingCoverIv);
-                        } else {
-                            ViewUtils.visible(mFarmingCoverIv);
-                            mFarmingCoverIv.setImageURI(entity.titleImg);
-                        }
+//                        if (TextUtils.isEmpty(entity.titleImg)) {
+//                            ViewUtils.gone(mFarmingCoverIv);
+//                        } else {
+//                            ViewUtils.visible(mFarmingCoverIv);
+//                            mFarmingCoverIv.setImageURI(entity.titleImg);
+//                        }
                         mFarmingTimeAndSourceTv.setText(entity.sourceWay + " " + entity.sendTime);
                         mFarmingBrowseTv.setText(getString(R.string.browse_number, entity.counts));
-                        mNewsContentTv.setText(entity.content);
+//                        mNewsContentTv.setText(entity.content);
+                        mWebView.loadData(entity.content, "text/html; charset=UTF-8", null);
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "getFarmingPolicyDetails#onResponse() #Exception#" + e.getMessage());
                 }
             }
         });
+    }
+
+    protected void initWebView() {
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setSupportZoom(false);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        // 优化跳转闪烁的效果（支持3.0以上的系统）
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
     }
 }

@@ -32,7 +32,49 @@
             android:textSize="@dimen/font_36px" />
     </RelativeLayout>
 
-    <ScrollView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/px30"
+        android:paddingLeft="@dimen/px24"
+        android:paddingRight="@dimen/px24"
+        android:paddingTop="@dimen/px30">
+
+        <TextView
+            android:id="@+id/farming_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/font_36px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/farming_time_and_source_tv"
+            style="@style/BaseText.gray999_24px"
+            android:layout_below="@id/farming_title_tv"
+            android:layout_marginTop="@dimen/px25" />
+
+        <TextView
+            android:id="@+id/farming_browse_tv"
+            style="@style/BaseText.gray999_24px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/farming_time_and_source_tv"
+            android:layout_alignParentRight="true" />
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/farming_time_and_source_tv"
+            android:layout_marginTop="@dimen/px25"
+            android:background="@android:color/white"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -84,7 +126,7 @@
                 android:layout_marginTop="@dimen/px25"
                 android:lineSpacingExtra="@dimen/px25" />
         </RelativeLayout>
-    </ScrollView>
+    </ScrollView>-->
 
     <ImageView
         android:layout_width="match_parent"

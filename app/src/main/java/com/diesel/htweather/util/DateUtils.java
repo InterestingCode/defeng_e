@@ -28,6 +28,8 @@ public class DateUtils {
 
     public static final String MM_DD = "MM/dd";
 
+    public static final String TIME_YYYY_MM_DD_DOT = "yyyy.M.d";
+
     public static final String TIME_YYYY_MM_DD = "yyyy-MM-dd";
 
     public static final String TIME_MM_DD_HH_MM_SS = "MM-dd HH:mm:ss";
@@ -177,7 +179,7 @@ public class DateUtils {
 
     public static boolean isToday(String day) {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_YYYY_MM_DD);
             Date date = dateFormat.parse(day);
             Calendar calendar1 = Calendar.getInstance();
             calendar1.setTime(date);
@@ -191,6 +193,34 @@ public class DateUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static String convertWeek(String week) {
+        if (TextUtils.isEmpty(week)) return week;
+        switch (week) {
+            case "星期日":
+                week = "周日";
+                break;
+            case "星期一":
+                week = "周一";
+                break;
+            case "星期二":
+                week = "周二";
+                break;
+            case "星期三":
+                week = "周三";
+                break;
+            case "星期四":
+                week = "周四";
+                break;
+            case "星期五":
+                week = "周五";
+                break;
+            case "星期六":
+                week = "周六";
+                break;
+        }
+        return week;
     }
 
 }

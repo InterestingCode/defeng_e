@@ -156,7 +156,7 @@ public class WeatherTrendView extends View {
         int startX = perWidth / 2;
         int stopX = startX + perWidth;
         int highStartY = 0, highStopY = 0, lowStartY = 0, lowStopY = 0;
-        int highTempSize = mHighTemperatures.size();
+        int highTempSize = mHighTemperatures.size() > 6 ? 6 : mHighTemperatures.size();
         for (int i = 0; i < highTempSize; i++) {
             if (i != highTempSize - 1) {
                 int highCurrTemp = mHighTemperatures.get(i);

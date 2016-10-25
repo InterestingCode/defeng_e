@@ -14,6 +14,7 @@ import com.diesel.htweather.util.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -132,6 +133,13 @@ public class Trend24HourView extends View {
         for (int i = 0; i < mGridNumber; i ++) {
             mValues.add(mMinTemperature + i * mTemperatureDiff / mGridNumber);
         }
+        Collections.sort(mValues, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer t0, Integer t1) {
+                return t1.compareTo(t0);
+            }
+        });
+
         Log.i(tag, "setTemperatures() maxTemp(" + mMaxTemperature + "), minTemp(" + mMinTemperature
                 + "), tempDiff(" + mTemperatureDiff + ")");
         requestLayout();
@@ -215,19 +223,19 @@ public class Trend24HourView extends View {
             Log.d(tag, "onDraw() start(" + startX + ", " + startY + "); stop(" + stopX + ", "
                     + stopY + "); i=" + i + "; temp=" + temperatures.get(i));
 
-            if (i % 2 == 0) {
-                mPointPaint.setColor(
-                        ContextCompat.getColor(getContext(), R.color.polyline_yellow_point_color));
-            } else {
-                mPointPaint.setColor(
-                        ContextCompat.getColor(getContext(), R.color.polyline_blue_point_color));
-            }
+//            if (i % 2 == 0) {
+//                mPointPaint.setColor(
+//                        ContextCompat.getColor(getContext(), R.color.polyline_yellow_point_color));
+//            } else {
+//                mPointPaint.setColor(
+//                        ContextCompat.getColor(getContext(), R.color.polyline_blue_point_color));
+//            }
             canvas.drawCircle(startX, startY, mCircleRadius, mPointPaint);
             int valueStartY = startY - 25;
             if (startY > 0 && startY < 50) {
                 valueStartY = startY + 50;
             }
-            canvas.drawText(temperatures.get(i)+"°", startX, valueStartY, mTextPaint);
+            canvas.drawText(temperatures.get(i)+"", startX, valueStartY, mTextPaint);
 
 //            float textStartY = height - (timeHeight - mTextPaint.getFontMetrics().bottom) / 2;
 //            float textStartY = height - timeHeight + (timeHeight - mTextPaint.getFontMetrics().bottom);

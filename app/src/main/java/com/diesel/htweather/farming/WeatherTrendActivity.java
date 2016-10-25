@@ -17,7 +17,6 @@ import com.diesel.htweather.util.WeatherTrendHelper;
 import com.diesel.htweather.widget.WeatherTrendView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,11 +60,9 @@ public class WeatherTrendActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_trend);
         ButterKnife.bind(this);
-//        testTempTrend();
 
         ArrayList<FarmingResJO.ObjEntity.WeatherCropCollEntity.DayWeatherListEntity> dayWeatherList
                 = IntentExtras.getWeatherTrendData(getIntent());
-//        List<WeatherTrendBean> trendData = new ArrayList<>();
         if (null != dayWeatherList && !dayWeatherList.isEmpty()) {
             List<Integer> highTemp = new ArrayList<>();
             List<Integer> lowTemp = new ArrayList<>();
@@ -83,10 +80,6 @@ public class WeatherTrendActivity extends BaseActivity {
                             DateUtils.formatDate(System.currentTimeMillis(), DateUtils.HH_MM)));
                 }
 
-//                WeatherTrendBean bean = new WeatherTrendBean();
-//                bean.forcastDate = DateUtils.formatDate(entity.currDate, DateUtils.MM_DD);
-//                bean.weather = entity.weatherContent;
-//                bean.windPower = entity.windPower;
                 if (!TextUtils.isEmpty(entity.tempBucket) && entity.tempBucket.contains("/")) {
                     String[] temp = entity.tempBucket.replaceAll("°", "").split("/");
                     lowTemp.add(Integer.valueOf(temp[0]));
@@ -99,7 +92,6 @@ public class WeatherTrendActivity extends BaseActivity {
                     lowTemp.add(15);
                     highTemp.add(25);
                 }
-//                trendData.add(bean);
             }
             mWeatherTrendView.setTemperatures(highTemp, lowTemp);
 
@@ -112,27 +104,6 @@ public class WeatherTrendActivity extends BaseActivity {
             ToastUtils.show("未获取到天气数据");
         }
 
-//        if (!trendData.isEmpty()) {
-//            ViewUtils.visible(mWeatherTrendLayout);
-//            WeatherTrendHelper trendHelper = new WeatherTrendHelper(this, mWeatherLayout,
-//                    mWindLayout, dayWeatherList);
-//        } else {
-//            ViewUtils.gone(mWeatherTrendLayout);
-//        }
-
-//        for (int i = 0; i < 6; i++) {
-//            WeatherTrendBean bean = new WeatherTrendBean();
-//            bean.forcastDate = "2016-08-28";
-//            trendData.add(bean);
-//        }
-    }
-
-    private void testTempTrend() {
-        Integer[] temp1 = new Integer[]{31, 26, 29, 31, 35, 32};
-        Integer[] temp2 = new Integer[]{23, 22, 20, 21, 27, 24};
-        List<Integer> high = Arrays.asList(temp1);
-        List<Integer> low = Arrays.asList(temp2);
-        mWeatherTrendView.setTemperatures(high, low);
     }
 
     @OnClick(R.id.back_btn)
