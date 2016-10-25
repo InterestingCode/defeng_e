@@ -70,7 +70,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/px24"
                     android:layout_toLeftOf="@id/right_arrow_iv"
-                    fresco:placeholderImage="@drawable/icon_avatar_test" />
+                    fresco:placeholderImage="@drawable/ic_def_avatar" />
             </RelativeLayout>
 
             <com.diesel.htweather.widget.EditUserInfoView
