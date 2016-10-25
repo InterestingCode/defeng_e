@@ -32,6 +32,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
+import static com.diesel.htweather.R.id.tvImage2;
+
 /**
  * 咨询详情
  */
@@ -136,10 +138,21 @@ public class OnlineAdvisoryDetailsActivity extends BaseActivity implements Adapt
                         tvCreateTime.setText(obj.getCreatTime());
                         tvContent.setText(obj.getContent());
                         String imagePath[] = getImageViewUriPath(obj.getImgPaths());
-                        if (imagePath != null && imagePath.length == 3) {
-                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
-                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
-                            PicassoUtils.loadImageViewHolder(OnlineAdvisoryDetailsActivity.this, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, ivImage3);
+
+                        if (imagePath != null) {
+                            if (imagePath.length == 1) {
+                                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
+                                ivImage2.setVisibility(View.VISIBLE);
+                                ivImage3.setVisibility(View.VISIBLE);
+                            } else if (imagePath.length == 2) {
+                                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
+                                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
+                                ivImage3.setVisibility(View.VISIBLE);
+                            } else if (imagePath.length == 3) {
+                                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, ivImage1);
+                                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, ivImage2);
+                                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, ivImage3);
+                            }
                         }
 
                         tvUpsNum.setText(obj.getUps());

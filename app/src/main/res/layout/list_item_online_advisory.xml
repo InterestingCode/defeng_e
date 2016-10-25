@@ -85,24 +85,21 @@
             android:id="@+id/tvImage1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/test_online_image" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/tvImage2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px15"
-            android:layout_weight="1"
-            android:src="@drawable/test_online_image" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/tvImage3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/px15"
-            android:layout_weight="1"
-            android:src="@drawable/test_online_image" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

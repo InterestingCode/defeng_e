@@ -35,7 +35,7 @@ public class OnlineAllMsgAdapter extends RecyclerView.Adapter<OnlineAllMsgHolder
     }
 
     @Override
-    public void onBindViewHolder(OnlineAllMsgHolder holder, int position) {
+    public void onBindViewHolder(final OnlineAllMsgHolder holder, int position) {
         OnlineAdvisoryBean advisoryBean = mOnlineAdvisoryBeanList.get(position);
         String userFacePath = Api.SERVER_URL + advisoryBean.getUserFace();
         PicassoUtils.loadImageViewHolder(mContext, userFacePath, R.drawable.ic_gather_data_avatar, holder.tvUserFace);
@@ -45,16 +45,26 @@ public class OnlineAllMsgAdapter extends RecyclerView.Adapter<OnlineAllMsgHolder
         holder.tvCreateTime.setText(advisoryBean.getCreatTime());
         holder.mContent.setText(advisoryBean.getContent());
         String imagePath[] = getImageViewUriPath(advisoryBean.getImgPaths());
-        if (imagePath != null && imagePath.length == 3) {
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+        if (imagePath.length > 0) {
+            if (imagePath.length == 1) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                holder.tvImage2.setVisibility(View.INVISIBLE);
+                holder.tvImage3.setVisibility(View.INVISIBLE);
+            } else if (imagePath.length == 2) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+                holder.tvImage3.setVisibility(View.INVISIBLE);
+            } else if (imagePath.length == 3) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+            }
         }
 
         holder.tvUps.setText(advisoryBean.getUps());
         holder.tvComments.setText(advisoryBean.getComments());
         holder.tvReadCounts.setText(advisoryBean.getCounts());
-
+        holder.itemView.setTag(advisoryBean);
     }
 
     @Override
@@ -70,19 +80,10 @@ public class OnlineAllMsgAdapter extends RecyclerView.Adapter<OnlineAllMsgHolder
         return path.split(";");
     }
 
-//    private void setImageViewBitmap(final ImageView imageView, String imageUrl) {
-//        DepthWebService.getInstance().getNetworkBitmap(imageUrl, new BitmapCallback() {
-//            @Override
-//            public void onError(Call call, Exception e, int id) {
-//                Log.e(TAG, "getNetworkBitmap#onError() " + e.getMessage());
-//            }
+//    @Override
+//    public void onViewRecycled(OnlineAllMsgHolder holder) {
+//        super.onViewRecycled(holder);
 //
-//            @Override
-//            public void onResponse(Bitmap response, int id) {
-//                Log.v(TAG, "getNetworkBitmap#onResponse() " + "缓存图片成功");
-//                imageView.setImageBitmap(response);
-//            }
-//        });
 //    }
 
 }

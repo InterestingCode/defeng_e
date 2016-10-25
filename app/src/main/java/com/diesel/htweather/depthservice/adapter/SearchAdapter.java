@@ -45,10 +45,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchHolder> {
         holder.tvCreateTime.setText(advisoryBean.getCreatTime());
         holder.mContent.setText(advisoryBean.getContent());
         String imagePath[] = getImageViewUriPath(advisoryBean.getImgPaths());
-        if (imagePath != null && imagePath.length == 3) {
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+        if (imagePath.length > 0) {
+            if (imagePath.length == 1) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                holder.tvImage2.setVisibility(View.INVISIBLE);
+                holder.tvImage3.setVisibility(View.INVISIBLE);
+            } else if (imagePath.length == 2) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+                holder.tvImage3.setVisibility(View.INVISIBLE);
+            } else if (imagePath.length == 3) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+            }
         }
 
         holder.tvUps.setText(advisoryBean.getUps());

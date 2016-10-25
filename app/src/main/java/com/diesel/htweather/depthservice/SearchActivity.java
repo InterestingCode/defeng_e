@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
@@ -130,11 +131,13 @@ public class SearchActivity extends BaseActivity implements TextWatcher {
     @Override
     public void afterTextChanged(Editable editable) {
         final String faTitle = mSearchBtn.getText().toString();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                searchDatas(faTitle);
-            }
-        }, 1000);
+        if (!TextUtils.isEmpty(faTitle)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    searchDatas(faTitle);
+                }
+            }, 1000);
+        }
     }
 }

@@ -44,11 +44,21 @@ public class OnlineMeMsgAdapter extends RecyclerView.Adapter<OnlineMeMsgHolder> 
         holder.tvCreateTime.setText(advisoryBean.getCreatTime());
         holder.mContent.setText(advisoryBean.getContent());
         String imagePath[] = getImageViewUriPath(advisoryBean.getImgPaths());
-        // TODO 下载图片
-        if (imagePath != null && imagePath.length == 3) {
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
-            PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+
+        if (imagePath.length > 0) {
+            if (imagePath.length == 1) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                holder.tvImage2.setVisibility(View.INVISIBLE);
+                holder.tvImage3.setVisibility(View.INVISIBLE);
+            } else if (imagePath.length == 2) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+                holder.tvImage3.setVisibility(View.INVISIBLE);
+            } else if (imagePath.length == 3) {
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[0], R.drawable.test_online_image, holder.tvImage1);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[1], R.drawable.test_online_image, holder.tvImage2);
+                PicassoUtils.loadImageViewHolder(mContext, Api.SERVER_URL + imagePath[2], R.drawable.test_online_image, holder.tvImage3);
+            }
         }
 
         holder.tvUps.setText(advisoryBean.getUps());
@@ -69,20 +79,5 @@ public class OnlineMeMsgAdapter extends RecyclerView.Adapter<OnlineMeMsgHolder> 
     private String[] getImageViewUriPath(String path) {
         return path.split(";");
     }
-
-//    private void setImageViewBitmap(final ImageView imageView, String imageUrl) {
-//        DepthWebService.getInstance().getNetworkBitmap(imageUrl, new BitmapCallback() {
-//            @Override
-//            public void onError(Call call, Exception e, int id) {
-//                Log.e(TAG, "getNetworkBitmap#onError() " + e.getMessage());
-//            }
-//
-//            @Override
-//            public void onResponse(Bitmap response, int id) {
-//                Log.v(TAG, "getNetworkBitmap#onResponse() " + "缓存图片成功");
-//                imageView.setImageBitmap(response);
-//            }
-//        });
-//    }
 
 }
