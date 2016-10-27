@@ -178,7 +178,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
         TimePickerView mTimePickerView = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
         mTimePickerView.setTitle("选择日期");
         mTimePickerView.setTime(new Date());
-        mTimePickerView.setCyclic(true);
+        mTimePickerView.setCyclic(false);
         mTimePickerView.setCancelable(true);
         mTimePickerView.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
             @Override
@@ -196,7 +196,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
         TimePickerView mTimePickerView = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
         mTimePickerView.setTitle("选择日期");
         mTimePickerView.setTime(new Date());
-        mTimePickerView.setCyclic(true);
+        mTimePickerView.setCyclic(false);
         mTimePickerView.setCancelable(true);
         mTimePickerView.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
             @Override
@@ -215,7 +215,7 @@ public class SettingFacilitiesActivity extends BaseActivity {
             mCityPickerView = new OptionsPickerView(this);
             mCityPickerView.setTitle(getString(R.string.choose_area));
             mCityPickerView.setPicker(DFApplication.provinces, DFApplication.cities, countries, true);
-            mCityPickerView.setCyclic(true, true, true);
+            mCityPickerView.setCyclic(false, false, false);
             mCityPickerView.setSelectOptions(0, 0, 0);
 
             mCityPickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
