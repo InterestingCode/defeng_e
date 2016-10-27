@@ -27,33 +27,40 @@
             android:textSize="@dimen/font_36px" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:paddingBottom="@dimen/px24"
-        android:paddingTop="@dimen/px24"
-        android:text="深度服务简介"
-        android:textColor="@color/black_333"
-        android:textSize="@dimen/font_36px"
-        android:textStyle="bold" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
-        <TextView
-            android:id="@+id/tvDescContent"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:lineSpacingExtra="@dimen/px10"
-            android:paddingBottom="@dimen/px40"
-            android:paddingLeft="@dimen/px23"
-            android:paddingRight="@dimen/px23"
-            android:paddingTop="@dimen/px16"
-            android:textColor="@color/black_333"
-            android:textSize="@dimen/font_24px" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/px24"
+                android:paddingTop="@dimen/px24"
+                android:text="深度服务简介"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/font_36px"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tvDescContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/px10"
+                android:paddingBottom="@dimen/px40"
+                android:paddingLeft="@dimen/px23"
+                android:paddingRight="@dimen/px23"
+                android:paddingTop="@dimen/px16"
+                android:textColor="@color/black_333"
+                android:textSize="@dimen/font_24px" />
+
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
